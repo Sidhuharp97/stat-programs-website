@@ -1,11 +1,10 @@
 ---
 authors:
 - admin
-- 吳恩達
 categories:
-- Demo
-- 教程
-date: "2020-12-13T00:00:00Z"
+- R
+- reproducible research
+date: "2021-04-15T00:00:00"
 draft: false
 featured: false
 image:
@@ -13,79 +12,105 @@ image:
   focal_point: ""
   placement: 2
   preview_only: false
-lastmod: "2020-12-13T00:00:00Z"
-projects: []
-subtitle: "Welcome \U0001F44B We know that first impressions are important, so we've
-  populated your new site with some initial content to help you get familiar with
-  everything in no time."
-summary: "Welcome \U0001F44B We know that first impressions are important, so we've
-  populated your new site with some initial content to help you get familiar with
-  everything in no time."
+lastmod: "2021-04-15T00:00:00"
+projects: [Reproducible Research]
+subtitle: "A few steps you can take to make your workflows in R more reproducible and less painful for you to deal with."
+summary: "A few steps you can take to make your workflows in R more reproducible and less painful for you to deal with."
 tags:
-- Academic
-- 开源
-title: Welcome to Wowchemy, the website builder for Hugo
+- R
+- Reproducible Research
+title: Quick Tricks and Tips for Reproducible Research in R
 ---
 
-## Overview
 
-1. The Wowchemy website builder for Hugo, along with its starter templates, is designed for professional creators, educators, and teams/organizations - although it can be used to create any kind of site
-2. The template can be modified and customised to suit your needs. It's a good platform for anyone looking to take control of their data and online identity whilst having the convenience to start off with a **no-code solution (write in Markdown and customize with YAML parameters)** and having **flexibility to later add even deeper personalization with HTML and CSS**
-3. You can work with all your favourite tools and apps with hundreds of plugins and integrations to speed up your workflows, interact with your readers, and much more
+### Make sure your Rstudio session is not saving `.rdata` automatically:
 
-{{< figure src="https://raw.githubusercontent.com/wowchemy/wowchemy-hugo-modules/master/academic.png" title="The template is mobile first with a responsive design to ensure that your site looks stunning on every device." >}}
+*Note: this step requires the* `usethis` *package; please install if you do not already have it installed.*
 
-## Get Started
+```
+usethis::use_blank_slate()
+```
 
-- 👉 [**Create a new site**](https://wowchemy.com/templates/)
-- 📚 [**Personalize your site**](https://wowchemy.com/docs/)
-- 💬 [Chat with the **Wowchemy community**](https://discord.gg/z8wNYzb) or [**Hugo community**](https://discourse.gohugo.io)
-- 🐦 Twitter: [@wowchemy](https://twitter.com/wowchemy) [@GeorgeCushen](https://twitter.com/GeorgeCushen) [#MadeWithWowchemy](https://twitter.com/search?q=(%23MadeWithWowchemy%20OR%20%23MadeWithAcademic)&src=typed_query)
-- 💡 [Request a **feature** or report a **bug** for _Wowchemy_](https://github.com/wowchemy/wowchemy-hugo-modules/issues)
-- ⬆️ **Updating Wowchemy?** View the [Update Guide](https://wowchemy.com/docs/guide/update/) and [Release Notes](https://wowchemy.com/updates/)
+### Save all code you run in an `.R` or `.Rmd` file
 
-## Crowd-funded open-source software
+This is your source code. It's as real and as important as your input data. This file should capture a set of actions that can be repeated by another person (e.g. your PI, yourself in the future) including packages loaded, files imported, all data manipulations and the outputs from these actions (e.g. visualisations, analytical outcomes). The idea is to capture your thought process so this can be repeated in full. In most analyses, it is extremely likely* you will revisit a project and need to repeat what has already been done.! Keeping a record of actions will save loads and loads of time because you will not have to expend an effort to recall exactly what you did in previous sessions.   
 
-To help us develop this template and software sustainably under the MIT license, we ask all individuals and businesses that use it to help support its ongoing maintenance and development via sponsorship.
+\*This is *almost* guaranteed to happen!
 
-### [❤️ Click here to become a sponsor and help support Wowchemy's future ❤️](https://wowchemy.com/plans/)
+### Regularly restart your R session
 
-As a token of appreciation for sponsoring, you can **unlock [these](https://wowchemy.com/plans/) awesome rewards and extra features 🦄✨**
+Yes, that means wiping all the loaded packaged and objects from the session (if you followed Step 1 in these instructions), but the upside is that your analysis are reproducible. This means future you can repeat those analyses and get the same results back you did earlier!
 
-## Ecosystem
+You can restart R by manually closing and opening RStudio. You can also restart the R session with RStudio by navigating to the menu item "Session" and and selecting "Restart R".
 
-* **[Hugo Academic CLI](https://github.com/wowchemy/hugo-academic-cli):** Automatically import publications from BibTeX
+### Use R projects
 
-## Inspiration
+This is optional, but it will make your life easier. Whenever you start a new analytical endeavor in R, create an R project by navigating to "File" --> "New Project" in RStudio. There's many options here for setting the directory to place the .rpoj, type of project (e.g. R package, Shiny app or blank), and initializing a git repo. The simplest option is to choose "New Project" (no special type) and put it in a dedicated directory. The main advantage of projects is that by opening an .Rproj file, the working directory is automatically set to that directory. If you are using a cloud solution for working across different computers or working with collaborators, this will make things easier because you can use relative paths for importing data and outputting files. There would be no more need for this at the top of your script:
 
-[Check out the latest **demo**](https://academic-demo.netlify.com/) of what you'll get in less than 10 minutes, or [view the **showcase**](https://wowchemy.com/user-stories/) of personal, project, and business sites.
+```
+setwd("specific/path/to/my/computer")
+```
 
-## Features
+Additionally, for setting up gitbooks through `bookdown`, R packages, Shiny apps, and other complicated R endeavors, the automated set-up through Rprojects can be immensely helpful.  
 
-- **Page builder** - Create *anything* with [**widgets**](https://wowchemy.com/docs/page-builder/) and [**elements**](https://wowchemy.com/docs/writing-markdown-latex/)
-- **Edit any type of content** - Blog posts, publications, talks, slides, projects, and more!
-- **Create content** in [**Markdown**](https://wowchemy.com/docs/writing-markdown-latex/), [**Jupyter**](https://wowchemy.com/docs/import/jupyter/), or [**RStudio**](https://wowchemy.com/docs/install-locally/)
-- **Plugin System** - Fully customizable [**color** and **font themes**](https://wowchemy.com/docs/customization/)
-- **Display Code and Math** - Code highlighting and [LaTeX math](https://en.wikibooks.org/wiki/LaTeX/Mathematics) supported
-- **Integrations** - [Google Analytics](https://analytics.google.com), [Disqus commenting](https://disqus.com), Maps, Contact Forms, and more!
-- **Beautiful Site** - Simple and refreshing one page design
-- **Industry-Leading SEO** - Help get your website found on search engines and social media
-- **Media Galleries** - Display your images and videos with captions in a customizable gallery
-- **Mobile Friendly** - Look amazing on every screen with a mobile friendly version of your site
-- **Multi-language** - 34+ language packs including English, 中文, and Português
-- **Multi-user** - Each author gets their own profile page
-- **Privacy Pack** - Assists with GDPR
-- **Stand Out** - Bring your site to life with animation, parallax backgrounds, and scroll effects
-- **One-Click Deployment** - No servers. No databases. Only files.
+This is sometimes referred to as "project-oriented workflow." I prefer to have a consistent directory structure like so:
 
-## Themes
+  top-level-directory
+  │   README.md
+  │
+  └───data
+  │      file011.txt
+  │      file012.txt
+  │   
+  └───scripts
+  │       eda.R
+  │       report.Rmd
+  │   
+  └───outputs
+  │       plot1.png
+  │       table1.csv
+  │   
+  └───extra
+          some_paper.pdf
+          email.pdf
 
-Wowchemy and its templates come with **automatic day (light) and night (dark) mode** built-in. Alternatively, visitors can choose their preferred mode - click the moon icon in the top right of the [Demo](https://academic-demo.netlify.com/) to see it in action! Day/night mode can also be disabled by the site admin in `params.toml`.
 
-[Choose a stunning **theme** and **font**](https://wowchemy.com/docs/customization) for your site. Themes are fully customizable.
+I put all raw data needed for analysis into the 'data' directory, any and all programming scripts in the "scripts" directory, all outputs (plots, tables, intermediate data object) in the 'outputs' directory and everything else ends up 'extra'. Naturally, there are many different directory structures to use and this is just one example. Find something that works best for your needs!
 
-## License
+1. Use the `here` package.
 
-Copyright 2016-present [George Cushen](https://georgecushen.com).
+This is also optional. It works like Rprojects for setting the working directory. However, for an Rproject to work, you have to open the .Rproj file in RStudio. What if you or your collaborators prefer to open R files directly and start using those? Here will look for the next directory level which there is a .Rproj file and set the working directory there.
 
-Released under the [MIT](https://github.com/wowchemy/wowchemy-hugo-modules/blob/master/LICENSE.md) license.
+If you want to import a file, "datafile.csv" that located in the data directory. Your .R script is actually located in the 'scripts' directory. Normally, if you try to read that in, you need to specify the full path to "mydata.csv" or set the working directory and use a relative path. Again, these paths will not work if you switch computers or your collaborators are running these scripts on their own systems. This system gets even more complicated when working iwth an .Rmd file. Here's an alternative approach that works the same across files and systems:  
+
+First, make sure you have .Rproj file to define the top-level directory.
+```
+library(here)
+mydata <- read.csv(here("data", "datafile.csv"))
+```
+This code will construct this path: "data/datafile.csv" and execute that command under the assumption that wherever that .rproj is located (going up one directory at a time until it finds it) is where the working directory is set. Putting `library(here)` into every .R or .Rmd file in a project will resolve these issues.
+
+### Use R environments.
+
+Again: optional, but it will make your life easier.
+
+Often in academia, I might do an analysis, move on to something else and then have to return that analysis months or years later. I probably will have updated R and some or all of the packages used in that analysis. As a result of these updates, my original code may not work at all or may not do the intended actions. What I need are both the older version of R and the older packages. The package 'renv' is a solution. It captures the versions of R and the loaded packages. It also builds a custom package library for your package (and caches this information across other projects using `renv`).
+
+Start here:
+*(you need to aslo be using Rprojects since* `renv` *is searching for .Rproj file)*
+```
+library(renv)
+renv::init()
+```
+If you have a mature project that's not undergoing any further development at this time, this is all you need to do.
+
+If you continue to develop your project and install new packages, update your R environment like thus to ensure new or updated packaged are included:
+```
+renv::snapshot()
+```
+
+If you're familiar with **Packrat**, this is a replacement for that. This is particularly helpful for things that may have a long life span, like Shiny apps. The [renv package](https://rstudio.github.io/renv/articles/renv.html) has extensive documentation worth reading. 
+
+### Final Comments
+
+There are many more resources and recommendations for conducting reproducible research in R. There an entire [CRAN task view](https://cran.r-project.org/web/views/ReproducibleResearch.html) devoted to this!

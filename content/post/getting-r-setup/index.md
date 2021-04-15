@@ -1,91 +1,60 @@
 ---
 authors:
 - admin
-- 吳恩達
 categories:
-- Demo
-- 教程
-date: "2020-12-13T00:00:00Z"
+- R
+- reproducible research
+date: "2021-04-15T00:00:00Z"
 draft: false
 featured: false
 image:
-  caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/CpkOjOcXdUY)'
+  caption: 'Image credit: [**I got nothing**](https://unsplash.com/photos/CpkOjOcXdUY)'
   focal_point: ""
   placement: 2
   preview_only: false
-lastmod: "2020-12-13T00:00:00Z"
-projects: []
-subtitle: "Welcome \U0001F44B We know that first impressions are important, so we've
-  populated your new site with some initial content to help you get familiar with
-  everything in no time."
-summary: "Welcome \U0001F44B We know that first impressions are important, so we've
-  populated your new site with some initial content to help you get familiar with
-  everything in no time."
+lastmod: "2021-04-15T00:00:00Z"
+projects: [Reproducible Research]
+subtitle: "Some instructions for R installation and your R setup to support reproducible research."
+summary: "Some instructions for R installation and your R setup to support reproducible research."
 tags:
-- Academic
-- 开源
-title: Welcome to Wowchemy, the website builder for Hugo
+- R
+- reproducible research
+title: Getting R Set Up
 ---
 
-## Overview
 
-1. The Wowchemy website builder for Hugo, along with its starter templates, is designed for professional creators, educators, and teams/organizations - although it can be used to create any kind of site
-2. The template can be modified and customised to suit your needs. It's a good platform for anyone looking to take control of their data and online identity whilst having the convenience to start off with a **no-code solution (write in Markdown and customize with YAML parameters)** and having **flexibility to later add even deeper personalization with HTML and CSS**
-3. You can work with all your favourite tools and apps with hundreds of plugins and integrations to speed up your workflows, interact with your readers, and much more
 
-{{< figure src="https://raw.githubusercontent.com/wowchemy/wowchemy-hugo-modules/master/academic.png" title="The template is mobile first with a responsive design to ensure that your site looks stunning on every device." >}}
+#### Install R:
 
-## Get Started
+  You can download R [here](https://cloud.r-project.org/). Get the correction R distribution for your operating system. Once downloaded, click on downloaded file, and follow the installation instructions.
+  
+  Note that R is updated several times per year. If you installation is a year older or more, consider updating your version of R to the latest version.
 
-- 👉 [**Create a new site**](https://wowchemy.com/templates/)
-- 📚 [**Personalize your site**](https://wowchemy.com/docs/)
-- 💬 [Chat with the **Wowchemy community**](https://discord.gg/z8wNYzb) or [**Hugo community**](https://discourse.gohugo.io)
-- 🐦 Twitter: [@wowchemy](https://twitter.com/wowchemy) [@GeorgeCushen](https://twitter.com/GeorgeCushen) [#MadeWithWowchemy](https://twitter.com/search?q=(%23MadeWithWowchemy%20OR%20%23MadeWithAcademic)&src=typed_query)
-- 💡 [Request a **feature** or report a **bug** for _Wowchemy_](https://github.com/wowchemy/wowchemy-hugo-modules/issues)
-- ⬆️ **Updating Wowchemy?** View the [Update Guide](https://wowchemy.com/docs/guide/update/) and [Release Notes](https://wowchemy.com/updates/)
+#### Install RStudio
 
-## Crowd-funded open-source software
+  Rstudio is not R, rather, it is a user interface for accessing R. It is complicated with many features for developers. Despite that, it is still a very helpful R user interface for users of all abilities. It can downloaded [here](https://www.rstudio.com/products/rstudio/download/). For most users, the free version of "RStudio Desktop" should be chosen. Once downloaded, click on downloaded file, and follow the installation instructions.
 
-To help us develop this template and software sustainably under the MIT license, we ask all individuals and businesses that use it to help support its ongoing maintenance and development via sponsorship.
+#### Install Rtools (optional)
 
-### [❤️ Click here to become a sponsor and help support Wowchemy's future ❤️](https://wowchemy.com/plans/)
+  Only Windows users need to consider this step. This app is for compiling R packages with C, C++ and Fortran code. It is a separate piece of software that has to be downloaded and installed (it is not an R package). Rtools is not needed by all users and if you don't know if you need this, it is absolutely fine to skip this step.  If you do think you need this, You can find it [here](https://cran.r-project.org/bin/windows/Rtools/). Download and install.
 
-As a token of appreciation for sponsoring, you can **unlock [these](https://wowchemy.com/plans/) awesome rewards and extra features 🦄✨**
+#### RStudio Setup (optional)
 
-## Ecosystem
+This is an optional step, but it is highly recommended. This step will prevent RStudio from saving all of your objects in a session to `.Rdata` file that is then automatically loaded whenever you open R.  
 
-* **[Hugo Academic CLI](https://github.com/wowchemy/hugo-academic-cli):** Automatically import publications from BibTeX
+```
+install.packages("usethis"); library(usethis)
+usethis::use_blank_slate()
+```
 
-## Inspiration
+Why is automatic loading of an `.Rdata` file not recommended? Because it makes your work less reproducible. You may have created test objects that will unexpectedly interfere with downstream operations or analysis. You may have changed the original data source, but an older version is saved in the `.Rdata` file. More explanation is given by [RStudio](https://usethis.r-lib.org/reference/use_blank_slate.html).
 
-[Check out the latest **demo**](https://academic-demo.netlify.com/) of what you'll get in less than 10 minutes, or [view the **showcase**](https://wowchemy.com/user-stories/) of personal, project, and business sites.
+IF you are used to opening R and seeing all of your previous objects automatically loaded into the objects pane, this will be an adjustment. The solution is to save your processes into `.R` scripts that capture all information from packages loaded, file import, all data manipulations and other operations important. If these steps are slow and there is a need to access intermediate objects, these can be saved in tabular formats readable by many applications (e.g. .txt or .csv) or saved as a specific R object (see `saveRDS()` in the R help files) and reloaded in another session.
 
-## Features
+#### Set up version control (optional)
 
-- **Page builder** - Create *anything* with [**widgets**](https://wowchemy.com/docs/page-builder/) and [**elements**](https://wowchemy.com/docs/writing-markdown-latex/)
-- **Edit any type of content** - Blog posts, publications, talks, slides, projects, and more!
-- **Create content** in [**Markdown**](https://wowchemy.com/docs/writing-markdown-latex/), [**Jupyter**](https://wowchemy.com/docs/import/jupyter/), or [**RStudio**](https://wowchemy.com/docs/install-locally/)
-- **Plugin System** - Fully customizable [**color** and **font themes**](https://wowchemy.com/docs/customization/)
-- **Display Code and Math** - Code highlighting and [LaTeX math](https://en.wikibooks.org/wiki/LaTeX/Mathematics) supported
-- **Integrations** - [Google Analytics](https://analytics.google.com), [Disqus commenting](https://disqus.com), Maps, Contact Forms, and more!
-- **Beautiful Site** - Simple and refreshing one page design
-- **Industry-Leading SEO** - Help get your website found on search engines and social media
-- **Media Galleries** - Display your images and videos with captions in a customizable gallery
-- **Mobile Friendly** - Look amazing on every screen with a mobile friendly version of your site
-- **Multi-language** - 34+ language packs including English, 中文, and Português
-- **Multi-user** - Each author gets their own profile page
-- **Privacy Pack** - Assists with GDPR
-- **Stand Out** - Bring your site to life with animation, parallax backgrounds, and scroll effects
-- **One-Click Deployment** - No servers. No databases. Only files.
+If you use Git or SVN, you can perform Git operations directions from RStudio and interact with remote repositories. If you don't use version control, this step can be skipped. If you do use version control, the command line or other third-party software (e.g. Gitkraken) are fine to use instead or in addition to RStudio's interface. The implementation of git in R is very minimal and can support only a limited number of actions, so you are likely to need to use other software for complicated git actions. It is useful for file additions (equivalent to `git add`), commits, pushes and pulls.
 
-## Themes
+You can set up Git by going to "Tools" --> "Global Options --> "Git/SVN".
 
-Wowchemy and its templates come with **automatic day (light) and night (dark) mode** built-in. Alternatively, visitors can choose their preferred mode - click the moon icon in the top right of the [Demo](https://academic-demo.netlify.com/) to see it in action! Day/night mode can also be disabled by the site admin in `params.toml`.
-
-[Choose a stunning **theme** and **font**](https://wowchemy.com/docs/customization) for your site. Themes are fully customizable.
-
-## License
-
-Copyright 2016-present [George Cushen](https://georgecushen.com).
-
-Released under the [MIT](https://github.com/wowchemy/wowchemy-hugo-modules/blob/master/LICENSE.md) license.
+This is not the right space to discuss how to use Git as an R user, but Jenny Bryan wrote a very good [tutorial](https://happygitwithr.com/index.html) covering this subject.
