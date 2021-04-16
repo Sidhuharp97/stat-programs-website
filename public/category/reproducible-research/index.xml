@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Nelson Bighetti | Academic</title>
-    <link>http://example.org/author/nelson-bighetti/</link>
-      <atom:link href="http://example.org/author/nelson-bighetti/index.xml" rel="self" type="application/rss+xml" />
-    <description>Nelson Bighetti</description>
+    <title>reproducible research | Academic</title>
+    <link>http://example.org/category/reproducible-research/</link>
+      <atom:link href="http://example.org/category/reproducible-research/index.xml" rel="self" type="application/rss+xml" />
+    <description>reproducible research</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 15 Apr 2021 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>http://example.org/author/nelson-bighetti/avatar_hu52a603635ecebd45650b162dadabb4e5_12861_270x270_fill_q75_lanczos_center.jpg</url>
-      <title>Nelson Bighetti</title>
-      <link>http://example.org/author/nelson-bighetti/</link>
+      <url>http://example.org/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_2.png</url>
+      <title>reproducible research</title>
+      <link>http://example.org/category/reproducible-research/</link>
     </image>
     
     <item>
@@ -103,58 +103,6 @@ renv::init()
 &lt;p&gt;If you&amp;rsquo;re familiar with &lt;strong&gt;Packrat&lt;/strong&gt;, this is a replacement for that. This is particularly helpful for things that may have a long life span, like Shiny apps. The &lt;a href=&#34;https://rstudio.github.io/renv/articles/renv.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;renv package&lt;/a&gt; has extensive documentation worth reading.&lt;/p&gt;
 &lt;h3 id=&#34;final-comments&#34;&gt;Final Comments&lt;/h3&gt;
 &lt;p&gt;There are many more resources and recommendations for conducting reproducible research in R. There an entire &lt;a href=&#34;https://cran.r-project.org/web/views/ReproducibleResearch.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CRAN task view&lt;/a&gt; devoted to this!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>An example preprint / working paper</title>
-      <link>http://example.org/publication/preprint/</link>
-      <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
-      <guid>http://example.org/publication/preprint/</guid>
-      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code, math, and images&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>An example journal article</title>
-      <link>http://example.org/publication/journal-article/</link>
-      <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
-      <guid>http://example.org/publication/journal-article/</guid>
-      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code, math, and images&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>An example conference paper</title>
-      <link>http://example.org/publication/conference-paper/</link>
-      <pubDate>Mon, 01 Jul 2013 00:00:00 +0000</pubDate>
-      <guid>http://example.org/publication/conference-paper/</guid>
-      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code, math, and images&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     

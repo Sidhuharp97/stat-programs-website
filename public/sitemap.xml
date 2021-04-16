@@ -20,53 +20,50 @@
     <loc>http://example.org/event/</loc>
     <lastmod>2030-06-01T13:00:00+00:00</lastmod>
   </url><url>
+    <loc>http://example.org/authors/</loc>
+    <lastmod>2021-04-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://example.org/categories/</loc>
+    <lastmod>2021-04-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://example.org/post/getting-r-setup/</loc>
+    <lastmod>2021-04-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://example.org/author/nelson-bighetti/</loc>
+    <lastmod>2021-04-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://example.org/post/</loc>
+    <lastmod>2021-04-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://example.org/project/</loc>
+    <lastmod>2021-04-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://example.org/post/reproducible-r/</loc>
+    <lastmod>2021-04-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://example.org/tag/r/</loc>
+    <lastmod>2021-04-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://example.org/category/r/</loc>
+    <lastmod>2021-04-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://example.org/project/reproducible-research/</loc>
+    <lastmod>2021-04-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://example.org/tag/reproducible-research/</loc>
+    <lastmod>2021-04-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://example.org/category/reproducible-research/</loc>
+    <lastmod>2021-04-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://example.org/tags/</loc>
+    <lastmod>2021-04-15T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://example.org/courses/</loc>
     <lastmod>2021-01-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://example.org/courses/example/</loc>
     <lastmod>2021-01-24T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://example.org/tag/academic/</loc>
-    <lastmod>2020-12-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://example.org/authors/</loc>
-    <lastmod>2020-12-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://example.org/categories/</loc>
-    <lastmod>2020-12-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://example.org/category/demo/</loc>
-    <lastmod>2020-12-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://example.org/author/nelson-bighetti/</loc>
-    <lastmod>2020-12-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://example.org/post/</loc>
-    <lastmod>2020-12-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://example.org/tags/</loc>
-    <lastmod>2020-12-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://example.org/post/getting-r-setup/</loc>
-    <lastmod>2020-12-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://example.org/post/getting-started/</loc>
-    <lastmod>2020-12-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://example.org/post/reproducible-r/</loc>
-    <lastmod>2020-12-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://example.org/author/%E5%90%B3%E6%81%A9%E9%81%94/</loc>
-    <lastmod>2020-12-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://example.org/tag/%E5%BC%80%E6%BA%90/</loc>
-    <lastmod>2020-12-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://example.org/category/%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2020-12-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://example.org/post/writing-technical-content/</loc>
-    <lastmod>2019-07-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://example.org/publication-type/3/</loc>
     <lastmod>2019-04-07T00:00:00+00:00</lastmod>
@@ -82,9 +79,6 @@
   </url><url>
     <loc>http://example.org/tag/source-themes/</loc>
     <lastmod>2019-04-07T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://example.org/post/jupyter/</loc>
-    <lastmod>2019-09-05T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://example.org/slides/</loc>
     <lastmod>2019-02-05T00:00:00+00:00</lastmod>
@@ -104,9 +98,6 @@
     <loc>http://example.org/project/internal-project/</loc>
     <lastmod>2016-04-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/project/</loc>
-    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://example.org/publication-type/2/</loc>
     <lastmod>2015-09-01T00:00:00+00:00</lastmod>
   </url><url>
@@ -123,5 +114,7 @@
     <lastmod>2013-07-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://example.org/admin/</loc>
+  </url><url>
+    <loc>http://example.org/author/%E5%90%B3%E6%81%A9%E9%81%94/</loc>
   </url>
 </urlset>

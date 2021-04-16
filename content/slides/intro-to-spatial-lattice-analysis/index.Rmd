@@ -1,12 +1,14 @@
 ---
+authors: [admin]
+categories: [spatial]
+date: "2021-04-08T00:00:00Z"
+slides:
+  highlight_style: dracula
+  theme: black
+summary: An introduction to using Wowchemy's Slides feature.
+tags: [spatial, R]
 title: "Routine incorporation of Spatial Covariates into Analysis of Planned Field Experiments"
-author: Julia Piaskowski
-date: April 08, 2021
-output:
-  ioslides_presentation:
-    widescreen: true
 ---
-
 
 <style type="text/css">
 =
