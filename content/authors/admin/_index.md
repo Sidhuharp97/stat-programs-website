@@ -42,7 +42,7 @@ social:
   icon_pack: fab
   link: https://www.linkedin.com/in/julia-piaskowski-4623145a
 superuser: true
-title: Nelson Bighetti
+title: Julia Piaskowski
 ---
 
 Julia Piaskowski is a consulting statistician at the University of Idaho. 
