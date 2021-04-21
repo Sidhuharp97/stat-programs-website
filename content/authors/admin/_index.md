@@ -1,46 +1,27 @@
 ---
-bio: My research interests include plant genetics, spatial statistics and how to implement open science and reproducible research practices routinely. 
+bio: Our research interests include supporting agricultural industries in and around Idaho. 
 education:
-  courses:
-  - course: PhD in Crop science
-    institution: Washington State University
-    year: 2012
-  - course: MS in Crop Science
-    institution: Washington State University
-    year: 2008
-  - course: BS in Molecular Biology, Biochemistry and Microbiology
-    institution: University of Idaho
-    year: 2001
-email: "jpiaskowski@uidaho.edu"
+email: 
 highlight_name: false
 interests:
 - Agricultural statistics
 - open data & reproducible research
-- plant and animal genetics
-- spatial statistics
 organizations:
 - name: University of Idaho
   url: https://www.uidaho.edu/
-role: Statististican
+role: Consultting Statistician
 social:
 - icon: envelope
   icon_pack: fas
   link: /#contact
 - display:
     header: true
-  icon: twitter
-  icon_pack: fab
-  label: Follow me on Twitter
-  link: https://www.linkedin.com/in/julia-piaskowski-4623145a
 - icon: graduation-cap
   icon_pack: fas
-  link: https://scholar.google.com/citations?user=PMN2WZEAAAAJ
+  link: https://www.uidaho.edu/cals/statistical-programs
 - icon: github
   icon_pack: fab
-  link: https://github.com/jpiaskowski
-- icon: linkedin
-  icon_pack: fab
-  link: https://www.linkedin.com/in/julia-piaskowski-4623145a
+  link: https://github.com/IdahoAgStats
 superuser: true
 title: Julia Piaskowski
 ---
