@@ -10,4 +10,5 @@ share: false
 title: Terms
 ---
 
-...
+This information is provided as-is without any guaranteed that these methods are the best out there to solve analytical problems. We try, but aren't that good!
+

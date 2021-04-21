@@ -1,5 +1,17 @@
 ---
-authors: [admin]
+title: "Routine incorporation of Spatial Covariates into Analysis of Planned Field Experiments"
+author: Julia Piaskowski
+date: April 08, 2021
+output:
+  ioslides_presentation:
+    widescreen: true
+categories: ["R"]
+tags: ["spatial statistics"]
+---
+
+
+---
+authors: "
 categories: [spatial]
 date: "2021-04-08T00:00:00Z"
 slides:

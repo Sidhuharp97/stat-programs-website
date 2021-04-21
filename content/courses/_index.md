@@ -2,8 +2,8 @@
 header:
   caption: ""
   image: ""
-title: Courses
+title: Tutorials
 type: page
 ---
 
-I teach the following courses:
+We have extended tutorials for these topics:
