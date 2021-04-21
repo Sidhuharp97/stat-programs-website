@@ -9,7 +9,7 @@ interests:
 organizations:
 - name: University of Idaho
   url: https://www.uidaho.edu/
-role: Consultting Statistician
+role: Statistical Consultation
 social:
 - icon: envelope
   icon_pack: fas
@@ -23,7 +23,7 @@ social:
   icon_pack: fab
   link: https://github.com/IdahoAgStats
 superuser: true
-title: Julia Piaskowski
+title: Statistical Programs
 ---
 
-Julia Piaskowski is a consulting statistician at the University of Idaho. 
+Statistical Programs is a unit located within the Idaho Agricultural Experimental Station serving the College of Agriculture and Life Sciences at the University of Idaho. 

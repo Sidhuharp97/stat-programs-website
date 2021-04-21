@@ -26,7 +26,7 @@ feature:
   name: R
 - description: 100%
   icon: sas-icon
-  icon_pack: fas
+  icon_pack: custom
   name: SAS
 
 # Uncomment to use emoji icons.
