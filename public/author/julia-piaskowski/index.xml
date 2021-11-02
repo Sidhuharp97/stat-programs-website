@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Julia Piaskowski | Academic</title>
+    <link>http://example.org/author/julia-piaskowski/</link>
+      <atom:link href="http://example.org/author/julia-piaskowski/index.xml" rel="self" type="application/rss+xml" />
+    <description>Julia Piaskowski</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language>
+    <image>
+      <url>http://example.org/author/julia-piaskowski/avatar_hu40701af9eef6a68c110a0aa9b081be15_98784_270x270_fill_q75_lanczos_center.jpg</url>
+      <title>Julia Piaskowski</title>
+      <link>http://example.org/author/julia-piaskowski/</link>
+    </image>
+    
+  </channel>
+</rss>

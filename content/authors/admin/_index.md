@@ -1,5 +1,5 @@
 ---
-bio: Our research interests include supporting agricultural industries in and around Idaho. 
+bio: Our research focus is supporting agricultural industries in and around Idaho. 
 education:
 email: 
 highlight_name: false

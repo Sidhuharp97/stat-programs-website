@@ -29,9 +29,6 @@
     <loc>http://example.org/post/getting-r-setup/</loc>
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/author/nelson-bighetti/</loc>
-    <lastmod>2021-04-15T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://example.org/post/</loc>
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
   </url><url>
@@ -56,13 +53,19 @@
     <loc>http://example.org/category/reproducible-research/</loc>
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>http://example.org/author/statistical-programs/</loc>
+    <lastmod>2021-04-15T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://example.org/tags/</loc>
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/courses/</loc>
-    <lastmod>2021-01-24T00:00:00+00:00</lastmod>
+    <loc>http://example.org/talk/routine-incorporation-of-spatial-covariates-into-analysis-of-planned-field-experiments/</loc>
+    <lastmod>2021-04-09T15:30:00+00:00</lastmod>
   </url><url>
     <loc>http://example.org/courses/example/</loc>
+    <lastmod>2021-01-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://example.org/courses/</loc>
     <lastmod>2021-01-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://example.org/publication-type/3/</loc>
@@ -79,12 +82,6 @@
   </url><url>
     <loc>http://example.org/tag/source-themes/</loc>
     <lastmod>2019-04-07T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://example.org/slides/</loc>
-    <lastmod>2019-02-05T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://example.org/slides/example/</loc>
-    <lastmod>2019-02-05T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://example.org/tag/deep-learning/</loc>
     <lastmod>2016-04-27T00:00:00+00:00</lastmod>
@@ -115,6 +112,8 @@
   </url><url>
     <loc>http://example.org/admin/</loc>
   </url><url>
-    <loc>http://example.org/author/%E5%90%B3%E6%81%A9%E9%81%94/</loc>
+    <loc>http://example.org/author/bill-price/</loc>
+  </url><url>
+    <loc>http://example.org/author/julia-piaskowski/</loc>
   </url>
 </urlset>
