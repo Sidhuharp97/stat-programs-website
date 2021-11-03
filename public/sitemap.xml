@@ -2,23 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://example.org/courses/example/python/</loc>
+    <loc>http://example.org/tutorials/example/python/</loc>
     <lastmod>2021-01-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/courses/example/visualization/</loc>
+    <loc>http://example.org/tutorials/example/visualization/</loc>
     <lastmod>2021-01-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/courses/example/stats/</loc>
+    <loc>http://example.org/tutorials/example/stats/</loc>
     <lastmod>2021-01-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://example.org/</loc>
-    <lastmod>2030-06-01T13:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://example.org/talk/example-talk/</loc>
-    <lastmod>2030-06-01T13:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://example.org/event/</loc>
-    <lastmod>2030-06-01T13:00:00+00:00</lastmod>
+    <lastmod>2021-04-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://example.org/authors/</loc>
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
@@ -59,13 +53,22 @@
     <loc>http://example.org/tags/</loc>
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>http://example.org/tag/field-experiments/</loc>
+    <lastmod>2021-04-09T15:30:00+00:00</lastmod>
+  </url><url>
+    <loc>http://example.org/event/</loc>
+    <lastmod>2021-04-09T15:30:00+00:00</lastmod>
+  </url><url>
     <loc>http://example.org/talk/routine-incorporation-of-spatial-covariates-into-analysis-of-planned-field-experiments/</loc>
     <lastmod>2021-04-09T15:30:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/courses/example/</loc>
+    <loc>http://example.org/tag/spatial-statistics/</loc>
+    <lastmod>2021-04-09T15:30:00+00:00</lastmod>
+  </url><url>
+    <loc>http://example.org/tutorials/example/</loc>
     <lastmod>2021-01-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/courses/</loc>
+    <loc>http://example.org/tutorials/</loc>
     <lastmod>2021-01-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://example.org/publication-type/3/</loc>

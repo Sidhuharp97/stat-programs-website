@@ -1,0 +1,627 @@
+---
+authors: ["Julia Piaskowski]
+categories: []
+date: "2021-04-08T00:00:00Z"
+draft: false
+slides:
+  highlight_style: dracula
+  theme: black
+summary: An introduction to using Wowchemy's Slides feature.
+tags: ["spatial statistics"]
+title: Slides
+---
+
+
+<style type="text/css">
+=
+
+ul {
+  color: #282828;
+  font-size: 40px;
+}
+
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE
+)
+```
+
+```{r}
+library(ggplot2); library(desplot); library(dplyr); library(here)
+if(!require(beyonce)) {remotes::install_github("dill/beyonce"); library(beyonce)}
+```
+
+```{r}
+mydata <- read.csv(here("data", "Kim2013.csv"))
+
+mydata$block <- as.factor(mydata$rep); mydata$cultivar <- as.factor(mydata$name)
+max.row0 = max(mydata$row)
+max.range0 = max(mydata$range)
+mydata$colF <- as.factor(mydata$range)
+mydata$rowF <- as.factor(mydata$row)
+```
+
+##  
+
+```{r, echo=FALSE, out.width="70%", fig.cap="A Road in Auvers After the Rain by Vincent Van Gogh"}
+knitr::include_graphics("images/road-auvers-after-rain-6_2840.jpg") 
+```
+
+## 
+   
+   
+   
+<center> 
+### Goal: Make everyone feel more comfortable using spatial stats when analyzing field experimental data. 
+
+(you don't have to be a geospatial statistics expert)
+</center>
+
+## Where to Find This Information
+
+This Presentation:
+
+    https://github.com/IdahoAgStats/lattice-spatial-analysis-talk
+
+A longer tutorial:
+
+    https://idahoagstats.github.io/guide-to-field-trial-spatial-analysis
+
+<need presentation url>
+
+## What Are Barriers to Using Spatial Stats?
+
+  * Perceived lack of need
+  * Unsure of benefits
+  * No training in the topic/intimidated by the statistical methodology
+  * Limited time to devote to statistical analysis
+  * Unclear what would happen to blocking if spatial stats are used
+  * **very few resources for easy implementation**
+
+## Spatial Variation in Agricultural Fields
+
+```{r, echo=FALSE, out.width="80%", fig.cap="Univeristy of Idaho's Parker Farm (Moscow, Idaho)"}
+knitr::include_graphics("images/Parker_farm.png") 
+```
+
+
+##  Spatial Variation in Agricultural Fields
+
+```{r, echo=FALSE, out.width="90%"}
+# yield heat map
+p <- ggplot(mydata, aes(range, row)) +
+  geom_tile(aes(fill = yield), col = "white", lwd = 0.6) +
+  #geom_text(aes(label = name)) +
+  #geom_tileborder(aes(group = 1, grp = block), lwd = 1.4) +
+  scale_fill_gradient(low = "white", high = "blue") +
+  labs(title = "Plot Yield Map", subtitle = "Soft White Winter Trial in Kimberly, 2013") +
+  scale_x_continuous(breaks = seq(1,max.range0, 1)) +
+  scale_y_continuous(breaks = 1:max.row0) +
+  theme_classic() +
+  theme(axis.text = element_text(size = 16),
+        axis.title = element_blank(),
+        legend.title = element_text(size = 16),
+        legend.text = element_text(size = 15),
+        panel.background = element_rect(fill = "transparent"),
+        plot.background = element_rect(fill = "transparent"))
+p
+
+ggsave(here("images", "Kimberely2013.png"), p)
+```
+
+## Blocking in Agricultural Fields 
+
+```{r, echo=FALSE, out.width="90%"}
+p + geom_tileborder(aes(group = 1, grp = block), lwd = 1.4) 
+```
+
+## Blocking versus Spatial Analysis
+
+```{r, out.width="60%"}
+knitr::include_graphics("images/boyfriend_meme.jpg") 
+```
+
+This is not how this works. Blocking **is** compatible with spatial analysis and recommended for most (all?) field trials.
+
+## There Are Many Spatial Methods Available
+
+```{r eval=FALSE, include=FALSE}
+library(kableExtra)
+mat <- matrix(c("row and column trend", "exponential", 
+                "nearest neighbor",  "spherical",  
+                "separable AR1xAR1 model", "Gaussian", 
+                "spatial error mode","Matern",
+                "spatial lag model","Cauchy",
+                "ARIMA","power", 
+                "spines","linear", 
+                "GAMs" ,"many more..."), byrow = TRUE, ncol = 2)
+kable(mat) %>% kable_styling(full_width = TRUE, bootstrap_options = c("bordered", "striped")) 
+```
+|areal data | correlated error models |
+|------------|---------------|
+|row and column trend | exponential  | 
+| nearest neighbor | spherical | 
+|separable ARxAR models | Gaussian | 
+|spatial error model | Matern |
+| spatial lag model | Cauchy | 
+| ARIMA | power | 
+| splines | linear | 
+| GAMs | many more... | 
+
+## These Methods Work
+
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/gif/spatial_gif.gif") 
+```
+
+
+
+## These Methods Can Be Complex   {.columns-2}
+
+```{r, out.width="80%"}
+knitr::include_graphics("images/ikea.jpg") 
+```
+
+
+....But
+
+You can also integrate spatial methods into gridded field trials without: 
+
+1. having to know anything about map projections, shapefiles or other geospatial terminology
+1. possessing a deep understanding of linear modeling techniques or empirical variograms
+1. being an R or SAS programming expert
+
+*Knowing these things is helpful, but not essential.*
+
+## A Typical Experiment
+
+  - Experimental treatments
+  - fully crossed effects
+  - Blocking scheme along the expected direction of field variation
+
+```{r}
+plot_layout_simple <- expand.grid(range=1:4, row=1:3)
+plot_layout_simple$block <- as.factor(plot_layout_simple$row)
+```
+
+```{r}
+ggplot(plot_layout_simple, aes(range, row)) +
+  geom_tile(aes(fill = block), color = "white", lwd = 3) + 
+  scale_fill_manual(values = beyonce_palette(18)) +
+  theme_classic() +
+ # guides(fill = FALSE) + 
+  theme(axis.text = element_blank(),
+        axis.title = element_blank(),
+        axis.line = element_blank(), axis.ticks = element_blank(),
+        legend.title = element_text(size = 18),
+        legend.text = element_text(size = 18),
+        panel.background = element_rect(fill = "transparent"),
+        plot.background = element_rect(fill = "transparent"))
+```
+
+
+## Analysis
+
+##### A typical linear model:
+
+$Y_{ij} = \mu + \alpha_i + \beta_j + \epsilon_{ij}$
+
+Response = trial mean + treatment effect + block effect + leftover error
+
+##### We Assume: 
+
+1. The error terms, or residuals, are independent of another with a shared distribution:
+
+$$\epsilon_i \sim  N(0,\sigma_e)$$
+
+2. Each block captures variation unique to that block and there is no other variation related to spatial position of the experimental plots. 
+
+<center> **How often is #2 evaluated?** </center>
+
+## Example Analysis
+
+```{r}
+p
+```
+
+## Average Yield by Row, Column and Block
+
+```{r, out.width="90%"}
+par(mfrow=c(1,3))
+boxplot(yield ~ row, data = mydata, col = "deepskyblue3", horizontal = TRUE, las = 2)
+boxplot(yield ~ range, data = mydata, col = "goldenrod1", horizontal = TRUE, las = 2)
+boxplot(yield ~ block, data = mydata, col = "red2"
+        , horizontal = TRUE, las = 2)
+par(mfrow=c(1,1))
+```
+
+## Standard Analysis of Kimberly, 2013 Wheat Variety Trial
+
+  - 36 soft white winter wheat cultivars
+  - 4 blocks
+  - 2 missing data points
+  - the linear model: 
+
+$Y_{ij} = \mu + \alpha_i + \beta_j + \epsilon_{ij}$
+
+```{r, echo=TRUE, message=FALSE}
+library(nlme)
+lm1 <- lme(yield ~ cultivar, random = ~ 1|block, data = mydata, na.action = na.exclude)
+```
+
+## What Do The Residuals Look Like? 
+
+```{r, echo=TRUE}
+plot(lm1)
+```
+
+## What Do The Residuals Look Like Spatially? 
+
+```{r}
+mydata$residuals <- residuals(lm1)
+```
+
+```{r}
+ggplot(mydata, aes(range, row)) +
+  geom_tile(aes(fill = residuals), col = "white", lwd = 0.6) +
+  #geom_text(aes(label = name)) +
+  #geom_tileborder(aes(group = 1, grp = block), lwd = 1.4) +
+  scale_fill_gradient(low = "white", high = "blue") +
+  labs(title = "Residual Plot Map", subtitle = "Soft White Winter Trial in Kimberly, 2013") +
+  scale_x_continuous(breaks = seq(1,max.range0, 1)) +
+  scale_y_continuous(breaks = 1:max.row0) +
+  theme_classic() +
+  theme(axis.text = element_text(size = 16),
+        axis.title = element_blank(),
+        legend.title = element_text(size = 16),
+        legend.text = element_text(size = 15),
+        panel.background = element_rect(fill = "transparent"),
+        plot.background = element_rect(fill = "transparent"))
+
+```
+
+## What Do The Residuals Look Like Spatially? 
+
+```{r}
+library(spdep); library(sf); library(purrr)
+
+xy.rook <- cell2nb(nrow = max(mydata$row), ncol = max(mydata$range), type="rook", legacy = FALSE, torus = FALSE)
+rook_matrix <- st_as_sf(expand.grid(row = 1:max(mydata$row), range = 1:max(mydata$range)), coords=c("row", "range"))
+#plot(xy.rook, coords = st_geometry(rook_matrix), points = TRUE) # just for testing
+resid.lme <- residuals(lm1)
+res.nn1 <- map_dbl(xy.rook, function(j) mean(resid.lme[j]))
+rc <- signif(cor(resid.lme, res.nn1, use = "pairwise.complete.obs"), 2)
+lin <- lm(resid.lme ~ res.nn1)
+plot(x = resid.lme, y = res.nn1,
+     main = paste0("r = ", rc), xlab = "residual", ylab = "average residual of neighbor (rook)")
+abline(lin$coefficients[1], lin$coefficients[2], col = "blue")
+```
+
+## Global Moran's Test for Spatial Autocorrelation 
+
+$H_0$: There is no spatial autocorrelation    
+$H_a:$  There is spatial autocorrelation!  
+
+This uses a simple weighting matrix that weights all neighbors that share a plot border (the chess-based "rook" formation) equally. 
+```{r}
+xy.rook <- cell2nb(nrow = max(mydata$row), ncol = max(mydata$range), type="rook", legacy = FALSE, torus = FALSE)
+weights <- nb2listw(xy.rook, style = "W") 
+moran.mc(mydata$residuals, weights, 999, na.action = na.exclude)
+```
+## Handling Spatial Autocorrelation in Areal Data
+  
+Areal data = finite region divided into discrete sub-regions (plots) with aggregated outcomes 
+
+Options: 
+
+1. model row and column trends 
+    - good for known gradients (hill slope, salinity patterns)
+2. assume plots close together are more similar than plots far apart. The errors terms can be modelled based on proximity, but there is no trial-wide trend  
+    - autoregressive models (AR)
+    - models utilizing "gaussian random fields" for continuously varying data (e.g. point data)
+    - Smoothing splines
+    - nearest neighbor
+  
+## Basic Linear Model
+
+$$Y_{ij} = \mu + A_i + \epsilon_{ij}$$ 
+$$\epsilon_i \sim  N(0,\sigma)$$
+
+If N = 4:  
+
+$$e_i ~\sim N \Bigg( 0, 
+\left[ {\begin{array}{ccc} \sigma^2 & 0 & 0 & 0\\ 
+                            0 & \sigma^2 & 0 & 0\\ 
+                            0 & 0 & \sigma^2 & 0\\
+                            0 & 0 & 0 & \sigma^2
+                            \end{array}  } \right] \Bigg) $$
+                            
+The variance-covariance matrix indicates a shared variance and all off-diagonals are zero, that is, the errors are uncorrelated. 
+
+## Linear Model with Autoregressive (AR) Errors
+
+Same linear model:
+$$Y_{ij} = \mu + A_i + \epsilon_{ij}$$ 
+
+Different variance structure:
+
+$$e_i ~\sim N \Bigg( 0,  = \sigma^2
+\left[ {\begin{array}{cc} 1 & \rho & \rho^2 & \rho^3 \\
+                          \rho & 1 & \rho & \rho^2 \\
+                          \rho^2 & \rho & 1 & \rho \\
+                          \rho^3 & \rho^2 & \rho & 1 \\ 
+                          \end{array} } \right] \Bigg) $$
+                          
+* $\rho$ is a correlation parameter ranging from -1 to 1 where 0 is no correlation and values approaching 1 indicate spatial correlation. 
+* The "one" in AR1 means that only the next most adjacent point is considered. There can be AR2, AR3, ..., ARn models.
+
+## The Separable AR1 x AR1 model  {.columns-2}
+
+```{r, echo=FALSE, out.width="90%"}
+
+plot_small <- expand.grid(range=1:3, row=1:3)
+plot_small$block <- as.factor(plot_small$range)
+
+ggplot(plot_small, aes(range, row)) +
+  geom_tile(aes(fill = block), color = "white", lwd = 3) + 
+  scale_fill_manual(values = beyonce_palette(18)) +
+  theme_classic() +
+  guides(fill = FALSE) + 
+  theme(axis.text = element_blank(),
+        axis.title = element_blank(),
+        axis.line = element_blank(), axis.ticks = element_blank(),
+        legend.title = element_text(size = 16),
+        legend.text = element_text(size = 15),
+        panel.background = element_rect(fill = "transparent"),
+        plot.background = element_rect(fill = "transparent"))
+```
+
+- AR1xAR1 assumes correlation in two directions, row and column. 
+- It estimates $\sigma$, $\rho_{column}$, and $\rho_{row}$  
+- often a good choice since plot are rectangular and hence autocorrelation will differ by direction ("anistropy")
+
+## More Notes on Separable AR1xAR1
+
+- From a statistical standpoint, it's one of the more intuitive models
+- The implementation in R is a little shaky 
+    - several packages, all hard to use and incompatible with other R packages
+- It is implemented in SAS
+- Some proprietary software implements this (AsREML), others do not (Agrobase)
+
+## Semivariance and Empirical Variograms
+
+A measure of spatial correlation based on all pairwise correlations in a data set, binned by distance apart:
+
+$\gamma^2(h) = \frac{1}{2} Var[Z(s+h)-Z(s)]$  
+$Z(s)$ = observed data at point $s$.   
+$Z(s)$ = observed data at another point $h$ distance from point $s$.   
+
+For a data set with $N$ observation, there are this many pairwise points:
+
+$\frac{N(N-1)}{2}$
+
+## Empirical Variogram
+
+This uses semivariance to mathematically relate spatial correlations with distance
+  
+```{r, echo=FALSE, out.width="70%"}
+knitr::include_graphics("images/Sadoti2014_spherical.jpg") 
+```
+  
+range = distance up to which is there is spatial correlation
+sill = uncorrelated variance of the variable of interest
+nugget = measurement error, or short-distance spatial variance and other unaccounted for variance
+  
+## Semivariance & Empirical Variograms  
+
+  - There are many difference mathematical models for explaining semivariance:  
+    - exponential, Gaussian, Matérn, spherical, ...  
+  - It is usually used for kriging, or prediction of a new point through spatial interpolation  
+  - It can also be used in a linear model where local observations are used to predict a data point in addition to treatment effects   
+  - Bonus: R and SAS are really good at this!   
+  
+## Adding Semivariance to a Linear Model
+
+Copy data into new object so we can assign it a new class (and remove missing data): 
+```{r, echo=TRUE}
+library(gstat); library(sp); library(dplyr)
+mydata_sp <- mydata %>% filter(!is.na(yield))
+```
+Establish `coordinates` for data set to make it an `sp` object ("spatial points"): 
+```{r, echo=TRUE}
+coordinates(mydata_sp) <- ~ row + range
+```
+Set the maximum distance for looking at pairwise correlations: 
+```{r, echo=TRUE}
+max_dist <- 0.5*max(dist(coordinates(mydata_sp)))
+```
+
+## Adding Semivariance to a Linear Model
+
+Calculate a sample variogram: 
+```{r, echo=TRUE}
+semivar <- variogram(yield ~ block + cultivar, data = mydata_sp,
+                        cutoff = max_dist, width = max_dist/12)
+nugget_start <- min(semivar$gamma)
+```
+
+## Adding Semivariance to a Linear Model
+
+The empirical variogram: 
+```{r, echo=TRUE}
+plot(semivar)
+```
+
+
+## Adding Semivariance to a Linear Model
+
+Set up models for fitting variograms:
+```{r, echo=TRUE}
+vgm1 <- vgm(model = "Exp", nugget = nugget_start) # exponential
+vgm2 <- vgm(model = "Sph", nugget = nugget_start) # spherical
+vgm3 <- vgm(model = "Gau", nugget = nugget_start) # Gaussian
+```
+
+Fit the variogram models to the data:
+```{r, echo=TRUE}
+variofit1 <- fit.variogram(semivar, vgm1)
+variofit2 <- fit.variogram(semivar, vgm2)
+variofit3 <- fit.variogram(semivar, vgm3)
+```
+
+
+## Adding Semivariance to a Linear Model
+
+Look at the error terms to see which model is the best at minimizing error. 
+
+```{r}
+sprintf("exponential: %.1f", attr(variofit1, "SSErr"))
+sprintf("spherical: %.1f", attr(variofit2, "SSErr"))
+sprintf("Gaussian: %.1f", attr(variofit3, "SSErr"))
+```
+
+The spherical model is the best at minimizing error. 
+
+## Adding Semivariance to a Linear Model
+
+```{r, echo=TRUE}
+plot(semivar, variofit2, main = "Spherical model")
+```
+
+
+## Adding Semivariance to a Linear Model
+
+Extract the nugget and sill information from the spherical variogram: 
+```{r, echo=TRUE}
+nugget <- variofit2$psill[1] 
+range <- variofit2$range[2] 
+sill <- sum(variofit2$psill) 
+nugget.effect <- nugget/sill  # the nugget/sill ratio
+```
+
+## Adding Semivariance to a Linear Model
+
+Build a correlation structure in `nlme`:
+```{r, echo=TRUE}
+cor.sph <- corSpatial(value = c(range, nugget.effect), 
+                  form = ~ row + range, 
+                  nugget = T, fixed = F,
+                  type = "spherical", 
+                  metric = "euclidean")
+```
+Update the Model:
+```{r,, echo=TRUE}
+lm_sph <- update(lm1, corr = cor.sph)
+```
+
+## Compare Models - Log likelihood
+
+```{r, echo=TRUE}
+logLik(lm1)
+logLik(lm_sph)
+```
+
+## Compare Models - Post-hoc Power
+
+
+```{r, echo=TRUE}
+anova(lm1)[2,]
+anova(lm_sph)[2,]
+```
+
+## Compare Model Predictions
+
+```{r, echo=TRUE}
+library(emmeans)
+lme_preds <- as.data.frame(emmeans(lm1, "cultivar")) %>% mutate(model = "mixed model")
+sph_preds <- as.data.frame(emmeans(lm_sph, "cultivar")) %>% 
+  mutate(model = "mixed model + spatial")
+preds <- rbind(lme_preds, sph_preds)
+```
+
+
+## Compare Model Predictions
+
+```{r}
+ggplot(preds, aes(x = model, y = emmean, group = cultivar)) +
+  geom_point(size = 3, alpha = 0.6) +
+  geom_line() +
+  ylab("yield means for cultivar") + 
+  theme_minimal(base_size = 16)
+
+ggsave(here("images", "Kimberly2013_ranks.png"))
+```
+
+Highest yielding wheat: 'Stephens' (released in 1977) 
+
+## Where Was Stephens Located in the Trial?
+
+```{r}
+pblock <- p + geom_tileborder(aes(group = 1, grp = block), lwd = 1.4)
+#pblock
+
+ggsave(here("images", "Kimberly2013_blocking.png"), pblock)
+```
+
+
+```{r}
+
+mydata$new_name <- ifelse(mydata$name == "Stephens", "Ste.", NA)
+                            #ifelse(mydata$name == "Bobtail", "Bob.", NA))
+
+ggplot(mydata, aes(range, row)) +
+  geom_tile(aes(fill = yield), col = "white", lwd = 0.6) +
+  geom_text(aes(label = new_name)) +
+  geom_tileborder(aes(group = 1, grp = block), lwd = 1.4) +
+  scale_fill_gradient(low = "white", high = "blue") +
+  labs(title = "Plot Yield Map", subtitle = "Soft White Winter Trial in Kimberly, 2013") +
+  scale_x_continuous(breaks = seq(1,max.range0, 1)) +
+  scale_y_continuous(breaks = 1:max.row0) +
+  theme_classic() +
+  theme(axis.text = element_text(size = 16),
+        axis.title = element_blank(),
+        legend.title = element_text(size = 16),
+        legend.text = element_text(size = 15),
+        panel.background = element_rect(fill = "transparent"),
+        plot.background = element_rect(fill = "transparent"))
+
+ggsave(here("images", "Kimberely2013_stephens.png"))
+```
+
+## More Notes
+
+  - When models omit blocking, the predictions may be unchanged or they may worsen. This varies by the agronomic field, but in general, blocking a field trial and including block in the statistical model improves your experimental power and controls experimental error.
+  - There is no single spatial model that fits all
+  - However, using any spatial model is usually better than none at all
+  - When you use spatial covariates, your estimates are better and more precise. This really does help you! 
+  
+## What's Next:
+
+  - Track row and range information in your trial data set.
+  - Look at the tutorial! (we will also add SAS code)
+  - Try out a few models and see how it impacts your results. 
+  
+```{r, echo=FALSE, out.width="60%"}
+knitr::include_graphics("images/variety testing2.JPG") 
+```
+
+  
+## *The Seminar Was Brought to you by...Statistical Programs!!!*
+
+*Statistical consulting to support the College of Agriculture and Life Sciences.*
+
+**Bill Price**, Director, bprice@uidaho.edu, AgSci307  
+
+**Julia Piaskowski**, jpiaskowski@uidaho.edu, AgSci 305  
+
+
+ 
+  
+  
+  
+  
