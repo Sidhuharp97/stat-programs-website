@@ -4,19 +4,23 @@ education:
 email: 
 highlight_name: false
 interests:
-- Agricultural statistics
+- agricultural statistics
 - open data & reproducible research
+- R programming
+- SAS programming
+- experimental design
+- machine learning
 organizations:
 - name: University of Idaho
   url: https://www.uidaho.edu/
 role: Statistical Consultation
 social:
-- icon: envelope
+- icon: paper-plane
   icon_pack: fas
   link: /#contact
 - display:
     header: true
-- icon: graduation-cap
+- icon: info
   icon_pack: fas
   link: https://www.uidaho.edu/cals/statistical-programs
 - icon: github
