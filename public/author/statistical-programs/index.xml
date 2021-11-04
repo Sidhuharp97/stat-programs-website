@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Statistical Programs | Academic</title>
-    <link>http://example.org/author/statistical-programs/</link>
-      <atom:link href="http://example.org/author/statistical-programs/index.xml" rel="self" type="application/rss+xml" />
+    <title>Statistical Programs | Idaho Ag Stats</title>
+    <link>/author/statistical-programs/</link>
+      <atom:link href="/author/statistical-programs/index.xml" rel="self" type="application/rss+xml" />
     <description>Statistical Programs</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 15 Apr 2021 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>http://example.org/author/statistical-programs/avatar_hu9d5ce8c0d44b36c676b5077349a68ce7_218905_270x270_fill_lanczos_center_2.png</url>
+      <url>/author/statistical-programs/avatar_hu9d5ce8c0d44b36c676b5077349a68ce7_218905_270x270_fill_lanczos_center_2.png</url>
       <title>Statistical Programs</title>
-      <link>http://example.org/author/statistical-programs/</link>
+      <link>/author/statistical-programs/</link>
     </image>
     
     <item>
       <title>Getting R Set Up</title>
-      <link>http://example.org/post/getting-r-setup/</link>
+      <link>/post/getting-r-setup/</link>
       <pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate>
-      <guid>http://example.org/post/getting-r-setup/</guid>
+      <guid>/post/getting-r-setup/</guid>
       <description>&lt;h4 id=&#34;install-r&#34;&gt;Install R:&lt;/h4&gt;
 &lt;p&gt;You can download R &lt;a href=&#34;https://cloud.r-project.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;. Get the correction R distribution for your operating system. Once downloaded, click on downloaded file, and follow the installation instructions.&lt;/p&gt;
 &lt;p&gt;Note that R is updated several times per year. If you installation is a year older or more, consider updating your version of R to the latest version.&lt;/p&gt;
@@ -40,9 +40,9 @@ usethis::use_blank_slate()
     
     <item>
       <title>Quick Tricks and Tips for Reproducible Research in R</title>
-      <link>http://example.org/post/reproducible-r/</link>
+      <link>/post/reproducible-r/</link>
       <pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate>
-      <guid>http://example.org/post/reproducible-r/</guid>
+      <guid>/post/reproducible-r/</guid>
       <description>&lt;h3 id=&#34;make-sure-your-rstudio-session-is-not-saving-rdata-automatically&#34;&gt;Make sure your Rstudio session is not saving &lt;code&gt;.rdata&lt;/code&gt; automatically:&lt;/h3&gt;
 &lt;p&gt;&lt;em&gt;Note: this step requires the&lt;/em&gt; &lt;code&gt;usethis&lt;/code&gt; &lt;em&gt;package; please install if you do not already have it installed.&lt;/em&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;usethis::use_blank_slate()
@@ -107,18 +107,18 @@ renv::init()
     </item>
     
     <item>
-      <title>Routine incorporation of Spatial Covariates into Analysis of Planned Field Experiments</title>
-      <link>http://example.org/talk/routine-incorporation-of-spatial-covariates-into-analysis-of-planned-field-experiments/</link>
+      <title>Routine Incorporation of Spatial Covariates into Analysis of Planned Field Experiments</title>
+      <link>/talks/spatial_seminar_20210409/</link>
       <pubDate>Fri, 09 Apr 2021 15:30:00 +0000</pubDate>
-      <guid>http://example.org/talk/routine-incorporation-of-spatial-covariates-into-analysis-of-planned-field-experiments/</guid>
+      <guid>/talks/spatial_seminar_20210409/</guid>
       <description></description>
     </item>
     
     <item>
       <title>An example preprint / working paper</title>
-      <link>http://example.org/publication/preprint/</link>
+      <link>/publication/preprint/</link>
       <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
-      <guid>http://example.org/publication/preprint/</guid>
+      <guid>/publication/preprint/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.
@@ -130,9 +130,9 @@ renv::init()
     
     <item>
       <title>An example journal article</title>
-      <link>http://example.org/publication/journal-article/</link>
+      <link>/publication/journal-article/</link>
       <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
-      <guid>http://example.org/publication/journal-article/</guid>
+      <guid>/publication/journal-article/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.
@@ -149,9 +149,9 @@ renv::init()
     
     <item>
       <title>An example conference paper</title>
-      <link>http://example.org/publication/conference-paper/</link>
+      <link>/publication/conference-paper/</link>
       <pubDate>Mon, 01 Jul 2013 00:00:00 +0000</pubDate>
-      <guid>http://example.org/publication/conference-paper/</guid>
+      <guid>/publication/conference-paper/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.

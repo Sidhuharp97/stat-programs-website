@@ -20,10 +20,10 @@ links:
 location: 
 projects:
 publishDate: "2021-40-22T00:00:00Z"
-slides: example
+slides: 
 summary: A brief introduction into how to integrate spatial covariates into ANOVA-based analysis of field trials laid out in a lattice pattern.
 tags: ["spatial statistics", "field experiments"]
-title: Routine incorporation of Spatial Covariates into Analysis of Planned Field Experiments
+title: Routine Incorporation of Spatial Covariates into Analysis of Planned Field Experiments
 url_code: "https://github.com/IdahoAgStats/lattice-spatial-analysis-talk"
 url_pdf: "lattice_talk_2021_April.pdf"
 url_slides: "lattice_talk_2021_April.html"

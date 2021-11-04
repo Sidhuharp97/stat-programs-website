@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts | Academic</title>
-    <link>http://example.org/post/</link>
-      <atom:link href="http://example.org/post/index.xml" rel="self" type="application/rss+xml" />
+    <title>Posts | Idaho Ag Stats</title>
+    <link>/post/</link>
+      <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 15 Apr 2021 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>http://example.org/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_2.png</url>
+      <url>/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_2.png</url>
       <title>Posts</title>
-      <link>http://example.org/post/</link>
+      <link>/post/</link>
     </image>
     
     <item>
       <title>Getting R Set Up</title>
-      <link>http://example.org/post/getting-r-setup/</link>
+      <link>/post/getting-r-setup/</link>
       <pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate>
-      <guid>http://example.org/post/getting-r-setup/</guid>
+      <guid>/post/getting-r-setup/</guid>
       <description>&lt;h4 id=&#34;install-r&#34;&gt;Install R:&lt;/h4&gt;
 &lt;p&gt;You can download R &lt;a href=&#34;https://cloud.r-project.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;. Get the correction R distribution for your operating system. Once downloaded, click on downloaded file, and follow the installation instructions.&lt;/p&gt;
 &lt;p&gt;Note that R is updated several times per year. If you installation is a year older or more, consider updating your version of R to the latest version.&lt;/p&gt;
@@ -40,9 +40,9 @@ usethis::use_blank_slate()
     
     <item>
       <title>Quick Tricks and Tips for Reproducible Research in R</title>
-      <link>http://example.org/post/reproducible-r/</link>
+      <link>/post/reproducible-r/</link>
       <pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate>
-      <guid>http://example.org/post/reproducible-r/</guid>
+      <guid>/post/reproducible-r/</guid>
       <description>&lt;h3 id=&#34;make-sure-your-rstudio-session-is-not-saving-rdata-automatically&#34;&gt;Make sure your Rstudio session is not saving &lt;code&gt;.rdata&lt;/code&gt; automatically:&lt;/h3&gt;
 &lt;p&gt;&lt;em&gt;Note: this step requires the&lt;/em&gt; &lt;code&gt;usethis&lt;/code&gt; &lt;em&gt;package; please install if you do not already have it installed.&lt;/em&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;usethis::use_blank_slate()

@@ -1,6 +1,6 @@
 ---
 authors:
-- admin
+- jpiaskowski
 categories:
 - R
 - reproducible research

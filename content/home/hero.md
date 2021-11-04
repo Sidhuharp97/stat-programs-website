@@ -2,7 +2,7 @@
 widget: hero
 headless: true
 weight: 10
-title: UIdaho [Agricultural] Statistical Programs
+title: Uidaho [[Agricultural]] Statistical Programs
 hero_media: hero.png
 
 # cta:
@@ -26,4 +26,4 @@ advanced:
 
 <br>
 
-Data management and analytical resources for the agricultural scientist
+Data management and analytical resources for agricultural science

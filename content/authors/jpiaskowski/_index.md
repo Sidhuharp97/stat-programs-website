@@ -27,11 +27,11 @@ social:
   icon_pack: fas
   link: /#contact
 - display:
-    header: true
+    header: false
   icon: twitter
   icon_pack: fab
   label: Follow me on Twitter
-  link: https://www.linkedin.com/in/julia-piaskowski-4623145a
+  link: https://twitter.com/SeedsandBreeds
 - icon: graduation-cap
   icon_pack: fas
   link: https://scholar.google.com/citations?user=PMN2WZEAAAAJ
@@ -41,7 +41,7 @@ social:
 - icon: linkedin
   icon_pack: fab
   link: https://www.linkedin.com/in/julia-piaskowski-4623145a
-superuser: true
+superuser: false
 title: Julia Piaskowski
 ---
 

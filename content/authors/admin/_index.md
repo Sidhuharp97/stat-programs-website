@@ -1,5 +1,5 @@
 ---
-bio: Our research focus is supporting agricultural industries in and around Idaho. 
+bio: Focused on Supporting Agricultural Research in and around Idaho. 
 education:
 email: 
 highlight_name: false

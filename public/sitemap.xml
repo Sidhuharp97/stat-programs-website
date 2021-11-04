@@ -2,123 +2,129 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://example.org/tutorials/example/python/</loc>
+    <loc>/tutorials/example/python/</loc>
     <lastmod>2021-01-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/tutorials/example/visualization/</loc>
+    <loc>/tutorials/example/visualization/</loc>
     <lastmod>2021-01-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/tutorials/example/stats/</loc>
+    <loc>/tutorials/example/stats/</loc>
     <lastmod>2021-01-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/</loc>
+    <loc>/authors/</loc>
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/authors/</loc>
+    <loc>/categories/</loc>
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/categories/</loc>
+    <loc>/post/getting-r-setup/</loc>
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/post/getting-r-setup/</loc>
+    <loc>/</loc>
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/post/</loc>
+    <loc>/post/</loc>
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/project/</loc>
+    <loc>/project/</loc>
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/post/reproducible-r/</loc>
+    <loc>/post/reproducible-r/</loc>
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/tag/r/</loc>
+    <loc>/tag/r/</loc>
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/category/r/</loc>
+    <loc>/category/r/</loc>
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/project/reproducible-research/</loc>
+    <loc>/project/reproducible-research/</loc>
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/tag/reproducible-research/</loc>
+    <loc>/tag/reproducible-research/</loc>
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/category/reproducible-research/</loc>
+    <loc>/category/reproducible-research/</loc>
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/author/statistical-programs/</loc>
+    <loc>/author/statistical-programs/</loc>
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/tags/</loc>
+    <loc>/tags/</loc>
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/tag/field-experiments/</loc>
+    <loc>/tag/field-experiments/</loc>
     <lastmod>2021-04-09T15:30:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/event/</loc>
+    <loc>/talks/</loc>
     <lastmod>2021-04-09T15:30:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/talk/routine-incorporation-of-spatial-covariates-into-analysis-of-planned-field-experiments/</loc>
+    <loc>/talks/spatial_seminar_20210409/</loc>
     <lastmod>2021-04-09T15:30:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/tag/spatial-statistics/</loc>
+    <loc>/tag/spatial-statistics/</loc>
     <lastmod>2021-04-09T15:30:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/tutorials/example/</loc>
+    <loc>/tutorials/example/</loc>
     <lastmod>2021-01-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/tutorials/</loc>
+    <loc>/tutorials/</loc>
     <lastmod>2021-01-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/publication-type/3/</loc>
+    <loc>/publication_types/3/</loc>
     <lastmod>2019-04-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/publication/preprint/</loc>
+    <loc>/publication/preprint/</loc>
     <lastmod>2019-04-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/publication_types/</loc>
+    <loc>/publication_types/</loc>
     <lastmod>2019-04-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/publication/</loc>
+    <loc>/publication/</loc>
     <lastmod>2019-04-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/tag/source-themes/</loc>
+    <loc>/tag/source-themes/</loc>
     <lastmod>2019-04-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/tag/deep-learning/</loc>
+    <loc>/tag/deep-learning/</loc>
     <lastmod>2016-04-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/tag/demo/</loc>
+    <loc>/tag/demo/</loc>
     <lastmod>2016-04-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/project/external-project/</loc>
+    <loc>/project/external-project/</loc>
     <lastmod>2016-04-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/project/internal-project/</loc>
+    <loc>/project/internal-project/</loc>
     <lastmod>2016-04-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/publication-type/2/</loc>
+    <loc>/publication_types/2/</loc>
     <lastmod>2015-09-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/publication/journal-article/</loc>
+    <loc>/publication/journal-article/</loc>
     <lastmod>2015-09-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/author/robert-ford/</loc>
+    <loc>/author/robert-ford/</loc>
     <lastmod>2015-09-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/publication-type/1/</loc>
+    <loc>/publication_types/1/</loc>
     <lastmod>2013-07-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/publication/conference-paper/</loc>
+    <loc>/publication/conference-paper/</loc>
     <lastmod>2013-07-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/admin/</loc>
+    <loc>/admin/</loc>
   </url><url>
-    <loc>http://example.org/author/julia-piaskowski/</loc>
+    <loc>/author/julia-piaskowski/</loc>
   </url><url>
-    <loc>http://example.org/author/william-price/</loc>
+    <loc>/event/</loc>
   </url><url>
-    <loc>http://example.org/author/xin-dai/</loc>
+    <loc>/slides/spatial_seminar_20210409/</loc>
+  </url><url>
+    <loc>/slides/</loc>
+  </url><url>
+    <loc>/author/william-price/</loc>
+  </url><url>
+    <loc>/author/xin-dai/</loc>
   </url>
 </urlset>

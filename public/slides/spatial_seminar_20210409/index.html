@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  
+  
+
+  
+  
+  
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Wowchemy 5.0.0-beta.3 for Hugo">
+
+  
+  <link rel="manifest" href="/index.webmanifest">
+  
+  
+  <link rel="icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/slides/spatial_seminar_20210409/">
+
+  <title>Routine incorporation of Spatial Covariates into Analysis of Planned Field Experiments | Idaho Ag Stats</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/reveal.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/theme/black.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" id="highlight-theme">
+
+  
+  
+  <link rel="stylesheet" href="/css/reveal_custom.min.css">
+</head>
+<body>
+
+  
+<div class="reveal">
+  <div class="slides">
+    
+    
+    
+
+    
+    
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+    <section>
+    
+      <style type="text/css">
+=
+
+ul {
+  color: #282828;
+  font-size: 40px;
+}
+
+</style>
+<h2 id="heading"></h2>
+<div class="figure">
+<img src="images/road-auvers-after-rain-6_2840.jpg" alt="A Road in Auvers After the Rain by Vincent Van Gogh" width="70%" />
+<p class="caption">A Road in Auvers After the Rain by Vincent Van Gogh</p>
+</div>
+<h2 id="heading-1"></h2>
+<center> 
+### Goal: Make everyone feel more comfortable using spatial stats when analyzing field experimental data. 
+<p>(you don&rsquo;t have to be a geospatial statistics expert)</p>
+</center>
+<h2 id="where-to-find-this-information">Where to Find This Information</h2>
+<p>This Presentation:</p>
+<pre><code>https://github.com/IdahoAgStats/lattice-spatial-analysis-talk
+</code></pre>
+<p>A longer tutorial:</p>
+<pre><code>https://idahoagstats.github.io/guide-to-field-trial-spatial-analysis
+</code></pre>
+<need presentation url>
+<h2 id="what-are-barriers-to-using-spatial-stats">What Are Barriers to Using Spatial Stats?</h2>
+<ul>
+<li>Perceived lack of need</li>
+<li>Unsure of benefits</li>
+<li>No training in the topic/intimidated by the statistical methodology</li>
+<li>Limited time to devote to statistical analysis</li>
+<li>Unclear what would happen to blocking if spatial stats are used</li>
+<li><strong>very few resources for easy implementation</strong></li>
+</ul>
+<h2 id="spatial-variation-in-agricultural-fields">Spatial Variation in Agricultural Fields</h2>
+<div class="figure">
+<img src="images/Parker_farm.png" alt="Univeristy of Idaho's Parker Farm (Moscow, Idaho)" width="80%" />
+<p class="caption">Univeristy of Idaho's Parker Farm (Moscow, Idaho)</p>
+</div>
+<h2 id="spatial-variation-in-agricultural-fields-1">Spatial Variation in Agricultural Fields</h2>
+<p><img src="main_presentation_files/figure-html/unnamed-chunk-5-1.png" width="90%" /></p>
+<h2 id="blocking-in-agricultural-fields">Blocking in Agricultural Fields</h2>
+<p><img src="main_presentation_files/figure-html/unnamed-chunk-6-1.png" width="90%" /></p>
+<h2 id="blocking-versus-spatial-analysis">Blocking versus Spatial Analysis</h2>
+<p><img src="images/boyfriend_meme.jpg" width="60%" /></p>
+<p>This is not how this works. Blocking <strong>is</strong> compatible with spatial analysis and recommended for most (all?) field trials.</p>
+<h2 id="there-are-many-spatial-methods-available">There Are Many Spatial Methods Available</h2>
+<table>
+<thead>
+<tr>
+<th>areal data</th>
+<th>correlated error models</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>row and column trend</td>
+<td>exponential</td>
+</tr>
+<tr>
+<td>nearest neighbor</td>
+<td>spherical</td>
+</tr>
+<tr>
+<td>separable ARxAR models</td>
+<td>Gaussian</td>
+</tr>
+<tr>
+<td>spatial error model</td>
+<td>Matern</td>
+</tr>
+<tr>
+<td>spatial lag model</td>
+<td>Cauchy</td>
+</tr>
+<tr>
+<td>ARIMA</td>
+<td>power</td>
+</tr>
+<tr>
+<td>splines</td>
+<td>linear</td>
+</tr>
+<tr>
+<td>GAMs</td>
+<td>many more&hellip;</td>
+</tr>
+</tbody>
+</table>
+<h2 id="these-methods-work">These Methods Work</h2>
+<p><img src="images/gif/spatial_gif.gif" width="100%" /></p>
+<h2 class="columns-2" id="these-methods-can-be-complex">These Methods Can Be Complex  </h2>
+<p><img src="images/ikea.jpg" width="80%" /></p>
+<p>&hellip;.But</p>
+<p>You can also integrate spatial methods into gridded field trials without:</p>
+<ol>
+<li>having to know anything about map projections, shapefiles or other geospatial terminology</li>
+<li>possessing a deep understanding of linear modeling techniques or empirical variograms</li>
+<li>being an R or SAS programming expert</li>
+</ol>
+<p><em>Knowing these things is helpful, but not essential.</em></p>
+<h2 id="a-typical-experiment">A Typical Experiment</h2>
+<ul>
+<li>Experimental treatments</li>
+<li>fully crossed effects</li>
+<li>Blocking scheme along the expected direction of field variation</li>
+</ul>
+<p><img src="main_presentation_files/figure-html/unnamed-chunk-12-1.png" alt=""><!-- --></p>
+<h2 id="analysis">Analysis</h2>
+<h5 id="a-typical-linear-model">A typical linear model:</h5>
+<p>$Y_{ij} = \mu + \alpha_i + \beta_j + \epsilon_{ij}$</p>
+<p>Response = trial mean + treatment effect + block effect + leftover error</p>
+<h5 id="we-assume">We Assume:</h5>
+<ol>
+<li>The error terms, or residuals, are independent of another with a shared distribution:</li>
+</ol>
+<p>$$\epsilon_i \sim  N(0,\sigma_e)$$</p>
+<ol start="2">
+<li>Each block captures variation unique to that block and there is no other variation related to spatial position of the experimental plots.</li>
+</ol>
+<center> **How often is #2 evaluated?** </center>
+<h2 id="example-analysis">Example Analysis</h2>
+<p><img src="main_presentation_files/figure-html/unnamed-chunk-13-1.png" alt=""><!-- --></p>
+<h2 id="average-yield-by-row-column-and-block">Average Yield by Row, Column and Block</h2>
+<p><img src="main_presentation_files/figure-html/unnamed-chunk-14-1.png" width="90%" /></p>
+<h2 id="standard-analysis-of-kimberly-2013-wheat-variety-trial">Standard Analysis of Kimberly, 2013 Wheat Variety Trial</h2>
+<ul>
+<li>36 soft white winter wheat cultivars</li>
+<li>4 blocks</li>
+<li>2 missing data points</li>
+<li>the linear model:</li>
+</ul>
+<p>$Y_{ij} = \mu + \alpha_i + \beta_j + \epsilon_{ij}$</p>
+<pre><code class="language-r">library(nlme)
+lm1 &lt;- lme(yield ~ cultivar, random = ~ 1|block, data = mydata, na.action = na.exclude)
+</code></pre>
+<h2 id="what-do-the-residuals-look-like">What Do The Residuals Look Like?</h2>
+<pre><code class="language-r">plot(lm1)
+</code></pre>
+<p><img src="main_presentation_files/figure-html/unnamed-chunk-16-1.png" alt=""><!-- --></p>
+<h2 id="what-do-the-residuals-look-like-spatially">What Do The Residuals Look Like Spatially?</h2>
+<p><img src="main_presentation_files/figure-html/unnamed-chunk-18-1.png" alt=""><!-- --></p>
+<h2 id="what-do-the-residuals-look-like-spatially-1">What Do The Residuals Look Like Spatially?</h2>
+<p><img src="main_presentation_files/figure-html/unnamed-chunk-19-1.png" alt=""><!-- --></p>
+<h2 id="global-morans-test-for-spatial-autocorrelation">Global Moran&rsquo;s Test for Spatial Autocorrelation</h2>
+<p>$H_0$: There is no spatial autocorrelation <br>
+$H_a:$  There is spatial autocorrelation!</p>
+<p>This uses a simple weighting matrix that weights all neighbors that share a plot border (the chess-based &ldquo;rook&rdquo; formation) equally.</p>
+<pre><code>## 
+## 	Monte-Carlo simulation of Moran I
+## 
+## data:  mydata$residuals 
+## weights: weights 
+## omitted: 88, 97 
+## number of simulations + 1: 1000 
+## 
+## statistic = 0.15869, observed rank = 997, p-value = 0.003
+## alternative hypothesis: greater
+</code></pre>
+<h2 id="handling-spatial-autocorrelation-in-areal-data">Handling Spatial Autocorrelation in Areal Data</h2>
+<p>Areal data = finite region divided into discrete sub-regions (plots) with aggregated outcomes</p>
+<p>Options:</p>
+<ol>
+<li>model row and column trends
+<ul>
+<li>good for known gradients (hill slope, salinity patterns)</li>
+</ul>
+</li>
+<li>assume plots close together are more similar than plots far apart. The errors terms can be modelled based on proximity, but there is no trial-wide trend
+<ul>
+<li>autoregressive models (AR)</li>
+<li>models utilizing &ldquo;gaussian random fields&rdquo; for continuously varying data (e.g. point data)</li>
+<li>Smoothing splines</li>
+<li>nearest neighbor</li>
+</ul>
+</li>
+</ol>
+<h2 id="basic-linear-model">Basic Linear Model</h2>
+<p>$$Y_{ij} = \mu + A_i + \epsilon_{ij}$$
+$$\epsilon_i \sim  N(0,\sigma)$$</p>
+<p>If N = 4:</p>
+<p>$$e_i ~\sim N \Bigg( 0,
+\left[ {\begin{array}{ccc} \sigma^2 &amp; 0 &amp; 0 &amp; 0\
+0 &amp; \sigma^2 &amp; 0 &amp; 0\
+0 &amp; 0 &amp; \sigma^2 &amp; 0\<br>
+0 &amp; 0 &amp; 0 &amp; \sigma^2
+\end{array}  } \right] \Bigg) $$</p>
+<p>The variance-covariance matrix indicates a shared variance and all off-diagonals are zero, that is, the errors are uncorrelated.</p>
+<h2 id="linear-model-with-autoregressive-ar-errors">Linear Model with Autoregressive (AR) Errors</h2>
+<p>Same linear model:
+$$Y_{ij} = \mu + A_i + \epsilon_{ij}$$</p>
+<p>Different variance structure:</p>
+<p>$$e_i ~\sim N \Bigg( 0,  = \sigma^2
+\left[ {\begin{array}{cc} 1 &amp; \rho &amp; \rho^2 &amp; \rho^3 \<br>
+\rho &amp; 1 &amp; \rho &amp; \rho^2 \<br>
+\rho^2 &amp; \rho &amp; 1 &amp; \rho \<br>
+\rho^3 &amp; \rho^2 &amp; \rho &amp; 1 \
+\end{array} } \right] \Bigg) $$</p>
+<ul>
+<li>$\rho$ is a correlation parameter ranging from -1 to 1 where 0 is no correlation and values approaching 1 indicate spatial correlation.</li>
+<li>The &ldquo;one&rdquo; in AR1 means that only the next most adjacent point is considered. There can be AR2, AR3, &hellip;, ARn models.</li>
+</ul>
+<h2 class="columns-2" id="the-separable-ar1-x-ar1-model">The Separable AR1 x AR1 model </h2>
+<p><img src="main_presentation_files/figure-html/unnamed-chunk-21-1.png" width="90%" /></p>
+<ul>
+<li>AR1xAR1 assumes correlation in two directions, row and column.</li>
+<li>It estimates $\sigma$, $\rho_{column}$, and $\rho_{row}$</li>
+<li>often a good choice since plot are rectangular and hence autocorrelation will differ by direction (&ldquo;anistropy&rdquo;)</li>
+</ul>
+<h2 id="more-notes-on-separable-ar1xar1">More Notes on Separable AR1xAR1</h2>
+<ul>
+<li>From a statistical standpoint, it&rsquo;s one of the more intuitive models</li>
+<li>The implementation in R is a little shaky
+<ul>
+<li>several packages, all hard to use and incompatible with other R packages</li>
+</ul>
+</li>
+<li>It is implemented in SAS</li>
+<li>Some proprietary software implements this (AsREML), others do not (Agrobase)</li>
+</ul>
+<h2 id="semivariance-and-empirical-variograms">Semivariance and Empirical Variograms</h2>
+<p>A measure of spatial correlation based on all pairwise correlations in a data set, binned by distance apart:</p>
+<p>$\gamma^2(h) = \frac{1}{2} Var[Z(s+h)-Z(s)]$<br>
+$Z(s)$ = observed data at point $s$.<br>
+$Z(s)$ = observed data at another point $h$ distance from point $s$.</p>
+<p>For a data set with $N$ observation, there are this many pairwise points:</p>
+<p>$\frac{N(N-1)}{2}$</p>
+<h2 id="empirical-variogram">Empirical Variogram</h2>
+<p>This uses semivariance to mathematically relate spatial correlations with distance</p>
+<p><img src="images/Sadoti2014_spherical.jpg" width="70%" /></p>
+<p>range = distance up to which is there is spatial correlation
+sill = uncorrelated variance of the variable of interest
+nugget = measurement error, or short-distance spatial variance and other unaccounted for variance</p>
+<h2 id="semivariance--empirical-variograms">Semivariance &amp; Empirical Variograms</h2>
+<ul>
+<li>There are many difference mathematical models for explaining semivariance:
+<ul>
+<li>exponential, Gaussian, Matérn, spherical, &hellip;</li>
+</ul>
+</li>
+<li>It is usually used for kriging, or prediction of a new point through spatial interpolation</li>
+<li>It can also be used in a linear model where local observations are used to predict a data point in addition to treatment effects</li>
+<li>Bonus: R and SAS are really good at this!</li>
+</ul>
+<h2 id="adding-semivariance-to-a-linear-model">Adding Semivariance to a Linear Model</h2>
+<p>Copy data into new object so we can assign it a new class (and remove missing data):</p>
+<pre><code class="language-r">library(gstat); library(sp); library(dplyr)
+mydata_sp &lt;- mydata %&gt;% filter(!is.na(yield))
+</code></pre>
+<p>Establish <code>coordinates</code> for data set to make it an <code>sp</code> object (&ldquo;spatial points&rdquo;):</p>
+<pre><code class="language-r">coordinates(mydata_sp) &lt;- ~ row + range
+</code></pre>
+<p>Set the maximum distance for looking at pairwise correlations:</p>
+<pre><code class="language-r">max_dist &lt;- 0.5*max(dist(coordinates(mydata_sp)))
+</code></pre>
+<h2 id="adding-semivariance-to-a-linear-model-1">Adding Semivariance to a Linear Model</h2>
+<p>Calculate a sample variogram:</p>
+<pre><code class="language-r">semivar &lt;- variogram(yield ~ block + cultivar, data = mydata_sp,
+                        cutoff = max_dist, width = max_dist/12)
+nugget_start &lt;- min(semivar$gamma)
+</code></pre>
+<h2 id="adding-semivariance-to-a-linear-model-2">Adding Semivariance to a Linear Model</h2>
+<p>The empirical variogram:</p>
+<pre><code class="language-r">plot(semivar)
+</code></pre>
+<p><img src="main_presentation_files/figure-html/unnamed-chunk-27-1.png" alt=""><!-- --></p>
+<h2 id="adding-semivariance-to-a-linear-model-3">Adding Semivariance to a Linear Model</h2>
+<p>Set up models for fitting variograms:</p>
+<pre><code class="language-r">vgm1 &lt;- vgm(model = &quot;Exp&quot;, nugget = nugget_start) # exponential
+vgm2 &lt;- vgm(model = &quot;Sph&quot;, nugget = nugget_start) # spherical
+vgm3 &lt;- vgm(model = &quot;Gau&quot;, nugget = nugget_start) # Gaussian
+</code></pre>
+<p>Fit the variogram models to the data:</p>
+<pre><code class="language-r">variofit1 &lt;- fit.variogram(semivar, vgm1)
+variofit2 &lt;- fit.variogram(semivar, vgm2)
+variofit3 &lt;- fit.variogram(semivar, vgm3)
+</code></pre>
+<h2 id="adding-semivariance-to-a-linear-model-4">Adding Semivariance to a Linear Model</h2>
+<p>Look at the error terms to see which model is the best at minimizing error.</p>
+<pre><code>## [1] &quot;exponential: 26857.3&quot;
+</code></pre>
+<pre><code>## [1] &quot;spherical: 26058.3&quot;
+</code></pre>
+<pre><code>## [1] &quot;Gaussian: 41861.0&quot;
+</code></pre>
+<p>The spherical model is the best at minimizing error.</p>
+<h2 id="adding-semivariance-to-a-linear-model-5">Adding Semivariance to a Linear Model</h2>
+<pre><code class="language-r">plot(semivar, variofit2, main = &quot;Spherical model&quot;)
+</code></pre>
+<p><img src="main_presentation_files/figure-html/unnamed-chunk-31-1.png" alt=""><!-- --></p>
+<h2 id="adding-semivariance-to-a-linear-model-6">Adding Semivariance to a Linear Model</h2>
+<p>Extract the nugget and sill information from the spherical variogram:</p>
+<pre><code class="language-r">nugget &lt;- variofit2$psill[1] 
+range &lt;- variofit2$range[2] 
+sill &lt;- sum(variofit2$psill) 
+nugget.effect &lt;- nugget/sill  # the nugget/sill ratio
+</code></pre>
+<h2 id="adding-semivariance-to-a-linear-model-7">Adding Semivariance to a Linear Model</h2>
+<p>Build a correlation structure in <code>nlme</code>:</p>
+<pre><code class="language-r">cor.sph &lt;- corSpatial(value = c(range, nugget.effect), 
+                  form = ~ row + range, 
+                  nugget = T, fixed = F,
+                  type = &quot;spherical&quot;, 
+                  metric = &quot;euclidean&quot;)
+</code></pre>
+<p>Update the Model:</p>
+<pre><code class="language-r">lm_sph &lt;- update(lm1, corr = cor.sph)
+</code></pre>
+<h2 id="compare-models---log-likelihood">Compare Models - Log likelihood</h2>
+<pre><code class="language-r">logLik(lm1)
+</code></pre>
+<pre><code>## 'log Lik.' -489.0572 (df=38)
+</code></pre>
+<pre><code class="language-r">logLik(lm_sph)
+</code></pre>
+<pre><code>## 'log Lik.' -445.4782 (df=40)
+</code></pre>
+<h2 id="compare-models---post-hoc-power">Compare Models - Post-hoc Power</h2>
+<pre><code class="language-r">anova(lm1)[2,]
+</code></pre>
+<pre><code>##          numDF denDF F-value p-value
+## cultivar    35   103  1.6411   0.029
+</code></pre>
+<pre><code class="language-r">anova(lm_sph)[2,]
+</code></pre>
+<pre><code>##          numDF denDF  F-value p-value
+## cultivar    35   103 2.054749  0.0028
+</code></pre>
+<h2 id="compare-model-predictions">Compare Model Predictions</h2>
+<pre><code class="language-r">library(emmeans)
+lme_preds &lt;- as.data.frame(emmeans(lm1, &quot;cultivar&quot;)) %&gt;% mutate(model = &quot;mixed model&quot;)
+sph_preds &lt;- as.data.frame(emmeans(lm_sph, &quot;cultivar&quot;)) %&gt;% 
+  mutate(model = &quot;mixed model + spatial&quot;)
+preds &lt;- rbind(lme_preds, sph_preds)
+</code></pre>
+<h2 id="compare-model-predictions-1">Compare Model Predictions</h2>
+<p><img src="main_presentation_files/figure-html/unnamed-chunk-38-1.png" alt=""><!-- --></p>
+<p>Highest yielding wheat: &lsquo;Stephens&rsquo; (released in 1977)</p>
+<h2 id="where-was-stephens-located-in-the-trial">Where Was Stephens Located in the Trial?</h2>
+<p><img src="main_presentation_files/figure-html/unnamed-chunk-40-1.png" alt=""><!-- --></p>
+<h2 id="more-notes">More Notes</h2>
+<ul>
+<li>When models omit blocking, the predictions may be unchanged or they may worsen. This varies by the agronomic field, but in general, blocking a field trial and including block in the statistical model improves your experimental power and controls experimental error.</li>
+<li>There is no single spatial model that fits all</li>
+<li>However, using any spatial model is usually better than none at all</li>
+<li>When you use spatial covariates, your estimates are better and more precise. This really does help you!</li>
+</ul>
+<h2 id="whats-next">What&rsquo;s Next:</h2>
+<ul>
+<li>Track row and range information in your trial data set.</li>
+<li>Look at the tutorial! (we will also add SAS code)</li>
+<li>Try out a few models and see how it impacts your results.</li>
+</ul>
+<p><img src="images/variety testing2.JPG" width="60%" /></p>
+<h2 id="the-seminar-was-brought-to-you-bystatistical-programs"><em>The Seminar Was Brought to you by&hellip;Statistical Programs!!!</em></h2>
+<p><em>Statistical consulting to support the College of Agriculture and Life Sciences.</em></p>
+<p><strong>Bill Price</strong>, Director, <a href="mailto:bprice@uidaho.edu">bprice@uidaho.edu</a>, AgSci307</p>
+<p><strong>Julia Piaskowski</strong>, <a href="mailto:jpiaskowski@uidaho.edu">jpiaskowski@uidaho.edu</a>, AgSci 305</p>
+
+    </section>
+    
+
+    
+    
+  </div>
+</div>
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/reveal.min.js" integrity="sha512-Xu/cezKABTI81MGnaBm64vdiS7XkttHeYGOgr2Mdga0bTplSBGongLq2lhK2HwL79wefKM0u4uTCLD0ha1sRzQ==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/plugin/markdown/markdown.min.js" integrity="sha512-eZZqO4ECmVvGhCt+6VZ7ian2bCu4S6yrjSFH9fXLY1zTokpAWsxAxQwM4x6+7G+G4ha5tFIe0jY0XjpBUqS49Q==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/plugin/highlight/highlight.min.js" integrity="sha512-NA5UCab7xDKQPXGsmIp8iEuId5BAKGPiqHZsZQcBuySfp1n3dZrwBDKpPNL23Db5upay1nULxU14JV1ggFOD2A==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/plugin/notes/notes.min.js" integrity="sha512-FYeeQscKqibmYKr0+nE2+fN5prBsFwgjsBVwkrA88O6mN2+ai6EvRkSi6txuhXlWsyK1MUfoV+94+q6HLouJSQ==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/plugin/search/search.min.js" integrity="sha512-2yh3Y2gEdboEnZb9d0QZP05N3e0jTkcjhbG9xYL97mbnZ53IXzF5R2TCTmSrtuspDyJ5FWBSh+8izjiGjVdLWw==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/plugin/math/math.min.js" integrity="sha512-FUzQmRJDLL111zqJg/vN1YzQFQtZNWfBH2VaOiv30dXRXgaTRn3F/Ibda92klSAVjfz3Q9UqS88R4RF4Ip01fQ==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/plugin/zoom/zoom.min.js" integrity="sha512-zPYOPjR7Hg9BPUYkfNlvVtrC37QlYwq/7mI42VTuXKTcNBp7QvMfuqUTMesOf74OrZ3AEdxJGndGSrJG9O2j5Q==" crossorigin="anonymous"></script>
+
+  
+  
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js-menu@2.1.0/plugin.js" integrity="sha256-M6JwAjnRAWmi+sbXURR/yAhWZKYhAw7YXnnLvIxrdGs=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js-menu@2.1.0/menu.js" integrity="sha256-l14dklFcW5mWar6w/9KaW0fWVerf3mYr7Wt0+rXzFAA=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-menu@2.1.0/menu.css" integrity="sha256-0fU8HKLaTjgzfaV9CgSqbsN8ilA3zo6zK1M6rlgULd8=" crossorigin="anonymous">
+  
+
+  
+
+  
+  <script src="/js/wowchemy-slides.js"></script>
+
+</body>
+</html>
