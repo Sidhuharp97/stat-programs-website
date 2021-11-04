@@ -6,18 +6,17 @@ type: book
 weight: 1
 ---
 
-Check R installation and install needed packages. 
+Here are instructions for how check your R installation and install packages needed for the workshop.  
 
 ### Check software versions 
 
-Check R Version: 
-
+Open R and run this code to check what version of R your system is running: 
 ```
 R.Version()
 ```
 If the version printed is not 4.0 or newer, please [upgrade R](https://cran.r-project.org/). 
 
-Check RStudio version
+*This step is not required if you do not use RStudio.* Open RStudio and run this code to check what version of RStudio is installed on your system: 
 
 ```
 rstudioapi::versionInfo()
@@ -28,6 +27,7 @@ If the version printed is not 1.4 or newer, please [upgrade Rstudio](https://www
 
 ### Install workshop packages 
 
+Open R and run this script:  
 ```
 package_list <- c("dplyr", "tidyr", "purrr",       # for standard data manipulation
                   "ggplot2", "desplot",            # for plotting
@@ -39,5 +39,5 @@ install.packages(package_list)
 sapply(package_list, require, character.only = TRUE)
 ```
 
-Please note that the spatial packages may take awhile to install and you may run into problems with the installation. Please install these in advance of the workshop and contact the workshop organizer if you are not able to install and load all packages. Please contact to us *before* the workshop so we can help you.
+Please note that the spatial packages may take awhile to install, and you may run into problems with the installation. Please install these in advance of the workshop. If you have problems installing and/or loading any of these packages that you are not able to resolve, contact us so we can help you. Please contact to us *before* the workshop so we can help you.
 
