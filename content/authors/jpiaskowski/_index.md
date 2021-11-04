@@ -21,7 +21,7 @@ interests:
 organizations:
 - name: University of Idaho
   url: https://www.uidaho.edu/
-role: Statististican
+role: Statistician
 social:
 - icon: envelope
   icon_pack: fas

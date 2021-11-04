@@ -115,8 +115,10 @@
   </url><url>
     <loc>http://example.org/admin/</loc>
   </url><url>
-    <loc>http://example.org/author/bill-price/</loc>
-  </url><url>
     <loc>http://example.org/author/julia-piaskowski/</loc>
+  </url><url>
+    <loc>http://example.org/author/william-price/</loc>
+  </url><url>
+    <loc>http://example.org/author/xin-dai/</loc>
   </url>
 </urlset>

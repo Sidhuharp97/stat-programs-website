@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>William Price | Academic</title>
+    <link>http://example.org/author/william-price/</link>
+      <atom:link href="http://example.org/author/william-price/index.xml" rel="self" type="application/rss+xml" />
+    <description>William Price</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language>
+    <image>
+      <url>http://example.org/author/william-price/avatar_hu07a119625e817e757d80ba6b1af81644_106941_270x270_fill_q75_lanczos_center.jpg</url>
+      <title>William Price</title>
+      <link>http://example.org/author/william-price/</link>
+    </image>
+    
+  </channel>
+</rss>

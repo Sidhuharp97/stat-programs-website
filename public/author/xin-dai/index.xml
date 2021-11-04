@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Xin Dai | Academic</title>
+    <link>http://example.org/author/xin-dai/</link>
+      <atom:link href="http://example.org/author/xin-dai/index.xml" rel="self" type="application/rss+xml" />
+    <description>Xin Dai</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language>
+    <image>
+      <url>http://example.org/author/xin-dai/avatar_hu07512da205e8e7bdd008373bb16bf216_31447_270x270_fill_q75_lanczos_center.jpg</url>
+      <title>Xin Dai</title>
+      <link>http://example.org/author/xin-dai/</link>
+    </image>
+    
+  </channel>
+</rss>
