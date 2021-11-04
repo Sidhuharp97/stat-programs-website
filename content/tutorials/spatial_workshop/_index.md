@@ -1,5 +1,5 @@
 ---
-date: "2021-11-07"
+date: "2021-11-01"
 linkTitle: Spatial Statistics in Field Trials
 summary: Routine inclusion of spatial statistics in planned field experiments
 title: "Spatial Recipes for Field Trials"
@@ -8,6 +8,11 @@ type: book
 
 {{< figure src="featured.jpg" >}}
 
+## Location
+
+Sunday, November 7  
+9:00am - 4:00pm  
+Salt Palace Convention Center, 250D 
 
 ## What you will learn
 
@@ -19,16 +24,6 @@ type: book
 ## Workshop overview
 
 Agricultural field experiments commonly employ standard experimental designs such as randomized complete block to control for field heterogeneity.  However, there is often substantial spatial variation not fully captured by blocking, particularly in large experiments. Although spatial statistics have demonstrated effectiveness in controlling localized spatial variation, they are rarely integrated into analysis of agricultural field experiments. The purpose of this workshop is to provide tools for diagnosing with-field spatial variation and accounting for that spatial variation in statistical analysis of trial data. 
-
-## Units in this Workshop
-
-
-
-## Location
-
-Sunday, November 7  
-9:00am - 4:00pm  
-Salt Palace Convention Center, 250D  
 
 ## Intended Audience
 
@@ -48,6 +43,26 @@ In order to run the SAS portion of this tutorial, a valid copy of SAS Base and S
 
 The workshop will use Rstudio and the standard SAS interface for R and SAS code demonstrations, respectively. 
 
+## Draft Schedule
+
+| Time  |      Topic   | 
+|-------|:-------------|
+| 9:00  |  welcome/intro | 
+| 9:20  |  diagnosing spatial autocorrelation |   
+| **10:00** | **10-minute break** | 
+| 10:10 | code demo |
+| 11:05 | row-by-column designs |
+| 11:30 | empirical variograms |
+| **12:00** | **1-hour lunch** |
+| 13:00 | questions |
+| 13:15 | code demo |
+| **14:00** | **10-minute break** |
+| 14:10 | splines + code demo |
+| 14:40 | model compariso + code demo |
+| 15:00 | augmented designn + code demo |
+| 16:00 | Adjourn |
+
+*This schedule may be adjusted as the workshop unfolds.* 
 
 ## Meet Your Instructors
 

@@ -1,6 +1,6 @@
 
 library(ggplot2); library(dplyr); library(maps)
-library(wesanderson)
+library(wesanderson); library(mapproj)
 
 map_id <- map('county', 'idaho', plot = FALSE, fill = TRUE)
 
@@ -17,15 +17,21 @@ cols = wes_palette("Zissou1", 10, type = "continuous")
 
 
 # star trek avatar
-
-ggplot(data = dots, aes(x = long, y = lat)) +   
+p <- ggplot(data = dots, aes(x = long, y = lat)) +   
   geom_point(color = sample(cols, nrow(dots), replace = TRUE), 
              size = 6, alpha = 1, shape = 15) +
   theme_void() +
-  coord_map() + 
+  coord_map() 
+
+# save icon
+ggsave("assets/media/homespun/icon.png", p, height = 512, width = 512, 
+       units = "px", bg = "transparent", dpi = 90)
+
+p2 <- p1 + 
   theme(plot.margin = unit(c(1.5, 2.5, 1.5, 2.5), "cm")) 
 
-ggsave("assets/media/homespun/avatar_color.png", height = 11, width = 11, 
+# save avatar
+ggsave("assets/media/homespun/avatar_color.png", p2, height = 11, width = 11, 
        bg = "transparent")
 
 # Black and green avatar (not used)
