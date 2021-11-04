@@ -13,21 +13,22 @@
     </image>
     
     <item>
-      <title>Computation Set-up</title>
+      <title>Computational Set-up</title>
       <link>/tutorials/spatial_workshop/prep_work/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
       <guid>/tutorials/spatial_workshop/prep_work/</guid>
-      <description>&lt;p&gt;Check R installation and install needed packages.&lt;/p&gt;
+      <description>&lt;p&gt;Here are instructions for how check your R installation and install packages needed for the workshop.&lt;/p&gt;
 &lt;h3 id=&#34;check-software-versions&#34;&gt;Check software versions&lt;/h3&gt;
-&lt;p&gt;Check R Version:&lt;/p&gt;
+&lt;p&gt;Open R and run this code to check what version of R your system is running:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;R.Version()
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;If the version printed is not 4.0 or newer, please &lt;a href=&#34;https://cran.r-project.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;upgrade R&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Check RStudio version&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;This step is not required if you do not use RStudio.&lt;/em&gt; Open RStudio and run this code to check what version of RStudio is installed on your system:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;rstudioapi::versionInfo()
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;If the version printed is not 1.4 or newer, please &lt;a href=&#34;https://www.rstudio.com/products/rstudio/download/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;upgrade Rstudio&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;install-workshop-packages&#34;&gt;Install workshop packages&lt;/h3&gt;
+&lt;p&gt;Open R and run this script:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;package_list &amp;lt;- c(&amp;quot;dplyr&amp;quot;, &amp;quot;tidyr&amp;quot;, &amp;quot;purrr&amp;quot;,       # for standard data manipulation
                   &amp;quot;ggplot2&amp;quot;, &amp;quot;desplot&amp;quot;,            # for plotting
                   &amp;quot;nlme&amp;quot;, &amp;quot;lme4&amp;quot;, &amp;quot;emmeans&amp;quot;,       # for linear modelling
@@ -37,7 +38,7 @@
 install.packages(package_list)
 sapply(package_list, require, character.only = TRUE)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Please note that the spatial packages may take awhile to install and you may run into problems with the installation. Please install these in advance of the workshop and contact the workshop organizer if you are not able to install and load all packages. Please contact to us &lt;em&gt;before&lt;/em&gt; the workshop so we can help you.&lt;/p&gt;
+&lt;p&gt;Please note that the spatial packages may take awhile to install, and you may run into problems with the installation. Please install these in advance of the workshop. If you have problems installing and/or loading any of these packages that you are not able to resolve, contact us so we can help you, preferably &lt;em&gt;before&lt;/em&gt; the workshop.&lt;/p&gt;
 </description>
     </item>
     

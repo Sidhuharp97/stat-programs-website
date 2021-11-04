@@ -11,7 +11,7 @@ education:
   - course: BS in Molecular Biology, Biochemistry and Microbiology
     institution: University of Idaho
     year: 2001
-email: "jpiaskowski@uidaho.edu"
+email: ""
 highlight_name: false
 interests:
 - Agricultural statistics

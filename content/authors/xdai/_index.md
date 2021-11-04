@@ -11,7 +11,7 @@ education:
   - course: BS in Medicine and Sanitary Technology
     institution: School of Public Health (Chengdu, China)
     year: 1998
-email: "xin.dai@usu.edu"
+email: ""
 highlight_name: false
 interests:
 - Agricultural statistics

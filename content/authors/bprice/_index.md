@@ -12,7 +12,7 @@ education:
   - course: BS in Plant Protection Entomology
     institution: Colorado State University
     year: 1981
-email: "bprice@udidaho.edu"
+email: ""
 interests:
 - linear models
 - SAS
