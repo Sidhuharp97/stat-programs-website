@@ -1,7 +1,7 @@
 
 ---
 date: "2021-11-01"
-title: Computation Set-up
+title: Computational Set-up
 type: book
 weight: 1
 ---
@@ -39,5 +39,5 @@ install.packages(package_list)
 sapply(package_list, require, character.only = TRUE)
 ```
 
-Please note that the spatial packages may take awhile to install, and you may run into problems with the installation. Please install these in advance of the workshop. If you have problems installing and/or loading any of these packages that you are not able to resolve, contact us so we can help you. Please contact to us *before* the workshop so we can help you.
+Please note that the spatial packages may take awhile to install, and you may run into problems with the installation. Please install these in advance of the workshop. If you have problems installing and/or loading any of these packages that you are not able to resolve, contact us so we can help you, preferably *before* the workshop.
 

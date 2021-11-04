@@ -21,11 +21,11 @@ content:
   # Email form provider
   form:
     provider: formspree
-    formspree:
+    formspree: https://formspree.io/f/xjvjqoql
       id: test
     netlify:
       # Enable CAPTCHA challenge to reduce spam?
-      captcha: false
+      captcha: true
   
 design:
   columns: '2'
