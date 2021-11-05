@@ -11,7 +11,7 @@ weight: 10
 
 The goal of many agricultural field trials is to provide information about crop response to a set a treatments such as soil treatments, disease pressure or crop genetic variation. 
 
-{{< figure src="variety_testing.JPG" >}}
+{{< figure src="variety_testing.JPG" id="vartest">}}
 
 #### Field variation
 
@@ -25,7 +25,7 @@ Here is the a map of a wheat variety trial conducted in Idaho with a chloropleth
 
 Block is not always sufficient to account for spatial variation. Here is the same Idaho variety trial with block information overlaid:
 
-{{< figure src="Kimberly2013.png" >}}
+{{< figure src="Kimberly2013_blocking.png" >}}
 
 The block arrangement is clearly not aligning with the field variation. 
 
@@ -35,8 +35,11 @@ The block arrangement is clearly not aligning with the field variation.
 
 {{< figure src="Kimberly2013_ranks.png" >}}
 
-* Low experimental power|high error|low precision|wide confidence intervals
 * Error terms are often correlated with each other, invalidating the downstream analysis
+
+{{< figure src="resids.png" >}}
+
+* high error/low precision/wide confidence intervals/low experimental power
 
 #### Blocking versus spatial statistics
 

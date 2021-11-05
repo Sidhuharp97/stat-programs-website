@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Old Spatial Recipes for Field Trials | Idaho Ag Stats</title>
+    <link>/workshops/old_spatial_workshop/</link>
+      <atom:link href="/workshops/old_spatial_workshop/index.xml" rel="self" type="application/rss+xml" />
+    <description>Old Spatial Recipes for Field Trials</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 01 Nov 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/workshops/old_spatial_workshop/featured.jpg</url>
+      <title>Old Spatial Recipes for Field Trials</title>
+      <link>/workshops/old_spatial_workshop/</link>
+    </image>
+    
+    <item>
+      <title>Computational Set-up</title>
+      <link>/workshops/old_spatial_workshop/prep-work/</link>
+      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>/workshops/old_spatial_workshop/prep-work/</guid>
+      <description>&lt;p&gt;Here are instructions for how check your R installation and install packages needed for the workshop.&lt;/p&gt;
+&lt;h3 id=&#34;check-software-versions&#34;&gt;Check software versions&lt;/h3&gt;
+&lt;p&gt;Open R and run this code to check what version of R your system is running:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;R.Version()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If the version printed is not 4.0 or newer, please &lt;a href=&#34;https://cran.r-project.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;upgrade R&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;This step is not required if you do not use RStudio.&lt;/em&gt; Open RStudio and run this code to check what version of RStudio is installed on your system:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rstudioapi::versionInfo()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If the version printed is not 1.4 or newer, please &lt;a href=&#34;https://www.rstudio.com/products/rstudio/download/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;upgrade Rstudio&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;install-workshop-packages&#34;&gt;Install workshop packages&lt;/h3&gt;
+&lt;p&gt;Open R and run this script:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;package_list &amp;lt;- c(&amp;quot;dplyr&amp;quot;, &amp;quot;tidyr&amp;quot;, &amp;quot;purrr&amp;quot;,       # for standard data manipulation
+                  &amp;quot;ggplot2&amp;quot;, &amp;quot;desplot&amp;quot;,            # for plotting
+                  &amp;quot;nlme&amp;quot;, &amp;quot;lme4&amp;quot;, &amp;quot;emmeans&amp;quot;,       # for linear modelling
+                  &amp;quot;SpATS&amp;quot;,                         # for fitting splines
+                  &amp;quot;sp&amp;quot;, &amp;quot;spdep&amp;quot;, &amp;quot;gstat&amp;quot;, &amp;quot;sf&amp;quot;)    # for spatial modelling
+
+install.packages(package_list)
+sapply(package_list, require, character.only = TRUE)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Please note that the spatial packages may take awhile to install, and you may run into problems with the installation. Please install these in advance of the workshop. If you have problems installing and/or loading any of these packages that you are not able to resolve, contact us so we can help you, preferably &lt;em&gt;before&lt;/em&gt; the workshop.&lt;/p&gt;
+&lt;h3 id=&#34;download-files-for-workshop&#34;&gt;Download files for workshop&lt;/h3&gt;
+&lt;p&gt;The following files are used in the workshop:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://raw.githubusercontent.com/IdahoAgStats/guide-to-field-trial-spatial-analysis/master/data/stroup_nin_wheat.csv&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Nebraska Interstate Nursery&lt;/a&gt;, a wheat variety trial arranged in a randomised complete block design with 4 blocks. This data set was first described by W. Stroup (2004) and has been used extensively for spatial analysis.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://raw.githubusercontent.com/IdahoAgStats/guide-to-field-trial-spatial-analysis/master/data/AB19F5_LIND.csv&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Lind&lt;/a&gt;, a winter wheat variety trial from Washington using an augmented design. This data set was kindly donated by &lt;a href=&#34;https://www.ars.usda.gov/pacific-west-area/pullman-wa/whgq/people/kimberly-garland-campbell/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Kimberly Garland Campbell&lt;/a&gt; of the USDA-ARS.&lt;/p&gt;
+&lt;p&gt;Please download these in advance so you can run the R and/or SAS scripts in the workshop.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Why Care about Spatial Variation?</title>
+      <link>/workshops/old_spatial_workshop/why-spatial/</link>
+      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>/workshops/old_spatial_workshop/why-spatial/</guid>
+      <description>&lt;h4 id=&#34;agricultural-field-trials&#34;&gt;Agricultural field trials&lt;/h4&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  id=&#34;figure-university-research-farm&#34;&gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;University Research Farm&#34; srcset=&#34;
+               /media/Parker_farm_hu5b749468aa26ddd0a9f36916aa2c4955_1521271_9da15a781bb8c2a2cbaf502640dda605.png 400w,
+               /media/Parker_farm_hu5b749468aa26ddd0a9f36916aa2c4955_1521271_50ad91b5571235d1fb26c5f8052cd681.png 760w,
+               /media/Parker_farm_hu5b749468aa26ddd0a9f36916aa2c4955_1521271_1200x1200_fit_lanczos_2.png 1200w&#34;
+               src=&#34;/media/Parker_farm_hu5b749468aa26ddd0a9f36916aa2c4955_1521271_9da15a781bb8c2a2cbaf502640dda605.png&#34;
+               width=&#34;760&#34;
+               height=&#34;423&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;figcaption&gt;
+      University Research Farm
+    &lt;/figcaption&gt;&lt;/figure&gt;
+&lt;p&gt;The goal of many agricultural field trials is to provide information about crop response to a set a treatments such as soil treatments, disease pressure or crop genetic variation.&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  id=&#34;figure-vartest&#34;&gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;&#34; srcset=&#34;
+               /media/variety_testing_hu91f40b680ee6584d31c566c5259b98ab_3192801_3666819c024fb8498a6fb7ebc2a81ec6.JPG 400w,
+               /media/variety_testing_hu91f40b680ee6584d31c566c5259b98ab_3192801_734f15ebc4d60affaea8fdeac1dccabf.JPG 760w,
+               /media/variety_testing_hu91f40b680ee6584d31c566c5259b98ab_3192801_1200x1200_fit_q75_lanczos.JPG 1200w&#34;
+               src=&#34;/media/variety_testing_hu91f40b680ee6584d31c566c5259b98ab_3192801_3666819c024fb8498a6fb7ebc2a81ec6.JPG&#34;
+               width=&#34;760&#34;
+               height=&#34;428&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&#34;/variety_testing.JPG&#34; /&gt;&lt;/p&gt;
+&lt;h4 id=&#34;field-variation&#34;&gt;Field variation&lt;/h4&gt;
+&lt;p&gt;Agricultural field trials often employ popular experimental designs such as randomized complete block design to account for environmental heterogeneity. However, those techniques are quite often inadequate to fully account for spatial heterogeneity that arises due to field position, soil conditions, disease, wildlife impacts and more.&lt;/p&gt;
+&lt;p&gt;Here is the a map of a wheat variety trial conducted in Idaho with a chloropleth map indicating plot yield. Each square represents a plot.&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;Kimberly2013.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;h4 id=&#34;blocking-in-a-field-trial&#34;&gt;Blocking in a field trial&lt;/h4&gt;
+&lt;p&gt;Block is not always sufficient to account for spatial variation. Here is the same Idaho variety trial with block information overlaid:&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;Kimberly2013.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;p&gt;The block arrangement is clearly not aligning with the field variation.&lt;/p&gt;
+&lt;h4 id=&#34;when-spatial-variation-is-not-fully-accounted-for&#34;&gt;When Spatial Variation is not Fully Accounted For&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;The treatment rankings can be wrong. Here is a plot of the cultivar ranks for yield from the Idaho variety trial when analysed with a standard linear mixed model and the same model augmented with spatial covariates.&lt;/li&gt;
+&lt;/ul&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;Kimberly2013_ranks.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;Low experimental power|high error|low precision|wide confidence intervals&lt;/li&gt;
+&lt;li&gt;Error terms are often correlated with each other, invalidating the downstream analysis&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;blocking-versus-spatial-statistics&#34;&gt;Blocking versus spatial statistics&lt;/h4&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  id=&#34;figure-another-distracted-boyfriend-meme&#34;&gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;boyfriend_meme.jpg&#34; alt=&#34;another distracted boyfriend meme!&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;figcaption&gt;
+      another distracted boyfriend meme!
+    &lt;/figcaption&gt;&lt;/figure&gt;
+&lt;p&gt;Researchers do not have to abandon blocking when incorporating spatial covariates into analysis of a field trial. In fact, using blocking or other experimental designs combined with spatial modelling has been shown improve the quality of the final estimates.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Diagnosing Spatial Autocorrelation</title>
+      <link>/workshops/old_spatial_workshop/diagnosing/</link>
+      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>/workshops/old_spatial_workshop/diagnosing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Row-and-Column Models</title>
+      <link>/workshops/old_spatial_workshop/rowcolumn/</link>
+      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>/workshops/old_spatial_workshop/rowcolumn/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Empirical Variograms</title>
+      <link>/workshops/old_spatial_workshop/variograms/</link>
+      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>/workshops/old_spatial_workshop/variograms/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spatial Splines</title>
+      <link>/workshops/old_spatial_workshop/splines/</link>
+      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>/workshops/old_spatial_workshop/splines/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Comparing Models</title>
+      <link>/workshops/old_spatial_workshop/model-comparison/</link>
+      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>/workshops/old_spatial_workshop/model-comparison/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Augmented Design</title>
+      <link>/workshops/old_spatial_workshop/augmented/</link>
+      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>/workshops/old_spatial_workshop/augmented/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Final thoughts</title>
+      <link>/workshops/old_spatial_workshop/conclusion/</link>
+      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>/workshops/old_spatial_workshop/conclusion/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

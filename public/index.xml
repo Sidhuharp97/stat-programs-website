@@ -48,6 +48,41 @@ sapply(package_list, require, character.only = TRUE)
     </item>
     
     <item>
+      <title>Computational Set-up</title>
+      <link>/workshops/spatial_workshop_new/prep-work/</link>
+      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>/workshops/spatial_workshop_new/prep-work/</guid>
+      <description>&lt;p&gt;Here are instructions for how check your R installation and install packages needed for the workshop.&lt;/p&gt;
+&lt;h3 id=&#34;check-software-versions&#34;&gt;Check software versions&lt;/h3&gt;
+&lt;p&gt;Open R and run this code to check what version of R your system is running:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;R.Version()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If the version printed is not 4.0 or newer, please &lt;a href=&#34;https://cran.r-project.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;upgrade R&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;This step is not required if you do not use RStudio.&lt;/em&gt; Open RStudio and run this code to check what version of RStudio is installed on your system:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rstudioapi::versionInfo()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If the version printed is not 1.4 or newer, please &lt;a href=&#34;https://www.rstudio.com/products/rstudio/download/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;upgrade Rstudio&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;install-workshop-packages&#34;&gt;Install workshop packages&lt;/h3&gt;
+&lt;p&gt;Open R and run this script:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;package_list &amp;lt;- c(&amp;quot;dplyr&amp;quot;, &amp;quot;tidyr&amp;quot;, &amp;quot;purrr&amp;quot;,       # for standard data manipulation
+                  &amp;quot;ggplot2&amp;quot;, &amp;quot;desplot&amp;quot;,            # for plotting
+                  &amp;quot;nlme&amp;quot;, &amp;quot;lme4&amp;quot;, &amp;quot;emmeans&amp;quot;,       # for linear modelling
+                  &amp;quot;SpATS&amp;quot;,                         # for fitting splines
+                  &amp;quot;sp&amp;quot;, &amp;quot;spdep&amp;quot;, &amp;quot;gstat&amp;quot;, &amp;quot;sf&amp;quot;)    # for spatial modelling
+
+install.packages(package_list)
+sapply(package_list, require, character.only = TRUE)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Please note that the spatial packages may take awhile to install, and you may run into problems with the installation. Please install these in advance of the workshop. If you have problems installing and/or loading any of these packages that you are not able to resolve, contact us so we can help you, preferably &lt;em&gt;before&lt;/em&gt; the workshop.&lt;/p&gt;
+&lt;h3 id=&#34;download-files-for-workshop&#34;&gt;Download files for workshop&lt;/h3&gt;
+&lt;p&gt;The following files are used in the workshop:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://raw.githubusercontent.com/IdahoAgStats/guide-to-field-trial-spatial-analysis/master/data/stroup_nin_wheat.csv&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Nebraska Interstate Nursery&lt;/a&gt;, a wheat variety trial arranged in a randomised complete block design with 4 blocks. This data set was first described by W. Stroup (2004) and has been used extensively for spatial analysis.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://raw.githubusercontent.com/IdahoAgStats/guide-to-field-trial-spatial-analysis/master/data/AB19F5_LIND.csv&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Lind&lt;/a&gt;, a winter wheat variety trial from Washington using an augmented design. This data set was kindly donated by &lt;a href=&#34;https://www.ars.usda.gov/pacific-west-area/pullman-wa/whgq/people/kimberly-garland-campbell/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Kimberly Garland Campbell&lt;/a&gt; of the USDA-ARS.&lt;/p&gt;
+&lt;p&gt;Please download these in advance so you can run the R and/or SAS scripts in the workshop.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Why Care about Spatial Variation?</title>
       <link>/workshops/spatial_workshop/why-spatial/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
@@ -95,9 +130,16 @@ sapply(package_list, require, character.only = TRUE)
 
 
 
-&lt;figure  &gt;
+&lt;figure  id=&#34;figure-vartest&#34;&gt;
   &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;variety_testing.JPG&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;&#34; srcset=&#34;
+               /media/variety_testing_hu91f40b680ee6584d31c566c5259b98ab_3192801_3666819c024fb8498a6fb7ebc2a81ec6.JPG 400w,
+               /media/variety_testing_hu91f40b680ee6584d31c566c5259b98ab_3192801_734f15ebc4d60affaea8fdeac1dccabf.JPG 760w,
+               /media/variety_testing_hu91f40b680ee6584d31c566c5259b98ab_3192801_1200x1200_fit_q75_lanczos.JPG 1200w&#34;
+               src=&#34;/media/variety_testing_hu91f40b680ee6584d31c566c5259b98ab_3192801_3666819c024fb8498a6fb7ebc2a81ec6.JPG&#34;
+               width=&#34;760&#34;
+               height=&#34;428&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
   &lt;/div&gt;&lt;/figure&gt;
 &lt;h4 id=&#34;field-variation&#34;&gt;Field variation&lt;/h4&gt;
 &lt;p&gt;Agricultural field trials often employ popular experimental designs such as randomized complete block design to account for environmental heterogeneity. However, those techniques are quite often inadequate to fully account for spatial heterogeneity that arises due to field position, soil conditions, disease, wildlife impacts and more.&lt;/p&gt;
@@ -118,7 +160,14 @@ sapply(package_list, require, character.only = TRUE)
 
 &lt;figure  &gt;
   &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;Kimberly2013.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;&#34; srcset=&#34;
+               /media/Kimberly2013_hufcda326c681836e362ae8f277219c861_133784_6783117ac31579be4ba79158430a5c8e.png 400w,
+               /media/Kimberly2013_hufcda326c681836e362ae8f277219c861_133784_0796f24bf395714b76e0185fb6d1fb6c.png 760w,
+               /media/Kimberly2013_hufcda326c681836e362ae8f277219c861_133784_1200x1200_fit_lanczos_2.png 1200w&#34;
+               src=&#34;/media/Kimberly2013_hufcda326c681836e362ae8f277219c861_133784_6783117ac31579be4ba79158430a5c8e.png&#34;
+               width=&#34;760&#34;
+               height=&#34;456&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
   &lt;/div&gt;&lt;/figure&gt;
 &lt;h4 id=&#34;blocking-in-a-field-trial&#34;&gt;Blocking in a field trial&lt;/h4&gt;
 &lt;p&gt;Block is not always sufficient to account for spatial variation. Here is the same Idaho variety trial with block information overlaid:&lt;/p&gt;
@@ -138,7 +187,14 @@ sapply(package_list, require, character.only = TRUE)
 
 &lt;figure  &gt;
   &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;Kimberly2013.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;&#34; srcset=&#34;
+               /media/Kimberly2013_blocking_hufcda326c681836e362ae8f277219c861_135684_c910abd22cf81daeeb4bd452fa2368f0.png 400w,
+               /media/Kimberly2013_blocking_hufcda326c681836e362ae8f277219c861_135684_7f89ae5d4011a3c958aefee39855e94c.png 760w,
+               /media/Kimberly2013_blocking_hufcda326c681836e362ae8f277219c861_135684_1200x1200_fit_lanczos_2.png 1200w&#34;
+               src=&#34;/media/Kimberly2013_blocking_hufcda326c681836e362ae8f277219c861_135684_c910abd22cf81daeeb4bd452fa2368f0.png&#34;
+               width=&#34;760&#34;
+               height=&#34;456&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
   &lt;/div&gt;&lt;/figure&gt;
 &lt;p&gt;The block arrangement is clearly not aligning with the field variation.&lt;/p&gt;
 &lt;h4 id=&#34;when-spatial-variation-is-not-fully-accounted-for&#34;&gt;When Spatial Variation is not Fully Accounted For&lt;/h4&gt;
@@ -161,7 +217,14 @@ sapply(package_list, require, character.only = TRUE)
 
 &lt;figure  &gt;
   &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;Kimberly2013_ranks.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;&#34; srcset=&#34;
+               /media/Kimberly2013_ranks_huc1b2eb09556372696e77ae4f8ee42364_283302_f8fe488cc657eea6d907333649c08f07.png 400w,
+               /media/Kimberly2013_ranks_huc1b2eb09556372696e77ae4f8ee42364_283302_06d53b914bc401e020b8db69b917798b.png 760w,
+               /media/Kimberly2013_ranks_huc1b2eb09556372696e77ae4f8ee42364_283302_1200x1200_fit_lanczos_2.png 1200w&#34;
+               src=&#34;/media/Kimberly2013_ranks_huc1b2eb09556372696e77ae4f8ee42364_283302_f8fe488cc657eea6d907333649c08f07.png&#34;
+               width=&#34;760&#34;
+               height=&#34;456&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
   &lt;/div&gt;&lt;/figure&gt;
 &lt;ul&gt;
 &lt;li&gt;Low experimental power|high error|low precision|wide confidence intervals&lt;/li&gt;
@@ -184,7 +247,14 @@ sapply(package_list, require, character.only = TRUE)
 
 &lt;figure  id=&#34;figure-another-distracted-boyfriend-meme&#34;&gt;
   &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;boyfriend_meme.jpg&#34; alt=&#34;another distracted boyfriend meme!&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;another distracted boyfriend meme!&#34; srcset=&#34;
+               /media/boyfriend_meme_hu0bb4fc25b36bd5709c7ac9216fac1bd5_110631_f6b16f5fd9fe04db808a4129de3e15dd.jpg 400w,
+               /media/boyfriend_meme_hu0bb4fc25b36bd5709c7ac9216fac1bd5_110631_6e44bc1d6558553d9eb1bd59a7a01470.jpg 760w,
+               /media/boyfriend_meme_hu0bb4fc25b36bd5709c7ac9216fac1bd5_110631_1200x1200_fit_q75_lanczos.jpg 1200w&#34;
+               src=&#34;/media/boyfriend_meme_hu0bb4fc25b36bd5709c7ac9216fac1bd5_110631_f6b16f5fd9fe04db808a4129de3e15dd.jpg&#34;
+               width=&#34;750&#34;
+               height=&#34;500&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
   &lt;/div&gt;&lt;figcaption&gt;
       another distracted boyfriend meme!
     &lt;/figcaption&gt;&lt;/figure&gt;
