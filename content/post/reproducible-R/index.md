@@ -55,25 +55,33 @@ Additionally, for setting up gitbooks through `bookdown`, R packages, Shiny apps
 
 This is sometimes referred to as "project-oriented workflow." I prefer to have a consistent directory structure like so:
 
-  top-level-directory
-  │   README.md
-  │
-  └───data
-  │      file011.txt
-  │      file012.txt
-  │   
-  └───scripts
-  │       eda.R
-  │       report.Rmd
-  │   
-  └───outputs
-  │       plot1.png
-  │       table1.csv
-  │   
-  └───extra
-          some_paper.pdf
-          email.pdf
-
+```
+top-level-directory
+│   README.md
+│
+└───data
+│   │   file011.txt
+│   │   file012.txt
+│   │
+│   └───spatial_files
+│       │   file208.dbf
+│       │   file208.shp
+│       │   file208.shx
+│   
+└───scripts
+│   │   eda.R
+│   │   analysis.R
+│   │   plots.R
+│   │   final_report.Rmd
+|
+└───outputs
+│   │   plot1.png
+│   │   blups.csv
+|
+└───extra
+    │   some_paper.pdf
+    │   ...
+```
 
 I put all raw data needed for analysis into the 'data' directory, any and all programming scripts in the "scripts" directory, all outputs (plots, tables, intermediate data object) in the 'outputs' directory and everything else ends up 'extra'. Naturally, there are many different directory structures to use and this is just one example. Find something that works best for your needs!
 

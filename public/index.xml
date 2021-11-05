@@ -798,22 +798,22 @@ usethis::use_blank_slate()
 &lt;p&gt;Additionally, for setting up gitbooks through &lt;code&gt;bookdown&lt;/code&gt;, R packages, Shiny apps, and other complicated R endeavors, the automated set-up through Rprojects can be immensely helpful.&lt;/p&gt;
 &lt;p&gt;This is sometimes referred to as &amp;ldquo;project-oriented workflow.&amp;rdquo; I prefer to have a consistent directory structure like so:&lt;/p&gt;
 &lt;p&gt;top-level-directory
-│   README.md
-│
-└───data
-│      file011.txt
-│      file012.txt
-│&lt;br&gt;
-└───scripts
-│       eda.R
-│       report.Rmd
-│&lt;br&gt;
-└───outputs
-│       plot1.png
-│       table1.csv
-│&lt;br&gt;
-└───extra
-some_paper.pdf
+│   README.md &lt;br&gt;
+│ &lt;br&gt;
+└───data &lt;br&gt;
+│      file011.txt &lt;br&gt;
+│      file012.txt &lt;br&gt;
+│   &lt;br&gt;
+└───scripts&lt;br&gt;
+│       eda.R&lt;br&gt;
+│       report.Rmd&lt;br&gt;
+│ &lt;br&gt;
+└───outputs &lt;br&gt;
+│       plot1.png &lt;br&gt;
+│       table1.csv &lt;br&gt;
+│  &lt;br&gt;
+└───extra &lt;br&gt;
+some_paper.pdf &lt;br&gt;
 email.pdf&lt;/p&gt;
 &lt;p&gt;I put all raw data needed for analysis into the &amp;lsquo;data&amp;rsquo; directory, any and all programming scripts in the &amp;ldquo;scripts&amp;rdquo; directory, all outputs (plots, tables, intermediate data object) in the &amp;lsquo;outputs&amp;rsquo; directory and everything else ends up &amp;lsquo;extra&amp;rsquo;. Naturally, there are many different directory structures to use and this is just one example. Find something that works best for your needs!&lt;/p&gt;
 &lt;ol&gt;
