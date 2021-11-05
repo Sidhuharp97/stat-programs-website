@@ -6,7 +6,7 @@ type: book
 weight: 1
 ---
 
-Here are instructions for how check your R installation and install packages needed for the workshop.  
+{{< icon name="r-project" pack="fab" >}} Here are instructions for how check your R installation and install packages needed for the workshop.  
 
 ### Check software versions 
 
@@ -39,16 +39,7 @@ install.packages(package_list)
 sapply(package_list, require, character.only = TRUE)
 ```
 
-Please note that the spatial packages may take awhile to install, and you may run into problems with the installation. Please install these in advance of the workshop. If you have problems installing and/or loading any of these packages that you are not able to resolve, contact us so we can help you, preferably *before* the workshop.
-
-### Download files for workshop
-
-The following files are used in the workshop: 
- 
-[Nebraska Interstate Nursery](https://raw.githubusercontent.com/IdahoAgStats/guide-to-field-trial-spatial-analysis/master/data/stroup_nin_wheat.csv), a wheat variety trial arranged in a randomised complete block design with 4 blocks. This data set was first described by W. Stroup (2004) and has been used extensively for spatial analysis. 
-
-[Lind](https://raw.githubusercontent.com/IdahoAgStats/guide-to-field-trial-spatial-analysis/master/data/AB19F5_LIND.csv), a winter wheat variety trial from Washington using an augmented design. This data set was kindly donated by [Kimberly Garland Campbell](https://www.ars.usda.gov/pacific-west-area/pullman-wa/whgq/people/kimberly-garland-campbell/) of the USDA-ARS. 
-
-Please download these in advance so you can run the R and/or SAS scripts in the workshop.
-
+{{% callout warning %}}
+Please note that the spatial packages may take awhile to install, and you may run into problems with the installation. Please attempt installation *in advance* of the workshop. If you have problems installing and/or loading any of these packages that you are not able to resolve, contact us so we can help you, preferably *before* the workshop.
+{{% /callout %}}
 

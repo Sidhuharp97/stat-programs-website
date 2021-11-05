@@ -785,7 +785,6 @@ Check software versions Open R and run this code to check what version of R your
       <ul>
         <li><a href="#check-software-versions">Check software versions</a></li>
         <li><a href="#install-workshop-packages">Install workshop packages</a></li>
-        <li><a href="#download-files-for-workshop">Download files for workshop</a></li>
       </ul>
     </li>
   </ul>
@@ -848,7 +847,8 @@ Check software versions Open R and run this code to check what version of R your
           <h1>Computational Set-up</h1>
 
           <div class="article-style">
-            <p>Here are instructions for how check your R installation and install packages needed for the workshop.</p>
+            <p>
+  <i class="fab fa-r-project  pr-1 fa-fw"></i> Here are instructions for how check your R installation and install packages needed for the workshop.</p>
 <h3 id="check-software-versions">Check software versions</h3>
 <p>Open R and run this code to check what version of R your system is running:</p>
 <pre><code>R.Version()
@@ -869,12 +869,11 @@ Check software versions Open R and run this code to check what version of R your
 install.packages(package_list)
 sapply(package_list, require, character.only = TRUE)
 </code></pre>
-<p>Please note that the spatial packages may take awhile to install, and you may run into problems with the installation. Please install these in advance of the workshop. If you have problems installing and/or loading any of these packages that you are not able to resolve, contact us so we can help you, preferably <em>before</em> the workshop.</p>
-<h3 id="download-files-for-workshop">Download files for workshop</h3>
-<p>The following files are used in the workshop:</p>
-<p><a href="https://raw.githubusercontent.com/IdahoAgStats/guide-to-field-trial-spatial-analysis/master/data/stroup_nin_wheat.csv" target="_blank" rel="noopener">Nebraska Interstate Nursery</a>, a wheat variety trial arranged in a randomised complete block design with 4 blocks. This data set was first described by W. Stroup (2004) and has been used extensively for spatial analysis.</p>
-<p><a href="https://raw.githubusercontent.com/IdahoAgStats/guide-to-field-trial-spatial-analysis/master/data/AB19F5_LIND.csv" target="_blank" rel="noopener">Lind</a>, a winter wheat variety trial from Washington using an augmented design. This data set was kindly donated by <a href="https://www.ars.usda.gov/pacific-west-area/pullman-wa/whgq/people/kimberly-garland-campbell/" target="_blank" rel="noopener">Kimberly Garland Campbell</a> of the USDA-ARS.</p>
-<p>Please download these in advance so you can run the R and/or SAS scripts in the workshop.</p>
+<div class="alert alert-warning">
+  <div>
+    Please note that the spatial packages may take awhile to install, and you may run into problems with the installation. Please attempt installation <em>in advance</em> of the workshop. If you have problems installing and/or loading any of these packages that you are not able to resolve, contact us so we can help you, preferably <em>before</em> the workshop.
+  </div>
+</div>
 
           </div>
 

@@ -23,7 +23,7 @@ Salt Palace Convention Center, 250D
 
 ## Workshop overview
 
-Agricultural field experiments commonly employ standard experimental designs such as randomized complete block to control for field heterogeneity.  However, there is often substantial spatial variation not fully captured by blocking, particularly in large experiments. Although spatial statistics have demonstrated effectiveness in controlling localized spatial variation, they are rarely integrated into analysis of agricultural field experiments. The purpose of this workshop is to provide tools for diagnosing with-field spatial variation and accounting for that spatial variation in statistical analysis of trial data. 
+Agricultural field experiments commonly employ standard experimental designs such as randomized complete block to control for field heterogeneity.  However, there is often substantial spatial variation not fully captured by blocking, particularly in large experiments. Although spatial statistics have demonstrated effectiveness in controlling localized spatial variation, they are rarely integrated into analysis of agricultural field experiments. The purpose of this workshop is to provide tools for diagnosing with-field spatial variation and accounting for that spatial variation in statistical analysis of trial data. The workshop draws heavily from our [book](https://idahoagstats.github.io/guide-to-field-trial-spatial-analysis/) on this subject.  
 
 ## Intended Audience
 
@@ -42,6 +42,16 @@ You will need a recent version of R, available free through the [Comprehensive R
 In order to run the SAS portion of this tutorial, a valid copy of SAS Base and Stat products and a current SAS license are required. This tutorial was built using SAS 9.4 (TS1M5). Although older versions of SAS may also work, we have not evaluated this. Users can also consider downloading and using a free version of [SAS® On Demand for Academics: Studio](https://www.sas.com/en_us/software/on-demand-for-academics/references/getting-started-with-sas-ondemand-for-academics-studio.html).
 
 The workshop will use Rstudio and the standard SAS interface for R and SAS code demonstrations, respectively. 
+
+**Data sets**
+
+The following files will be used in the workshop: 
+ 
+[Nebraska Interstate Nursery](https://raw.githubusercontent.com/IdahoAgStats/guide-to-field-trial-spatial-analysis/master/data/stroup_nin_wheat.csv), a wheat variety trial arranged in a randomised complete block design with 4 blocks. This data set was first described by W. Stroup (2004) and has been used extensively for spatial analysis. 
+
+[Lind](https://raw.githubusercontent.com/IdahoAgStats/guide-to-field-trial-spatial-analysis/master/data/AB19F5_LIND.csv), a winter wheat variety trial from Washington using an augmented design. This data set was kindly donated by [Kimberly Garland Campbell](https://www.ars.usda.gov/pacific-west-area/pullman-wa/whgq/people/kimberly-garland-campbell/) of the USDA-ARS. 
+
+Please download these in advance so you can run the R and/or SAS scripts in the workshop.
 
 ## Draft Schedule
 

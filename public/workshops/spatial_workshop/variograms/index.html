@@ -33,8 +33,7 @@
   
     
   
-  <meta name="description" content="Code for this section The following scripts build upon work done in previous section(s).
-Rhere it is.more code  SAShere it is.more code  " />
+  <meta name="description" content="Under Construction&hellip;The empirical variogram is a visual tool for quantifying spatial covariance. It uses semivariance ($\gamma$), which is a measure of covariance between points or units ($i$ and $j$) as a function of distance ($h$):" />
 
   
   <link rel="alternate" hreflang="en-us" href="/workshops/spatial_workshop/variograms/" />
@@ -299,8 +298,7 @@ Rhere it is.more code  SAShere it is.more code  " />
   <meta property="og:site_name" content="Idaho Ag Stats" />
   <meta property="og:url" content="/workshops/spatial_workshop/variograms/" />
   <meta property="og:title" content="Empirical Variograms | Idaho Ag Stats" />
-  <meta property="og:description" content="Code for this section The following scripts build upon work done in previous section(s).
-Rhere it is.more code  SAShere it is.more code  " /><meta property="og:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" />
+  <meta property="og:description" content="Under Construction&hellip;The empirical variogram is a visual tool for quantifying spatial covariance. It uses semivariance ($\gamma$), which is a measure of covariance between points or units ($i$ and $j$) as a function of distance ($h$):" /><meta property="og:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" />
     <meta property="twitter:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" /><meta property="og:locale" content="en-us" />
   
     
@@ -783,6 +781,7 @@ Rhere it is.more code  SAShere it is.more code  " /><meta property="og:ima
   <ul>
     <li>
       <ul>
+        <li><a href="#correlated-error-models">Correlated Error Models</a></li>
         <li><a href="#code-for-this-section">Code for this section</a></li>
       </ul>
     </li>
@@ -846,19 +845,170 @@ Rhere it is.more code  SAShere it is.more code  " /><meta property="og:ima
           <h1>Empirical Variograms</h1>
 
           <div class="article-style">
-            <h3 id="code-for-this-section">Code for this section</h3>
+            <div class="alert alert-note">
+  <div>
+    <em>Under Construction&hellip;</em>
+  </div>
+</div>
+<p>The empirical variogram is a visual tool for quantifying spatial covariance. It uses semivariance ($\gamma$), which is a measure of covariance between points or units ($i$ and $j$) as a function of distance ($h$):</p>
+<p>$$\gamma(h) = \frac{1}{2|N(h)|}\sum_{N(h)}(x_i - x_j)^2$$</p>
+<p>Semivariances are binned for distance intervals. The average values for semivariance and distance interval can be fit to mathematical models designed to explain how semivariance changes over distance.</p>
+<p>Three important concepts of an empirical variogram are <em>nugget</em>, <em>sill</em> and  <em>range</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  id="figure-example-empirical-variogram">
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img alt="Example Empirical Variogram" srcset="
+               /media/Sadoti2014_spherical_huf033197c365a34c0f3cd93f8cc2a46a3_30850_84c00fa9c50ea6a6c12ad9bfe7b7fc54.jpg 400w,
+               /media/Sadoti2014_spherical_huf033197c365a34c0f3cd93f8cc2a46a3_30850_264947b8bbb5022511399aab59b72492.jpg 760w,
+               /media/Sadoti2014_spherical_huf033197c365a34c0f3cd93f8cc2a46a3_30850_1200x1200_fit_q75_lanczos.jpg 1200w"
+               src="/media/Sadoti2014_spherical_huf033197c365a34c0f3cd93f8cc2a46a3_30850_84c00fa9c50ea6a6c12ad9bfe7b7fc54.jpg"
+               width="640"
+               height="434"
+               loading="lazy" data-zoomable /></div>
+  </div><figcaption>
+      Example Empirical Variogram
+    </figcaption></figure>
+<ul>
+<li>range = distance up to which is there is spatial correlation</li>
+<li>sill = uncorrelated variance of the variable of interest</li>
+<li>nugget = measurement error, or short-distance spatial variance and other unaccounted for variance</li>
+</ul>
+<p><strong>2 other concepts:</strong></p>
+<ul>
+<li>partial sill = sill - nugget</li>
+<li>nugget effect = the nugget/sill ratio, interpreted opposite of $r^2$</li>
+</ul>
+<h3 id="correlated-error-models">Correlated Error Models</h3>
+<p>Many equations exist for modelling semivariance patterns. A deep knowledge of these is not required to fit an empirical variogram to a model. Here are a few popular examples.</p>
+<p><strong>Exponential</strong></p>
+<p>$$ \gamma (h)\left{ {\begin{array}{cc} 0 &amp; h = 0\ C_0+C_1 \left [ 1-e^{-(\frac{h}{r})} \right] &amp; h &gt; 0 \end{array} } \right. $$
+where</p>
+<p>$$ C_0 = nugget \ C_1 = partial : sill \ r = range$$</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  id="figure-theoretical-exponential-variogram">
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="exponential.png%29" alt="Theoretical Exponential Variogram" loading="lazy" data-zoomable /></div>
+  </div><figcaption>
+      Theoretical Exponential Variogram
+    </figcaption></figure>
+<p><strong>Gaussian</strong></p>
+<p>(a squared version of the exponential model)</p>
+<p>$$ \gamma (h)\left{ {\begin{array}{cc} 0 &amp; h = 0\ C_0+C_1 \left [ 1-e^{-(\frac{h}{r})^2} \right] &amp; h &gt; 0 \end{array} } \right. $$
+where</p>
+<p>$$ C_0 = nugget \ C_1 = partial : sill \ r = range$$</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  id="figure-theoretical-gaussian-variogram">
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="gaussian.png%29" alt="Theoretical Gaussian Variogram" loading="lazy" data-zoomable /></div>
+  </div><figcaption>
+      Theoretical Gaussian Variogram
+    </figcaption></figure>
+<p><strong>Matérn</strong></p>
+<p><em>&lt;/An extremely complicated mathematical model/&gt;</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  id="figure-empirical-matérn-variogram">
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="matern.png%29" alt="Empirical Matérn Variogram" loading="lazy" data-zoomable /></div>
+  </div><figcaption>
+      Empirical Matérn Variogram
+    </figcaption></figure>
+<div class="alert alert-note">
+  <div>
+    For more information on these models, see this workshop&rsquo;s accompanying <a href="https://idahoagstats.github.io/guide-to-field-trial-spatial-analysis/background.html">online book</a> on this topic and additional <a href="http://documentation.sas.com/doc/en/pgmsascdc/9.4_3.4/statug/statug_variogram_details02.htm">SAS resources</a>.
+  </div>
+</div>
+<h3 id="code-for-this-section">Code for this section</h3>
 <p><em>The following scripts build upon work done in previous section(s).</em></p>
-<details class="spoiler "  id="spoiler-0">
+<details class="spoiler "  id="spoiler-6">
   <summary>R</summary>
-  <p><pre><code>here it is.
-more code
+  <p><pre><code># load libraries
+librar(gstat)
+
+# set up spatial object
+Nin_spatial &lt;- Nin_na
+coordinates(Nin_spatial) &lt;- ~ col.width + row.length # add attribte
+class(Nin_spatial)
+
+# establish max distance for variogram estimation
+max_dist = 0.5*max(dist(coordinates(Nin_spatial)))
+
+# calculate empirical variogram
+resid_var1 &lt;- gstat::variogram(yield ~ rep + gen, 
+                        cutoff = max_dist,
+                        width = max_dist/20, # 20 is the number of bins
+                        data = Nin_spatial)
+plot(resid_var1)
 </code></pre>
 </p>
 </details>
-<details class="spoiler "  id="spoiler-1">
+<details class="spoiler "  id="spoiler-7">
   <summary>SAS</summary>
-  <p><pre><code>here it is.
-more code
+  <p><pre><code># calculate semivariance and compute empirical variogram
+proc variogram data=residuals plots(only)=(semivar);
+   coordinates xc=Col yc=Row;
+   compute lagd=1.2 maxlags=30;
+  var resid;
+run;
+
+# fit models to the empirical variogram
+proc variogram data=residuals plots(only)=(fitplot);
+   coordinates xc=Col yc=Row;
+   compute lagd=1.2 maxlags=30;
+   model form=auto(mlist=(gau, exp, pow, sph) nest=1);
+  var resid;
+run;
 </code></pre>
 </p>
 </details>

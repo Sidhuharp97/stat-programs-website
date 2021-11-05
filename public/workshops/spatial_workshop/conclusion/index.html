@@ -33,7 +33,7 @@
   
     
   
-  <meta name="description" content="" />
+  <meta name="description" content="Spatial analysis can be challenging, but I think it is worth the effort to learn and implement in analysis of field trials. Incorporating spatial statistics into analysis of feel trials can be overwhelming at time." />
 
   
   <link rel="alternate" hreflang="en-us" href="/workshops/spatial_workshop/conclusion/" />
@@ -298,7 +298,7 @@
   <meta property="og:site_name" content="Idaho Ag Stats" />
   <meta property="og:url" content="/workshops/spatial_workshop/conclusion/" />
   <meta property="og:title" content="Final thoughts | Idaho Ag Stats" />
-  <meta property="og:description" content="" /><meta property="og:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" />
+  <meta property="og:description" content="Spatial analysis can be challenging, but I think it is worth the effort to learn and implement in analysis of field trials. Incorporating spatial statistics into analysis of feel trials can be overwhelming at time." /><meta property="og:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" />
     <meta property="twitter:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" /><meta property="og:locale" content="en-us" />
   
     
@@ -777,7 +777,16 @@
         <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
       </ul>
 
-      <nav id="TableOfContents"></nav>
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#other-resources">Other resources</a></li>
+        <li><a href="#books">Books</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
       
     </div>
@@ -836,7 +845,106 @@
           <h1>Final thoughts</h1>
 
           <div class="article-style">
-            
+            <p>Spatial analysis can be challenging, but I think it is worth the effort to learn and implement in analysis of field trials. Incorporating spatial statistics into analysis of feel trials can be overwhelming at time. However, investigating spatial correlation in a field trial and controlling for it if necessary using <em>any</em> of the methods developed for this is recommended over doing nothing.</p>
+<p>There is no denying that work is needed to develop scripts that automate this process so researchers can routinely incorporate spatial covariance into field trial analysis. Many current R tools are unwieldy to use and have insufficient options to support variety trial analysis.</p>
+<p>Until this situation is improved, it is probably wisest to focus on using spatial models that are well-supported at this time. Any of the options implemented in the <strong>nlme</strong> package (or that work with that package) are decent choices with excellent support for extracting least-squares means, running ANOVA, and standard model diagnostics. Furthermore, <strong>nlme</strong> supports generalized linear models. <strong>INLA</strong> is established is supported by a large and growing user base, and <strong>breedR</strong> is likewise well established.</p>
+<h3 id="other-resources">Other resources</h3>
+<ul>
+<li>
+<p><a href="https://idahoagstats.github.io/guide-to-field-trial-spatial-analysis/" target="_blank" rel="noopener">Incorporating Spatial Analysis into Agricultural Field Experiments</a>, a more comprehensive version of this tutorial</p>
+</li>
+<li>
+<p>CRAN task view on <a href="https://cran.r-project.org/web/views/Spatial.html" target="_blank" rel="noopener">analysis of spatial data</a></p>
+</li>
+<li>
+<p>Other R packages</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>package</th>
+<th>usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://famuvie.github.io/breedR/" target="_blank" rel="noopener">breedR</a></td>
+<td>mixed modelling with AR1xAR1 estimation</td>
+</tr>
+<tr>
+<td><a href="https://www.r-inla.org" target="_blank" rel="noopener">inla</a></td>
+<td>Bayesian modelling with options for spatial covariance structure</td>
+</tr>
+<tr>
+<td><a href="https://github.com/cran/McSpatial" target="_blank" rel="noopener">Mcspatial</a></td>
+<td>nonparametric spatial analysis, (no longer on CRAN)</td>
+</tr>
+<tr>
+<td><a href="https://CRAN.R-project.org/package=ngspatial" target="_blank" rel="noopener">ngspatial</a></td>
+<td>spatial models with a focus on generalized linear models</td>
+</tr>
+<tr>
+<td><a href="https://CRAN.R-project.org/package=sommer" target="_blank" rel="noopener">sommer</a></td>
+<td>mixed models, including an AR1xAr1 model</td>
+</tr>
+<tr>
+<td><a href="https://gitlab.mbb.univ-montp2.fr/francois/spamm-ref" target="_blank" rel="noopener">spamm</a></td>
+<td>Matérn covariance structure</td>
+</tr>
+<tr>
+<td><a href="https://github.com/lrcastro/spANOVA" target="_blank" rel="noopener">spANOVA</a></td>
+<td>spatial lag models for field trials</td>
+</tr>
+<tr>
+<td><a href="https://r-spatial.github.io/spatialreg/" target="_blank" rel="noopener">spatialreg</a></td>
+<td>spatial functions for areal data</td>
+</tr>
+</tbody>
+</table>
+<p>The package <strong>sommer</strong> implements a version of the AR1xAR1 covariance structure. However, it does not estimate the parameter $\rho$. The user must specify the $\rho$ and that value is not optimized in the restricted maximum likelihood estimation. Both <strong>BreedR</strong> and <strong>inla</strong> implement an AR1xAR1 covariance structure. Additional, SAS and the proprietary software <a href="https://asreml.kb.vsni.co.uk/" target="_blank" rel="noopener">asreml</a> can implement a mixed model with this covariance structure.</p>
+<p>A <a href="https://raw.githubusercontent.com/f-rousset/spaMM-ref/master/vignettePlus/MixedModels_useR2021.pdf" target="_blank" rel="noopener">spAMM tutorial</a> is available for exploring this package more.</p>
+<h3 id="books">Books</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img alt="" srcset="
+               /media/cressie_revised_hu68b06343b1fbcd2ddc04942b3b381960_38587_800cbb8726c4de125424ad445947b1eb.jpg 400w,
+               /media/cressie_revised_hu68b06343b1fbcd2ddc04942b3b381960_38587_bd57d203adefa7bd4d34132f8dafda5d.jpg 760w,
+               /media/cressie_revised_hu68b06343b1fbcd2ddc04942b3b381960_38587_1200x1200_fit_q75_lanczos.jpg 1200w"
+               src="/media/cressie_revised_hu68b06343b1fbcd2ddc04942b3b381960_38587_800cbb8726c4de125424ad445947b1eb.jpg"
+               width="250"
+               height="250"
+               loading="lazy" data-zoomable /></div>
+  </div></figure>
+<ul>
+<li>
+<p><a href="https://onlinelibrary.wiley.com/doi/book/10.1002/9781119115151" target="_blank" rel="noopener"><strong>Statistics for Spatial Data</strong></a></p>
+</li>
+<li>
+<p><strong>Applied Spatial Data Analysis with R</strong>, available for <a href="https://asdar-book.org/" target="_blank" rel="noopener">free</a></p>
+</li>
+<li>
+<p><a href="https://spacetimewithr.org/" target="_blank" rel="noopener"><strong>Spatio-Temporal Statistics With R</strong></a> (also free)</p>
+</li>
+<li>
+<p><a href="https://www.routledge.com/Spatial-Data-Analysis-in-Ecology-and-Agriculture-Using-R/Plant/p/book/9780367732325" target="_blank" rel="noopener"><strong>Spatial Data Analysis in Ecology and Agriculture Using R</strong></a></p>
+</li>
+</ul>
+
           </div>
 
           
