@@ -2,10 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/workshops/spatial_workshop/prep_work/</loc>
+    <loc>/workshops/spatial_workshop/prep-work/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/workshops/spatial_workshop/why_spatial/</loc>
+    <loc>/workshops/spatial_workshop/why-spatial/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/workshops/spatial_workshop/diagnosing/</loc>
@@ -29,7 +29,7 @@
     <loc>/workshops/spatial_workshop/splines/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/workshops/spatial_workshop/model_comparison/</loc>
+    <loc>/workshops/spatial_workshop/model-comparison/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/workshops/spatial_workshop/augmented/</loc>

@@ -6,8 +6,6 @@ type: book
 weight: 30
 ---
 
-Learn how to visualize data with Plotly.
-
 <!--more-->
 
 {{< icon name="clock" pack="fas" >}} 1-2 hours per week, for 8 weeks

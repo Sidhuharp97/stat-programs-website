@@ -38,4 +38,4 @@ There are no prerequisites for the first course.
 Continuously, at your own pace.
 {{< /spoiler >}}
 
-{{< cta cta_text="Begin the course" cta_link="missing" >}}
+{{< cta cta_text="Begin the course" cta_link="python" >}}

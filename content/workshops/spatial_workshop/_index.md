@@ -35,7 +35,7 @@ This workshop is open to scientists, students, technicians and anyone else who c
 
 You will need a recent version of R, available free through the [Comprehensive R Archive Network](https://cran.r-project.org/) (CRAN). While this is sufficient for running R scripts, You may also find it helpful to use RStudio, which provides a nice graphical user interface for R. RStudio can be downloaded [here](https://www.rstudio.com/products/rstudio/download/). Additionally, there are several package to download:  
 
-{{< cta cta_text="check your system" cta_link="prep_work" >}}
+{{< cta cta_text="check your system" cta_link="prep-work" >}}
 
 **SAS**
 
@@ -72,4 +72,6 @@ The workshop will use Rstudio and the standard SAS interface for R and SAS code 
 {{< mention "xdai" >}} is consulting statistician at Utah Agricultural Experiment Station, Utah State University with 12 years of experience in SAS programming.  
 
 
-{{< cta cta_text="gegin the workshop" cta_link="why_spatial" >}}
+{{< cta cta_text="begin the workshop" cta_link="why-spatial" >}}
+
+*This workshop is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc/4.0/.*
