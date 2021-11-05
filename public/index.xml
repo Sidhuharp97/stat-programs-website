@@ -14,9 +14,9 @@
     
     <item>
       <title>Computational Set-up</title>
-      <link>/workshops/spatial_workshop/prep-work/</link>
+      <link>/draft-workshops/spatial_workshop_new/prep-work/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/workshops/spatial_workshop/prep-work/</guid>
+      <guid>/draft-workshops/spatial_workshop_new/prep-work/</guid>
       <description>&lt;p&gt;Here are instructions for how check your R installation and install packages needed for the workshop.&lt;/p&gt;
 &lt;h3 id=&#34;check-software-versions&#34;&gt;Check software versions&lt;/h3&gt;
 &lt;p&gt;Open R and run this code to check what version of R your system is running:&lt;/p&gt;
@@ -49,9 +49,9 @@ sapply(package_list, require, character.only = TRUE)
     
     <item>
       <title>Computational Set-up</title>
-      <link>/workshops/spatial_workshop_new/prep-work/</link>
+      <link>/workshops/spatial_workshop/prep-work/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/workshops/spatial_workshop_new/prep-work/</guid>
+      <guid>/workshops/spatial_workshop/prep-work/</guid>
       <description>&lt;p&gt;Here are instructions for how check your R installation and install packages needed for the workshop.&lt;/p&gt;
 &lt;h3 id=&#34;check-software-versions&#34;&gt;Check software versions&lt;/h3&gt;
 &lt;p&gt;Open R and run this code to check what version of R your system is running:&lt;/p&gt;
@@ -330,7 +330,7 @@ sapply(package_list, require, character.only = TRUE)
 &lt;p&gt;While there is always ambiguity associated with using plots for decision making, early exploration of these plots can be helpful in understanding the extent of spatial correlation.&lt;/p&gt;
 &lt;h3 id=&#34;morans-i&#34;&gt;Moran&amp;rsquo;s I&lt;/h3&gt;
 &lt;p&gt;Moran&amp;rsquo;s I, sometimes called &amp;ldquo;Global Moran&amp;rsquo;s I&amp;rdquo; can be used for conducting a hypothesis test on whether there is correlation between spatial units located adjacent to one another.&lt;/p&gt;
-&lt;p&gt;$$ I = \frac{N}{W}\frac{\sum_i \sum_j w_{ij} (x_i - \bar{x})(x_j - \bar{x})}{\sum_i(x_i - \bar{x})^2}
+&lt;p&gt;$$ I = \frac{N}{W}\frac{\sum_i \sum_j w_{ij} (x_i - \bar{x})(x_j - \bar{x})}{\sum_i(x_i - \bar{x})^2} 
 \qquad i \neq j$$&lt;/p&gt;
 &lt;p&gt;Where N is total number of spatial locations indexed by $i$ and $j$, x is the variable of interest, $w_{ij}$ are a spatial weights between each $i$ and $j$, and W is the sum of all weights.&lt;/p&gt;
 &lt;p&gt;The expected values of Moran&amp;rsquo;s I is $-1/(N-1)$. Values greater than the expected value indicate positive spatial correlation (areas close to each other are similar), while values less than that indicate dissimilarity as spatial distance between points decreases.&lt;/p&gt;
@@ -454,9 +454,9 @@ run;
     
     <item>
       <title>Python basics</title>
-      <link>/workshops/example/python/</link>
+      <link>/draft-workshops/example/python/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>/workshops/example/python/</guid>
+      <guid>/draft-workshops/example/python/</guid>
       <description>&lt;p&gt;Build a foundation in Python.&lt;/p&gt;
 &lt;p&gt;
   &lt;i class=&#34;fas fa-clock  pr-1 fa-fw&#34;&gt;&lt;/i&gt; 1-2 hours per week, for 8 weeks&lt;/p&gt;
@@ -592,9 +592,9 @@ run;
     
     <item>
       <title>Visualization</title>
-      <link>/workshops/example/visualization/</link>
+      <link>/draft-workshops/example/visualization/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>/workshops/example/visualization/</guid>
+      <guid>/draft-workshops/example/visualization/</guid>
       <description>&lt;p&gt;
   &lt;i class=&#34;fas fa-clock  pr-1 fa-fw&#34;&gt;&lt;/i&gt; 1-2 hours per week, for 8 weeks&lt;/p&gt;
 &lt;h2 id=&#34;learn&#34;&gt;Learn&lt;/h2&gt;
@@ -645,9 +645,9 @@ more code
     
     <item>
       <title>Statistics</title>
-      <link>/workshops/example/stats/</link>
+      <link>/draft-workshops/example/stats/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>/workshops/example/stats/</guid>
+      <guid>/draft-workshops/example/stats/</guid>
       <description>&lt;p&gt;Introduction to statistics for data science.&lt;/p&gt;
 &lt;p&gt;
   &lt;i class=&#34;fas fa-clock  pr-1 fa-fw&#34;&gt;&lt;/i&gt; 1-2 hours per week, for 8 weeks&lt;/p&gt;
@@ -797,24 +797,32 @@ usethis::use_blank_slate()
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Additionally, for setting up gitbooks through &lt;code&gt;bookdown&lt;/code&gt;, R packages, Shiny apps, and other complicated R endeavors, the automated set-up through Rprojects can be immensely helpful.&lt;/p&gt;
 &lt;p&gt;This is sometimes referred to as &amp;ldquo;project-oriented workflow.&amp;rdquo; I prefer to have a consistent directory structure like so:&lt;/p&gt;
-&lt;p&gt;top-level-directory
-│   README.md &lt;br&gt;
-│ &lt;br&gt;
-└───data &lt;br&gt;
-│      file011.txt &lt;br&gt;
-│      file012.txt &lt;br&gt;
-│   &lt;br&gt;
-└───scripts&lt;br&gt;
-│       eda.R&lt;br&gt;
-│       report.Rmd&lt;br&gt;
-│ &lt;br&gt;
-└───outputs &lt;br&gt;
-│       plot1.png &lt;br&gt;
-│       table1.csv &lt;br&gt;
-│  &lt;br&gt;
-└───extra &lt;br&gt;
-some_paper.pdf &lt;br&gt;
-email.pdf&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;top-level-directory
+│   README.md
+│
+└───data
+│   │   file011.txt
+│   │   file012.txt
+│   │
+│   └───spatial_files
+│       │   file208.dbf
+│       │   file208.shp
+│       │   file208.shx
+│   
+└───scripts
+│   │   eda.R
+│   │   analysis.R
+│   │   plots.R
+│   │   final_report.Rmd
+|
+└───outputs
+│   │   plot1.png
+│   │   blups.csv
+|
+└───extra
+    │   some_paper.pdf
+    │   ...
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;I put all raw data needed for analysis into the &amp;lsquo;data&amp;rsquo; directory, any and all programming scripts in the &amp;ldquo;scripts&amp;rdquo; directory, all outputs (plots, tables, intermediate data object) in the &amp;lsquo;outputs&amp;rsquo; directory and everything else ends up &amp;lsquo;extra&amp;rsquo;. Naturally, there are many different directory structures to use and this is just one example. Find something that works best for your needs!&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Use the &lt;code&gt;here&lt;/code&gt; package.&lt;/li&gt;
@@ -1127,12 +1135,12 @@ $H_a:$  There is spatial autocorrelation!&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;basic-linear-model&#34;&gt;Basic Linear Model&lt;/h2&gt;
-&lt;p&gt;$$Y_{ij} = \mu + A_i + \epsilon_{ij}$$
+&lt;p&gt;$$Y_{ij} = \mu + A_i + \epsilon_{ij}$$ 
 $$\epsilon_i \sim  N(0,\sigma)$$&lt;/p&gt;
 &lt;p&gt;If N = 4:&lt;/p&gt;
-&lt;p&gt;$$e_i ~\sim N \Bigg( 0,
-\left[ {\begin{array}{ccc} \sigma^2 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0\
-0 &amp;amp; \sigma^2 &amp;amp; 0 &amp;amp; 0\
+&lt;p&gt;$$e_i ~\sim N \Bigg( 0, 
+\left[ {\begin{array}{ccc} \sigma^2 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0\ 
+0 &amp;amp; \sigma^2 &amp;amp; 0 &amp;amp; 0\ 
 0 &amp;amp; 0 &amp;amp; \sigma^2 &amp;amp; 0\&lt;br&gt;
 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; \sigma^2
 \end{array}  } \right] \Bigg) $$&lt;/p&gt;
@@ -1145,7 +1153,7 @@ $$Y_{ij} = \mu + A_i + \epsilon_{ij}$$&lt;/p&gt;
 \left[ {\begin{array}{cc} 1 &amp;amp; \rho &amp;amp; \rho^2 &amp;amp; \rho^3 \&lt;br&gt;
 \rho &amp;amp; 1 &amp;amp; \rho &amp;amp; \rho^2 \&lt;br&gt;
 \rho^2 &amp;amp; \rho &amp;amp; 1 &amp;amp; \rho \&lt;br&gt;
-\rho^3 &amp;amp; \rho^2 &amp;amp; \rho &amp;amp; 1 \
+\rho^3 &amp;amp; \rho^2 &amp;amp; \rho &amp;amp; 1 \ 
 \end{array} } \right] \Bigg) $$&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;$\rho$ is a correlation parameter ranging from -1 to 1 where 0 is no correlation and values approaching 1 indicate spatial correlation.&lt;/li&gt;

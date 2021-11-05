@@ -16,8 +16,15 @@ weight: 40
 
 {{< spoiler text="R" >}}
 ```
-here it is.
-more code
+# set up spatial object
+Nin_spatial <- Nin_na
+coordinates(Nin_spatial) <- ~ col.width + row.length
+class(Nin_spatial)
+
+# establish max distance for variogram estimation
+max_dist = 0.5*max(dist(coordinates(Nin_spatial)))
+
+
 ``` 
 {{< /spoiler >}}
 

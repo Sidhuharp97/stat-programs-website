@@ -2,10 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/workshops/spatial_workshop/prep-work/</loc>
+    <loc>/draft-workshops/spatial_workshop_new/prep-work/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/workshops/spatial_workshop_new/prep-work/</loc>
+    <loc>/workshops/spatial_workshop/prep-work/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/workshops/spatial_workshop/why-spatial/</loc>
@@ -14,19 +14,19 @@
     <loc>/workshops/spatial_workshop/diagnosis/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/workshops/example/python/</loc>
+    <loc>/draft-workshops/example/python/</loc>
     <lastmod>2021-01-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/workshops/spatial_workshop/rowcolumn/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/workshops/example/visualization/</loc>
+    <loc>/draft-workshops/example/visualization/</loc>
     <lastmod>2021-01-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/workshops/spatial_workshop/variograms/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/workshops/example/stats/</loc>
+    <loc>/draft-workshops/example/stats/</loc>
     <lastmod>2021-01-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/workshops/spatial_workshop/splines/</loc>
@@ -41,13 +41,16 @@
     <loc>/workshops/spatial_workshop/conclusion/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>/draft-workshops/</loc>
+    <lastmod>2021-11-01T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/workshops/spatial_workshop/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/workshops/spatial_workshop_new/</loc>
+    <loc>/draft-workshops/spatial_workshop_new/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/workshops/</loc>
@@ -107,7 +110,7 @@
     <loc>/author/statistical-programs/</loc>
     <lastmod>2021-04-09T15:30:00+00:00</lastmod>
   </url><url>
-    <loc>/workshops/example/</loc>
+    <loc>/draft-workshops/example/</loc>
     <lastmod>2021-01-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/publication_types/3/</loc>
