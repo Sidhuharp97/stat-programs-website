@@ -2,49 +2,49 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/tutorials/spatial_workshop/prep_work/</loc>
+    <loc>/workshops/spatial_workshop/prep_work/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tutorials/spatial_workshop/why_spatial/</loc>
+    <loc>/workshops/spatial_workshop/why_spatial/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tutorials/spatial_workshop/diagnosing/</loc>
+    <loc>/workshops/spatial_workshop/diagnosing/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tutorials/example/python/</loc>
+    <loc>/workshops/example/python/</loc>
     <lastmod>2021-01-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tutorials/spatial_workshop/rowcolumn/</loc>
+    <loc>/workshops/spatial_workshop/rowcolumn/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tutorials/example/visualization/</loc>
+    <loc>/workshops/example/visualization/</loc>
     <lastmod>2021-01-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tutorials/spatial_workshop/variograms/</loc>
+    <loc>/workshops/spatial_workshop/variograms/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tutorials/example/stats/</loc>
+    <loc>/workshops/example/stats/</loc>
     <lastmod>2021-01-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tutorials/spatial_workshop/splines/</loc>
+    <loc>/workshops/spatial_workshop/splines/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tutorials/spatial_workshop/model_comparison/</loc>
+    <loc>/workshops/spatial_workshop/model_comparison/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tutorials/spatial_workshop/augmented/</loc>
+    <loc>/workshops/spatial_workshop/augmented/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tutorials/spatial_workshop/conclusion/</loc>
+    <loc>/workshops/spatial_workshop/conclusion/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tutorials/spatial_workshop/</loc>
+    <loc>/workshops/spatial_workshop/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tutorials/</loc>
+    <loc>/workshops/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/authors/</loc>
@@ -101,7 +101,7 @@
     <loc>/author/statistical-programs/</loc>
     <lastmod>2021-04-09T15:30:00+00:00</lastmod>
   </url><url>
-    <loc>/tutorials/example/</loc>
+    <loc>/workshops/example/</loc>
     <lastmod>2021-01-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/publication_types/3/</loc>

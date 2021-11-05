@@ -2,7 +2,7 @@
 header:
   caption: ""
   image: ""
-title: Tutorials
+title: Workshops
 type: page
 ---
 

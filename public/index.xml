@@ -14,9 +14,9 @@
     
     <item>
       <title>Computational Set-up</title>
-      <link>/tutorials/spatial_workshop/prep_work/</link>
+      <link>/workshops/spatial_workshop/prep_work/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/tutorials/spatial_workshop/prep_work/</guid>
+      <guid>/workshops/spatial_workshop/prep_work/</guid>
       <description>&lt;p&gt;Here are instructions for how check your R installation and install packages needed for the workshop.&lt;/p&gt;
 &lt;h3 id=&#34;check-software-versions&#34;&gt;Check software versions&lt;/h3&gt;
 &lt;p&gt;Open R and run this code to check what version of R your system is running:&lt;/p&gt;
@@ -44,9 +44,9 @@ sapply(package_list, require, character.only = TRUE)
     
     <item>
       <title>Why Use Spatial Covariates?</title>
-      <link>/tutorials/spatial_workshop/why_spatial/</link>
+      <link>/workshops/spatial_workshop/why_spatial/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/tutorials/spatial_workshop/why_spatial/</guid>
+      <guid>/workshops/spatial_workshop/why_spatial/</guid>
       <description>&lt;h3 id=&#34;test-quiz&#34;&gt;Test Quiz&lt;/h3&gt;
 &lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-0&#34;&gt;
   &lt;summary&gt;Is this a quiz?&lt;/summary&gt;
@@ -57,17 +57,17 @@ sapply(package_list, require, character.only = TRUE)
     
     <item>
       <title>Diagnosing Spatial Autocorrelation</title>
-      <link>/tutorials/spatial_workshop/diagnosing/</link>
+      <link>/workshops/spatial_workshop/diagnosing/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/tutorials/spatial_workshop/diagnosing/</guid>
+      <guid>/workshops/spatial_workshop/diagnosing/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Python basics</title>
-      <link>/tutorials/example/python/</link>
+      <link>/workshops/example/python/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>/tutorials/example/python/</guid>
+      <guid>/workshops/example/python/</guid>
       <description>&lt;p&gt;Build a foundation in Python.&lt;/p&gt;
 &lt;p&gt;
   &lt;i class=&#34;fas fa-clock  pr-1 fa-fw&#34;&gt;&lt;/i&gt; 1-2 hours per week, for 8 weeks&lt;/p&gt;
@@ -102,17 +102,17 @@ sapply(package_list, require, character.only = TRUE)
     
     <item>
       <title>Row-and-Column Models</title>
-      <link>/tutorials/spatial_workshop/rowcolumn/</link>
+      <link>/workshops/spatial_workshop/rowcolumn/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/tutorials/spatial_workshop/rowcolumn/</guid>
+      <guid>/workshops/spatial_workshop/rowcolumn/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Visualization</title>
-      <link>/tutorials/example/visualization/</link>
+      <link>/workshops/example/visualization/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>/tutorials/example/visualization/</guid>
+      <guid>/workshops/example/visualization/</guid>
       <description>&lt;p&gt;Learn how to visualize data with Plotly.&lt;/p&gt;
 &lt;p&gt;
   &lt;i class=&#34;fas fa-clock  pr-1 fa-fw&#34;&gt;&lt;/i&gt; 1-2 hours per week, for 8 weeks&lt;/p&gt;
@@ -140,17 +140,17 @@ fig.show()
     
     <item>
       <title>Empirical Variograms</title>
-      <link>/tutorials/spatial_workshop/variograms/</link>
+      <link>/workshops/spatial_workshop/variograms/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/tutorials/spatial_workshop/variograms/</guid>
+      <guid>/workshops/spatial_workshop/variograms/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Statistics</title>
-      <link>/tutorials/example/stats/</link>
+      <link>/workshops/example/stats/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>/tutorials/example/stats/</guid>
+      <guid>/workshops/example/stats/</guid>
       <description>&lt;p&gt;Introduction to statistics for data science.&lt;/p&gt;
 &lt;p&gt;
   &lt;i class=&#34;fas fa-clock  pr-1 fa-fw&#34;&gt;&lt;/i&gt; 1-2 hours per week, for 8 weeks&lt;/p&gt;
@@ -176,33 +176,33 @@ The variance of the distribution is $\sigma^{2}$.
     
     <item>
       <title>Spatial Splines</title>
-      <link>/tutorials/spatial_workshop/splines/</link>
+      <link>/workshops/spatial_workshop/splines/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/tutorials/spatial_workshop/splines/</guid>
+      <guid>/workshops/spatial_workshop/splines/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Comparing Models</title>
-      <link>/tutorials/spatial_workshop/model_comparison/</link>
+      <link>/workshops/spatial_workshop/model_comparison/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/tutorials/spatial_workshop/model_comparison/</guid>
+      <guid>/workshops/spatial_workshop/model_comparison/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Augmented Design</title>
-      <link>/tutorials/spatial_workshop/augmented/</link>
+      <link>/workshops/spatial_workshop/augmented/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/tutorials/spatial_workshop/augmented/</guid>
+      <guid>/workshops/spatial_workshop/augmented/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Final thoughts</title>
-      <link>/tutorials/spatial_workshop/conclusion/</link>
+      <link>/workshops/spatial_workshop/conclusion/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/tutorials/spatial_workshop/conclusion/</guid>
+      <guid>/workshops/spatial_workshop/conclusion/</guid>
       <description></description>
     </item>
     
