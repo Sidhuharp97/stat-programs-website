@@ -192,8 +192,35 @@ sapply(package_list, require, character.only = TRUE)
                loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
   &lt;/div&gt;&lt;/figure&gt;
 &lt;ul&gt;
-&lt;li&gt;Low experimental power|high error|low precision|wide confidence intervals&lt;/li&gt;
 &lt;li&gt;Error terms are often correlated with each other, invalidating the downstream analysis&lt;/li&gt;
+&lt;/ul&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;&#34; srcset=&#34;
+               /media/resids_hu3126d5daa04687742bde609f4b9a11d2_46731_6aab43ce9784e2d07419f7d7b54c493f.png 400w,
+               /media/resids_hu3126d5daa04687742bde609f4b9a11d2_46731_f438523eba3ff36d5d4a6460b5f74951.png 760w,
+               /media/resids_hu3126d5daa04687742bde609f4b9a11d2_46731_1200x1200_fit_lanczos_2.png 1200w&#34;
+               src=&#34;/media/resids_hu3126d5daa04687742bde609f4b9a11d2_46731_6aab43ce9784e2d07419f7d7b54c493f.png&#34;
+               width=&#34;720&#34;
+               height=&#34;432&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;high error/low precision/wide confidence intervals/low experimental power&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;blocking-versus-spatial-statistics&#34;&gt;Blocking versus spatial statistics&lt;/h4&gt;
 
@@ -229,10 +256,165 @@ sapply(package_list, require, character.only = TRUE)
     
     <item>
       <title>Diagnosing Spatial Autocorrelation</title>
-      <link>/workshops/spatial_workshop/diagnosing/</link>
+      <link>/workshops/spatial_workshop/diagnosis/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/workshops/spatial_workshop/diagnosing/</guid>
-      <description></description>
+      <guid>/workshops/spatial_workshop/diagnosis/</guid>
+      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    This workshop is concerned with &lt;strong&gt;areal&lt;/strong&gt; data, that is, data that occurs in discrete units (plots, in most cases). This attribute of trial data impacts many aspects of spatial analysis
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Spatial autocorrelation refers to similarity between points that are close to one another.  That correlation is expected to decline with distance. Note that is different from experiment-wide gradients, such as a salinity gradient or position on a slope.&lt;/p&gt;
+&lt;h3 id=&#34;plotting&#34;&gt;Plotting&lt;/h3&gt;
+&lt;p&gt;One of the easiest ways to diagnose spatial autocorrelation is by plotting data by its spatial position and using a heat map to indicate values of a response variable.&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;&#34; srcset=&#34;
+               /media/SOS_2017_hu798d915d3ca3a6f805e7339a3e2de09d_966931_94317cb58645d718ffcb5c4e584d1ee9.png 400w,
+               /media/SOS_2017_hu798d915d3ca3a6f805e7339a3e2de09d_966931_328483d39fcc1fbc7f4572fb76a41bfe.png 760w,
+               /media/SOS_2017_hu798d915d3ca3a6f805e7339a3e2de09d_966931_1200x1200_fit_lanczos_2.png 1200w&#34;
+               src=&#34;/media/SOS_2017_hu798d915d3ca3a6f805e7339a3e2de09d_966931_94317cb58645d718ffcb5c4e584d1ee9.png&#34;
+               width=&#34;760&#34;
+               height=&#34;434&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;p&gt;While there is always ambiguity associated with using plots for decision making, early exploration of these plots can be helpful in understanding the extent of spatial correlation.&lt;/p&gt;
+&lt;h3 id=&#34;morans-i&#34;&gt;Moran&amp;rsquo;s I&lt;/h3&gt;
+&lt;p&gt;Moran&amp;rsquo;s I, sometimes called &amp;ldquo;Global Moran&amp;rsquo;s I&amp;rdquo; can be used for conducting a hypothesis test on whether there is correlation between spatial units located adjacent to one another.&lt;/p&gt;
+&lt;p&gt;$$ I = \frac{N}{W}\frac{\sum_i \sum_j w_{ij} (x_i - \bar{x})(x_j - \bar{x})}{\sum_i(x_i - \bar{x})^2}
+\qquad i \neq j$$&lt;/p&gt;
+&lt;p&gt;Where N is total number of spatial locations indexed by $i$ and $j$, x is the variable of interest, $w_{ij}$ are a spatial weights between each $i$ and $j$, and W is the sum of all weights.&lt;/p&gt;
+&lt;p&gt;The expected values of Moran&amp;rsquo;s I is $-1/(N-1)$. Values greater than the expected value indicate positive spatial correlation (areas close to each other are similar), while values less than that indicate dissimilarity as spatial distance between points decreases.&lt;/p&gt;
+&lt;h3 id=&#34;defining-neighbors&#34;&gt;Defining Neighbors&lt;/h3&gt;
+&lt;p&gt;There are &lt;a href=&#34;https://r-spatial.github.io/spdep/reference/nb2listw.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;several options&lt;/a&gt; for defining adjacent neighbors and how to weight each neighbor&amp;rsquo;s influence. The two common configurations for defining neighbors are the rook and queen configurations. These are exactly what their chess analogy suggests: &amp;ldquo;rook&amp;rdquo; defines neighbors in an row/column fashion, while &amp;ldquo;queen&amp;rdquo; defines neighbors in a row/column configuration an also neighbors located diagonally at a 45 degree angle from the row/column neighbors. Determining this can be &lt;a href=&#34;https://r-spatial.github.io/spdep/articles/nb.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;complicated&lt;/a&gt; when working with irregularly-placed data (e.g. counties), but is quite unambiguous for lattice data common in planned field experiments.&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;&#34; srcset=&#34;
+               /media/neighbors_hufe5a74dfc647783bb8cb2ac3e6bbaf7e_14102_5b5e7b00e31159d69d33479b3238f7fb.png 400w,
+               /media/neighbors_hufe5a74dfc647783bb8cb2ac3e6bbaf7e_14102_f423b76df8f3d3b2b6760c2dddf4daf4.png 760w,
+               /media/neighbors_hufe5a74dfc647783bb8cb2ac3e6bbaf7e_14102_1200x1200_fit_lanczos_2.png 1200w&#34;
+               src=&#34;/media/neighbors_hufe5a74dfc647783bb8cb2ac3e6bbaf7e_14102_5b5e7b00e31159d69d33479b3238f7fb.png&#34;
+               width=&#34;760&#34;
+               height=&#34;543&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;p&gt;Setting the values for weights is a function of both how neighbors are defined and their proximity to the unit of interest. However, a very popular method is to define each neighbor as equal fractions that sum to one, e.g. in rook formation, each neighbor is weighted 0.25 (assuming an interior plot with 4 neighbors).&lt;/p&gt;
+&lt;h3 id=&#34;empirical-variogram&#34;&gt;Empirical variogram&lt;/h3&gt;
+&lt;p&gt;This is one of the most useful methods of determining the extent of spatial variability and will be covered in the following sections.&lt;/p&gt;
+&lt;h3 id=&#34;code-for-this-section&#34;&gt;Code for this section&lt;/h3&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-3&#34;&gt;
+  &lt;summary&gt;R&lt;/summary&gt;
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;# load libraries
+library(dplyr); library(ggplot2); library(desplot); 
+library(spdep); library(sf); library(nlme)
+
+# read in data and prepare it
+Nin &amp;lt;- read.csv(&amp;quot;stroup_nin_wheat.csv&amp;quot;) %&amp;gt;% 
+  mutate(col.width = col * 1.2, row.length = row * 4.3) %&amp;gt;% 
+  mutate(name = case_when(is.na(as.character(rep)) ~ NA_character_, 
+                          TRUE ~ as.character(gen))) %&amp;gt;% 
+  arrange(col, row)
+
+Nin_na &amp;lt;- filter(Nin, !is.na(rep))
+
+# make exploratory plot
+ggplot(Nin, aes(x = row, y = col)) +
+  geom_tile(aes(fill = yield), col = &amp;quot;white&amp;quot;) +
+  geom_tileborder(aes(group = 1, grp = rep), lwd = 1.2) +
+  labs(x = &amp;quot;row&amp;quot;, y = &amp;quot;column&amp;quot;, title = &amp;quot;field plot layout&amp;quot;) + 
+  theme_classic() +
+  theme(axis.text = element_text(size = 12),
+        axis.title = element_text(size = 14),
+        legend.title = element_text(size = 14),
+        legend.text = element_text(size = 12))
+
+## conduct moran&#39;s I test ##
+
+# set neighbors with convenience function for grids
+xy_rook &amp;lt;- cell2nb(nrow = max(Nin$row), ncol = max(Nin$col), 
+  type=&amp;quot;rook&amp;quot;, torus = FALSE, legacy = FALSE)  
+
+# run linear mixed model and extract residuals
+nin.lme &amp;lt;- lme(fixed = yield ~ gen, random = ~1|rep,
+              data = Nin, na.action = na.exclude)
+resid_lme &amp;lt;- residuals(nin.lme)
+names(resid_lme) &amp;lt;- Nin$plot
+
+# two version of the Moran&#39;s I test: 
+moran.test(resid_lme, nb2listw(xy_rook), na.action = na.exclude)
+moran.mc(resid_lme, nb2listw(xy_rook), 999, na.action = na.exclude)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-4&#34;&gt;
+  &lt;summary&gt;SAS&lt;/summary&gt;
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;# read in data
+proc format;
+  invalue has_NA
+  &#39;NA&#39; = .;
+;
+
+filename NIN url &amp;quot;https://raw.githubusercontent.com/IdahoAgStats/guide-to-field-trial-spatial-analysis/master/data/stroup_nin_wheat.csv&amp;quot;;
+
+data alliance;
+    infile NIN firstobs=2 delimiter=&#39;,&#39;;
+    informat yield has_NA.;
+    input entry $   rep $   yield   col row;
+    Row  = 4.3*Row;
+    Col = 1.2*Col;
+    if yield=. then delete;
+run;
+
+# heatmap
+proc sgplot data=alliance;
+    HEATMAPPARM y=Row x=Col COLORRESPONSE=yield/ colormodel=(blue yellow green); 
+run;
+
+# linear mixed model
+proc mixed data=alliance;
+   class Rep Entry;
+   model Yield = Entry / outp=residuals;
+   random Rep;
+run;
+
+# Moran&#39;s I
+proc variogram data=residuals plots(only)=moran ;
+   compute lagd=1.2 maxlag=30 novariogram autocorr(assum=nor) ;
+   coordinates xc=row yc=col;
+   var resid;
+run;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+</description>
     </item>
     
     <item>
@@ -240,7 +422,100 @@ sapply(package_list, require, character.only = TRUE)
       <link>/workshops/spatial_workshop/rowcolumn/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
       <guid>/workshops/spatial_workshop/rowcolumn/</guid>
-      <description></description>
+      <description>&lt;p&gt;The spatial models we will introduce later in this workshop assume that spatial variation is localised and within a trial, plots located sufficiently far apart are independent of each other with no apparent spatial correlation. However, sometimes that is accurately describe a field trial. There can be experiment-wide gradients due to position on a slope, proximity to an influential environmental factor (e.g. a road), and so on. In these instances, those gradients should be modelled as a trend.&lt;/p&gt;
+&lt;h3 id=&#34;blocking&#34;&gt;Blocking&lt;/h3&gt;
+&lt;p&gt;Blocking is one example of modelling an experiment wide-trend:&lt;/p&gt;
+&lt;p&gt;$$Y_ij = \mu + \alpha_i + \beta_j + \epsilon_{ij}$$&lt;/p&gt;
+&lt;p&gt;$Y_ij$ is the independent variable&lt;br&gt;
+$\mu$ is the overall mean&lt;br&gt;
+$\alpha_i$ is the effect due to the $i^{th}$ treatment&lt;br&gt;
+$\beta_j$ is the effect due to the $j^{th}$ block&lt;br&gt;
+$\epsilon_ij$ are the error terms distributed as $N ~\sim (0,\sigma)$&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;&#34; srcset=&#34;
+               /media/blocking_hu10ad972e63ec33f6cccede6b15d61278_254605_d4a9434e4d64be2fa5ae0fabbb1a7d9f.png 400w,
+               /media/blocking_hu10ad972e63ec33f6cccede6b15d61278_254605_cc366fc98ad7465ff769b5f4863a991d.png 760w,
+               /media/blocking_hu10ad972e63ec33f6cccede6b15d61278_254605_1200x1200_fit_lanczos_2.png 1200w&#34;
+               src=&#34;/media/blocking_hu10ad972e63ec33f6cccede6b15d61278_254605_d4a9434e4d64be2fa5ae0fabbb1a7d9f.png&#34;
+               width=&#34;760&#34;
+               height=&#34;434&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;p&gt;The expectation is that each block will capture and model existing variation  within it. This becomes difficult to justify as blocks become large.&lt;/p&gt;
+&lt;h3 id=&#34;rows--ranges&#34;&gt;Rows &amp;amp; Ranges&lt;/h3&gt;
+&lt;p&gt;Trials rows and ranges can likewise be modelled directly in a model:&lt;/p&gt;
+&lt;p&gt;$$Y_ijk = \mu + \alpha_i + \beta_j + \gamma_k + \epsilon_{ijk}$$&lt;/p&gt;
+&lt;p&gt;$\beta_j$ is the effect due to the $j^{th}$ row&lt;br&gt;
+$\beta_j$ is the effect due to the $k^{th}$ range (or column)&lt;/p&gt;
+&lt;h3 id=&#34;code-for-this-section&#34;&gt;Code for this section&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;The following scripts build upon work done in previous section(s).&lt;/em&gt;&lt;/p&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-1&#34;&gt;
+  &lt;summary&gt;R&lt;/summary&gt;
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;# load libraries
+library(lme4)
+
+# exploratory plots 
+boxplot(yield ~ rep, data = Nin, xlab = &amp;quot;block&amp;quot;, col = &amp;quot;red2&amp;quot;)
+boxplot(yield ~ row, data = Nin, xlab = &amp;quot;row&amp;quot;, col = &amp;quot;dodgerblue2&amp;quot;)
+boxplot(yield ~ col, data = Nin, xlab = &amp;quot;column&amp;quot;, col = &amp;quot;gold&amp;quot;)
+
+## row/column model ##
+
+# data prep
+Nin$rowF = as.factor(Nin$row)
+Nin$colF = as.factor(Nin$col)
+
+# specify model
+nin.rc &amp;lt;- lmer(yield ~ gen + (1|colfF) + (1|rowF),
+              data = Nin, na.action = na.exclude)
+# extract random effects for row and column
+ranef(nin_rc)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-2&#34;&gt;
+  &lt;summary&gt;SAS&lt;/summary&gt;
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;# exploratory boxplots
+proc sgplot data=alliance;
+    vbox yield/category=rep FILLATTRS=(color=red) LINEATTRS=(color=black) WHISKERATTRS=(color=black);
+run;
+
+proc sgplot data=alliance;
+    vbox yield/category=Col FILLATTRS=(color=yellow) LINEATTRS=(color=black) WHISKERATTRS=(color=black);
+run;
+
+proc sgplot data=alliance;
+    vbox yield/category=Row FILLATTRS=(color=blue) LINEATTRS=(color=black) WHISKERATTRS=(color=black);
+run;
+
+# row/column model
+proc mixed data=alliance ;
+	class entry rep;
+	model yield = entry  row col/ddfm=kr;
+	random rep;
+	lsmeans entry/cl;
+	ods output LSMeans=NIN_row_col_means;
+	title1 &#39;NIN data: RCBD&#39;;
+run;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+</description>
     </item>
     
     <item>
@@ -248,7 +523,23 @@ sapply(package_list, require, character.only = TRUE)
       <link>/workshops/spatial_workshop/variograms/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
       <guid>/workshops/spatial_workshop/variograms/</guid>
-      <description></description>
+      <description>&lt;h3 id=&#34;code-for-this-section&#34;&gt;Code for this section&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;The following scripts build upon work done in previous section(s).&lt;/em&gt;&lt;/p&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-0&#34;&gt;
+  &lt;summary&gt;R&lt;/summary&gt;
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;here it is.
+more code
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-1&#34;&gt;
+  &lt;summary&gt;SAS&lt;/summary&gt;
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;here it is.
+more code
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+</description>
     </item>
     
     <item>
@@ -256,7 +547,23 @@ sapply(package_list, require, character.only = TRUE)
       <link>/workshops/spatial_workshop/splines/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
       <guid>/workshops/spatial_workshop/splines/</guid>
-      <description></description>
+      <description>&lt;h3 id=&#34;code-for-this-section&#34;&gt;Code for this section&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;The following scripts build upon work done in previous section(s).&lt;/em&gt;&lt;/p&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-0&#34;&gt;
+  &lt;summary&gt;R&lt;/summary&gt;
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;here it is.
+more code
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-1&#34;&gt;
+  &lt;summary&gt;SAS&lt;/summary&gt;
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;here it is.
+more code
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+</description>
     </item>
     
     <item>
@@ -264,7 +571,22 @@ sapply(package_list, require, character.only = TRUE)
       <link>/workshops/spatial_workshop/model-comparison/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
       <guid>/workshops/spatial_workshop/model-comparison/</guid>
-      <description></description>
+      <description>&lt;h3 id=&#34;code-for-this-section&#34;&gt;Code for this section&lt;/h3&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-0&#34;&gt;
+  &lt;summary&gt;R&lt;/summary&gt;
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;here it is.
+more code
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-1&#34;&gt;
+  &lt;summary&gt;SAS&lt;/summary&gt;
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;here it is.
+more code
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+</description>
     </item>
     
     <item>
@@ -272,7 +594,23 @@ sapply(package_list, require, character.only = TRUE)
       <link>/workshops/spatial_workshop/augmented/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
       <guid>/workshops/spatial_workshop/augmented/</guid>
-      <description></description>
+      <description>&lt;h3 id=&#34;code-for-this-section&#34;&gt;Code for this section&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;The following scripts build upon work done in previous section(s).&lt;/em&gt;&lt;/p&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-0&#34;&gt;
+  &lt;summary&gt;R&lt;/summary&gt;
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;here it is.
+more code
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-1&#34;&gt;
+  &lt;summary&gt;SAS&lt;/summary&gt;
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;here it is.
+more code
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+</description>
     </item>
     
     <item>

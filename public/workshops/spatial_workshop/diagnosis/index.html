@@ -33,11 +33,10 @@
   
     
   
-  <meta name="description" content="Code for this section The following scripts build upon work done in previous section(s).
-R here it is. more code   SAS here it is. more code   " />
+  <meta name="description" content="This workshop is concerned with areal data, that is, data that occurs in discrete units (plots, in most cases). This attribute of trial data impacts many aspects of spatial analysis   Spatial autocorrelation refers to similarity between points that are close to one another." />
 
   
-  <link rel="alternate" hreflang="en-us" href="/workshops/spatial_workshop/variograms/" />
+  <link rel="alternate" hreflang="en-us" href="/workshops/spatial_workshop/diagnosis/" />
 
   
 
@@ -280,7 +279,7 @@ R here it is. more code   SAS here it is. more code   " />
   <link rel="icon" type="image/png" href="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_32x32_fill_lanczos_center_2.png" />
   <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_180x180_fill_lanczos_center_2.png" />
 
-  <link rel="canonical" href="/workshops/spatial_workshop/variograms/" />
+  <link rel="canonical" href="/workshops/spatial_workshop/diagnosis/" />
 
   
   
@@ -297,10 +296,9 @@ R here it is. more code   SAS here it is. more code   " />
   <meta property="twitter:card" content="summary" />
   
   <meta property="og:site_name" content="Idaho Ag Stats" />
-  <meta property="og:url" content="/workshops/spatial_workshop/variograms/" />
-  <meta property="og:title" content="Empirical Variograms | Idaho Ag Stats" />
-  <meta property="og:description" content="Code for this section The following scripts build upon work done in previous section(s).
-R here it is. more code   SAS here it is. more code   " /><meta property="og:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" />
+  <meta property="og:url" content="/workshops/spatial_workshop/diagnosis/" />
+  <meta property="og:title" content="Diagnosing Spatial Autocorrelation | Idaho Ag Stats" />
+  <meta property="og:description" content="This workshop is concerned with areal data, that is, data that occurs in discrete units (plots, in most cases). This attribute of trial data impacts many aspects of spatial analysis   Spatial autocorrelation refers to similarity between points that are close to one another." /><meta property="og:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" />
     <meta property="twitter:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" /><meta property="og:locale" content="en-us" />
   
     
@@ -326,11 +324,11 @@ R here it is. more code   SAS here it is. more code   " /><meta property="og:ima
 
 
 
-  <title>Empirical Variograms | Idaho Ag Stats</title>
+  <title>Diagnosing Spatial Autocorrelation | Idaho Ag Stats</title>
 </head>
 
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="81d3c1402b4901e8475f1ef2dae374bf" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="f2c99156a3b8e8842ab660d22c1df5ed" >
 
   
   
@@ -731,7 +729,7 @@ R here it is. more code   SAS here it is. more code   " /><meta property="og:ima
 
 
 
-  <li class=""><a href="/workshops/spatial_workshop/diagnosis/">Diagnosing Spatial Autocorrelation</a></li>
+  <li class="active"><a href="/workshops/spatial_workshop/diagnosis/">Diagnosing Spatial Autocorrelation</a></li>
 
 
 
@@ -739,7 +737,7 @@ R here it is. more code   SAS here it is. more code   " /><meta property="og:ima
 
 
 
-  <li class="active"><a href="/workshops/spatial_workshop/variograms/">Empirical Variograms</a></li>
+  <li class=""><a href="/workshops/spatial_workshop/variograms/">Empirical Variograms</a></li>
 
 
 
@@ -783,6 +781,10 @@ R here it is. more code   SAS here it is. more code   " /><meta property="og:ima
   <ul>
     <li>
       <ul>
+        <li><a href="#plotting">Plotting</a></li>
+        <li><a href="#morans-i">Moran&rsquo;s I</a></li>
+        <li><a href="#defining-neighbors">Defining Neighbors</a></li>
+        <li><a href="#empirical-variogram">Empirical variogram</a></li>
         <li><a href="#code-for-this-section">Code for this section</a></li>
       </ul>
     </li>
@@ -835,7 +837,7 @@ R here it is. more code   SAS here it is. more code   " /><meta property="og:ima
 
 
       <li class="breadcrumb-item active" aria-current="page">
-        Empirical Variograms
+        Diagnosing Spatial Autocorrelation
       </li>
     </ol>
   </nav>
@@ -843,22 +845,161 @@ R here it is. more code   SAS here it is. more code   " /><meta property="og:ima
 
           
 
-          <h1>Empirical Variograms</h1>
+          <h1>Diagnosing Spatial Autocorrelation</h1>
 
           <div class="article-style">
-            <h3 id="code-for-this-section">Code for this section</h3>
-<p><em>The following scripts build upon work done in previous section(s).</em></p>
-<details class="spoiler "  id="spoiler-0">
+            <div class="alert alert-note">
+  <div>
+    This workshop is concerned with <strong>areal</strong> data, that is, data that occurs in discrete units (plots, in most cases). This attribute of trial data impacts many aspects of spatial analysis
+  </div>
+</div>
+<p>Spatial autocorrelation refers to similarity between points that are close to one another.  That correlation is expected to decline with distance. Note that is different from experiment-wide gradients, such as a salinity gradient or position on a slope.</p>
+<h3 id="plotting">Plotting</h3>
+<p>One of the easiest ways to diagnose spatial autocorrelation is by plotting data by its spatial position and using a heat map to indicate values of a response variable.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img alt="" srcset="
+               /media/SOS_2017_hu798d915d3ca3a6f805e7339a3e2de09d_966931_94317cb58645d718ffcb5c4e584d1ee9.png 400w,
+               /media/SOS_2017_hu798d915d3ca3a6f805e7339a3e2de09d_966931_328483d39fcc1fbc7f4572fb76a41bfe.png 760w,
+               /media/SOS_2017_hu798d915d3ca3a6f805e7339a3e2de09d_966931_1200x1200_fit_lanczos_2.png 1200w"
+               src="/media/SOS_2017_hu798d915d3ca3a6f805e7339a3e2de09d_966931_94317cb58645d718ffcb5c4e584d1ee9.png"
+               width="760"
+               height="434"
+               loading="lazy" data-zoomable /></div>
+  </div></figure>
+<p>While there is always ambiguity associated with using plots for decision making, early exploration of these plots can be helpful in understanding the extent of spatial correlation.</p>
+<h3 id="morans-i">Moran&rsquo;s I</h3>
+<p>Moran&rsquo;s I, sometimes called &ldquo;Global Moran&rsquo;s I&rdquo; can be used for conducting a hypothesis test on whether there is correlation between spatial units located adjacent to one another.</p>
+<p>$$ I = \frac{N}{W}\frac{\sum_i \sum_j w_{ij} (x_i - \bar{x})(x_j - \bar{x})}{\sum_i(x_i - \bar{x})^2}
+\qquad i \neq j$$</p>
+<p>Where N is total number of spatial locations indexed by $i$ and $j$, x is the variable of interest, $w_{ij}$ are a spatial weights between each $i$ and $j$, and W is the sum of all weights.</p>
+<p>The expected values of Moran&rsquo;s I is $-1/(N-1)$. Values greater than the expected value indicate positive spatial correlation (areas close to each other are similar), while values less than that indicate dissimilarity as spatial distance between points decreases.</p>
+<h3 id="defining-neighbors">Defining Neighbors</h3>
+<p>There are <a href="https://r-spatial.github.io/spdep/reference/nb2listw.html" target="_blank" rel="noopener">several options</a> for defining adjacent neighbors and how to weight each neighbor&rsquo;s influence. The two common configurations for defining neighbors are the rook and queen configurations. These are exactly what their chess analogy suggests: &ldquo;rook&rdquo; defines neighbors in an row/column fashion, while &ldquo;queen&rdquo; defines neighbors in a row/column configuration an also neighbors located diagonally at a 45 degree angle from the row/column neighbors. Determining this can be <a href="https://r-spatial.github.io/spdep/articles/nb.html" target="_blank" rel="noopener">complicated</a> when working with irregularly-placed data (e.g. counties), but is quite unambiguous for lattice data common in planned field experiments.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img alt="" srcset="
+               /media/neighbors_hufe5a74dfc647783bb8cb2ac3e6bbaf7e_14102_5b5e7b00e31159d69d33479b3238f7fb.png 400w,
+               /media/neighbors_hufe5a74dfc647783bb8cb2ac3e6bbaf7e_14102_f423b76df8f3d3b2b6760c2dddf4daf4.png 760w,
+               /media/neighbors_hufe5a74dfc647783bb8cb2ac3e6bbaf7e_14102_1200x1200_fit_lanczos_2.png 1200w"
+               src="/media/neighbors_hufe5a74dfc647783bb8cb2ac3e6bbaf7e_14102_5b5e7b00e31159d69d33479b3238f7fb.png"
+               width="760"
+               height="543"
+               loading="lazy" data-zoomable /></div>
+  </div></figure>
+<p>Setting the values for weights is a function of both how neighbors are defined and their proximity to the unit of interest. However, a very popular method is to define each neighbor as equal fractions that sum to one, e.g. in rook formation, each neighbor is weighted 0.25 (assuming an interior plot with 4 neighbors).</p>
+<h3 id="empirical-variogram">Empirical variogram</h3>
+<p>This is one of the most useful methods of determining the extent of spatial variability and will be covered in the following sections.</p>
+<h3 id="code-for-this-section">Code for this section</h3>
+<details class="spoiler "  id="spoiler-3">
   <summary>R</summary>
-  <p><pre><code>here it is.
-more code
+  <p><pre><code># load libraries
+library(dplyr); library(ggplot2); library(desplot); 
+library(spdep); library(sf); library(nlme)
+
+# read in data and prepare it
+Nin &lt;- read.csv(&quot;stroup_nin_wheat.csv&quot;) %&gt;% 
+  mutate(col.width = col * 1.2, row.length = row * 4.3) %&gt;% 
+  mutate(name = case_when(is.na(as.character(rep)) ~ NA_character_, 
+                          TRUE ~ as.character(gen))) %&gt;% 
+  arrange(col, row)
+
+Nin_na &lt;- filter(Nin, !is.na(rep))
+
+# make exploratory plot
+ggplot(Nin, aes(x = row, y = col)) +
+  geom_tile(aes(fill = yield), col = &quot;white&quot;) +
+  geom_tileborder(aes(group = 1, grp = rep), lwd = 1.2) +
+  labs(x = &quot;row&quot;, y = &quot;column&quot;, title = &quot;field plot layout&quot;) + 
+  theme_classic() +
+  theme(axis.text = element_text(size = 12),
+        axis.title = element_text(size = 14),
+        legend.title = element_text(size = 14),
+        legend.text = element_text(size = 12))
+
+## conduct moran's I test ##
+
+# set neighbors with convenience function for grids
+xy_rook &lt;- cell2nb(nrow = max(Nin$row), ncol = max(Nin$col), 
+  type=&quot;rook&quot;, torus = FALSE, legacy = FALSE)  
+
+# run linear mixed model and extract residuals
+nin.lme &lt;- lme(fixed = yield ~ gen, random = ~1|rep,
+              data = Nin, na.action = na.exclude)
+resid_lme &lt;- residuals(nin.lme)
+names(resid_lme) &lt;- Nin$plot
+
+# two version of the Moran's I test: 
+moran.test(resid_lme, nb2listw(xy_rook), na.action = na.exclude)
+moran.mc(resid_lme, nb2listw(xy_rook), 999, na.action = na.exclude)
 </code></pre>
 </p>
 </details>
-<details class="spoiler "  id="spoiler-1">
+<details class="spoiler "  id="spoiler-4">
   <summary>SAS</summary>
-  <p><pre><code>here it is.
-more code
+  <p><pre><code># read in data
+proc format;
+  invalue has_NA
+  'NA' = .;
+;
+
+filename NIN url &quot;https://raw.githubusercontent.com/IdahoAgStats/guide-to-field-trial-spatial-analysis/master/data/stroup_nin_wheat.csv&quot;;
+
+data alliance;
+    infile NIN firstobs=2 delimiter=',';
+    informat yield has_NA.;
+    input entry $   rep $   yield   col row;
+    Row  = 4.3*Row;
+    Col = 1.2*Col;
+    if yield=. then delete;
+run;
+
+# heatmap
+proc sgplot data=alliance;
+    HEATMAPPARM y=Row x=Col COLORRESPONSE=yield/ colormodel=(blue yellow green); 
+run;
+
+# linear mixed model
+proc mixed data=alliance;
+   class Rep Entry;
+   model Yield = Entry / outp=residuals;
+   random Rep;
+run;
+
+# Moran's I
+proc variogram data=residuals plots(only)=moran ;
+   compute lagd=1.2 maxlag=30 novariogram autocorr(assum=nor) ;
+   coordinates xc=row yc=col;
+   var resid;
+run;
 </code></pre>
 </p>
 </details>
@@ -879,14 +1020,14 @@ more code
   
   <div class="post-nav-item">
     <div class="meta-nav">Previous</div>
-    <a href="/workshops/spatial_workshop/rowcolumn/" rel="next">Row-and-Column Models</a>
+    <a href="/workshops/spatial_workshop/why-spatial/" rel="next">Why Care about Spatial Variation?</a>
   </div>
   
   
   
   <div class="post-nav-item">
     <div class="meta-nav">Next</div>
-    <a href="/workshops/spatial_workshop/splines/" rel="prev">Spatial Splines</a>
+    <a href="/workshops/spatial_workshop/rowcolumn/" rel="prev">Row-and-Column Models</a>
   </div>
   
 </div>

@@ -33,7 +33,7 @@
   
     
   
-  <meta name="description" content="" />
+  <meta name="description" content="The spatial models we will introduce later in this workshop assume that spatial variation is localised and within a trial, plots located sufficiently far apart are independent of each other with no apparent spatial correlation." />
 
   
   <link rel="alternate" hreflang="en-us" href="/workshops/spatial_workshop/rowcolumn/" />
@@ -298,7 +298,7 @@
   <meta property="og:site_name" content="Idaho Ag Stats" />
   <meta property="og:url" content="/workshops/spatial_workshop/rowcolumn/" />
   <meta property="og:title" content="Row-and-Column Models | Idaho Ag Stats" />
-  <meta property="og:description" content="" /><meta property="og:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" />
+  <meta property="og:description" content="The spatial models we will introduce later in this workshop assume that spatial variation is localised and within a trial, plots located sufficiently far apart are independent of each other with no apparent spatial correlation." /><meta property="og:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" />
     <meta property="twitter:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" /><meta property="og:locale" content="en-us" />
   
     
@@ -729,7 +729,7 @@
 
 
 
-  <li class=""><a href="/workshops/spatial_workshop/diagnosing/">Diagnosing Spatial Autocorrelation</a></li>
+  <li class=""><a href="/workshops/spatial_workshop/diagnosis/">Diagnosing Spatial Autocorrelation</a></li>
 
 
 
@@ -777,7 +777,17 @@
         <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
       </ul>
 
-      <nav id="TableOfContents"></nav>
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#blocking">Blocking</a></li>
+        <li><a href="#rows--ranges">Rows &amp; Ranges</a></li>
+        <li><a href="#code-for-this-section">Code for this section</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
       
     </div>
@@ -836,7 +846,100 @@
           <h1>Row-and-Column Models</h1>
 
           <div class="article-style">
-            
+            <p>The spatial models we will introduce later in this workshop assume that spatial variation is localised and within a trial, plots located sufficiently far apart are independent of each other with no apparent spatial correlation. However, sometimes that is accurately describe a field trial. There can be experiment-wide gradients due to position on a slope, proximity to an influential environmental factor (e.g. a road), and so on. In these instances, those gradients should be modelled as a trend.</p>
+<h3 id="blocking">Blocking</h3>
+<p>Blocking is one example of modelling an experiment wide-trend:</p>
+<p>$$Y_ij = \mu + \alpha_i + \beta_j + \epsilon_{ij}$$</p>
+<p>$Y_ij$ is the independent variable<br>
+$\mu$ is the overall mean<br>
+$\alpha_i$ is the effect due to the $i^{th}$ treatment<br>
+$\beta_j$ is the effect due to the $j^{th}$ block<br>
+$\epsilon_ij$ are the error terms distributed as $N ~\sim (0,\sigma)$</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img alt="" srcset="
+               /media/blocking_hu10ad972e63ec33f6cccede6b15d61278_254605_d4a9434e4d64be2fa5ae0fabbb1a7d9f.png 400w,
+               /media/blocking_hu10ad972e63ec33f6cccede6b15d61278_254605_cc366fc98ad7465ff769b5f4863a991d.png 760w,
+               /media/blocking_hu10ad972e63ec33f6cccede6b15d61278_254605_1200x1200_fit_lanczos_2.png 1200w"
+               src="/media/blocking_hu10ad972e63ec33f6cccede6b15d61278_254605_d4a9434e4d64be2fa5ae0fabbb1a7d9f.png"
+               width="760"
+               height="434"
+               loading="lazy" data-zoomable /></div>
+  </div></figure>
+<p>The expectation is that each block will capture and model existing variation  within it. This becomes difficult to justify as blocks become large.</p>
+<h3 id="rows--ranges">Rows &amp; Ranges</h3>
+<p>Trials rows and ranges can likewise be modelled directly in a model:</p>
+<p>$$Y_ijk = \mu + \alpha_i + \beta_j + \gamma_k + \epsilon_{ijk}$$</p>
+<p>$\beta_j$ is the effect due to the $j^{th}$ row<br>
+$\beta_j$ is the effect due to the $k^{th}$ range (or column)</p>
+<h3 id="code-for-this-section">Code for this section</h3>
+<p><em>The following scripts build upon work done in previous section(s).</em></p>
+<details class="spoiler "  id="spoiler-1">
+  <summary>R</summary>
+  <p><pre><code># load libraries
+library(lme4)
+
+# exploratory plots 
+boxplot(yield ~ rep, data = Nin, xlab = &quot;block&quot;, col = &quot;red2&quot;)
+boxplot(yield ~ row, data = Nin, xlab = &quot;row&quot;, col = &quot;dodgerblue2&quot;)
+boxplot(yield ~ col, data = Nin, xlab = &quot;column&quot;, col = &quot;gold&quot;)
+
+## row/column model ##
+
+# data prep
+Nin$rowF = as.factor(Nin$row)
+Nin$colF = as.factor(Nin$col)
+
+# specify model
+nin.rc &lt;- lmer(yield ~ gen + (1|colfF) + (1|rowF),
+              data = Nin, na.action = na.exclude)
+# extract random effects for row and column
+ranef(nin_rc)
+</code></pre>
+</p>
+</details>
+<details class="spoiler "  id="spoiler-2">
+  <summary>SAS</summary>
+  <p><pre><code># exploratory boxplots
+proc sgplot data=alliance;
+    vbox yield/category=rep FILLATTRS=(color=red) LINEATTRS=(color=black) WHISKERATTRS=(color=black);
+run;
+
+proc sgplot data=alliance;
+    vbox yield/category=Col FILLATTRS=(color=yellow) LINEATTRS=(color=black) WHISKERATTRS=(color=black);
+run;
+
+proc sgplot data=alliance;
+    vbox yield/category=Row FILLATTRS=(color=blue) LINEATTRS=(color=black) WHISKERATTRS=(color=black);
+run;
+
+# row/column model
+proc mixed data=alliance ;
+	class entry rep;
+	model yield = entry  row col/ddfm=kr;
+	random rep;
+	lsmeans entry/cl;
+	ods output LSMeans=NIN_row_col_means;
+	title1 'NIN data: RCBD';
+run;
+</code></pre>
+</p>
+</details>
+
           </div>
 
           
@@ -853,7 +956,7 @@
   
   <div class="post-nav-item">
     <div class="meta-nav">Previous</div>
-    <a href="/workshops/spatial_workshop/diagnosing/" rel="next">Diagnosing Spatial Autocorrelation</a>
+    <a href="/workshops/spatial_workshop/diagnosis/" rel="next">Diagnosing Spatial Autocorrelation</a>
   </div>
   
   
