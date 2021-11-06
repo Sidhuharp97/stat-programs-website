@@ -2,7 +2,7 @@
 date: "2021-11-01"
 title: Empirical Variograms
 type: book
-weight: 40
+weight: 30
 ---
 
 {{% callout note %}}
@@ -26,7 +26,7 @@ Three important concepts of an empirical variogram are *nugget*, *sill* and  *ra
 **2 other concepts:** 
 
 * partial sill = sill - nugget
-* nugget effect = the nugget/sill ratio, interpreted opposite of $r^2$
+* nugget effect = the nugget/sill ratio, interpreted opposite of $r^2$ (the closer it is to 1, the less the amount of spatial autocorrelation)
 
 ### Correlated Error Models
 
@@ -34,11 +34,14 @@ Many equations exist for modelling semivariance patterns. A deep knowledge of th
 
 **Exponential**
 
-$$ \gamma (h)\left\{ {\begin{array}{cc} 0 & h = 0\\ C_0+C_1 \left [ 1-e^{-(\frac{h}{r})} \right] & h > 0 \end{array} } \right. $$
+$$ \gamma (h) = \begin{cases}0 & \text{if }h=0 \\\\
+C_0+C_1 \left [ 1-e^{-(\frac{h}{r}) } \right] & \text{if } h>0 \end{cases}$$
 
 where
 
-$$ C_0 = nugget \\ C_1 = partial \: sill \\ r = range $$ 
+$$ C_0 = nugget $$
+$$ C_1 = partial \: sill $$
+$$ r = range $$ 
 
 {{< figure src="exponential.png" caption="Theoretical Exponential Variogram" >}}
 
@@ -46,14 +49,16 @@ $$ C_0 = nugget \\ C_1 = partial \: sill \\ r = range $$
 
 (a squared version of the exponential model)
 
-$$ \gamma (h)\left\{ {\begin{array}{cc} 0 & h = 0\\ C_0+C_1 \left [ 1-e^{-(\frac{h}{r})^2} \right] & h > 0 \end{array} } \right. $$
+$$ \gamma (h) = \begin{cases}0 & \text{if }h=0, \\\\
+C_0+C_1 \left [ 1-e^{-(\frac{h}{r})^2} \right] & \text{if } h>0 \end{cases}$$
 
 where
 
-$$ C_0 = nugget \\ C_1 = partial \: sill \\ r = range$$
+$$ C_0 = nugget $$
+$$ C_1 = partial \: sill $$
+$$ r = range $$ 
 
 {{< figure src="gaussian.png" caption="Theoretical Gaussian Variogram" >}}
-
 
 **Matérn**
 
@@ -61,9 +66,23 @@ $$ C_0 = nugget \\ C_1 = partial \: sill \\ r = range$$
 
 {{< figure src="matern_example.png" caption="Empirical Matérn Variogram" >}}
 
+There are many more models: Cauchy, logistic, spherical, sine, .... 
+
 {{% callout note %}}
 For more information on these models, see this workshop's accompanying [online book](https://idahoagstats.github.io/guide-to-field-trial-spatial-analysis/background.html) on this topic and additional [SAS resources](http://documentation.sas.com/doc/en/pgmsascdc/9.4_3.4/statug/statug_variogram_details02.htm). 
 {{% /callout %}}
+
+### Variogram fitting
+
+Picking the right model is done both by comparing the sum of squares of error for different models and by 
+
+**Not all variables have spatial autocorrelation**
+
+{{< figure src="bad_variogram.png"  >}}
+
+**Not all fitted variogram models are worthy**
+
+{{< figure src="bad_variogram2.png" caption="Variogram gone bad" >}}
 
 ### Code for this section
 
@@ -88,6 +107,8 @@ resid_var1 <- gstat::variogram(yield ~ rep + gen,
                         width = max_dist/20, # 20 is the number of bins
                         data = Nin_spatial)
 plot(resid_var1)
+
+#To fit a large number of models, the function 'autofitVariogram()' from the package automap can be used (is it calling gstat::variogram)
 ``` 
 
 {{< /spoiler >}}

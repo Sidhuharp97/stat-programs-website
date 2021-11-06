@@ -737,6 +737,10 @@
 
 
 
+  <li class=""><a href="/workshops/spatial_workshop/correlated-error-models/">Linear Models with Correlated Errors</a></li>
+
+
+
   <li class=""><a href="/workshops/spatial_workshop/trend-modelling/">Modelling Spatial Trends</a></li>
 
 
@@ -745,7 +749,7 @@
 
 
 
-  <li class=""><a href="/workshops/spatial_workshop/augmented/">Augmented Design</a></li>
+  <li class=""><a href="/workshops/spatial_workshop/augmented/">Augmented Designs</a></li>
 
 
 
@@ -778,6 +782,7 @@
     <li>
       <ul>
         <li><a href="#correlated-error-models">Correlated Error Models</a></li>
+        <li><a href="#variogram-fitting">Variogram fitting</a></li>
         <li><a href="#code-for-this-section">Code for this section</a></li>
       </ul>
     </li>
@@ -885,14 +890,17 @@
 <p><strong>2 other concepts:</strong></p>
 <ul>
 <li>partial sill = sill - nugget</li>
-<li>nugget effect = the nugget/sill ratio, interpreted opposite of $r^2$</li>
+<li>nugget effect = the nugget/sill ratio, interpreted opposite of $r^2$ (the closer it is to 1, the less the amount of spatial autocorrelation)</li>
 </ul>
 <h3 id="correlated-error-models">Correlated Error Models</h3>
 <p>Many equations exist for modelling semivariance patterns. A deep knowledge of these is not required to fit an empirical variogram to a model. Here are a few popular examples.</p>
 <p><strong>Exponential</strong></p>
-<p>$$ \gamma (h)\left{ {\begin{array}{cc} 0 &amp; h = 0\ C_0+C_1 \left [ 1-e^{-(\frac{h}{r})} \right] &amp; h &gt; 0 \end{array} } \right. $$</p>
+<p>$$ \gamma (h) = \begin{cases}0 &amp; \text{if }h=0 \\<br>
+C_0+C_1 \left [ 1-e^{-(\frac{h}{r}) } \right] &amp; \text{if } h&gt;0 \end{cases}$$</p>
 <p>where</p>
-<p>$$ C_0 = nugget \ C_1 = partial : sill \ r = range $$</p>
+<p>$$ C_0 = nugget $$
+$$ C_1 = partial : sill $$
+$$ r = range $$</p>
 
 
 
@@ -922,9 +930,12 @@
     </figcaption></figure>
 <p><strong>Gaussian</strong></p>
 <p>(a squared version of the exponential model)</p>
-<p>$$ \gamma (h)\left{ {\begin{array}{cc} 0 &amp; h = 0\ C_0+C_1 \left [ 1-e^{-(\frac{h}{r})^2} \right] &amp; h &gt; 0 \end{array} } \right. $$</p>
+<p>$$ \gamma (h) = \begin{cases}0 &amp; \text{if }h=0, \\<br>
+C_0+C_1 \left [ 1-e^{-(\frac{h}{r})^2} \right] &amp; \text{if } h&gt;0 \end{cases}$$</p>
 <p>where</p>
-<p>$$ C_0 = nugget \ C_1 = partial : sill \ r = range$$</p>
+<p>$$ C_0 = nugget $$
+$$ C_1 = partial : sill $$
+$$ r = range $$</p>
 
 
 
@@ -981,14 +992,71 @@
   </div><figcaption>
       Empirical Matérn Variogram
     </figcaption></figure>
+<p>There are many more models: Cauchy, logistic, spherical, sine, &hellip;.</p>
 <div class="alert alert-note">
   <div>
     For more information on these models, see this workshop&rsquo;s accompanying <a href="https://idahoagstats.github.io/guide-to-field-trial-spatial-analysis/background.html">online book</a> on this topic and additional <a href="http://documentation.sas.com/doc/en/pgmsascdc/9.4_3.4/statug/statug_variogram_details02.htm">SAS resources</a>.
   </div>
 </div>
+<h3 id="variogram-fitting">Variogram fitting</h3>
+<p>Picking the right model is done both by comparing the sum of squares of error for different models and by</p>
+<p><strong>Not all variables have spatial autocorrelation</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img alt="" srcset="
+               /media/bad_variogram_hued4982af248a0925e63ca33cf80a5a32_29378_fc15314aec043527ef960b706ff65911.png 400w,
+               /media/bad_variogram_hued4982af248a0925e63ca33cf80a5a32_29378_278189afe3dd801b3e5a39d434aa0f53.png 760w,
+               /media/bad_variogram_hued4982af248a0925e63ca33cf80a5a32_29378_1200x1200_fit_lanczos_2.png 1200w"
+               src="/media/bad_variogram_hued4982af248a0925e63ca33cf80a5a32_29378_fc15314aec043527ef960b706ff65911.png"
+               width="760"
+               height="760"
+               loading="lazy" data-zoomable /></div>
+  </div></figure>
+<p><strong>Not all fitted variogram models are worthy</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  id="figure-variogram-gone-bad">
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img alt="Variogram gone bad" srcset="
+               /media/bad_variogram2_hubb2acf3376379e20deaeda13cbc7af2d_140991_528362d3ba3fefa9f526ab216ad0b8a3.png 400w,
+               /media/bad_variogram2_hubb2acf3376379e20deaeda13cbc7af2d_140991_963c2ba2c995fb232ec6b036ac661d9b.png 760w,
+               /media/bad_variogram2_hubb2acf3376379e20deaeda13cbc7af2d_140991_1200x1200_fit_lanczos_2.png 1200w"
+               src="/media/bad_variogram2_hubb2acf3376379e20deaeda13cbc7af2d_140991_528362d3ba3fefa9f526ab216ad0b8a3.png"
+               width="760"
+               height="760"
+               loading="lazy" data-zoomable /></div>
+  </div><figcaption>
+      Variogram gone bad
+    </figcaption></figure>
 <h3 id="code-for-this-section">Code for this section</h3>
 <p><em>The following scripts build upon work done in previous section(s).</em></p>
-<details class="spoiler "  id="spoiler-6">
+<details class="spoiler "  id="spoiler-8">
   <summary>R</summary>
   <p><pre><code># load libraries
 librar(gstat)
@@ -1007,10 +1075,12 @@ resid_var1 &lt;- gstat::variogram(yield ~ rep + gen,
                         width = max_dist/20, # 20 is the number of bins
                         data = Nin_spatial)
 plot(resid_var1)
+
+#To fit a large number of models, the function 'autofitVariogram()' from the package automap can be used (is it calling gstat::variogram)
 </code></pre>
 </p>
 </details>
-<details class="spoiler "  id="spoiler-7">
+<details class="spoiler "  id="spoiler-9">
   <summary>SAS</summary>
   <p><pre><code># calculate semivariance and compute empirical variogram
 proc variogram data=residuals plots(only)=(semivar);
@@ -1053,7 +1123,7 @@ run;
   
   <div class="post-nav-item">
     <div class="meta-nav">Next</div>
-    <a href="/workshops/spatial_workshop/trend-modelling/" rel="prev">Modelling Spatial Trends</a>
+    <a href="/workshops/spatial_workshop/correlated-error-models/" rel="prev">Linear Models with Correlated Errors</a>
   </div>
   
 </div>

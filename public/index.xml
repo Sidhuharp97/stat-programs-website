@@ -490,6 +490,267 @@ run;
     </item>
     
     <item>
+      <title>Empirical Variograms</title>
+      <link>/workshops/spatial_workshop/variograms/</link>
+      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>/workshops/spatial_workshop/variograms/</guid>
+      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    &lt;em&gt;Under Construction&amp;hellip;&lt;/em&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;The empirical variogram is a visual tool for quantifying spatial covariance. It uses semivariance ($\gamma$), which is a measure of covariance between points or units ($i$ and $j$) as a function of distance ($h$):&lt;/p&gt;
+&lt;p&gt;$$\gamma(h) = \frac{1}{2|N(h)|}\sum_{N(h)}(x_i - x_j)^2$$&lt;/p&gt;
+&lt;p&gt;Semivariances are binned for distance intervals. The average values for semivariance and distance interval can be fit to mathematical models designed to explain how semivariance changes over distance.&lt;/p&gt;
+&lt;p&gt;Three important concepts of an empirical variogram are &lt;em&gt;nugget&lt;/em&gt;, &lt;em&gt;sill&lt;/em&gt; and  &lt;em&gt;range&lt;/em&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  id=&#34;figure-example-empirical-variogram&#34;&gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;Example Empirical Variogram&#34; srcset=&#34;
+               /media/Sadoti2014_spherical_huf033197c365a34c0f3cd93f8cc2a46a3_30850_84c00fa9c50ea6a6c12ad9bfe7b7fc54.jpg 400w,
+               /media/Sadoti2014_spherical_huf033197c365a34c0f3cd93f8cc2a46a3_30850_264947b8bbb5022511399aab59b72492.jpg 760w,
+               /media/Sadoti2014_spherical_huf033197c365a34c0f3cd93f8cc2a46a3_30850_1200x1200_fit_q75_lanczos.jpg 1200w&#34;
+               src=&#34;/media/Sadoti2014_spherical_huf033197c365a34c0f3cd93f8cc2a46a3_30850_84c00fa9c50ea6a6c12ad9bfe7b7fc54.jpg&#34;
+               width=&#34;640&#34;
+               height=&#34;434&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;figcaption&gt;
+      Example Empirical Variogram
+    &lt;/figcaption&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;range = distance up to which is there is spatial correlation&lt;/li&gt;
+&lt;li&gt;sill = uncorrelated variance of the variable of interest&lt;/li&gt;
+&lt;li&gt;nugget = measurement error, or short-distance spatial variance and other unaccounted for variance&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;2 other concepts:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;partial sill = sill - nugget&lt;/li&gt;
+&lt;li&gt;nugget effect = the nugget/sill ratio, interpreted opposite of $r^2$ (the closer it is to 1, the less the amount of spatial autocorrelation)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;correlated-error-models&#34;&gt;Correlated Error Models&lt;/h3&gt;
+&lt;p&gt;Many equations exist for modelling semivariance patterns. A deep knowledge of these is not required to fit an empirical variogram to a model. Here are a few popular examples.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Exponential&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;$$ \gamma (h) = \begin{cases}0 &amp;amp; \text{if }h=0 \\&lt;br&gt;
+C_0+C_1 \left [ 1-e^{-(\frac{h}{r}) } \right] &amp;amp; \text{if } h&amp;gt;0 \end{cases}$$&lt;/p&gt;
+&lt;p&gt;where&lt;/p&gt;
+&lt;p&gt;$$ C_0 = nugget $$
+$$ C_1 = partial : sill $$
+$$ r = range $$&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  id=&#34;figure-theoretical-exponential-variogram&#34;&gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;Theoretical Exponential Variogram&#34; srcset=&#34;
+               /media/exponential_hu386e53d67d764d7444b0b387b4e063d4_9112_ddf7cdfd8b98e26c9d3054149e89356a.png 400w,
+               /media/exponential_hu386e53d67d764d7444b0b387b4e063d4_9112_a87e02bb556b883dd58f6f07653f1b3d.png 760w,
+               /media/exponential_hu386e53d67d764d7444b0b387b4e063d4_9112_1200x1200_fit_lanczos_2.png 1200w&#34;
+               src=&#34;/media/exponential_hu386e53d67d764d7444b0b387b4e063d4_9112_ddf7cdfd8b98e26c9d3054149e89356a.png&#34;
+               width=&#34;760&#34;
+               height=&#34;570&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;figcaption&gt;
+      Theoretical Exponential Variogram
+    &lt;/figcaption&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;Gaussian&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;(a squared version of the exponential model)&lt;/p&gt;
+&lt;p&gt;$$ \gamma (h) = \begin{cases}0 &amp;amp; \text{if }h=0, \\&lt;br&gt;
+C_0+C_1 \left [ 1-e^{-(\frac{h}{r})^2} \right] &amp;amp; \text{if } h&amp;gt;0 \end{cases}$$&lt;/p&gt;
+&lt;p&gt;where&lt;/p&gt;
+&lt;p&gt;$$ C_0 = nugget $$
+$$ C_1 = partial : sill $$
+$$ r = range $$&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  id=&#34;figure-theoretical-gaussian-variogram&#34;&gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;Theoretical Gaussian Variogram&#34; srcset=&#34;
+               /media/gaussian_hu2f658028d7284d4383fb0ced7f818ca1_9293_cff44df779d4cf946b5347a882e571f0.png 400w,
+               /media/gaussian_hu2f658028d7284d4383fb0ced7f818ca1_9293_0aa29f0aef9676f3097de237b30e8d5b.png 760w,
+               /media/gaussian_hu2f658028d7284d4383fb0ced7f818ca1_9293_1200x1200_fit_lanczos_2.png 1200w&#34;
+               src=&#34;/media/gaussian_hu2f658028d7284d4383fb0ced7f818ca1_9293_cff44df779d4cf946b5347a882e571f0.png&#34;
+               width=&#34;760&#34;
+               height=&#34;570&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;figcaption&gt;
+      Theoretical Gaussian Variogram
+    &lt;/figcaption&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;Matérn&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&amp;lt;/An extremely complicated mathematical model/&amp;gt;&lt;/em&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  id=&#34;figure-empirical-matérn-variogram&#34;&gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;Empirical Matérn Variogram&#34; srcset=&#34;
+               /media/matern_example_hu3509d66db1bd03bfa15b6cd033f73cb0_11816_469234f2912ae9c7d5d274e0e93e1e8b.png 400w,
+               /media/matern_example_hu3509d66db1bd03bfa15b6cd033f73cb0_11816_9fb3a5401309369250e4aee537db6ab2.png 760w,
+               /media/matern_example_hu3509d66db1bd03bfa15b6cd033f73cb0_11816_1200x1200_fit_lanczos_2.png 1200w&#34;
+               src=&#34;/media/matern_example_hu3509d66db1bd03bfa15b6cd033f73cb0_11816_469234f2912ae9c7d5d274e0e93e1e8b.png&#34;
+               width=&#34;760&#34;
+               height=&#34;543&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;figcaption&gt;
+      Empirical Matérn Variogram
+    &lt;/figcaption&gt;&lt;/figure&gt;
+&lt;p&gt;There are many more models: Cauchy, logistic, spherical, sine, &amp;hellip;.&lt;/p&gt;
+&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    For more information on these models, see this workshop&amp;rsquo;s accompanying &lt;a href=&#34;https://idahoagstats.github.io/guide-to-field-trial-spatial-analysis/background.html&#34;&gt;online book&lt;/a&gt; on this topic and additional &lt;a href=&#34;http://documentation.sas.com/doc/en/pgmsascdc/9.4_3.4/statug/statug_variogram_details02.htm&#34;&gt;SAS resources&lt;/a&gt;.
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;h3 id=&#34;variogram-fitting&#34;&gt;Variogram fitting&lt;/h3&gt;
+&lt;p&gt;Picking the right model is done both by comparing the sum of squares of error for different models and by&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Not all variables have spatial autocorrelation&lt;/strong&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;&#34; srcset=&#34;
+               /media/bad_variogram_hued4982af248a0925e63ca33cf80a5a32_29378_fc15314aec043527ef960b706ff65911.png 400w,
+               /media/bad_variogram_hued4982af248a0925e63ca33cf80a5a32_29378_278189afe3dd801b3e5a39d434aa0f53.png 760w,
+               /media/bad_variogram_hued4982af248a0925e63ca33cf80a5a32_29378_1200x1200_fit_lanczos_2.png 1200w&#34;
+               src=&#34;/media/bad_variogram_hued4982af248a0925e63ca33cf80a5a32_29378_fc15314aec043527ef960b706ff65911.png&#34;
+               width=&#34;760&#34;
+               height=&#34;760&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;Not all fitted variogram models are worthy&lt;/strong&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  id=&#34;figure-variogram-gone-bad&#34;&gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;Variogram gone bad&#34; srcset=&#34;
+               /media/bad_variogram2_hubb2acf3376379e20deaeda13cbc7af2d_140991_528362d3ba3fefa9f526ab216ad0b8a3.png 400w,
+               /media/bad_variogram2_hubb2acf3376379e20deaeda13cbc7af2d_140991_963c2ba2c995fb232ec6b036ac661d9b.png 760w,
+               /media/bad_variogram2_hubb2acf3376379e20deaeda13cbc7af2d_140991_1200x1200_fit_lanczos_2.png 1200w&#34;
+               src=&#34;/media/bad_variogram2_hubb2acf3376379e20deaeda13cbc7af2d_140991_528362d3ba3fefa9f526ab216ad0b8a3.png&#34;
+               width=&#34;760&#34;
+               height=&#34;760&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;figcaption&gt;
+      Variogram gone bad
+    &lt;/figcaption&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;code-for-this-section&#34;&gt;Code for this section&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;The following scripts build upon work done in previous section(s).&lt;/em&gt;&lt;/p&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-8&#34;&gt;
+  &lt;summary&gt;R&lt;/summary&gt;
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;# load libraries
+librar(gstat)
+
+# set up spatial object
+Nin_spatial &amp;lt;- Nin_na
+coordinates(Nin_spatial) &amp;lt;- ~ col.width + row.length # add attribte
+class(Nin_spatial)
+
+# establish max distance for variogram estimation
+max_dist = 0.5*max(dist(coordinates(Nin_spatial)))
+
+# calculate empirical variogram
+resid_var1 &amp;lt;- gstat::variogram(yield ~ rep + gen, 
+                        cutoff = max_dist,
+                        width = max_dist/20, # 20 is the number of bins
+                        data = Nin_spatial)
+plot(resid_var1)
+
+#To fit a large number of models, the function &#39;autofitVariogram()&#39; from the package automap can be used (is it calling gstat::variogram)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-9&#34;&gt;
+  &lt;summary&gt;SAS&lt;/summary&gt;
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;# calculate semivariance and compute empirical variogram
+proc variogram data=residuals plots(only)=(semivar);
+   coordinates xc=Col yc=Row;
+   compute lagd=1.2 maxlags=30;
+  var resid;
+run;
+
+# fit models to the empirical variogram
+proc variogram data=residuals plots(only)=(fitplot);
+   coordinates xc=Col yc=Row;
+   compute lagd=1.2 maxlags=30;
+   model form=auto(mlist=(gau, exp, pow, sph) nest=1);
+  var resid;
+run;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Row-and-Column Models</title>
       <link>/courses/rowcolumn/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
@@ -620,195 +881,30 @@ fig.show()
     </item>
     
     <item>
-      <title>Empirical Variograms</title>
-      <link>/workshops/spatial_workshop/variograms/</link>
+      <title>Linear Models with Correlated Errors</title>
+      <link>/workshops/spatial_workshop/correlated-error-models/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/workshops/spatial_workshop/variograms/</guid>
+      <guid>/workshops/spatial_workshop/correlated-error-models/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     &lt;em&gt;Under Construction&amp;hellip;&lt;/em&gt;
   &lt;/div&gt;
 &lt;/div&gt;
-&lt;p&gt;The empirical variogram is a visual tool for quantifying spatial covariance. It uses semivariance ($\gamma$), which is a measure of covariance between points or units ($i$ and $j$) as a function of distance ($h$):&lt;/p&gt;
-&lt;p&gt;$$\gamma(h) = \frac{1}{2|N(h)|}\sum_{N(h)}(x_i - x_j)^2$$&lt;/p&gt;
-&lt;p&gt;Semivariances are binned for distance intervals. The average values for semivariance and distance interval can be fit to mathematical models designed to explain how semivariance changes over distance.&lt;/p&gt;
-&lt;p&gt;Three important concepts of an empirical variogram are &lt;em&gt;nugget&lt;/em&gt;, &lt;em&gt;sill&lt;/em&gt; and  &lt;em&gt;range&lt;/em&gt;&lt;/p&gt;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-&lt;figure  id=&#34;figure-example-empirical-variogram&#34;&gt;
-  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;Example Empirical Variogram&#34; srcset=&#34;
-               /media/Sadoti2014_spherical_huf033197c365a34c0f3cd93f8cc2a46a3_30850_84c00fa9c50ea6a6c12ad9bfe7b7fc54.jpg 400w,
-               /media/Sadoti2014_spherical_huf033197c365a34c0f3cd93f8cc2a46a3_30850_264947b8bbb5022511399aab59b72492.jpg 760w,
-               /media/Sadoti2014_spherical_huf033197c365a34c0f3cd93f8cc2a46a3_30850_1200x1200_fit_q75_lanczos.jpg 1200w&#34;
-               src=&#34;/media/Sadoti2014_spherical_huf033197c365a34c0f3cd93f8cc2a46a3_30850_84c00fa9c50ea6a6c12ad9bfe7b7fc54.jpg&#34;
-               width=&#34;640&#34;
-               height=&#34;434&#34;
-               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
-  &lt;/div&gt;&lt;figcaption&gt;
-      Example Empirical Variogram
-    &lt;/figcaption&gt;&lt;/figure&gt;
-&lt;ul&gt;
-&lt;li&gt;range = distance up to which is there is spatial correlation&lt;/li&gt;
-&lt;li&gt;sill = uncorrelated variance of the variable of interest&lt;/li&gt;
-&lt;li&gt;nugget = measurement error, or short-distance spatial variance and other unaccounted for variance&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;2 other concepts:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;partial sill = sill - nugget&lt;/li&gt;
-&lt;li&gt;nugget effect = the nugget/sill ratio, interpreted opposite of $r^2$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;correlated-error-models&#34;&gt;Correlated Error Models&lt;/h3&gt;
-&lt;p&gt;Many equations exist for modelling semivariance patterns. A deep knowledge of these is not required to fit an empirical variogram to a model. Here are a few popular examples.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Exponential&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;$$ \gamma (h)\left{ {\begin{array}{cc} 0 &amp;amp; h = 0\ C_0+C_1 \left [ 1-e^{-(\frac{h}{r})} \right] &amp;amp; h &amp;gt; 0 \end{array} } \right. $$&lt;/p&gt;
-&lt;p&gt;where&lt;/p&gt;
-&lt;p&gt;$$ C_0 = nugget \ C_1 = partial : sill \ r = range $$&lt;/p&gt;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-&lt;figure  id=&#34;figure-theoretical-exponential-variogram&#34;&gt;
-  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;Theoretical Exponential Variogram&#34; srcset=&#34;
-               /media/exponential_hu386e53d67d764d7444b0b387b4e063d4_9112_ddf7cdfd8b98e26c9d3054149e89356a.png 400w,
-               /media/exponential_hu386e53d67d764d7444b0b387b4e063d4_9112_a87e02bb556b883dd58f6f07653f1b3d.png 760w,
-               /media/exponential_hu386e53d67d764d7444b0b387b4e063d4_9112_1200x1200_fit_lanczos_2.png 1200w&#34;
-               src=&#34;/media/exponential_hu386e53d67d764d7444b0b387b4e063d4_9112_ddf7cdfd8b98e26c9d3054149e89356a.png&#34;
-               width=&#34;760&#34;
-               height=&#34;570&#34;
-               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
-  &lt;/div&gt;&lt;figcaption&gt;
-      Theoretical Exponential Variogram
-    &lt;/figcaption&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;strong&gt;Gaussian&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;(a squared version of the exponential model)&lt;/p&gt;
-&lt;p&gt;$$ \gamma (h)\left{ {\begin{array}{cc} 0 &amp;amp; h = 0\ C_0+C_1 \left [ 1-e^{-(\frac{h}{r})^2} \right] &amp;amp; h &amp;gt; 0 \end{array} } \right. $$&lt;/p&gt;
-&lt;p&gt;where&lt;/p&gt;
-&lt;p&gt;$$ C_0 = nugget \ C_1 = partial : sill \ r = range$$&lt;/p&gt;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-&lt;figure  id=&#34;figure-theoretical-gaussian-variogram&#34;&gt;
-  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;Theoretical Gaussian Variogram&#34; srcset=&#34;
-               /media/gaussian_hu2f658028d7284d4383fb0ced7f818ca1_9293_cff44df779d4cf946b5347a882e571f0.png 400w,
-               /media/gaussian_hu2f658028d7284d4383fb0ced7f818ca1_9293_0aa29f0aef9676f3097de237b30e8d5b.png 760w,
-               /media/gaussian_hu2f658028d7284d4383fb0ced7f818ca1_9293_1200x1200_fit_lanczos_2.png 1200w&#34;
-               src=&#34;/media/gaussian_hu2f658028d7284d4383fb0ced7f818ca1_9293_cff44df779d4cf946b5347a882e571f0.png&#34;
-               width=&#34;760&#34;
-               height=&#34;570&#34;
-               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
-  &lt;/div&gt;&lt;figcaption&gt;
-      Theoretical Gaussian Variogram
-    &lt;/figcaption&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;strong&gt;Matérn&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;&amp;lt;/An extremely complicated mathematical model/&amp;gt;&lt;/em&gt;&lt;/p&gt;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-&lt;figure  id=&#34;figure-empirical-matérn-variogram&#34;&gt;
-  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;Empirical Matérn Variogram&#34; srcset=&#34;
-               /media/matern_example_hu3509d66db1bd03bfa15b6cd033f73cb0_11816_469234f2912ae9c7d5d274e0e93e1e8b.png 400w,
-               /media/matern_example_hu3509d66db1bd03bfa15b6cd033f73cb0_11816_9fb3a5401309369250e4aee537db6ab2.png 760w,
-               /media/matern_example_hu3509d66db1bd03bfa15b6cd033f73cb0_11816_1200x1200_fit_lanczos_2.png 1200w&#34;
-               src=&#34;/media/matern_example_hu3509d66db1bd03bfa15b6cd033f73cb0_11816_469234f2912ae9c7d5d274e0e93e1e8b.png&#34;
-               width=&#34;760&#34;
-               height=&#34;543&#34;
-               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
-  &lt;/div&gt;&lt;figcaption&gt;
-      Empirical Matérn Variogram
-    &lt;/figcaption&gt;&lt;/figure&gt;
-&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    For more information on these models, see this workshop&amp;rsquo;s accompanying &lt;a href=&#34;https://idahoagstats.github.io/guide-to-field-trial-spatial-analysis/background.html&#34;&gt;online book&lt;/a&gt; on this topic and additional &lt;a href=&#34;http://documentation.sas.com/doc/en/pgmsascdc/9.4_3.4/statug/statug_variogram_details02.htm&#34;&gt;SAS resources&lt;/a&gt;.
-  &lt;/div&gt;
-&lt;/div&gt;
 &lt;h3 id=&#34;code-for-this-section&#34;&gt;Code for this section&lt;/h3&gt;
 &lt;p&gt;&lt;em&gt;The following scripts build upon work done in previous section(s).&lt;/em&gt;&lt;/p&gt;
-&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-6&#34;&gt;
+&lt;h3 id=&#34;code-for-this-section-1&#34;&gt;Code for this section&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;The following scripts build upon work done in previous section(s).&lt;/em&gt;&lt;/p&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-1&#34;&gt;
   &lt;summary&gt;R&lt;/summary&gt;
-  &lt;p&gt;&lt;pre&gt;&lt;code&gt;# load libraries
-librar(gstat)
-
-# set up spatial object
-Nin_spatial &amp;lt;- Nin_na
-coordinates(Nin_spatial) &amp;lt;- ~ col.width + row.length # add attribte
-class(Nin_spatial)
-
-# establish max distance for variogram estimation
-max_dist = 0.5*max(dist(coordinates(Nin_spatial)))
-
-# calculate empirical variogram
-resid_var1 &amp;lt;- gstat::variogram(yield ~ rep + gen, 
-                        cutoff = max_dist,
-                        width = max_dist/20, # 20 is the number of bins
-                        data = Nin_spatial)
-plot(resid_var1)
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;here it is.
+more code
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/p&gt;
 &lt;/details&gt;
-&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-7&#34;&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-2&#34;&gt;
   &lt;summary&gt;SAS&lt;/summary&gt;
-  &lt;p&gt;&lt;pre&gt;&lt;code&gt;# calculate semivariance and compute empirical variogram
-proc variogram data=residuals plots(only)=(semivar);
-   coordinates xc=Col yc=Row;
-   compute lagd=1.2 maxlags=30;
-  var resid;
-run;
-
-# fit models to the empirical variogram
-proc variogram data=residuals plots(only)=(fitplot);
-   coordinates xc=Col yc=Row;
-   compute lagd=1.2 maxlags=30;
-   model form=auto(mlist=(gau, exp, pow, sph) nest=1);
-  var resid;
-run;
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;here it is.
+more code
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/p&gt;
 &lt;/details&gt;
@@ -1011,7 +1107,7 @@ more code
     </item>
     
     <item>
-      <title>Augmented Design</title>
+      <title>Augmented Designs</title>
       <link>/workshops/spatial_workshop/augmented/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
       <guid>/workshops/spatial_workshop/augmented/</guid>
