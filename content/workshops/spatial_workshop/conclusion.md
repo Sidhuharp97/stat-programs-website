@@ -33,17 +33,13 @@ Until this situation is improved, it is probably wisest to focus on using spatia
 
 The package **sommer** implements a version of the AR1xAR1 covariance structure. However, it does not estimate the parameter $\rho$. The user must specify the $\rho$ and that value is not optimized in the restricted maximum likelihood estimation. Both **BreedR** and **inla** implement an AR1xAR1 covariance structure. Additional, SAS and the proprietary software [asreml](https://asreml.kb.vsni.co.uk/) can implement a mixed model with this covariance structure.
 
-A [spAMM tutorial](https://raw.githubusercontent.com/f-rousset/spaMM-ref/master/vignettePlus/MixedModels_useR2021.pdf) is available for exploring this package more. 
-
-### Books 
+### Books for the deep dive
 
 {{< figure src="cressie_revised.jpg" >}}
 
 * [**Statistics for Spatial Data**](https://onlinelibrary.wiley.com/doi/book/10.1002/9781119115151)
 
-
 * **Applied Spatial Data Analysis with R**, available for [free](https://asdar-book.org/)
-
 
 * [**Spatio-Temporal Statistics With R**](https://spacetimewithr.org/) (also free)
 

@@ -32,7 +32,7 @@ $$Y_ijk = \mu + \alpha_i + \beta_j + \gamma_k + \epsilon_{ijk}$$
 $\beta_j$ is the effect due to the $j^{th}$ row   
 $\beta_j$ is the effect due to the $k^{th}$ range (or column)
 
-### Code for this section
+### Code for Trends
 
 *The following scripts build upon work done in previous section(s).* 
 

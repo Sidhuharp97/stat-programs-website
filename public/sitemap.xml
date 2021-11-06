@@ -17,7 +17,7 @@
     <loc>/draft-workshops/example/python/</loc>
     <lastmod>2021-01-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/workshops/spatial_workshop/rowcolumn/</loc>
+    <loc>/courses/rowcolumn/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/draft-workshops/example/visualization/</loc>
@@ -29,7 +29,7 @@
     <loc>/draft-workshops/example/stats/</loc>
     <lastmod>2021-01-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/workshops/spatial_workshop/splines/</loc>
+    <loc>/workshops/spatial_workshop/trend-modelling/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/workshops/spatial_workshop/model-comparison/</loc>
@@ -39,6 +39,9 @@
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/workshops/spatial_workshop/conclusion/</loc>
+    <lastmod>2021-11-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/courses/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/draft-workshops/</loc>

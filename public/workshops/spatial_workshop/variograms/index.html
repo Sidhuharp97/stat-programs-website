@@ -33,7 +33,7 @@
   
     
   
-  <meta name="description" content="Under Construction&hellip;The empirical variogram is a visual tool for quantifying spatial covariance. It uses semivariance ($\gamma$), which is a measure of covariance between points or units ($i$ and $j$) as a function of distance ($h$):" />
+  <meta name="description" content="Under Construction&hellip;   The empirical variogram is a visual tool for quantifying spatial covariance. It uses semivariance ($\gamma$), which is a measure of covariance between points or units ($i$ and $j$) as a function of distance ($h$):" />
 
   
   <link rel="alternate" hreflang="en-us" href="/workshops/spatial_workshop/variograms/" />
@@ -298,7 +298,7 @@
   <meta property="og:site_name" content="Idaho Ag Stats" />
   <meta property="og:url" content="/workshops/spatial_workshop/variograms/" />
   <meta property="og:title" content="Empirical Variograms | Idaho Ag Stats" />
-  <meta property="og:description" content="Under Construction&hellip;The empirical variogram is a visual tool for quantifying spatial covariance. It uses semivariance ($\gamma$), which is a measure of covariance between points or units ($i$ and $j$) as a function of distance ($h$):" /><meta property="og:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" />
+  <meta property="og:description" content="Under Construction&hellip;   The empirical variogram is a visual tool for quantifying spatial covariance. It uses semivariance ($\gamma$), which is a measure of covariance between points or units ($i$ and $j$) as a function of distance ($h$):" /><meta property="og:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" />
     <meta property="twitter:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" /><meta property="og:locale" content="en-us" />
   
     
@@ -733,15 +733,11 @@
 
 
 
-  <li class=""><a href="/workshops/spatial_workshop/rowcolumn/">Row-and-Column Models</a></li>
-
-
-
   <li class="active"><a href="/workshops/spatial_workshop/variograms/">Empirical Variograms</a></li>
 
 
 
-  <li class=""><a href="/workshops/spatial_workshop/splines/">Spatial Splines</a></li>
+  <li class=""><a href="/workshops/spatial_workshop/trend-modelling/">Modelling Spatial Trends</a></li>
 
 
 
@@ -894,9 +890,9 @@
 <h3 id="correlated-error-models">Correlated Error Models</h3>
 <p>Many equations exist for modelling semivariance patterns. A deep knowledge of these is not required to fit an empirical variogram to a model. Here are a few popular examples.</p>
 <p><strong>Exponential</strong></p>
-<p>$$ \gamma (h)\left{ {\begin{array}{cc} 0 &amp; h = 0\ C_0+C_1 \left [ 1-e^{-(\frac{h}{r})} \right] &amp; h &gt; 0 \end{array} } \right. $$
-where</p>
-<p>$$ C_0 = nugget \ C_1 = partial : sill \ r = range$$</p>
+<p>$$ \gamma (h)\left{ {\begin{array}{cc} 0 &amp; h = 0\ C_0+C_1 \left [ 1-e^{-(\frac{h}{r})} \right] &amp; h &gt; 0 \end{array} } \right. $$</p>
+<p>where</p>
+<p>$$ C_0 = nugget \ C_1 = partial : sill \ r = range $$</p>
 
 
 
@@ -913,14 +909,21 @@ where</p>
 
 <figure  id="figure-theoretical-exponential-variogram">
   <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="exponential.png%29" alt="Theoretical Exponential Variogram" loading="lazy" data-zoomable /></div>
+    <div class="w-100" ><img alt="Theoretical Exponential Variogram" srcset="
+               /media/exponential_hu386e53d67d764d7444b0b387b4e063d4_9112_ddf7cdfd8b98e26c9d3054149e89356a.png 400w,
+               /media/exponential_hu386e53d67d764d7444b0b387b4e063d4_9112_a87e02bb556b883dd58f6f07653f1b3d.png 760w,
+               /media/exponential_hu386e53d67d764d7444b0b387b4e063d4_9112_1200x1200_fit_lanczos_2.png 1200w"
+               src="/media/exponential_hu386e53d67d764d7444b0b387b4e063d4_9112_ddf7cdfd8b98e26c9d3054149e89356a.png"
+               width="760"
+               height="570"
+               loading="lazy" data-zoomable /></div>
   </div><figcaption>
       Theoretical Exponential Variogram
     </figcaption></figure>
 <p><strong>Gaussian</strong></p>
 <p>(a squared version of the exponential model)</p>
-<p>$$ \gamma (h)\left{ {\begin{array}{cc} 0 &amp; h = 0\ C_0+C_1 \left [ 1-e^{-(\frac{h}{r})^2} \right] &amp; h &gt; 0 \end{array} } \right. $$
-where</p>
+<p>$$ \gamma (h)\left{ {\begin{array}{cc} 0 &amp; h = 0\ C_0+C_1 \left [ 1-e^{-(\frac{h}{r})^2} \right] &amp; h &gt; 0 \end{array} } \right. $$</p>
+<p>where</p>
 <p>$$ C_0 = nugget \ C_1 = partial : sill \ r = range$$</p>
 
 
@@ -938,7 +941,14 @@ where</p>
 
 <figure  id="figure-theoretical-gaussian-variogram">
   <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="gaussian.png%29" alt="Theoretical Gaussian Variogram" loading="lazy" data-zoomable /></div>
+    <div class="w-100" ><img alt="Theoretical Gaussian Variogram" srcset="
+               /media/gaussian_hu2f658028d7284d4383fb0ced7f818ca1_9293_cff44df779d4cf946b5347a882e571f0.png 400w,
+               /media/gaussian_hu2f658028d7284d4383fb0ced7f818ca1_9293_0aa29f0aef9676f3097de237b30e8d5b.png 760w,
+               /media/gaussian_hu2f658028d7284d4383fb0ced7f818ca1_9293_1200x1200_fit_lanczos_2.png 1200w"
+               src="/media/gaussian_hu2f658028d7284d4383fb0ced7f818ca1_9293_cff44df779d4cf946b5347a882e571f0.png"
+               width="760"
+               height="570"
+               loading="lazy" data-zoomable /></div>
   </div><figcaption>
       Theoretical Gaussian Variogram
     </figcaption></figure>
@@ -960,7 +970,14 @@ where</p>
 
 <figure  id="figure-empirical-matérn-variogram">
   <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="matern.png%29" alt="Empirical Matérn Variogram" loading="lazy" data-zoomable /></div>
+    <div class="w-100" ><img alt="Empirical Matérn Variogram" srcset="
+               /media/matern_example_hu3509d66db1bd03bfa15b6cd033f73cb0_11816_469234f2912ae9c7d5d274e0e93e1e8b.png 400w,
+               /media/matern_example_hu3509d66db1bd03bfa15b6cd033f73cb0_11816_9fb3a5401309369250e4aee537db6ab2.png 760w,
+               /media/matern_example_hu3509d66db1bd03bfa15b6cd033f73cb0_11816_1200x1200_fit_lanczos_2.png 1200w"
+               src="/media/matern_example_hu3509d66db1bd03bfa15b6cd033f73cb0_11816_469234f2912ae9c7d5d274e0e93e1e8b.png"
+               width="760"
+               height="543"
+               loading="lazy" data-zoomable /></div>
   </div><figcaption>
       Empirical Matérn Variogram
     </figcaption></figure>
@@ -1029,14 +1046,14 @@ run;
   
   <div class="post-nav-item">
     <div class="meta-nav">Previous</div>
-    <a href="/workshops/spatial_workshop/rowcolumn/" rel="next">Row-and-Column Models</a>
+    <a href="/workshops/spatial_workshop/diagnosis/" rel="next">Diagnosing Spatial Autocorrelation</a>
   </div>
   
   
   
   <div class="post-nav-item">
     <div class="meta-nav">Next</div>
-    <a href="/workshops/spatial_workshop/splines/" rel="prev">Spatial Splines</a>
+    <a href="/workshops/spatial_workshop/trend-modelling/" rel="prev">Modelling Spatial Trends</a>
   </div>
   
 </div>
@@ -1217,7 +1234,7 @@ run;
     
     
 
-    <script src="/js/_vendor/bootstrap.bundle.min.96b79e4fd55cfeb144bda37cb9dee866.js"></script>
+    <script src="/js/_vendor/bootstrap.bundle.min.f81d0a1705048649befc8b595e455a94.js"></script>
 
     
     
