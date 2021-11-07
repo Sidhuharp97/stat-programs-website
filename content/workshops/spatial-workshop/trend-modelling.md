@@ -5,11 +5,6 @@ type: book
 weight: 50
 ---
 
-
-{{% callout note %}}
-*still under construction...*
-{{% /callout %}}
-
 The spatial models introduced in this workshop assume that spatial variation is localised and within a trial, plots located sufficiently far apart are independent of each other with no apparent spatial correlation. However, sometimes that is accurately describe a field trial. There can be experiment-wide gradients due to position on a slope, proximity to an influential environmental factor (e.g. a road), and so on. In these instances, those gradients should be modelled as a trend. 
 
 ### Blocking 
@@ -22,7 +17,7 @@ $Y_ij$ is the independent variable
 $\mu$ is the overall mean   
 $\alpha_i$ is the effect due to the $i^{th}$ treatment   
 $\beta_j$ is the effect due to the $j^{th}$ block   
-$\epsilon_ij$ are the error terms distributed as $N ~\sim (0,\sigma)$    
+$\epsilon_{ij}$ are the error terms distributed as $N ~\sim (0,\sigma)$    
 
 {{< figure src="blocking.png" >}}
 
@@ -35,8 +30,7 @@ Trials rows and ranges can likewise be modelled directly in a model:
 $$Y_ijk = \mu + \alpha_i + \beta_j + \gamma_k + \epsilon_{ijk}$$
 
 $\beta_j$ is the effect due to the $j^{th}$ row   
-$\beta_j$ is the effect due to the $k^{th}$ range (or column)
-
+$\gamma_k$ is the effect due to the $k^{th}$ range (or column)
 
 #### Code for Trends
 
