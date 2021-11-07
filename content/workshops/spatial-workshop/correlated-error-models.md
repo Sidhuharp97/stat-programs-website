@@ -41,7 +41,7 @@ nin_lme <- lme(yield ~ gen, random = ~1|rep,
               data = Nin,
               na.action = na.exclude)
               
-# extract the least squares means for variety
+# extract the esimated marginal means for variety
 preds_lme <- as.data.frame(emmeans(nin_lme, "gen"))
 
 # use information from the variogram fitting for intialising the parameters
@@ -59,6 +59,8 @@ cor.gaus <- corSpatial(value = c(range, nugget.effect),
 
 # update the rcbd model
 nin_gaus <- update(nin_lme, corr = cor.gaus)
+# extract predictions for 'gen'
+preds_gaus <- as.data.frame(emmeans(nin_gaus, "gen")
 
 # a similar procedure can be follow for other models
 # but we are going to take a shortcut and not specify the parameters
@@ -74,6 +76,7 @@ preds_exp <- as.data.frame(emmeans(nin_exp, "gen"))
 cor.mat <- corMatern(form = ~ row.length + col.width, 
                      nugget = T, fixed = F)
 nin_matern <- update(nin_lme, corr = cor.mat)
+preds_mat <- as.data.frame(emmeans(nin_matern, "gen")
 ``` 
 {{< /spoiler >}}
 

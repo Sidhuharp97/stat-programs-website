@@ -33,7 +33,7 @@
   
     
   
-  <meta name="description" content=" Under Construction&hellip;   Code for this section R here it is. more code   SAS data NIN_RCBD_means (drop=tvalue probt alpha estimate stderr lower upper df); set NIN_RCBD_means; RCB_est = estimate; RCB_se = stderr; run; data NIN_Spatial_means (drop=tvalue probt alpha estimate stderr lower upper df); set NIN_Spatial_means; Sp_est = estimate; Sp_se = stderr; run; proc sort data=NIN_RCBD_means; by entry; run; proc sort data=NIN_Spatial_means; by entry; run; data compare; merge NIN_RCBD_means NIN_Spatial_means; by entry; run; proc rank data=compare out=compare descending; var RCB_est Sp_est; ranks RCB_Rank Sp_Rank; run; proc sort data=compare; by Sp_rank; run; proc print data=compare(obs=15); var entry rcb_est Sp_est rcb_se sp_se rcb_rank sp_rank; run;   " />
+  <meta name="description" content="Now that we have built these spatial models, how do we pick the right one? Unfortunately, there is no one model that works best in all circumstances. In addition, there is no single way for choosing the best model." />
 
   
   <link rel="alternate" hreflang="en-us" href="/workshops/spatial-workshop/model-comparison/" />
@@ -298,7 +298,7 @@
   <meta property="og:site_name" content="Idaho Ag Stats" />
   <meta property="og:url" content="/workshops/spatial-workshop/model-comparison/" />
   <meta property="og:title" content="Comparing Models | Idaho Ag Stats" />
-  <meta property="og:description" content=" Under Construction&hellip;   Code for this section R here it is. more code   SAS data NIN_RCBD_means (drop=tvalue probt alpha estimate stderr lower upper df); set NIN_RCBD_means; RCB_est = estimate; RCB_se = stderr; run; data NIN_Spatial_means (drop=tvalue probt alpha estimate stderr lower upper df); set NIN_Spatial_means; Sp_est = estimate; Sp_se = stderr; run; proc sort data=NIN_RCBD_means; by entry; run; proc sort data=NIN_Spatial_means; by entry; run; data compare; merge NIN_RCBD_means NIN_Spatial_means; by entry; run; proc rank data=compare out=compare descending; var RCB_est Sp_est; ranks RCB_Rank Sp_Rank; run; proc sort data=compare; by Sp_rank; run; proc print data=compare(obs=15); var entry rcb_est Sp_est rcb_se sp_se rcb_rank sp_rank; run;   " /><meta property="og:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" />
+  <meta property="og:description" content="Now that we have built these spatial models, how do we pick the right one? Unfortunately, there is no one model that works best in all circumstances. In addition, there is no single way for choosing the best model." /><meta property="og:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" />
     <meta property="twitter:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" /><meta property="og:locale" content="en-us" />
   
     
@@ -844,16 +844,73 @@
           <h1>Comparing Models</h1>
 
           <div class="article-style">
-            <div class="alert alert-note">
+            <p>Now that we have built these spatial models, how do we pick the right one? Unfortunately, there is no one model that works best in all circumstances. In addition, there is no single way for choosing the best model. Some approaches include:</p>
+<ul>
+<li>Comparing model fitness (e.g. AIC, BIC, log likelihood). Although the methods are not nested, hence precluding a log likelihood ratio test, we can compare raw values for each fit statistic. Be careful doing this in R since linear modelling packages use different estimation procedures for maximum likelihood and REML estimation that are not comparable.</li>
+<li>Comparing post-hoc power (that is, the p-values for the treatments)</li>
+<li>Comparing standard error of the estimates (i.e. precision)</li>
+</ul>
+<div class="alert alert-note">
   <div>
-    <em>Under Construction&hellip;</em>
+    Comparing changes in the coefficient of variation (CV, $\sigma/\mu$) is not recommended because in many spatial models, field variation has been re-partitioned to the error term when it was (erroneously) absorbed by the other experimental effects. As a result, the CV can increase in spatial models even when inclusion of spatial covariates results in better model fit.
   </div>
 </div>
+<p>Unfortunately, there is no one method for unambiguously returning the the best estimates and true ranks of the treatments. Likewise, there is no one spatial method that works best in all situations and field trials.</p>
 <h3 id="code-for-this-section">Code for this section</h3>
 <details class="spoiler "  id="spoiler-1">
   <summary>R</summary>
-  <p><pre><code>here it is.
-more code
+  <p><pre><code>library(tidyr)
+
+# remove some objects we don't need (and will interfere with downstream processes)
+rm(nin_variofit, nin_vgm)
+rm(nin_vgm, nin_variofit, nugget, sill, range, nugget.effect)
+
+# assemble objects into a list
+nlme_mods &lt;- list(nin_lme, nin_exp, nin_gaus, nin_matern)
+names(nlme_mods) &lt;- c(&quot;LMM&quot;, &quot;exponential&quot;, &quot;gaussian&quot;, &quot;matern&quot;)
+
+# extract log likelihood, AIC, BIC
+data.frame(loglik = sapply(nlme_mods, logLik),  
+           AIC = sapply(nlme_mods, AIC),
+           BIC = sapply(nlme_mods, AIC, k = log(nrow(Nin_na)))) %&gt;% arrange(desc(loglikelihood))
+# (higher is better for loglik, lower is better for AIC and BIC)
+
+# compare post-hoc power
+# conduct ANOVA
+anovas &lt;- lapply(nlme_mods[-7], function(x){ 
+  aov &lt;- as.data.frame(anova(x))[2,]})
+# bind all the output together
+a &lt;- bind_rows(anovas) %&gt;% 
+  mutate(model = c(&quot;LMM&quot;, &quot;exponential&quot;, &quot;gaussian&quot;, &quot;matern&quot;)) %&gt;% 
+  arrange(desc(`p-value`)) %&gt;% select(c(model, 1:4)) 
+rownames(a) &lt;- 1:nrow(a)
+a[6,2:5] &lt;- anova(nin_trend)[3:6]
+a
+
+## compare precision of estimates
+all.preds &lt;- mget(ls(pattern = &quot;^preds_*&quot;))
+errors &lt;- lapply(all.preds, &quot;[&quot;, &quot;SE&quot;)
+pred.names &lt;- gsub(&quot;preds_&quot;, &quot;&quot;, names(errors))
+error_df &lt;- bind_cols(errors)
+colnames(error_df) &lt;- pred.names
+boxplot(error_df, ylab = &quot;standard errors&quot;, xlab = &quot;linear model&quot;, 
+        col = &quot;dodgerblue3&quot;)
+
+# compare predictions 
+preds &lt;- lapply(all.preds, &quot;[&quot;, &quot;emmean&quot;)
+preds_df &lt;- bind_cols(preds)
+colnames(preds_df) &lt;- pred.names
+preds_df$gen &lt;- preds_exp$gen
+
+# plot changes in rank
+lev &lt;- c(&quot;lme&quot;, &quot;exp&quot;, &quot;gaus&quot;, &quot;mat&quot;)
+pivot_longer(preds_df, cols = !gen, names_to = &quot;model&quot;, values_to = &quot;emmeans&quot;) %&gt;% 
+  mutate(model = factor(model, levels = lev)) %&gt;% 
+  ggplot(aes(x = model, y = emmeans, group = gen)) +
+  geom_point(size = 5, alpha = 0.5, col = &quot;navy&quot;) +
+  geom_line() +
+  ylab(&quot;yield means for gen&quot;) + 
+  theme_minimal(base_size = 14)
 </code></pre>
 </p>
 </details>

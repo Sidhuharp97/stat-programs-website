@@ -733,7 +733,7 @@ nin_lme &amp;lt;- lme(yield ~ gen, random = ~1|rep,
               data = Nin,
               na.action = na.exclude)
               
-# extract the least squares means for variety
+# extract the esimated marginal means for variety
 preds_lme &amp;lt;- as.data.frame(emmeans(nin_lme, &amp;quot;gen&amp;quot;))
 
 # use information from the variogram fitting for intialising the parameters
@@ -751,6 +751,8 @@ cor.gaus &amp;lt;- corSpatial(value = c(range, nugget.effect),
 
 # update the rcbd model
 nin_gaus &amp;lt;- update(nin_lme, corr = cor.gaus)
+# extract predictions for &#39;gen&#39;
+preds_gaus &amp;lt;- as.data.frame(emmeans(nin_gaus, &amp;quot;gen&amp;quot;)
 
 # a similar procedure can be follow for other models
 # but we are going to take a shortcut and not specify the parameters
@@ -766,6 +768,7 @@ preds_exp &amp;lt;- as.data.frame(emmeans(nin_exp, &amp;quot;gen&amp;quot;))
 cor.mat &amp;lt;- corMatern(form = ~ row.length + col.width, 
                      nugget = T, fixed = F)
 nin_matern &amp;lt;- update(nin_lme, corr = cor.mat)
+preds_mat &amp;lt;- as.data.frame(emmeans(nin_matern, &amp;quot;gen&amp;quot;)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/p&gt;
 &lt;/details&gt;
@@ -934,16 +937,73 @@ run;
       <link>/workshops/spatial-workshop/model-comparison/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
       <guid>/workshops/spatial-workshop/model-comparison/</guid>
-      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
+      <description>&lt;p&gt;Now that we have built these spatial models, how do we pick the right one? Unfortunately, there is no one model that works best in all circumstances. In addition, there is no single way for choosing the best model. Some approaches include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Comparing model fitness (e.g. AIC, BIC, log likelihood). Although the methods are not nested, hence precluding a log likelihood ratio test, we can compare raw values for each fit statistic. Be careful doing this in R since linear modelling packages use different estimation procedures for maximum likelihood and REML estimation that are not comparable.&lt;/li&gt;
+&lt;li&gt;Comparing post-hoc power (that is, the p-values for the treatments)&lt;/li&gt;
+&lt;li&gt;Comparing standard error of the estimates (i.e. precision)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
-    &lt;em&gt;Under Construction&amp;hellip;&lt;/em&gt;
+    Comparing changes in the coefficient of variation (CV, $\sigma/\mu$) is not recommended because in many spatial models, field variation has been re-partitioned to the error term when it was (erroneously) absorbed by the other experimental effects. As a result, the CV can increase in spatial models even when inclusion of spatial covariates results in better model fit.
   &lt;/div&gt;
 &lt;/div&gt;
+&lt;p&gt;Unfortunately, there is no one method for unambiguously returning the the best estimates and true ranks of the treatments. Likewise, there is no one spatial method that works best in all situations and field trials.&lt;/p&gt;
 &lt;h3 id=&#34;code-for-this-section&#34;&gt;Code for this section&lt;/h3&gt;
 &lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-1&#34;&gt;
   &lt;summary&gt;R&lt;/summary&gt;
-  &lt;p&gt;&lt;pre&gt;&lt;code&gt;here it is.
-more code
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;library(tidyr)
+
+# remove some objects we don&#39;t need (and will interfere with downstream processes)
+rm(nin_variofit, nin_vgm)
+rm(nin_vgm, nin_variofit, nugget, sill, range, nugget.effect)
+
+# assemble objects into a list
+nlme_mods &amp;lt;- list(nin_lme, nin_exp, nin_gaus, nin_matern)
+names(nlme_mods) &amp;lt;- c(&amp;quot;LMM&amp;quot;, &amp;quot;exponential&amp;quot;, &amp;quot;gaussian&amp;quot;, &amp;quot;matern&amp;quot;)
+
+# extract log likelihood, AIC, BIC
+data.frame(loglik = sapply(nlme_mods, logLik),  
+           AIC = sapply(nlme_mods, AIC),
+           BIC = sapply(nlme_mods, AIC, k = log(nrow(Nin_na)))) %&amp;gt;% arrange(desc(loglikelihood))
+# (higher is better for loglik, lower is better for AIC and BIC)
+
+# compare post-hoc power
+# conduct ANOVA
+anovas &amp;lt;- lapply(nlme_mods[-7], function(x){ 
+  aov &amp;lt;- as.data.frame(anova(x))[2,]})
+# bind all the output together
+a &amp;lt;- bind_rows(anovas) %&amp;gt;% 
+  mutate(model = c(&amp;quot;LMM&amp;quot;, &amp;quot;exponential&amp;quot;, &amp;quot;gaussian&amp;quot;, &amp;quot;matern&amp;quot;)) %&amp;gt;% 
+  arrange(desc(`p-value`)) %&amp;gt;% select(c(model, 1:4)) 
+rownames(a) &amp;lt;- 1:nrow(a)
+a[6,2:5] &amp;lt;- anova(nin_trend)[3:6]
+a
+
+## compare precision of estimates
+all.preds &amp;lt;- mget(ls(pattern = &amp;quot;^preds_*&amp;quot;))
+errors &amp;lt;- lapply(all.preds, &amp;quot;[&amp;quot;, &amp;quot;SE&amp;quot;)
+pred.names &amp;lt;- gsub(&amp;quot;preds_&amp;quot;, &amp;quot;&amp;quot;, names(errors))
+error_df &amp;lt;- bind_cols(errors)
+colnames(error_df) &amp;lt;- pred.names
+boxplot(error_df, ylab = &amp;quot;standard errors&amp;quot;, xlab = &amp;quot;linear model&amp;quot;, 
+        col = &amp;quot;dodgerblue3&amp;quot;)
+
+# compare predictions 
+preds &amp;lt;- lapply(all.preds, &amp;quot;[&amp;quot;, &amp;quot;emmean&amp;quot;)
+preds_df &amp;lt;- bind_cols(preds)
+colnames(preds_df) &amp;lt;- pred.names
+preds_df$gen &amp;lt;- preds_exp$gen
+
+# plot changes in rank
+lev &amp;lt;- c(&amp;quot;lme&amp;quot;, &amp;quot;exp&amp;quot;, &amp;quot;gaus&amp;quot;, &amp;quot;mat&amp;quot;)
+pivot_longer(preds_df, cols = !gen, names_to = &amp;quot;model&amp;quot;, values_to = &amp;quot;emmeans&amp;quot;) %&amp;gt;% 
+  mutate(model = factor(model, levels = lev)) %&amp;gt;% 
+  ggplot(aes(x = model, y = emmeans, group = gen)) +
+  geom_point(size = 5, alpha = 0.5, col = &amp;quot;navy&amp;quot;) +
+  geom_line() +
+  ylab(&amp;quot;yield means for gen&amp;quot;) + 
+  theme_minimal(base_size = 14)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/p&gt;
 &lt;/details&gt;
