@@ -11,26 +11,26 @@ The spatial models introduced in this workshop assume that spatial variation is 
 
 Blocking is one example of modelling an experiment wide-trend:
 
-$$Y_ij = \mu + \alpha_i + \beta_j + \epsilon_{ij}$$
-
-$Y_ij$ is the independent variable   
-$\mu$ is the overall mean   
-$\alpha_i$ is the effect due to the $i^{th}$ treatment   
-$\beta_j$ is the effect due to the $j^{th}$ block   
-$\epsilon_{ij}$ are the error terms distributed as $N ~\sim (0,\sigma)$    
-
 {{< figure src="blocking.png" >}}
 
 The expectation is that each block will capture and model existing variation  within it. This becomes difficult to justify as blocks become large. 
 
 ### Rows & Ranges
 
-Trials rows and ranges can likewise be modelled directly in a model:
+Recall the RCBD model from the previous section: 
+
+$$Y_ij = \mu + \alpha_i + \beta_j + \epsilon_{ij}$$
+
+Trials rows and ranges can likewise be modelled directly through expansion of that model (and omitting block since it full represented by column):
 
 $$Y_ijk = \mu + \alpha_i + \beta_j + \gamma_k + \epsilon_{ijk}$$
 
-$\beta_j$ is the effect due to the $j^{th}$ row   
-$\gamma_k$ is the effect due to the $k^{th}$ range (or column)
+$Y_ij$ is the independent variable   
+$\mu$ is the overall mean   
+$\alpha_i$ is the effect due to the $i^{th}$ treatment   
+$\beta_j$ is the effect due to the $j^{th}$ row     
+$\gamma_k$ is the effect due to the $k^{th}$ range (or column)  
+$\epsilon_{ij}$ are the error terms distributed as $N ~\sim (0,\sigma)
 
 #### Code for Trends
 

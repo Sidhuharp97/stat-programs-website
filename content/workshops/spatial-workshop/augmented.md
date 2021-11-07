@@ -11,7 +11,7 @@ Augmented models are analyzed in a fundamentally different method than RCBD mode
 
 There are multiple way to specify an augmented model depending on what the researcher wants to know.
 
-#### Model specification 1: 
+### Model specification \#1
 
 $$ Y_{ij} = \tau_i + \beta(\tau)_{ij} $$
 
@@ -26,7 +26,7 @@ This model evaluates:
 1. The difference between all checks and the average of the unreplicated treatments.
 1. The difference between the unreplicated treatments. 
 
-#### Model specification 2:
+### Model specification \#2
 
 $$ Y_{ij} = \delta_i + \gamma(\delta)_{ij} $$
 

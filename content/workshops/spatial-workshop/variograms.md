@@ -5,10 +5,6 @@ type: book
 weight: 30
 ---
 
-{{% callout note %}}
-*Under Construction...*
-{{% /callout %}}
-
 The empirical variogram is a visual tool for quantifying spatial covariance. It uses semivariance ($\gamma$), which is a measure of covariance between points or units ($i$ and $j$) as a function of distance ($h$): 
 
 $$\gamma(h) = \frac{1}{2|N(h)|}\sum_{N(h)}(x_i - x_j)^2$$
@@ -134,9 +130,9 @@ attr(Nin_variofit_mat, "SSErr")
 # parameters:
 Nin_variofit_gau
 
-nugget <- Nin_variofit3$psill[1] # measurement error (other random error)
-range <- Nin_variofit3$range[2] # distance to establish independence between data points
-sill <- sum(Nin_variofit3$psill) # maximum semivariance
+nugget <- Nin_variofit_gau$psill[1] # measurement error (other random error)
+range <- Nin_variofit_gau$range[2] # distance to establish independence between data points
+sill <- sum(Nin_variofit_gau$psill) # maximum semivariance
 ``` 
 
 {{< /spoiler >}}

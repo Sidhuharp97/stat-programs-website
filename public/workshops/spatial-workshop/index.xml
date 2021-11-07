@@ -422,12 +422,7 @@ run;
       <link>/workshops/spatial-workshop/variograms/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
       <guid>/workshops/spatial-workshop/variograms/</guid>
-      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    &lt;em&gt;Under Construction&amp;hellip;&lt;/em&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;The empirical variogram is a visual tool for quantifying spatial covariance. It uses semivariance ($\gamma$), which is a measure of covariance between points or units ($i$ and $j$) as a function of distance ($h$):&lt;/p&gt;
+      <description>&lt;p&gt;The empirical variogram is a visual tool for quantifying spatial covariance. It uses semivariance ($\gamma$), which is a measure of covariance between points or units ($i$ and $j$) as a function of distance ($h$):&lt;/p&gt;
 &lt;p&gt;$$\gamma(h) = \frac{1}{2|N(h)|}\sum_{N(h)}(x_i - x_j)^2$$&lt;/p&gt;
 &lt;p&gt;Semivariances are binned for distance intervals. The average values for semivariance and distance interval can be fit to mathematical models designed to explain how semivariance changes over distance.&lt;/p&gt;
 &lt;p&gt;Three important concepts of an empirical variogram are &lt;em&gt;nugget&lt;/em&gt;, &lt;em&gt;sill&lt;/em&gt; and  &lt;em&gt;range&lt;/em&gt;&lt;/p&gt;
@@ -632,7 +627,7 @@ $$ r = range $$&lt;/p&gt;
     &lt;/figcaption&gt;&lt;/figure&gt;
 &lt;h3 id=&#34;code-for-this-section&#34;&gt;Code for this section&lt;/h3&gt;
 &lt;p&gt;&lt;em&gt;The following scripts build upon work done in previous section(s).&lt;/em&gt;&lt;/p&gt;
-&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-8&#34;&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-7&#34;&gt;
   &lt;summary&gt;R&lt;/summary&gt;
   &lt;p&gt;&lt;pre&gt;&lt;code&gt;# load libraries
 library(gstat)
@@ -678,13 +673,13 @@ attr(Nin_variofit_mat, &amp;quot;SSErr&amp;quot;)
 # parameters:
 Nin_variofit_gau
 
-nugget &amp;lt;- Nin_variofit3$psill[1] # measurement error (other random error)
-range &amp;lt;- Nin_variofit3$range[2] # distance to establish independence between data points
-sill &amp;lt;- sum(Nin_variofit3$psill) # maximum semivariance
+nugget &amp;lt;- Nin_variofit_gau$psill[1] # measurement error (other random error)
+range &amp;lt;- Nin_variofit_gau$range[2] # distance to establish independence between data points
+sill &amp;lt;- sum(Nin_variofit_gau$psill) # maximum semivariance
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/p&gt;
 &lt;/details&gt;
-&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-9&#34;&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-8&#34;&gt;
   &lt;summary&gt;SAS&lt;/summary&gt;
   &lt;p&gt;&lt;pre&gt;&lt;code&gt;# calculate semivariance and compute empirical variogram
 proc variogram data=residuals plots(only)=(semivar);
@@ -711,26 +706,89 @@ run;
       <link>/workshops/spatial-workshop/correlated-error-models/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
       <guid>/workshops/spatial-workshop/correlated-error-models/</guid>
-      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    &lt;em&gt;Under Construction&amp;hellip;&lt;/em&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
+      <description>&lt;p&gt;Now that we have a sense of how to model spatial variation, the next step is to incorporate that into a linear model. The starting point is the linear mixed model. In RCBD design, often the treatments are treated as fixed and the block effect as random.&lt;/p&gt;
+&lt;p&gt;$$Y_ij = \mu + \alpha_i + \beta_j + \epsilon_{ij}$$&lt;/p&gt;
+&lt;p&gt;$Y_ij$ is the independent variable&lt;br&gt;
+$\mu$ is the overall mean&lt;br&gt;
+$\alpha_i$ is the effect due to the $i^{th}$ treatment&lt;br&gt;
+$\beta_j$ is the effect due to the $j^{th}$ block&lt;br&gt;
+$\epsilon_{ij}$ are the error terms distributed as $N ~\sim (0,\sigma)$&lt;/p&gt;
+&lt;p&gt;Here is an expanded version of the last term:&lt;/p&gt;
+&lt;p&gt;$$  \epsilon_{ij} ~\sim N \Bigg( 0,
+\left[ { \begin{array}{ccc} \sigma &amp;amp; \cdots &amp;amp; 0 \\&lt;br&gt;
+\vdots &amp;amp; \ddots &amp;amp; \vdots \\&lt;br&gt;
+0 &amp;amp; \cdots &amp;amp; \sigma \end{array} } \right] \Bigg) $$&lt;/p&gt;
+&lt;p&gt;This is a mathematically representation of &lt;strong&gt;iid&lt;/strong&gt;, independent and identically distributed, an assumption of linear models. When there is spatial autocorrelation, observations closer to one another are correlated, so the off-diagonals in the variance-covariance matrix are not zero.&lt;/p&gt;
+&lt;p&gt;Spatial models seek to mathematically model this covariance so it is properly accounted for during hypothesis testing and prediction.&lt;/p&gt;
 &lt;h3 id=&#34;code-for-this-section&#34;&gt;Code for this section&lt;/h3&gt;
 &lt;p&gt;&lt;em&gt;The following scripts build upon work done in previous section(s).&lt;/em&gt;&lt;/p&gt;
-&lt;h3 id=&#34;code-for-this-section-1&#34;&gt;Code for this section&lt;/h3&gt;
-&lt;p&gt;&lt;em&gt;The following scripts build upon work done in previous section(s).&lt;/em&gt;&lt;/p&gt;
-&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-1&#34;&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-0&#34;&gt;
   &lt;summary&gt;R&lt;/summary&gt;
-  &lt;p&gt;&lt;pre&gt;&lt;code&gt;here it is.
-more code
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;library(emmeans); library()
+# (nlme and gstat should already be loaded)
+library(spaMM) # for running `corMatern()`
+
+# standard linear model
+nin_lme &amp;lt;- lme(yield ~ gen, random = ~1|rep,
+              data = Nin,
+              na.action = na.exclude)
+              
+# extract the least squares means for variety
+preds_lme &amp;lt;- as.data.frame(emmeans(nin_lme, &amp;quot;gen&amp;quot;))
+
+# use information from the variogram fitting for intialising the parameters
+nugget &amp;lt;- Nin_variofit_gau$psill[1] 
+range &amp;lt;- Nin_variofit_gau$range[2]  
+sill &amp;lt;- sum(Nin_variofit_gau$psill) 
+nugget.effect &amp;lt;-  nugget/sill
+
+# initalise the covariance structure (from the nlme package)
+cor.gaus &amp;lt;- corSpatial(value = c(range, nugget.effect), 
+                  form = ~ row.length + col.width, 
+                  nugget = T, fixed = F,
+                  type = &amp;quot;gaussian&amp;quot;, 
+                  metric = &amp;quot;euclidean&amp;quot;)
+
+# update the rcbd model
+nin_gaus &amp;lt;- update(nin_lme, corr = cor.gaus)
+
+# a similar procedure can be follow for other models
+# but we are going to take a shortcut and not specify the parameters
+
+# exponential
+cor.exp &amp;lt;- corSpatial(form = ~ row.length + col.width, 
+                      nugget = T, fixed = F)
+
+nin_exp &amp;lt;- update(nin_lme, corr = cor.exp)
+preds_exp &amp;lt;- as.data.frame(emmeans(nin_exp, &amp;quot;gen&amp;quot;))
+
+# Matern structure
+cor.mat &amp;lt;- corMatern(form = ~ row.length + col.width, 
+                     nugget = T, fixed = F)
+nin_matern &amp;lt;- update(nin_lme, corr = cor.mat)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/p&gt;
 &lt;/details&gt;
-&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-2&#34;&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-1&#34;&gt;
   &lt;summary&gt;SAS&lt;/summary&gt;
-  &lt;p&gt;&lt;pre&gt;&lt;code&gt;here it is.
-more code
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;proc mixed data=alliance ;
+	class entry rep;
+	model yield = entry ;
+	random rep;
+	lsmeans entry/cl;
+	ods output LSMeans=NIN_RCBD_means;
+	title1 &#39;NIN data: RCBD&#39;;
+run;
+
+proc mixed data=alliance maxiter=150;
+	class entry;
+	model yield = entry /ddfm=kr;
+	repeated/subject=intercept type=sp(gau) (Row Col) local;
+	parms (11) (22) (19);
+	lsmeans entry/cl;
+	ods output LSMeans=NIN_Spatial_means;
+	title1 &#39;NIN data: Gaussian Spatial Adjustment&#39;;
+run;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/p&gt;
 &lt;/details&gt;
@@ -745,12 +803,6 @@ more code
       <description>&lt;p&gt;The spatial models introduced in this workshop assume that spatial variation is localised and within a trial, plots located sufficiently far apart are independent of each other with no apparent spatial correlation. However, sometimes that is accurately describe a field trial. There can be experiment-wide gradients due to position on a slope, proximity to an influential environmental factor (e.g. a road), and so on. In these instances, those gradients should be modelled as a trend.&lt;/p&gt;
 &lt;h3 id=&#34;blocking&#34;&gt;Blocking&lt;/h3&gt;
 &lt;p&gt;Blocking is one example of modelling an experiment wide-trend:&lt;/p&gt;
-&lt;p&gt;$$Y_ij = \mu + \alpha_i + \beta_j + \epsilon_{ij}$$&lt;/p&gt;
-&lt;p&gt;$Y_ij$ is the independent variable&lt;br&gt;
-$\mu$ is the overall mean&lt;br&gt;
-$\alpha_i$ is the effect due to the $i^{th}$ treatment&lt;br&gt;
-$\beta_j$ is the effect due to the $j^{th}$ block&lt;br&gt;
-$\epsilon_{ij}$ are the error terms distributed as $N ~\sim (0,\sigma)$&lt;/p&gt;
 
 
 
@@ -778,10 +830,16 @@ $\epsilon_{ij}$ are the error terms distributed as $N ~\sim (0,\sigma)$&lt;/p&gt
   &lt;/div&gt;&lt;/figure&gt;
 &lt;p&gt;The expectation is that each block will capture and model existing variation  within it. This becomes difficult to justify as blocks become large.&lt;/p&gt;
 &lt;h3 id=&#34;rows--ranges&#34;&gt;Rows &amp;amp; Ranges&lt;/h3&gt;
-&lt;p&gt;Trials rows and ranges can likewise be modelled directly in a model:&lt;/p&gt;
+&lt;p&gt;Recall the RCBD model from the previous section:&lt;/p&gt;
+&lt;p&gt;$$Y_ij = \mu + \alpha_i + \beta_j + \epsilon_{ij}$$&lt;/p&gt;
+&lt;p&gt;Trials rows and ranges can likewise be modelled directly through expansion of that model (and omitting block since it full represented by column):&lt;/p&gt;
 &lt;p&gt;$$Y_ijk = \mu + \alpha_i + \beta_j + \gamma_k + \epsilon_{ijk}$$&lt;/p&gt;
-&lt;p&gt;$\beta_j$ is the effect due to the $j^{th}$ row&lt;br&gt;
-$\gamma_k$ is the effect due to the $k^{th}$ range (or column)&lt;/p&gt;
+&lt;p&gt;$Y_ij$ is the independent variable&lt;br&gt;
+$\mu$ is the overall mean&lt;br&gt;
+$\alpha_i$ is the effect due to the $i^{th}$ treatment&lt;br&gt;
+$\beta_j$ is the effect due to the $j^{th}$ row  &lt;br&gt;
+$\gamma_k$ is the effect due to the $k^{th}$ range (or column)&lt;br&gt;
+$\epsilon_{ij}$ are the error terms distributed as $N ~\sim (0,\sigma)&lt;/p&gt;
 &lt;h4 id=&#34;code-for-trends&#34;&gt;Code for Trends&lt;/h4&gt;
 &lt;p&gt;&lt;em&gt;The following scripts build upon work done in previous section(s).&lt;/em&gt;&lt;/p&gt;
 &lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-1&#34;&gt;
@@ -891,8 +949,43 @@ more code
 &lt;/details&gt;
 &lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-2&#34;&gt;
   &lt;summary&gt;SAS&lt;/summary&gt;
-  &lt;p&gt;&lt;pre&gt;&lt;code&gt;here it is.
-more code
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;data NIN_RCBD_means (drop=tvalue probt alpha estimate stderr lower upper df);
+	set NIN_RCBD_means;
+	RCB_est = estimate;
+	RCB_se = stderr;
+run;
+
+data NIN_Spatial_means (drop=tvalue probt alpha estimate stderr lower upper df);
+	set NIN_Spatial_means;
+	Sp_est = estimate;
+	Sp_se = stderr;
+run;
+
+proc sort data=NIN_RCBD_means;
+	by entry;
+run;
+
+proc sort data=NIN_Spatial_means;
+	by entry;
+run;
+
+data compare;
+	merge NIN_RCBD_means NIN_Spatial_means;
+	by entry;
+run;
+
+proc rank data=compare out=compare descending;
+	var RCB_est Sp_est;
+	ranks RCB_Rank Sp_Rank;
+run;
+
+proc sort data=compare;
+	by  Sp_rank;
+run;
+
+proc print data=compare(obs=15);
+	var entry rcb_est Sp_est rcb_se sp_se rcb_rank sp_rank;
+run;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/p&gt;
 &lt;/details&gt;
@@ -907,7 +1000,7 @@ more code
       <description>&lt;p&gt;The augmented experimental design is a special design where there is a large number of unreplicated plots interspersed with frequent checks that are replicated. This type of model is  useful when the number of treatments is very large and/or replication is either impossible or unfeasible. Often, the primary goal of the studies using this design is to rank or select genotypes.&lt;/p&gt;
 &lt;p&gt;Augmented models are analyzed in a fundamentally different method than RCBD models due to the large number of unreplicated observations. To adjust for the lack of replication, only a select set of treatments, usually of known performance, are replicated in the experiments. The error estimated from these replicated treatments is used in the analysis to evaluate the remaining genotypes.&lt;/p&gt;
 &lt;p&gt;There are multiple way to specify an augmented model depending on what the researcher wants to know.&lt;/p&gt;
-&lt;h4 id=&#34;model-specification-1&#34;&gt;Model specification 1:&lt;/h4&gt;
+&lt;h3 id=&#34;model-specification-1&#34;&gt;Model specification #1&lt;/h3&gt;
 &lt;p&gt;$$ Y_{ij} = \tau_i + \beta(\tau)_{ij} $$&lt;/p&gt;
 &lt;p&gt;where:&lt;/p&gt;
 &lt;ul&gt;
@@ -920,7 +1013,7 @@ more code
 &lt;li&gt;The difference between all checks and the average of the unreplicated treatments.&lt;/li&gt;
 &lt;li&gt;The difference between the unreplicated treatments.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h4 id=&#34;model-specification-2&#34;&gt;Model specification 2:&lt;/h4&gt;
+&lt;h3 id=&#34;model-specification-2&#34;&gt;Model specification #2&lt;/h3&gt;
 &lt;p&gt;$$ Y_{ij} = \delta_i + \gamma(\delta)_{ij} $$&lt;/p&gt;
 &lt;p&gt;where:&lt;/p&gt;
 &lt;ul&gt;

@@ -33,7 +33,7 @@
   
     
   
-  <meta name="description" content=" Under Construction&hellip;   Code for this section R here it is. more code   SAS here it is. more code   " />
+  <meta name="description" content=" Under Construction&hellip;   Code for this section R here it is. more code   SAS data NIN_RCBD_means (drop=tvalue probt alpha estimate stderr lower upper df); set NIN_RCBD_means; RCB_est = estimate; RCB_se = stderr; run; data NIN_Spatial_means (drop=tvalue probt alpha estimate stderr lower upper df); set NIN_Spatial_means; Sp_est = estimate; Sp_se = stderr; run; proc sort data=NIN_RCBD_means; by entry; run; proc sort data=NIN_Spatial_means; by entry; run; data compare; merge NIN_RCBD_means NIN_Spatial_means; by entry; run; proc rank data=compare out=compare descending; var RCB_est Sp_est; ranks RCB_Rank Sp_Rank; run; proc sort data=compare; by Sp_rank; run; proc print data=compare(obs=15); var entry rcb_est Sp_est rcb_se sp_se rcb_rank sp_rank; run;   " />
 
   
   <link rel="alternate" hreflang="en-us" href="/workshops/spatial-workshop/model-comparison/" />
@@ -298,7 +298,7 @@
   <meta property="og:site_name" content="Idaho Ag Stats" />
   <meta property="og:url" content="/workshops/spatial-workshop/model-comparison/" />
   <meta property="og:title" content="Comparing Models | Idaho Ag Stats" />
-  <meta property="og:description" content=" Under Construction&hellip;   Code for this section R here it is. more code   SAS here it is. more code   " /><meta property="og:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" />
+  <meta property="og:description" content=" Under Construction&hellip;   Code for this section R here it is. more code   SAS data NIN_RCBD_means (drop=tvalue probt alpha estimate stderr lower upper df); set NIN_RCBD_means; RCB_est = estimate; RCB_se = stderr; run; data NIN_Spatial_means (drop=tvalue probt alpha estimate stderr lower upper df); set NIN_Spatial_means; Sp_est = estimate; Sp_se = stderr; run; proc sort data=NIN_RCBD_means; by entry; run; proc sort data=NIN_Spatial_means; by entry; run; data compare; merge NIN_RCBD_means NIN_Spatial_means; by entry; run; proc rank data=compare out=compare descending; var RCB_est Sp_est; ranks RCB_Rank Sp_Rank; run; proc sort data=compare; by Sp_rank; run; proc print data=compare(obs=15); var entry rcb_est Sp_est rcb_se sp_se rcb_rank sp_rank; run;   " /><meta property="og:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" />
     <meta property="twitter:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" /><meta property="og:locale" content="en-us" />
   
     
@@ -859,8 +859,43 @@ more code
 </details>
 <details class="spoiler "  id="spoiler-2">
   <summary>SAS</summary>
-  <p><pre><code>here it is.
-more code
+  <p><pre><code>data NIN_RCBD_means (drop=tvalue probt alpha estimate stderr lower upper df);
+	set NIN_RCBD_means;
+	RCB_est = estimate;
+	RCB_se = stderr;
+run;
+
+data NIN_Spatial_means (drop=tvalue probt alpha estimate stderr lower upper df);
+	set NIN_Spatial_means;
+	Sp_est = estimate;
+	Sp_se = stderr;
+run;
+
+proc sort data=NIN_RCBD_means;
+	by entry;
+run;
+
+proc sort data=NIN_Spatial_means;
+	by entry;
+run;
+
+data compare;
+	merge NIN_RCBD_means NIN_Spatial_means;
+	by entry;
+run;
+
+proc rank data=compare out=compare descending;
+	var RCB_est Sp_est;
+	ranks RCB_Rank Sp_Rank;
+run;
+
+proc sort data=compare;
+	by  Sp_rank;
+run;
+
+proc print data=compare(obs=15);
+	var entry rcb_est Sp_est rcb_se sp_se rcb_rank sp_rank;
+run;
 </code></pre>
 </p>
 </details>

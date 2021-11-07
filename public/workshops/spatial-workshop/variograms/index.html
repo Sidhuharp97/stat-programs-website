@@ -33,7 +33,7 @@
   
     
   
-  <meta name="description" content="Under Construction&hellip;   The empirical variogram is a visual tool for quantifying spatial covariance. It uses semivariance ($\gamma$), which is a measure of covariance between points or units ($i$ and $j$) as a function of distance ($h$):" />
+  <meta name="description" content="The empirical variogram is a visual tool for quantifying spatial covariance. It uses semivariance ($\gamma$), which is a measure of covariance between points or units ($i$ and $j$) as a function of distance ($h$):" />
 
   
   <link rel="alternate" hreflang="en-us" href="/workshops/spatial-workshop/variograms/" />
@@ -298,7 +298,7 @@
   <meta property="og:site_name" content="Idaho Ag Stats" />
   <meta property="og:url" content="/workshops/spatial-workshop/variograms/" />
   <meta property="og:title" content="Empirical Variograms | Idaho Ag Stats" />
-  <meta property="og:description" content="Under Construction&hellip;   The empirical variogram is a visual tool for quantifying spatial covariance. It uses semivariance ($\gamma$), which is a measure of covariance between points or units ($i$ and $j$) as a function of distance ($h$):" /><meta property="og:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" />
+  <meta property="og:description" content="The empirical variogram is a visual tool for quantifying spatial covariance. It uses semivariance ($\gamma$), which is a measure of covariance between points or units ($i$ and $j$) as a function of distance ($h$):" /><meta property="og:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" />
     <meta property="twitter:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" /><meta property="og:locale" content="en-us" />
   
     
@@ -846,12 +846,7 @@
           <h1>Empirical Variograms</h1>
 
           <div class="article-style">
-            <div class="alert alert-note">
-  <div>
-    <em>Under Construction&hellip;</em>
-  </div>
-</div>
-<p>The empirical variogram is a visual tool for quantifying spatial covariance. It uses semivariance ($\gamma$), which is a measure of covariance between points or units ($i$ and $j$) as a function of distance ($h$):</p>
+            <p>The empirical variogram is a visual tool for quantifying spatial covariance. It uses semivariance ($\gamma$), which is a measure of covariance between points or units ($i$ and $j$) as a function of distance ($h$):</p>
 <p>$$\gamma(h) = \frac{1}{2|N(h)|}\sum_{N(h)}(x_i - x_j)^2$$</p>
 <p>Semivariances are binned for distance intervals. The average values for semivariance and distance interval can be fit to mathematical models designed to explain how semivariance changes over distance.</p>
 <p>Three important concepts of an empirical variogram are <em>nugget</em>, <em>sill</em> and  <em>range</em></p>
@@ -1056,7 +1051,7 @@ $$ r = range $$</p>
     </figcaption></figure>
 <h3 id="code-for-this-section">Code for this section</h3>
 <p><em>The following scripts build upon work done in previous section(s).</em></p>
-<details class="spoiler "  id="spoiler-8">
+<details class="spoiler "  id="spoiler-7">
   <summary>R</summary>
   <p><pre><code># load libraries
 library(gstat)
@@ -1102,13 +1097,13 @@ attr(Nin_variofit_mat, &quot;SSErr&quot;)
 # parameters:
 Nin_variofit_gau
 
-nugget &lt;- Nin_variofit3$psill[1] # measurement error (other random error)
-range &lt;- Nin_variofit3$range[2] # distance to establish independence between data points
-sill &lt;- sum(Nin_variofit3$psill) # maximum semivariance
+nugget &lt;- Nin_variofit_gau$psill[1] # measurement error (other random error)
+range &lt;- Nin_variofit_gau$range[2] # distance to establish independence between data points
+sill &lt;- sum(Nin_variofit_gau$psill) # maximum semivariance
 </code></pre>
 </p>
 </details>
-<details class="spoiler "  id="spoiler-9">
+<details class="spoiler "  id="spoiler-8">
   <summary>SAS</summary>
   <p><pre><code># calculate semivariance and compute empirical variogram
 proc variogram data=residuals plots(only)=(semivar);

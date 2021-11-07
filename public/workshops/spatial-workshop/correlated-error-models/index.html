@@ -33,8 +33,7 @@
   
     
   
-  <meta name="description" content="Under Construction&hellip;   Code for this section The following scripts build upon work done in previous section(s).
-Code for this section The following scripts build upon work done in previous section(s)." />
+  <meta name="description" content="Now that we have a sense of how to model spatial variation, the next step is to incorporate that into a linear model. The starting point is the linear mixed model." />
 
   
   <link rel="alternate" hreflang="en-us" href="/workshops/spatial-workshop/correlated-error-models/" />
@@ -299,8 +298,7 @@ Code for this section The following scripts build upon work done in previous sec
   <meta property="og:site_name" content="Idaho Ag Stats" />
   <meta property="og:url" content="/workshops/spatial-workshop/correlated-error-models/" />
   <meta property="og:title" content="Linear Models with Correlated Errors | Idaho Ag Stats" />
-  <meta property="og:description" content="Under Construction&hellip;   Code for this section The following scripts build upon work done in previous section(s).
-Code for this section The following scripts build upon work done in previous section(s)." /><meta property="og:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" />
+  <meta property="og:description" content="Now that we have a sense of how to model spatial variation, the next step is to incorporate that into a linear model. The starting point is the linear mixed model." /><meta property="og:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" />
     <meta property="twitter:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" /><meta property="og:locale" content="en-us" />
   
     
@@ -784,7 +782,6 @@ Code for this section The following scripts build upon work done in previous sec
     <li>
       <ul>
         <li><a href="#code-for-this-section">Code for this section</a></li>
-        <li><a href="#code-for-this-section-1">Code for this section</a></li>
       </ul>
     </li>
   </ul>
@@ -847,26 +844,89 @@ Code for this section The following scripts build upon work done in previous sec
           <h1>Linear Models with Correlated Errors</h1>
 
           <div class="article-style">
-            <div class="alert alert-note">
-  <div>
-    <em>Under Construction&hellip;</em>
-  </div>
-</div>
+            <p>Now that we have a sense of how to model spatial variation, the next step is to incorporate that into a linear model. The starting point is the linear mixed model. In RCBD design, often the treatments are treated as fixed and the block effect as random.</p>
+<p>$$Y_ij = \mu + \alpha_i + \beta_j + \epsilon_{ij}$$</p>
+<p>$Y_ij$ is the independent variable<br>
+$\mu$ is the overall mean<br>
+$\alpha_i$ is the effect due to the $i^{th}$ treatment<br>
+$\beta_j$ is the effect due to the $j^{th}$ block<br>
+$\epsilon_{ij}$ are the error terms distributed as $N ~\sim (0,\sigma)$</p>
+<p>Here is an expanded version of the last term:</p>
+<p>$$  \epsilon_{ij} ~\sim N \Bigg( 0,
+\left[ { \begin{array}{ccc} \sigma &amp; \cdots &amp; 0 \\<br>
+\vdots &amp; \ddots &amp; \vdots \\<br>
+0 &amp; \cdots &amp; \sigma \end{array} } \right] \Bigg) $$</p>
+<p>This is a mathematically representation of <strong>iid</strong>, independent and identically distributed, an assumption of linear models. When there is spatial autocorrelation, observations closer to one another are correlated, so the off-diagonals in the variance-covariance matrix are not zero.</p>
+<p>Spatial models seek to mathematically model this covariance so it is properly accounted for during hypothesis testing and prediction.</p>
 <h3 id="code-for-this-section">Code for this section</h3>
 <p><em>The following scripts build upon work done in previous section(s).</em></p>
-<h3 id="code-for-this-section-1">Code for this section</h3>
-<p><em>The following scripts build upon work done in previous section(s).</em></p>
-<details class="spoiler "  id="spoiler-1">
+<details class="spoiler "  id="spoiler-0">
   <summary>R</summary>
-  <p><pre><code>here it is.
-more code
+  <p><pre><code>library(emmeans); library()
+# (nlme and gstat should already be loaded)
+library(spaMM) # for running `corMatern()`
+
+# standard linear model
+nin_lme &lt;- lme(yield ~ gen, random = ~1|rep,
+              data = Nin,
+              na.action = na.exclude)
+              
+# extract the least squares means for variety
+preds_lme &lt;- as.data.frame(emmeans(nin_lme, &quot;gen&quot;))
+
+# use information from the variogram fitting for intialising the parameters
+nugget &lt;- Nin_variofit_gau$psill[1] 
+range &lt;- Nin_variofit_gau$range[2]  
+sill &lt;- sum(Nin_variofit_gau$psill) 
+nugget.effect &lt;-  nugget/sill
+
+# initalise the covariance structure (from the nlme package)
+cor.gaus &lt;- corSpatial(value = c(range, nugget.effect), 
+                  form = ~ row.length + col.width, 
+                  nugget = T, fixed = F,
+                  type = &quot;gaussian&quot;, 
+                  metric = &quot;euclidean&quot;)
+
+# update the rcbd model
+nin_gaus &lt;- update(nin_lme, corr = cor.gaus)
+
+# a similar procedure can be follow for other models
+# but we are going to take a shortcut and not specify the parameters
+
+# exponential
+cor.exp &lt;- corSpatial(form = ~ row.length + col.width, 
+                      nugget = T, fixed = F)
+
+nin_exp &lt;- update(nin_lme, corr = cor.exp)
+preds_exp &lt;- as.data.frame(emmeans(nin_exp, &quot;gen&quot;))
+
+# Matern structure
+cor.mat &lt;- corMatern(form = ~ row.length + col.width, 
+                     nugget = T, fixed = F)
+nin_matern &lt;- update(nin_lme, corr = cor.mat)
 </code></pre>
 </p>
 </details>
-<details class="spoiler "  id="spoiler-2">
+<details class="spoiler "  id="spoiler-1">
   <summary>SAS</summary>
-  <p><pre><code>here it is.
-more code
+  <p><pre><code>proc mixed data=alliance ;
+	class entry rep;
+	model yield = entry ;
+	random rep;
+	lsmeans entry/cl;
+	ods output LSMeans=NIN_RCBD_means;
+	title1 'NIN data: RCBD';
+run;
+
+proc mixed data=alliance maxiter=150;
+	class entry;
+	model yield = entry /ddfm=kr;
+	repeated/subject=intercept type=sp(gau) (Row Col) local;
+	parms (11) (22) (19);
+	lsmeans entry/cl;
+	ods output LSMeans=NIN_Spatial_means;
+	title1 'NIN data: Gaussian Spatial Adjustment';
+run;
 </code></pre>
 </p>
 </details>

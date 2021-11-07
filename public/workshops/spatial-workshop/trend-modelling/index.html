@@ -849,12 +849,6 @@
             <p>The spatial models introduced in this workshop assume that spatial variation is localised and within a trial, plots located sufficiently far apart are independent of each other with no apparent spatial correlation. However, sometimes that is accurately describe a field trial. There can be experiment-wide gradients due to position on a slope, proximity to an influential environmental factor (e.g. a road), and so on. In these instances, those gradients should be modelled as a trend.</p>
 <h3 id="blocking">Blocking</h3>
 <p>Blocking is one example of modelling an experiment wide-trend:</p>
-<p>$$Y_ij = \mu + \alpha_i + \beta_j + \epsilon_{ij}$$</p>
-<p>$Y_ij$ is the independent variable<br>
-$\mu$ is the overall mean<br>
-$\alpha_i$ is the effect due to the $i^{th}$ treatment<br>
-$\beta_j$ is the effect due to the $j^{th}$ block<br>
-$\epsilon_{ij}$ are the error terms distributed as $N ~\sim (0,\sigma)$</p>
 
 
 
@@ -882,10 +876,16 @@ $\epsilon_{ij}$ are the error terms distributed as $N ~\sim (0,\sigma)$</p>
   </div></figure>
 <p>The expectation is that each block will capture and model existing variation  within it. This becomes difficult to justify as blocks become large.</p>
 <h3 id="rows--ranges">Rows &amp; Ranges</h3>
-<p>Trials rows and ranges can likewise be modelled directly in a model:</p>
+<p>Recall the RCBD model from the previous section:</p>
+<p>$$Y_ij = \mu + \alpha_i + \beta_j + \epsilon_{ij}$$</p>
+<p>Trials rows and ranges can likewise be modelled directly through expansion of that model (and omitting block since it full represented by column):</p>
 <p>$$Y_ijk = \mu + \alpha_i + \beta_j + \gamma_k + \epsilon_{ijk}$$</p>
-<p>$\beta_j$ is the effect due to the $j^{th}$ row<br>
-$\gamma_k$ is the effect due to the $k^{th}$ range (or column)</p>
+<p>$Y_ij$ is the independent variable<br>
+$\mu$ is the overall mean<br>
+$\alpha_i$ is the effect due to the $i^{th}$ treatment<br>
+$\beta_j$ is the effect due to the $j^{th}$ row  <br>
+$\gamma_k$ is the effect due to the $k^{th}$ range (or column)<br>
+$\epsilon_{ij}$ are the error terms distributed as $N ~\sim (0,\sigma)</p>
 <h4 id="code-for-trends">Code for Trends</h4>
 <p><em>The following scripts build upon work done in previous section(s).</em></p>
 <details class="spoiler "  id="spoiler-1">
