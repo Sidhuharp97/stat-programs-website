@@ -1,0 +1,1202 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spatial Recipes for Field Trials | Idaho Ag Stats</title>
+    <link>/workshops/spatial-workshop/</link>
+      <atom:link href="/workshops/spatial-workshop/index.xml" rel="self" type="application/rss+xml" />
+    <description>Spatial Recipes for Field Trials</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 01 Nov 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/workshops/spatial-workshop/featured.jpg</url>
+      <title>Spatial Recipes for Field Trials</title>
+      <link>/workshops/spatial-workshop/</link>
+    </image>
+    
+    <item>
+      <title>Computational Set-up</title>
+      <link>/workshops/spatial-workshop/prep-work/</link>
+      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>/workshops/spatial-workshop/prep-work/</guid>
+      <description>&lt;p&gt;
+  &lt;i class=&#34;fab fa-r-project  pr-1 fa-fw&#34;&gt;&lt;/i&gt; Here are instructions for how check your R installation and install packages needed for the workshop.&lt;/p&gt;
+&lt;h3 id=&#34;check-software-versions&#34;&gt;Check software versions&lt;/h3&gt;
+&lt;p&gt;Open R and run this code to check what version of R your system is running:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;R.Version()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If the version printed is not 4.0 or newer, please &lt;a href=&#34;https://cran.r-project.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;upgrade R&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;This step is not required if you do not use RStudio.&lt;/em&gt; Open RStudio and run this code to check what version of RStudio is installed on your system:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rstudioapi::versionInfo()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If the version printed is not 1.4 or newer, please &lt;a href=&#34;https://www.rstudio.com/products/rstudio/download/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;upgrade Rstudio&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;install-workshop-packages&#34;&gt;Install workshop packages&lt;/h3&gt;
+&lt;p&gt;Open R and run this script:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;package_list &amp;lt;- c(&amp;quot;dplyr&amp;quot;, &amp;quot;tidyr&amp;quot;, &amp;quot;purrr&amp;quot;,       # for standard data manipulation
+                  &amp;quot;ggplot2&amp;quot;, &amp;quot;desplot&amp;quot;,            # for plotting
+                  &amp;quot;nlme&amp;quot;, &amp;quot;lme4&amp;quot;, &amp;quot;emmeans&amp;quot;,       # for linear modelling
+                  &amp;quot;SpATS&amp;quot;,                         # for fitting splines
+                  &amp;quot;sp&amp;quot;, &amp;quot;spdep&amp;quot;, &amp;quot;gstat&amp;quot;, &amp;quot;sf&amp;quot;)    # for spatial modelling
+
+install.packages(package_list)
+sapply(package_list, require, character.only = TRUE)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;alert alert-warning&#34;&gt;
+  &lt;div&gt;
+    Please note that the spatial packages may take awhile to install, and you may run into problems with the installation. Please attempt installation &lt;em&gt;in advance&lt;/em&gt; of the workshop. If you have problems installing and/or loading any of these packages that you are not able to resolve, contact us so we can help you, preferably &lt;em&gt;before&lt;/em&gt; the workshop.
+  &lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Why Care about Spatial Variation?</title>
+      <link>/workshops/spatial-workshop/why-spatial/</link>
+      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>/workshops/spatial-workshop/why-spatial/</guid>
+      <description>&lt;h4 id=&#34;agricultural-field-trials&#34;&gt;Agricultural field trials&lt;/h4&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  id=&#34;figure-university-research-farm&#34;&gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;University Research Farm&#34; srcset=&#34;
+               /media/Parker_farm_hu5b749468aa26ddd0a9f36916aa2c4955_1521271_9da15a781bb8c2a2cbaf502640dda605.png 400w,
+               /media/Parker_farm_hu5b749468aa26ddd0a9f36916aa2c4955_1521271_50ad91b5571235d1fb26c5f8052cd681.png 760w,
+               /media/Parker_farm_hu5b749468aa26ddd0a9f36916aa2c4955_1521271_1200x1200_fit_lanczos_2.png 1200w&#34;
+               src=&#34;/media/Parker_farm_hu5b749468aa26ddd0a9f36916aa2c4955_1521271_9da15a781bb8c2a2cbaf502640dda605.png&#34;
+               width=&#34;760&#34;
+               height=&#34;423&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;figcaption&gt;
+      University Research Farm
+    &lt;/figcaption&gt;&lt;/figure&gt;
+&lt;p&gt;The goal of many agricultural field trials is to provide information about crop response to a set a treatments such as soil treatments, disease pressure or crop genetic variation.&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  id=&#34;figure-vartest&#34;&gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;&#34; srcset=&#34;
+               /media/variety_testing_hu91f40b680ee6584d31c566c5259b98ab_3192801_3666819c024fb8498a6fb7ebc2a81ec6.JPG 400w,
+               /media/variety_testing_hu91f40b680ee6584d31c566c5259b98ab_3192801_734f15ebc4d60affaea8fdeac1dccabf.JPG 760w,
+               /media/variety_testing_hu91f40b680ee6584d31c566c5259b98ab_3192801_1200x1200_fit_q75_lanczos.JPG 1200w&#34;
+               src=&#34;/media/variety_testing_hu91f40b680ee6584d31c566c5259b98ab_3192801_3666819c024fb8498a6fb7ebc2a81ec6.JPG&#34;
+               width=&#34;760&#34;
+               height=&#34;428&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;h4 id=&#34;field-variation&#34;&gt;Field variation&lt;/h4&gt;
+&lt;p&gt;Agricultural field trials often employ popular experimental designs such as randomized complete block design to account for environmental heterogeneity. However, those techniques are quite often inadequate to fully account for spatial heterogeneity that arises due to field position, soil conditions, disease, wildlife impacts and more.&lt;/p&gt;
+&lt;p&gt;Here is the a map of a wheat variety trial conducted in Idaho with a chloropleth map indicating plot yield. Each square represents a plot.&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;&#34; srcset=&#34;
+               /media/Kimberly2013_hufcda326c681836e362ae8f277219c861_133784_6783117ac31579be4ba79158430a5c8e.png 400w,
+               /media/Kimberly2013_hufcda326c681836e362ae8f277219c861_133784_0796f24bf395714b76e0185fb6d1fb6c.png 760w,
+               /media/Kimberly2013_hufcda326c681836e362ae8f277219c861_133784_1200x1200_fit_lanczos_2.png 1200w&#34;
+               src=&#34;/media/Kimberly2013_hufcda326c681836e362ae8f277219c861_133784_6783117ac31579be4ba79158430a5c8e.png&#34;
+               width=&#34;760&#34;
+               height=&#34;456&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;h4 id=&#34;blocking-in-a-field-trial&#34;&gt;Blocking in a field trial&lt;/h4&gt;
+&lt;p&gt;Block is not always sufficient to account for spatial variation. Here is the same Idaho variety trial with block information overlaid:&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;&#34; srcset=&#34;
+               /media/Kimberly2013_blocking_hufcda326c681836e362ae8f277219c861_135684_c910abd22cf81daeeb4bd452fa2368f0.png 400w,
+               /media/Kimberly2013_blocking_hufcda326c681836e362ae8f277219c861_135684_7f89ae5d4011a3c958aefee39855e94c.png 760w,
+               /media/Kimberly2013_blocking_hufcda326c681836e362ae8f277219c861_135684_1200x1200_fit_lanczos_2.png 1200w&#34;
+               src=&#34;/media/Kimberly2013_blocking_hufcda326c681836e362ae8f277219c861_135684_c910abd22cf81daeeb4bd452fa2368f0.png&#34;
+               width=&#34;760&#34;
+               height=&#34;456&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;p&gt;The block arrangement is clearly not aligning with the field variation.&lt;/p&gt;
+&lt;h4 id=&#34;when-spatial-variation-is-not-fully-accounted-for&#34;&gt;When Spatial Variation is not Fully Accounted For&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;The treatment rankings can be wrong. Here is a plot of the cultivar ranks for yield from the Idaho variety trial when analysed with a standard linear mixed model and the same model augmented with spatial covariates.&lt;/li&gt;
+&lt;/ul&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;&#34; srcset=&#34;
+               /media/Kimberly2013_ranks_huc1b2eb09556372696e77ae4f8ee42364_283302_f8fe488cc657eea6d907333649c08f07.png 400w,
+               /media/Kimberly2013_ranks_huc1b2eb09556372696e77ae4f8ee42364_283302_06d53b914bc401e020b8db69b917798b.png 760w,
+               /media/Kimberly2013_ranks_huc1b2eb09556372696e77ae4f8ee42364_283302_1200x1200_fit_lanczos_2.png 1200w&#34;
+               src=&#34;/media/Kimberly2013_ranks_huc1b2eb09556372696e77ae4f8ee42364_283302_f8fe488cc657eea6d907333649c08f07.png&#34;
+               width=&#34;760&#34;
+               height=&#34;456&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;Error terms are often correlated with each other, invalidating the downstream analysis&lt;/li&gt;
+&lt;/ul&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;&#34; srcset=&#34;
+               /media/resids_hu3126d5daa04687742bde609f4b9a11d2_46731_6aab43ce9784e2d07419f7d7b54c493f.png 400w,
+               /media/resids_hu3126d5daa04687742bde609f4b9a11d2_46731_f438523eba3ff36d5d4a6460b5f74951.png 760w,
+               /media/resids_hu3126d5daa04687742bde609f4b9a11d2_46731_1200x1200_fit_lanczos_2.png 1200w&#34;
+               src=&#34;/media/resids_hu3126d5daa04687742bde609f4b9a11d2_46731_6aab43ce9784e2d07419f7d7b54c493f.png&#34;
+               width=&#34;720&#34;
+               height=&#34;432&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;high error/low precision/wide confidence intervals/low experimental power&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;blocking-versus-spatial-statistics&#34;&gt;Blocking versus spatial statistics&lt;/h4&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  id=&#34;figure-another-distracted-boyfriend-meme&#34;&gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;another distracted boyfriend meme!&#34; srcset=&#34;
+               /media/boyfriend_meme_hu0bb4fc25b36bd5709c7ac9216fac1bd5_110631_f6b16f5fd9fe04db808a4129de3e15dd.jpg 400w,
+               /media/boyfriend_meme_hu0bb4fc25b36bd5709c7ac9216fac1bd5_110631_6e44bc1d6558553d9eb1bd59a7a01470.jpg 760w,
+               /media/boyfriend_meme_hu0bb4fc25b36bd5709c7ac9216fac1bd5_110631_1200x1200_fit_q75_lanczos.jpg 1200w&#34;
+               src=&#34;/media/boyfriend_meme_hu0bb4fc25b36bd5709c7ac9216fac1bd5_110631_f6b16f5fd9fe04db808a4129de3e15dd.jpg&#34;
+               width=&#34;750&#34;
+               height=&#34;500&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;figcaption&gt;
+      another distracted boyfriend meme!
+    &lt;/figcaption&gt;&lt;/figure&gt;
+&lt;p&gt;Researchers do not have to abandon blocking when incorporating spatial covariates into analysis of a field trial. In fact, using blocking or other experimental designs combined with spatial modelling has been shown improve the quality of the final estimates.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Diagnosing Spatial Autocorrelation</title>
+      <link>/workshops/spatial-workshop/diagnosis/</link>
+      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>/workshops/spatial-workshop/diagnosis/</guid>
+      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    This workshop is concerned with &lt;strong&gt;areal&lt;/strong&gt; data, that is, data that occurs in discrete units (plots, in most cases). This attribute of trial data impacts many aspects of spatial analysis
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Spatial autocorrelation refers to similarity between points that are close to one another.  That correlation is expected to decline with distance. Note that is different from experiment-wide gradients, such as a salinity gradient or position on a slope.&lt;/p&gt;
+&lt;h3 id=&#34;plotting&#34;&gt;Plotting&lt;/h3&gt;
+&lt;p&gt;One of the easiest ways to diagnose spatial autocorrelation is by plotting data by its spatial position and using a heat map to indicate values of a response variable.&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;&#34; srcset=&#34;
+               /media/SOS_2017_hu798d915d3ca3a6f805e7339a3e2de09d_966931_94317cb58645d718ffcb5c4e584d1ee9.png 400w,
+               /media/SOS_2017_hu798d915d3ca3a6f805e7339a3e2de09d_966931_328483d39fcc1fbc7f4572fb76a41bfe.png 760w,
+               /media/SOS_2017_hu798d915d3ca3a6f805e7339a3e2de09d_966931_1200x1200_fit_lanczos_2.png 1200w&#34;
+               src=&#34;/media/SOS_2017_hu798d915d3ca3a6f805e7339a3e2de09d_966931_94317cb58645d718ffcb5c4e584d1ee9.png&#34;
+               width=&#34;760&#34;
+               height=&#34;434&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;p&gt;While there is always ambiguity associated with using plots for decision making, early exploration of these plots can be helpful in understanding the extent of spatial correlation.&lt;/p&gt;
+&lt;h3 id=&#34;morans-i&#34;&gt;Moran&amp;rsquo;s I&lt;/h3&gt;
+&lt;p&gt;Moran&amp;rsquo;s I, sometimes called &amp;ldquo;Global Moran&amp;rsquo;s I&amp;rdquo; can be used for conducting a hypothesis test on whether there is correlation between spatial units located adjacent to one another.&lt;/p&gt;
+&lt;p&gt;$$ I = \frac{N}{W}\frac{\sum_i \sum_j w_{ij} (x_i - \bar{x})(x_j - \bar{x})}{\sum_i(x_i - \bar{x})^2}
+\qquad i \neq j$$&lt;/p&gt;
+&lt;p&gt;Where N is total number of spatial locations indexed by $i$ and $j$, x is the variable of interest, $w_{ij}$ are a spatial weights between each $i$ and $j$, and W is the sum of all weights.&lt;/p&gt;
+&lt;p&gt;The expected values of Moran&amp;rsquo;s I is $-1/(N-1)$. Values greater than the expected value indicate positive spatial correlation (areas close to each other are similar), while values less than that indicate dissimilarity as spatial distance between points decreases.&lt;/p&gt;
+&lt;h3 id=&#34;defining-neighbors&#34;&gt;Defining Neighbors&lt;/h3&gt;
+&lt;p&gt;There are &lt;a href=&#34;https://r-spatial.github.io/spdep/reference/nb2listw.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;several options&lt;/a&gt; for defining adjacent neighbors and how to weight each neighbor&amp;rsquo;s influence. The two common configurations for defining neighbors are the rook and queen configurations. These are exactly what their chess analogy suggests: &amp;ldquo;rook&amp;rdquo; defines neighbors in an row/column fashion, while &amp;ldquo;queen&amp;rdquo; defines neighbors in a row/column configuration an also neighbors located diagonally at a 45 degree angle from the row/column neighbors. Determining this can be &lt;a href=&#34;https://r-spatial.github.io/spdep/articles/nb.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;complicated&lt;/a&gt; when working with irregularly-placed data (e.g. counties), but is quite unambiguous for lattice data common in planned field experiments.&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;&#34; srcset=&#34;
+               /media/neighbors_hufe5a74dfc647783bb8cb2ac3e6bbaf7e_14102_5b5e7b00e31159d69d33479b3238f7fb.png 400w,
+               /media/neighbors_hufe5a74dfc647783bb8cb2ac3e6bbaf7e_14102_f423b76df8f3d3b2b6760c2dddf4daf4.png 760w,
+               /media/neighbors_hufe5a74dfc647783bb8cb2ac3e6bbaf7e_14102_1200x1200_fit_lanczos_2.png 1200w&#34;
+               src=&#34;/media/neighbors_hufe5a74dfc647783bb8cb2ac3e6bbaf7e_14102_5b5e7b00e31159d69d33479b3238f7fb.png&#34;
+               width=&#34;760&#34;
+               height=&#34;543&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;p&gt;Setting the values for weights is a function of both how neighbors are defined and their proximity to the unit of interest. However, a very popular method is to define each neighbor as equal fractions that sum to one, e.g. in rook formation, each neighbor is weighted 0.25 (assuming an interior plot with 4 neighbors).&lt;/p&gt;
+&lt;h3 id=&#34;empirical-variogram&#34;&gt;Empirical variogram&lt;/h3&gt;
+&lt;p&gt;This is one of the most useful methods of determining the extent of spatial variability and will be covered in the following sections.&lt;/p&gt;
+&lt;h3 id=&#34;code-for-this-section&#34;&gt;Code for this section&lt;/h3&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-3&#34;&gt;
+  &lt;summary&gt;R&lt;/summary&gt;
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;# load libraries
+library(dplyr); library(ggplot2); library(desplot); 
+library(spdep); library(sf); library(nlme)
+
+# read in data and prepare it
+Nin &amp;lt;- read.csv(&amp;quot;stroup_nin_wheat.csv&amp;quot;) %&amp;gt;% 
+  mutate(col.width = col * 1.2, row.length = row * 4.3) %&amp;gt;% 
+  mutate(name = case_when(is.na(as.character(rep)) ~ NA_character_, 
+                          TRUE ~ as.character(gen))) %&amp;gt;% 
+  arrange(col, row)
+
+Nin_na &amp;lt;- filter(Nin, !is.na(rep))
+
+# make exploratory plot
+ggplot(Nin, aes(x = row, y = col)) +
+  geom_tile(aes(fill = yield), col = &amp;quot;white&amp;quot;) +
+  geom_tileborder(aes(group = 1, grp = rep), lwd = 1.2) +
+  labs(x = &amp;quot;row&amp;quot;, y = &amp;quot;column&amp;quot;, title = &amp;quot;field plot layout&amp;quot;) + 
+  theme_classic() +
+  theme(axis.text = element_text(size = 12),
+        axis.title = element_text(size = 14),
+        legend.title = element_text(size = 14),
+        legend.text = element_text(size = 12))
+
+## conduct moran&#39;s I test ##
+
+# set neighbors with convenience function for grids
+xy_rook &amp;lt;- cell2nb(nrow = max(Nin$row), ncol = max(Nin$col), 
+  type=&amp;quot;rook&amp;quot;, torus = FALSE, legacy = FALSE)  
+
+# run linear mixed model and extract residuals
+nin.lme &amp;lt;- lme(fixed = yield ~ gen, random = ~1|rep,
+              data = Nin, na.action = na.exclude)
+resid_lme &amp;lt;- residuals(nin.lme)
+names(resid_lme) &amp;lt;- Nin$plot
+
+# two version of the Moran&#39;s I test: 
+moran.test(resid_lme, nb2listw(xy_rook), na.action = na.exclude)
+moran.mc(resid_lme, nb2listw(xy_rook), 999, na.action = na.exclude)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-4&#34;&gt;
+  &lt;summary&gt;SAS&lt;/summary&gt;
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;# read in data
+proc format;
+  invalue has_NA
+  &#39;NA&#39; = .;
+;
+
+filename NIN url &amp;quot;https://raw.githubusercontent.com/IdahoAgStats/guide-to-field-trial-spatial-analysis/master/data/stroup_nin_wheat.csv&amp;quot;;
+
+data alliance;
+    infile NIN firstobs=2 delimiter=&#39;,&#39;;
+    informat yield has_NA.;
+    input entry $   rep $   yield   col row;
+    Row  = 4.3*Row;
+    Col = 1.2*Col;
+    if yield=. then delete;
+run;
+
+# heatmap
+proc sgplot data=alliance;
+    HEATMAPPARM y=Row x=Col COLORRESPONSE=yield/ colormodel=(blue yellow green); 
+run;
+
+# linear mixed model
+proc mixed data=alliance;
+   class Rep Entry;
+   model Yield = Entry / outp=residuals;
+   random Rep;
+run;
+
+# Moran&#39;s I
+proc variogram data=residuals plots(only)=moran ;
+   compute lagd=1.2 maxlag=30 novariogram autocorr(assum=nor) ;
+   coordinates xc=row yc=col;
+   var resid;
+run;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Empirical Variograms</title>
+      <link>/workshops/spatial-workshop/variograms/</link>
+      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>/workshops/spatial-workshop/variograms/</guid>
+      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    &lt;em&gt;Under Construction&amp;hellip;&lt;/em&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;The empirical variogram is a visual tool for quantifying spatial covariance. It uses semivariance ($\gamma$), which is a measure of covariance between points or units ($i$ and $j$) as a function of distance ($h$):&lt;/p&gt;
+&lt;p&gt;$$\gamma(h) = \frac{1}{2|N(h)|}\sum_{N(h)}(x_i - x_j)^2$$&lt;/p&gt;
+&lt;p&gt;Semivariances are binned for distance intervals. The average values for semivariance and distance interval can be fit to mathematical models designed to explain how semivariance changes over distance.&lt;/p&gt;
+&lt;p&gt;Three important concepts of an empirical variogram are &lt;em&gt;nugget&lt;/em&gt;, &lt;em&gt;sill&lt;/em&gt; and  &lt;em&gt;range&lt;/em&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  id=&#34;figure-example-empirical-variogram&#34;&gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;Example Empirical Variogram&#34; srcset=&#34;
+               /media/Sadoti2014_spherical_huf033197c365a34c0f3cd93f8cc2a46a3_30850_84c00fa9c50ea6a6c12ad9bfe7b7fc54.jpg 400w,
+               /media/Sadoti2014_spherical_huf033197c365a34c0f3cd93f8cc2a46a3_30850_264947b8bbb5022511399aab59b72492.jpg 760w,
+               /media/Sadoti2014_spherical_huf033197c365a34c0f3cd93f8cc2a46a3_30850_1200x1200_fit_q75_lanczos.jpg 1200w&#34;
+               src=&#34;/media/Sadoti2014_spherical_huf033197c365a34c0f3cd93f8cc2a46a3_30850_84c00fa9c50ea6a6c12ad9bfe7b7fc54.jpg&#34;
+               width=&#34;640&#34;
+               height=&#34;434&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;figcaption&gt;
+      Example Empirical Variogram
+    &lt;/figcaption&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;range = distance up to which is there is spatial correlation&lt;/li&gt;
+&lt;li&gt;sill = uncorrelated variance of the variable of interest&lt;/li&gt;
+&lt;li&gt;nugget = measurement error, or short-distance spatial variance and other unaccounted for variance&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;2 other concepts:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;partial sill = sill - nugget&lt;/li&gt;
+&lt;li&gt;nugget effect = the nugget/sill ratio, interpreted opposite of $r^2$ (the closer it is to 1, the less the amount of spatial autocorrelation)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;correlated-error-models&#34;&gt;Correlated Error Models&lt;/h3&gt;
+&lt;p&gt;Many equations exist for modelling semivariance patterns. A deep knowledge of these is not required to fit an empirical variogram to a model. Here are a few popular examples.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Exponential&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;$$ \gamma (h) = \begin{cases}0 &amp;amp; \text{if }h=0 \\&lt;br&gt;
+C_0+C_1 \left [ 1-e^{-(\frac{h}{r}) } \right] &amp;amp; \text{if } h&amp;gt;0 \end{cases}$$&lt;/p&gt;
+&lt;p&gt;where&lt;/p&gt;
+&lt;p&gt;$$ C_0 = nugget $$
+$$ C_1 = partial : sill $$
+$$ r = range $$&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  id=&#34;figure-theoretical-exponential-variogram&#34;&gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;Theoretical Exponential Variogram&#34; srcset=&#34;
+               /media/exponential_hu386e53d67d764d7444b0b387b4e063d4_9112_ddf7cdfd8b98e26c9d3054149e89356a.png 400w,
+               /media/exponential_hu386e53d67d764d7444b0b387b4e063d4_9112_a87e02bb556b883dd58f6f07653f1b3d.png 760w,
+               /media/exponential_hu386e53d67d764d7444b0b387b4e063d4_9112_1200x1200_fit_lanczos_2.png 1200w&#34;
+               src=&#34;/media/exponential_hu386e53d67d764d7444b0b387b4e063d4_9112_ddf7cdfd8b98e26c9d3054149e89356a.png&#34;
+               width=&#34;760&#34;
+               height=&#34;570&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;figcaption&gt;
+      Theoretical Exponential Variogram
+    &lt;/figcaption&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;Gaussian&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;(a squared version of the exponential model)&lt;/p&gt;
+&lt;p&gt;$$ \gamma (h) = \begin{cases}0 &amp;amp; \text{if }h=0, \\&lt;br&gt;
+C_0+C_1 \left [ 1-e^{-(\frac{h}{r})^2} \right] &amp;amp; \text{if } h&amp;gt;0 \end{cases}$$&lt;/p&gt;
+&lt;p&gt;where&lt;/p&gt;
+&lt;p&gt;$$ C_0 = nugget $$
+$$ C_1 = partial : sill $$
+$$ r = range $$&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  id=&#34;figure-theoretical-gaussian-variogram&#34;&gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;Theoretical Gaussian Variogram&#34; srcset=&#34;
+               /media/gaussian_hu2f658028d7284d4383fb0ced7f818ca1_9293_cff44df779d4cf946b5347a882e571f0.png 400w,
+               /media/gaussian_hu2f658028d7284d4383fb0ced7f818ca1_9293_0aa29f0aef9676f3097de237b30e8d5b.png 760w,
+               /media/gaussian_hu2f658028d7284d4383fb0ced7f818ca1_9293_1200x1200_fit_lanczos_2.png 1200w&#34;
+               src=&#34;/media/gaussian_hu2f658028d7284d4383fb0ced7f818ca1_9293_cff44df779d4cf946b5347a882e571f0.png&#34;
+               width=&#34;760&#34;
+               height=&#34;570&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;figcaption&gt;
+      Theoretical Gaussian Variogram
+    &lt;/figcaption&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;Matérn&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&amp;lt;/An extremely complicated mathematical model/&amp;gt;&lt;/em&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  id=&#34;figure-empirical-matérn-variogram&#34;&gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;Empirical Matérn Variogram&#34; srcset=&#34;
+               /media/matern_example_hu3509d66db1bd03bfa15b6cd033f73cb0_11816_469234f2912ae9c7d5d274e0e93e1e8b.png 400w,
+               /media/matern_example_hu3509d66db1bd03bfa15b6cd033f73cb0_11816_9fb3a5401309369250e4aee537db6ab2.png 760w,
+               /media/matern_example_hu3509d66db1bd03bfa15b6cd033f73cb0_11816_1200x1200_fit_lanczos_2.png 1200w&#34;
+               src=&#34;/media/matern_example_hu3509d66db1bd03bfa15b6cd033f73cb0_11816_469234f2912ae9c7d5d274e0e93e1e8b.png&#34;
+               width=&#34;760&#34;
+               height=&#34;543&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;figcaption&gt;
+      Empirical Matérn Variogram
+    &lt;/figcaption&gt;&lt;/figure&gt;
+&lt;p&gt;There are many more models: Cauchy, logistic, spherical, sine, &amp;hellip;.&lt;/p&gt;
+&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    For more information on these models, see this workshop&amp;rsquo;s accompanying &lt;a href=&#34;https://idahoagstats.github.io/guide-to-field-trial-spatial-analysis/background.html&#34;&gt;online book&lt;/a&gt; on this topic and additional &lt;a href=&#34;http://documentation.sas.com/doc/en/pgmsascdc/9.4_3.4/statug/statug_variogram_details02.htm&#34;&gt;SAS resources&lt;/a&gt;.
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;h3 id=&#34;variogram-fitting&#34;&gt;Variogram fitting&lt;/h3&gt;
+&lt;p&gt;Picking the right model is done both by comparing the sum of squares of error for different models and by&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Not all variables have spatial autocorrelation&lt;/strong&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;&#34; srcset=&#34;
+               /media/bad_variogram_hued4982af248a0925e63ca33cf80a5a32_29378_fc15314aec043527ef960b706ff65911.png 400w,
+               /media/bad_variogram_hued4982af248a0925e63ca33cf80a5a32_29378_278189afe3dd801b3e5a39d434aa0f53.png 760w,
+               /media/bad_variogram_hued4982af248a0925e63ca33cf80a5a32_29378_1200x1200_fit_lanczos_2.png 1200w&#34;
+               src=&#34;/media/bad_variogram_hued4982af248a0925e63ca33cf80a5a32_29378_fc15314aec043527ef960b706ff65911.png&#34;
+               width=&#34;760&#34;
+               height=&#34;760&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;Not all fitted variogram models are worthy&lt;/strong&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  id=&#34;figure-variogram-gone-bad&#34;&gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;Variogram gone bad&#34; srcset=&#34;
+               /media/bad_variogram2_hubb2acf3376379e20deaeda13cbc7af2d_140991_528362d3ba3fefa9f526ab216ad0b8a3.png 400w,
+               /media/bad_variogram2_hubb2acf3376379e20deaeda13cbc7af2d_140991_963c2ba2c995fb232ec6b036ac661d9b.png 760w,
+               /media/bad_variogram2_hubb2acf3376379e20deaeda13cbc7af2d_140991_1200x1200_fit_lanczos_2.png 1200w&#34;
+               src=&#34;/media/bad_variogram2_hubb2acf3376379e20deaeda13cbc7af2d_140991_528362d3ba3fefa9f526ab216ad0b8a3.png&#34;
+               width=&#34;760&#34;
+               height=&#34;760&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;figcaption&gt;
+      Variogram gone bad
+    &lt;/figcaption&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;code-for-this-section&#34;&gt;Code for this section&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;The following scripts build upon work done in previous section(s).&lt;/em&gt;&lt;/p&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-8&#34;&gt;
+  &lt;summary&gt;R&lt;/summary&gt;
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;# load libraries
+librar(gstat)
+
+# set up spatial object
+Nin_spatial &amp;lt;- Nin_na
+coordinates(Nin_spatial) &amp;lt;- ~ col.width + row.length # add attribte
+class(Nin_spatial)
+
+# establish max distance for variogram estimation
+max_dist = 0.5*max(dist(coordinates(Nin_spatial)))
+
+# calculate empirical variogram
+resid_var1 &amp;lt;- gstat::variogram(yield ~ rep + gen, 
+                        cutoff = max_dist,
+                        width = max_dist/20, # 20 is the number of bins
+                        data = Nin_spatial)
+plot(resid_var1)
+
+#To fit a large number of models, the function &#39;autofitVariogram()&#39; from the package automap can be used (is it calling gstat::variogram)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-9&#34;&gt;
+  &lt;summary&gt;SAS&lt;/summary&gt;
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;# calculate semivariance and compute empirical variogram
+proc variogram data=residuals plots(only)=(semivar);
+   coordinates xc=Col yc=Row;
+   compute lagd=1.2 maxlags=30;
+  var resid;
+run;
+
+# fit models to the empirical variogram
+proc variogram data=residuals plots(only)=(fitplot);
+   coordinates xc=Col yc=Row;
+   compute lagd=1.2 maxlags=30;
+   model form=auto(mlist=(gau, exp, pow, sph) nest=1);
+  var resid;
+run;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Linear Models with Correlated Errors</title>
+      <link>/workshops/spatial-workshop/correlated-error-models/</link>
+      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>/workshops/spatial-workshop/correlated-error-models/</guid>
+      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    &lt;em&gt;Under Construction&amp;hellip;&lt;/em&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;h3 id=&#34;code-for-this-section&#34;&gt;Code for this section&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;The following scripts build upon work done in previous section(s).&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id=&#34;code-for-this-section-1&#34;&gt;Code for this section&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;The following scripts build upon work done in previous section(s).&lt;/em&gt;&lt;/p&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-1&#34;&gt;
+  &lt;summary&gt;R&lt;/summary&gt;
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;here it is.
+more code
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-2&#34;&gt;
+  &lt;summary&gt;SAS&lt;/summary&gt;
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;here it is.
+more code
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Modelling Spatial Trends</title>
+      <link>/workshops/spatial-workshop/trend-modelling/</link>
+      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>/workshops/spatial-workshop/trend-modelling/</guid>
+      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    &lt;em&gt;still under construction&amp;hellip;&lt;/em&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;The spatial models introduced in this workshop assume that spatial variation is localised and within a trial, plots located sufficiently far apart are independent of each other with no apparent spatial correlation. However, sometimes that is accurately describe a field trial. There can be experiment-wide gradients due to position on a slope, proximity to an influential environmental factor (e.g. a road), and so on. In these instances, those gradients should be modelled as a trend.&lt;/p&gt;
+&lt;h3 id=&#34;blocking&#34;&gt;Blocking&lt;/h3&gt;
+&lt;p&gt;Blocking is one example of modelling an experiment wide-trend:&lt;/p&gt;
+&lt;p&gt;$$Y_ij = \mu + \alpha_i + \beta_j + \epsilon_{ij}$$&lt;/p&gt;
+&lt;p&gt;$Y_ij$ is the independent variable&lt;br&gt;
+$\mu$ is the overall mean&lt;br&gt;
+$\alpha_i$ is the effect due to the $i^{th}$ treatment&lt;br&gt;
+$\beta_j$ is the effect due to the $j^{th}$ block&lt;br&gt;
+$\epsilon_ij$ are the error terms distributed as $N ~\sim (0,\sigma)$&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;&#34; srcset=&#34;
+               /media/blocking_hu10ad972e63ec33f6cccede6b15d61278_254605_d4a9434e4d64be2fa5ae0fabbb1a7d9f.png 400w,
+               /media/blocking_hu10ad972e63ec33f6cccede6b15d61278_254605_cc366fc98ad7465ff769b5f4863a991d.png 760w,
+               /media/blocking_hu10ad972e63ec33f6cccede6b15d61278_254605_1200x1200_fit_lanczos_2.png 1200w&#34;
+               src=&#34;/media/blocking_hu10ad972e63ec33f6cccede6b15d61278_254605_d4a9434e4d64be2fa5ae0fabbb1a7d9f.png&#34;
+               width=&#34;760&#34;
+               height=&#34;434&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;p&gt;The expectation is that each block will capture and model existing variation  within it. This becomes difficult to justify as blocks become large.&lt;/p&gt;
+&lt;h3 id=&#34;rows--ranges&#34;&gt;Rows &amp;amp; Ranges&lt;/h3&gt;
+&lt;p&gt;Trials rows and ranges can likewise be modelled directly in a model:&lt;/p&gt;
+&lt;p&gt;$$Y_ijk = \mu + \alpha_i + \beta_j + \gamma_k + \epsilon_{ijk}$$&lt;/p&gt;
+&lt;p&gt;$\beta_j$ is the effect due to the $j^{th}$ row&lt;br&gt;
+$\beta_j$ is the effect due to the $k^{th}$ range (or column)&lt;/p&gt;
+&lt;h4 id=&#34;code-for-trends&#34;&gt;Code for Trends&lt;/h4&gt;
+&lt;p&gt;&lt;em&gt;The following scripts build upon work done in previous section(s).&lt;/em&gt;&lt;/p&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-2&#34;&gt;
+  &lt;summary&gt;R&lt;/summary&gt;
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;# load libraries
+library(lme4)
+
+# exploratory plots 
+boxplot(yield ~ rep, data = Nin, xlab = &amp;quot;block&amp;quot;, col = &amp;quot;red2&amp;quot;)
+boxplot(yield ~ row, data = Nin, xlab = &amp;quot;row&amp;quot;, col = &amp;quot;dodgerblue2&amp;quot;)
+boxplot(yield ~ col, data = Nin, xlab = &amp;quot;column&amp;quot;, col = &amp;quot;gold&amp;quot;)
+
+## row/column model ##
+
+# data prep
+Nin$rowF = as.factor(Nin$row)
+Nin$colF = as.factor(Nin$col)
+
+# specify model
+nin.rc &amp;lt;- lmer(yield ~ gen + (1|colfF) + (1|rowF),
+              data = Nin, na.action = na.exclude)
+# extract random effects for row and column
+ranef(nin_rc)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-3&#34;&gt;
+  &lt;summary&gt;SAS&lt;/summary&gt;
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;# exploratory boxplots
+proc sgplot data=alliance;
+    vbox yield/category=rep FILLATTRS=(color=red) LINEATTRS=(color=black) WHISKERATTRS=(color=black);
+run;
+
+proc sgplot data=alliance;
+    vbox yield/category=Col FILLATTRS=(color=yellow) LINEATTRS=(color=black) WHISKERATTRS=(color=black);
+run;
+
+proc sgplot data=alliance;
+    vbox yield/category=Row FILLATTRS=(color=blue) LINEATTRS=(color=black) WHISKERATTRS=(color=black);
+run;
+
+# row/column model
+proc mixed data=alliance ;
+	class entry rep;
+	model yield = entry  row col/ddfm=kr;
+	random rep;
+	lsmeans entry/cl;
+	ods output LSMeans=NIN_row_col_means;
+	title1 &#39;NIN data: RCBD&#39;;
+run;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+&lt;h3 id=&#34;splines&#34;&gt;Splines&lt;/h3&gt;
+&lt;p&gt;Polynomial splines are an additional method for spatial adjustment and represent a more non-parametric method that does not rely on estimation or modeling of variograms. Instead, it uses the raw data and residuals to fit a surface to the spatial data and adjust the variance covariance matrix accordingly.&lt;/p&gt;
+&lt;h4 id=&#34;code-for-splines&#34;&gt;Code for Splines&lt;/h4&gt;
+&lt;p&gt;&lt;em&gt;The following scripts build upon work done in previous section(s).&lt;/em&gt;&lt;/p&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-4&#34;&gt;
+  &lt;summary&gt;R&lt;/summary&gt;
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;nin_spline &amp;lt;- SpATS(response = &amp;quot;yield&amp;quot;, 
+                    spatial = ~ PSANOVA(col, row, nseg = c(10,20),
+                                        degree = 3, pord = 2), 
+                    genotype = &amp;quot;gen&amp;quot;,  
+                    random = ~ rep, # + rowF + colF, 
+                    data = Nin, 
+                    control = list(tolerance = 1e-03, monitoring = 0))
+                    
+preds_spline &amp;lt;- predict(nin_spline, which = &amp;quot;gen&amp;quot;) %&amp;gt;% 
+  dplyr::select(gen, emmean = &amp;quot;predicted.values&amp;quot;, SE = &amp;quot;standard.errors&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-5&#34;&gt;
+  &lt;summary&gt;SAS&lt;/summary&gt;
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;proc glimmix data=alliance ;
+    class entry rep;
+    effect sp_r = spline(row col);
+    model yield = entry  sp_r/ddfm=kr;
+    random row col/type=rsmooth;
+    lsmeans entry/cl;
+    ods output LSMeans=NIN_smooth_means;
+    title1 &#39;NIN data: RCBD&#39;;
+run;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Comparing Models</title>
+      <link>/workshops/spatial-workshop/model-comparison/</link>
+      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>/workshops/spatial-workshop/model-comparison/</guid>
+      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    &lt;em&gt;Under Construction&amp;hellip;&lt;/em&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;h3 id=&#34;code-for-this-section&#34;&gt;Code for this section&lt;/h3&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-1&#34;&gt;
+  &lt;summary&gt;R&lt;/summary&gt;
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;here it is.
+more code
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-2&#34;&gt;
+  &lt;summary&gt;SAS&lt;/summary&gt;
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;here it is.
+more code
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Augmented Designs</title>
+      <link>/workshops/spatial-workshop/augmented/</link>
+      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>/workshops/spatial-workshop/augmented/</guid>
+      <description>&lt;p&gt;The augmented experimental design is a special design where there is a large number of unreplicated plots interspersed with frequent checks that are replicated. This type of model is  useful when the number of treatments is very large and/or replication is either impossible or unfeasible. Often, the primary goal of the studies using this design is to rank or select genotypes.&lt;/p&gt;
+&lt;p&gt;Augmented models are analyzed in a fundamentally different method than RCBD models due to the large number of unreplicated observations. To adjust for the lack of replication, only a select set of treatments, usually of known performance, are replicated in the experiments. The error estimated from these replicated treatments is used in the analysis to evaluate the remaining genotypes.&lt;/p&gt;
+&lt;p&gt;There are multiple way to specify an augmented model depending on what the researcher wants to know.&lt;/p&gt;
+&lt;h4 id=&#34;model-specification-1&#34;&gt;Model specification 1:&lt;/h4&gt;
+&lt;p&gt;$$ Y_{ij} = \tau_i + \beta(\tau)_{ij} $$&lt;/p&gt;
+&lt;p&gt;where:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$ Y_{ij}$ is the response variable&lt;/li&gt;
+&lt;li&gt;$ \tau_i$ is the effect of each check and the average effect of all unreplicated treatments&lt;/li&gt;
+&lt;li&gt;$ \beta(\tau)_{ij}$ is is the effect of the $j^{th}$ unreplicated treatment nested within the overall effect of unreplicated treatments&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This model evaluates:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The difference between all checks and the average of the unreplicated treatments.&lt;/li&gt;
+&lt;li&gt;The difference between the unreplicated treatments.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;model-specification-2&#34;&gt;Model specification 2:&lt;/h4&gt;
+&lt;p&gt;$$ Y_{ij} = \delta_i + \gamma(\delta)_{ij} $$&lt;/p&gt;
+&lt;p&gt;where:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$ Y_{ij}$ is the response variable&lt;/li&gt;
+&lt;li&gt;$ \delta_i$ is the average effect of all checks and the average effect of all unreplicated treatments (so there are only 2 treatment levels)&lt;/li&gt;
+&lt;li&gt;$ \gamma(\delta)_{ij}$ is is the effect of the $j^{th}$ treatment nested within the either unreplicated treatments or the check observations&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This model evaluates:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The difference between the average of the checks and the average of the unreplicated treatments&lt;/li&gt;
+&lt;li&gt;The difference between all treatments&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;These models are described more in depth in &lt;a href=&#34;https://doi.org/10.2134/appliedstatistics.2016.0005.c13&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Burgueño et al, 2018&lt;/a&gt;, along with a helpful discussion on when to treat any of these effects as fixed or random&lt;/p&gt;
+&lt;p&gt;The data used here refer to a wheat genotype evaluation study carried out near Lind Washington. The study looked at 922 unreplicated genotypes (‘name’) accompanied by 9 replicated check wheat cultivars.&lt;/p&gt;
+&lt;h3 id=&#34;code-for-this-section&#34;&gt;Code for this section&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;The following scripts build upon work done in previous section(s).&lt;/em&gt;&lt;/p&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-0&#34;&gt;
+  &lt;summary&gt;R&lt;/summary&gt;
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;# (if not already loaded)
+library(dplyr); library(nlme); library(ggplot2)
+library(gstat); library(sp)
+
+# read in data
+aug_data_origin &amp;lt;- read.csv(&amp;quot;data/AB19F5_LIND.csv&amp;quot;, 
+                     na.strings = c(&amp;quot;&amp;quot;, &amp;quot;NA&amp;quot;, &amp;quot;.&amp;quot;, &amp;quot;999999&amp;quot;)) %&amp;gt;% 
+  slice(-1) %&amp;gt;% # first line not needed
+  mutate(yieldkg = yieldg/1000)  # to prevent overflow
+
+# summarise the genoytypic data by checks/not checks
+gen_sum &amp;lt;- group_by(aug_data_origin, name) %&amp;gt;% summarise(counts = n()) %&amp;gt;% 
+  mutate(delta =  case_when(
+    counts &amp;gt; 1 ~ &amp;quot;check&amp;quot;,
+    counts == 1 ~ &amp;quot;unrep&amp;quot;))
+
+# need info on just the checks
+checks &amp;lt;- gen_sum %&amp;gt;% filter(delta == &amp;quot;check&amp;quot;) 
+
+# more summarise steps for different augmented modes
+gen_sum2 &amp;lt;- gen_sum  %&amp;gt;%  mutate(gamma = name) %&amp;gt;% 
+  mutate(tau = case_when(
+    delta == &amp;quot;check&amp;quot; ~ gamma,
+    delta == &amp;quot;unrep&amp;quot; ~ &amp;quot;unreplicate_obs&amp;quot;)) %&amp;gt;% 
+  mutate(beta = case_when(
+    delta == &amp;quot;unrep&amp;quot; ~ gamma,
+    delta == &amp;quot;check&amp;quot; ~ NA_integer_)) # or maybe &amp;quot;check&amp;quot;
+
+# merge original data set with info on treatment levels
+aug_data &amp;lt;- aug_data_origin %&amp;gt;% 
+  select(name, prow, pcol, yieldg) %&amp;gt;%
+  mutate(row = prow*11.7, col = pcol*5.5) %&amp;gt;% 
+  full_join(gen_sum2, by = &amp;quot;name&amp;quot;) 
+
+# calculate denominator degrees of freedom
+ddf = sum(checks$counts) - nrow(checks) - 1
+
+## initial linear model:
+
+# tau estimates effects of checks versus all unreplicated genotypes)
+# beta predicts effects each unreplicated genotypes, nested in tau 
+aug1 &amp;lt;- lme(fixed = yieldg ~ tau,
+                 random = ~ 1|tau/beta,
+                 data = aug_data, na.action = na.exclude)
+
+# another formulation
+# delta estimates effects of replicated versus unreplicated genotypes
+# gamma estimates the effecs of all genotypes evaluated in the trial
+aug2 &amp;lt;- lme(fixed = yieldg ~ delta,
+                 random = ~ 1|delta/gamma,
+                 data = aug_data, na.action = na.exclude)
+
+# extract residuals
+aug_data$res &amp;lt;- residuals(aug1)
+
+# plot residual chlorpleth map:
+ggplot(aug_data, aes(y = row, x = col)) +
+  geom_tile(aes(fill = res)) +
+  scale_fill_gradient(low = &amp;quot;yellow&amp;quot;, high = &amp;quot;black&amp;quot;) +
+  scale_x_continuous(breaks = seq(1,max(aug_data$row), 1)) +
+  scale_y_continuous(breaks = 1:max(aug_data$col)) +
+  coord_equal() +
+  theme_void() 
+
+# add spatial covariates
+aug_spatial &amp;lt;- aug_data %&amp;gt;% filter(!is.na(res))
+coordinates(aug_spatial) &amp;lt;- ~ col + row
+max_dist = 0.5*max(dist(coordinates(aug_spatial)))
+
+aug_vario &amp;lt;- gstat::variogram(res ~ 1, 
+                               cutoff = max_dist,
+                               width = max_dist/10, # 20 is the number of bins
+                               data = aug_spatial)
+plot(aug_vario)
+
+# optional to run: 
+# nugget_start &amp;lt;- min(aug_vario$gamma)
+# aug_vgm &amp;lt;- vgm(model = &amp;quot;Exp&amp;quot;, nugget = nugget_start) 
+# aug_variofit &amp;lt;- fit.variogram(aug_vario, aug_vgm)
+# plot(aug_vario, aug_variofit, main = &amp;quot;Exponential model&amp;quot;)     
+
+cor_exp &amp;lt;- corSpatial(form = ~ row + col, 
+                      nugget = T, fixed = F,
+                      type = &amp;quot;exponential&amp;quot;)
+
+aug1_sp &amp;lt;- update(aug1, corr = cor_exp)
+
+# spatial parameters:
+aug1_sp$modelStruct$corStruct
+
+# extract BLUPs for unreplicated lines:
+aug_blups &amp;lt;- ranef(aug1_sp)$beta %&amp;gt;% rename(yieldg = &#39;(Intercept)&#39;)
+
+# look at variance components
+VarCorr(aug1_sp)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-1&#34;&gt;
+  &lt;summary&gt;SAS&lt;/summary&gt;
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;filename AUG url &amp;quot;https://raw.githubusercontent.com/IdahoAgStats/guide-to-field-trial-spatial-analysis/master/data/AB19F5_LIND.csv&amp;quot;;
+
+PROC IMPORT OUT= WORK.augmented
+     DATAFILE= AUG
+     DBMS=CSV REPLACE;
+     GETNAMES=YES;
+     DATAROW=2; 
+RUN;
+
+data augmented;
+	set augmented;
+	if yieldg = 999999 or yieldg=. then delete; /* Remove missing values */
+	prow=prow*11.7; /*convert row and column indices to feet */
+	pcol=pcol*5.5;
+run;
+
+proc freq noprint data=augmented;
+	tables name/out=controls;
+run;
+
+data controls;
+	set controls;
+	if count &amp;gt;1;
+run;
+
+proc sort data=controls;
+	by name;
+run;
+     
+proc sort data=augmented;
+	by name;
+run;
+
+data augmented;
+	merge augmented controls;
+	by name;
+	if count=. then d2=2; /* Unreplicated */
+	else d2=1;            /* Replicated */
+	yieldkg=yieldg/1000;
+run;
+
+PROC mixed data=augmented;
+	class name d2;
+	model yieldkg = d2/noint outp=residuals ddf=229 229;
+	lsmeans d2;
+	*lsmeans name(d2)/slice = d2;
+run;
+
+proc sgplot data=residuals;
+	HEATMAPPARM y=pRow x=pCol COLORRESPONSE=resid/ colormodel=(cx014458 cx1E8C6E cxE1FE01); 
+title1 &#39;Field Map&#39;;
+run;
+
+proc variogram data=residuals plots(only)=(fitplot);
+   where yieldkg ^= .;
+   coordinates xc=pcol yc=pRow;
+   compute lagd=6.6 maxlags=25;
+   model form=auto(mlist=(gau, exp, pow, sph) nest=1);
+  var resid;
+run;
+
+PROC mixed data=augmented;
+	class name d2;
+	model yieldkg = d2 name(d2)/outp=adjresiduals ddf=229 229;
+	lsmeans d2;
+	repeated/subject=intercept type=sp(pow)(prow pcol) local;
+	ods output SolutionR =parms;
+	parms (0.074) (0.0051)(0.475)  ;
+	*lsmeans name(d2)/slice = d2;  # alot of output!!
+run;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Final thoughts</title>
+      <link>/workshops/spatial-workshop/conclusion/</link>
+      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>/workshops/spatial-workshop/conclusion/</guid>
+      <description>&lt;p&gt;Spatial analysis can be challenging, but I think it is worth the effort to learn and implement in analysis of field trials. Incorporating spatial statistics into analysis of feel trials can be overwhelming at time. However, investigating spatial correlation in a field trial and controlling for it if necessary using &lt;em&gt;any&lt;/em&gt; of the methods developed for this is recommended over doing nothing.&lt;/p&gt;
+&lt;p&gt;There is no denying that work is needed to develop scripts that automate this process so researchers can routinely incorporate spatial covariance into field trial analysis. Many current R tools are unwieldy to use and have insufficient options to support variety trial analysis.&lt;/p&gt;
+&lt;p&gt;Until this situation is improved, it is probably wisest to focus on using spatial models that are well-supported at this time. Any of the options implemented in the &lt;strong&gt;nlme&lt;/strong&gt; package (or that work with that package) are decent choices with excellent support for extracting least-squares means, running ANOVA, and standard model diagnostics. Furthermore, &lt;strong&gt;nlme&lt;/strong&gt; supports generalized linear models. &lt;strong&gt;INLA&lt;/strong&gt; is established is supported by a large and growing user base, and &lt;strong&gt;breedR&lt;/strong&gt; is likewise well established.&lt;/p&gt;
+&lt;h3 id=&#34;other-resources&#34;&gt;Other resources&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://idahoagstats.github.io/guide-to-field-trial-spatial-analysis/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Incorporating Spatial Analysis into Agricultural Field Experiments&lt;/a&gt;, a more comprehensive version of this tutorial&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CRAN task view on &lt;a href=&#34;https://cran.r-project.org/web/views/Spatial.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;analysis of spatial data&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Other R packages&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;package&lt;/th&gt;
+&lt;th&gt;usage&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;http://famuvie.github.io/breedR/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;breedR&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;mixed modelling with AR1xAR1 estimation&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.r-inla.org&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;inla&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Bayesian modelling with options for spatial covariance structure&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/cran/McSpatial&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Mcspatial&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;nonparametric spatial analysis, (no longer on CRAN)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://CRAN.R-project.org/package=ngspatial&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ngspatial&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;spatial models with a focus on generalized linear models&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://CRAN.R-project.org/package=sommer&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;sommer&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;mixed models, including an AR1xAr1 model&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://gitlab.mbb.univ-montp2.fr/francois/spamm-ref&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;spamm&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Matérn covariance structure&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/lrcastro/spANOVA&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;spANOVA&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;spatial lag models for field trials&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://r-spatial.github.io/spatialreg/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;spatialreg&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;spatial functions for areal data&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;The package &lt;strong&gt;sommer&lt;/strong&gt; implements a version of the AR1xAR1 covariance structure. However, it does not estimate the parameter $\rho$. The user must specify the $\rho$ and that value is not optimized in the restricted maximum likelihood estimation. Both &lt;strong&gt;BreedR&lt;/strong&gt; and &lt;strong&gt;inla&lt;/strong&gt; implement an AR1xAR1 covariance structure. Additional, SAS and the proprietary software &lt;a href=&#34;https://asreml.kb.vsni.co.uk/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;asreml&lt;/a&gt; can implement a mixed model with this covariance structure.&lt;/p&gt;
+&lt;h3 id=&#34;books-for-the-deep-dive&#34;&gt;Books for the deep dive&lt;/h3&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;&#34; srcset=&#34;
+               /media/cressie_revised_hu68b06343b1fbcd2ddc04942b3b381960_38587_800cbb8726c4de125424ad445947b1eb.jpg 400w,
+               /media/cressie_revised_hu68b06343b1fbcd2ddc04942b3b381960_38587_bd57d203adefa7bd4d34132f8dafda5d.jpg 760w,
+               /media/cressie_revised_hu68b06343b1fbcd2ddc04942b3b381960_38587_1200x1200_fit_q75_lanczos.jpg 1200w&#34;
+               src=&#34;/media/cressie_revised_hu68b06343b1fbcd2ddc04942b3b381960_38587_800cbb8726c4de125424ad445947b1eb.jpg&#34;
+               width=&#34;250&#34;
+               height=&#34;250&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://onlinelibrary.wiley.com/doi/book/10.1002/9781119115151&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Statistics for Spatial Data&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Applied Spatial Data Analysis with R&lt;/strong&gt;, available for &lt;a href=&#34;https://asdar-book.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;free&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://spacetimewithr.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Spatio-Temporal Statistics With R&lt;/strong&gt;&lt;/a&gt; (also free)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.routledge.com/Spatial-Data-Analysis-in-Ecology-and-Agriculture-Using-R/Plant/p/book/9780367732325&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Spatial Data Analysis in Ecology and Agriculture Using R&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

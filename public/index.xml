@@ -49,9 +49,9 @@ sapply(package_list, require, character.only = TRUE)
     
     <item>
       <title>Computational Set-up</title>
-      <link>/workshops/spatial_workshop/prep-work/</link>
+      <link>/workshops/spatial-workshop/prep-work/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/workshops/spatial_workshop/prep-work/</guid>
+      <guid>/workshops/spatial-workshop/prep-work/</guid>
       <description>&lt;p&gt;
   &lt;i class=&#34;fab fa-r-project  pr-1 fa-fw&#34;&gt;&lt;/i&gt; Here are instructions for how check your R installation and install packages needed for the workshop.&lt;/p&gt;
 &lt;h3 id=&#34;check-software-versions&#34;&gt;Check software versions&lt;/h3&gt;
@@ -84,9 +84,9 @@ sapply(package_list, require, character.only = TRUE)
     
     <item>
       <title>Why Care about Spatial Variation?</title>
-      <link>/workshops/spatial_workshop/why-spatial/</link>
+      <link>/workshops/spatial-workshop/why-spatial/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/workshops/spatial_workshop/why-spatial/</guid>
+      <guid>/workshops/spatial-workshop/why-spatial/</guid>
       <description>&lt;h4 id=&#34;agricultural-field-trials&#34;&gt;Agricultural field trials&lt;/h4&gt;
 
 
@@ -291,9 +291,9 @@ sapply(package_list, require, character.only = TRUE)
     
     <item>
       <title>Diagnosing Spatial Autocorrelation</title>
-      <link>/workshops/spatial_workshop/diagnosis/</link>
+      <link>/workshops/spatial-workshop/diagnosis/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/workshops/spatial_workshop/diagnosis/</guid>
+      <guid>/workshops/spatial-workshop/diagnosis/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     This workshop is concerned with &lt;strong&gt;areal&lt;/strong&gt; data, that is, data that occurs in discrete units (plots, in most cases). This attribute of trial data impacts many aspects of spatial analysis
@@ -491,9 +491,9 @@ run;
     
     <item>
       <title>Empirical Variograms</title>
-      <link>/workshops/spatial_workshop/variograms/</link>
+      <link>/workshops/spatial-workshop/variograms/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/workshops/spatial_workshop/variograms/</guid>
+      <guid>/workshops/spatial-workshop/variograms/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     &lt;em&gt;Under Construction&amp;hellip;&lt;/em&gt;
@@ -882,9 +882,9 @@ fig.show()
     
     <item>
       <title>Linear Models with Correlated Errors</title>
-      <link>/workshops/spatial_workshop/correlated-error-models/</link>
+      <link>/workshops/spatial-workshop/correlated-error-models/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/workshops/spatial_workshop/correlated-error-models/</guid>
+      <guid>/workshops/spatial-workshop/correlated-error-models/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     &lt;em&gt;Under Construction&amp;hellip;&lt;/em&gt;
@@ -941,9 +941,9 @@ The variance of the distribution is $\sigma^{2}$.
     
     <item>
       <title>Modelling Spatial Trends</title>
-      <link>/workshops/spatial_workshop/trend-modelling/</link>
+      <link>/workshops/spatial-workshop/trend-modelling/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/workshops/spatial_workshop/trend-modelling/</guid>
+      <guid>/workshops/spatial-workshop/trend-modelling/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     &lt;em&gt;still under construction&amp;hellip;&lt;/em&gt;
@@ -1080,9 +1080,9 @@ run;
     
     <item>
       <title>Comparing Models</title>
-      <link>/workshops/spatial_workshop/model-comparison/</link>
+      <link>/workshops/spatial-workshop/model-comparison/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/workshops/spatial_workshop/model-comparison/</guid>
+      <guid>/workshops/spatial-workshop/model-comparison/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     &lt;em&gt;Under Construction&amp;hellip;&lt;/em&gt;
@@ -1108,27 +1108,214 @@ more code
     
     <item>
       <title>Augmented Designs</title>
-      <link>/workshops/spatial_workshop/augmented/</link>
+      <link>/workshops/spatial-workshop/augmented/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/workshops/spatial_workshop/augmented/</guid>
-      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    &lt;em&gt;Under Construction&amp;hellip;&lt;/em&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
+      <guid>/workshops/spatial-workshop/augmented/</guid>
+      <description>&lt;p&gt;The augmented experimental design is a special design where there is a large number of unreplicated plots interspersed with frequent checks that are replicated. This type of model is  useful when the number of treatments is very large and/or replication is either impossible or unfeasible. Often, the primary goal of the studies using this design is to rank or select genotypes.&lt;/p&gt;
+&lt;p&gt;Augmented models are analyzed in a fundamentally different method than RCBD models due to the large number of unreplicated observations. To adjust for the lack of replication, only a select set of treatments, usually of known performance, are replicated in the experiments. The error estimated from these replicated treatments is used in the analysis to evaluate the remaining genotypes.&lt;/p&gt;
+&lt;p&gt;There are multiple way to specify an augmented model depending on what the researcher wants to know.&lt;/p&gt;
+&lt;h4 id=&#34;model-specification-1&#34;&gt;Model specification 1:&lt;/h4&gt;
+&lt;p&gt;$$ Y_{ij} = \tau_i + \beta(\tau)_{ij} $$&lt;/p&gt;
+&lt;p&gt;where:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$ Y_{ij}$ is the response variable&lt;/li&gt;
+&lt;li&gt;$ \tau_i$ is the effect of each check and the average effect of all unreplicated treatments&lt;/li&gt;
+&lt;li&gt;$ \beta(\tau)_{ij}$ is is the effect of the $j^{th}$ unreplicated treatment nested within the overall effect of unreplicated treatments&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This model evaluates:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The difference between all checks and the average of the unreplicated treatments.&lt;/li&gt;
+&lt;li&gt;The difference between the unreplicated treatments.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;model-specification-2&#34;&gt;Model specification 2:&lt;/h4&gt;
+&lt;p&gt;$$ Y_{ij} = \delta_i + \gamma(\delta)_{ij} $$&lt;/p&gt;
+&lt;p&gt;where:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$ Y_{ij}$ is the response variable&lt;/li&gt;
+&lt;li&gt;$ \delta_i$ is the average effect of all checks and the average effect of all unreplicated treatments (so there are only 2 treatment levels)&lt;/li&gt;
+&lt;li&gt;$ \gamma(\delta)_{ij}$ is is the effect of the $j^{th}$ treatment nested within the either unreplicated treatments or the check observations&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This model evaluates:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The difference between the average of the checks and the average of the unreplicated treatments&lt;/li&gt;
+&lt;li&gt;The difference between all treatments&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;These models are described more in depth in &lt;a href=&#34;https://doi.org/10.2134/appliedstatistics.2016.0005.c13&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Burgueño et al, 2018&lt;/a&gt;, along with a helpful discussion on when to treat any of these effects as fixed or random&lt;/p&gt;
+&lt;p&gt;The data used here refer to a wheat genotype evaluation study carried out near Lind Washington. The study looked at 922 unreplicated genotypes (‘name’) accompanied by 9 replicated check wheat cultivars.&lt;/p&gt;
 &lt;h3 id=&#34;code-for-this-section&#34;&gt;Code for this section&lt;/h3&gt;
 &lt;p&gt;&lt;em&gt;The following scripts build upon work done in previous section(s).&lt;/em&gt;&lt;/p&gt;
-&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-1&#34;&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-0&#34;&gt;
   &lt;summary&gt;R&lt;/summary&gt;
-  &lt;p&gt;&lt;pre&gt;&lt;code&gt;here it is.
-more code
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;# (if not already loaded)
+library(dplyr); library(nlme); library(ggplot2)
+library(gstat); library(sp)
+
+# read in data
+aug_data_origin &amp;lt;- read.csv(&amp;quot;data/AB19F5_LIND.csv&amp;quot;, 
+                     na.strings = c(&amp;quot;&amp;quot;, &amp;quot;NA&amp;quot;, &amp;quot;.&amp;quot;, &amp;quot;999999&amp;quot;)) %&amp;gt;% 
+  slice(-1) %&amp;gt;% # first line not needed
+  mutate(yieldkg = yieldg/1000)  # to prevent overflow
+
+# summarise the genoytypic data by checks/not checks
+gen_sum &amp;lt;- group_by(aug_data_origin, name) %&amp;gt;% summarise(counts = n()) %&amp;gt;% 
+  mutate(delta =  case_when(
+    counts &amp;gt; 1 ~ &amp;quot;check&amp;quot;,
+    counts == 1 ~ &amp;quot;unrep&amp;quot;))
+
+# need info on just the checks
+checks &amp;lt;- gen_sum %&amp;gt;% filter(delta == &amp;quot;check&amp;quot;) 
+
+# more summarise steps for different augmented modes
+gen_sum2 &amp;lt;- gen_sum  %&amp;gt;%  mutate(gamma = name) %&amp;gt;% 
+  mutate(tau = case_when(
+    delta == &amp;quot;check&amp;quot; ~ gamma,
+    delta == &amp;quot;unrep&amp;quot; ~ &amp;quot;unreplicate_obs&amp;quot;)) %&amp;gt;% 
+  mutate(beta = case_when(
+    delta == &amp;quot;unrep&amp;quot; ~ gamma,
+    delta == &amp;quot;check&amp;quot; ~ NA_integer_)) # or maybe &amp;quot;check&amp;quot;
+
+# merge original data set with info on treatment levels
+aug_data &amp;lt;- aug_data_origin %&amp;gt;% 
+  select(name, prow, pcol, yieldg) %&amp;gt;%
+  mutate(row = prow*11.7, col = pcol*5.5) %&amp;gt;% 
+  full_join(gen_sum2, by = &amp;quot;name&amp;quot;) 
+
+# calculate denominator degrees of freedom
+ddf = sum(checks$counts) - nrow(checks) - 1
+
+## initial linear model:
+
+# tau estimates effects of checks versus all unreplicated genotypes)
+# beta predicts effects each unreplicated genotypes, nested in tau 
+aug1 &amp;lt;- lme(fixed = yieldg ~ tau,
+                 random = ~ 1|tau/beta,
+                 data = aug_data, na.action = na.exclude)
+
+# another formulation
+# delta estimates effects of replicated versus unreplicated genotypes
+# gamma estimates the effecs of all genotypes evaluated in the trial
+aug2 &amp;lt;- lme(fixed = yieldg ~ delta,
+                 random = ~ 1|delta/gamma,
+                 data = aug_data, na.action = na.exclude)
+
+# extract residuals
+aug_data$res &amp;lt;- residuals(aug1)
+
+# plot residual chlorpleth map:
+ggplot(aug_data, aes(y = row, x = col)) +
+  geom_tile(aes(fill = res)) +
+  scale_fill_gradient(low = &amp;quot;yellow&amp;quot;, high = &amp;quot;black&amp;quot;) +
+  scale_x_continuous(breaks = seq(1,max(aug_data$row), 1)) +
+  scale_y_continuous(breaks = 1:max(aug_data$col)) +
+  coord_equal() +
+  theme_void() 
+
+# add spatial covariates
+aug_spatial &amp;lt;- aug_data %&amp;gt;% filter(!is.na(res))
+coordinates(aug_spatial) &amp;lt;- ~ col + row
+max_dist = 0.5*max(dist(coordinates(aug_spatial)))
+
+aug_vario &amp;lt;- gstat::variogram(res ~ 1, 
+                               cutoff = max_dist,
+                               width = max_dist/10, # 20 is the number of bins
+                               data = aug_spatial)
+plot(aug_vario)
+
+# optional to run: 
+# nugget_start &amp;lt;- min(aug_vario$gamma)
+# aug_vgm &amp;lt;- vgm(model = &amp;quot;Exp&amp;quot;, nugget = nugget_start) 
+# aug_variofit &amp;lt;- fit.variogram(aug_vario, aug_vgm)
+# plot(aug_vario, aug_variofit, main = &amp;quot;Exponential model&amp;quot;)     
+
+cor_exp &amp;lt;- corSpatial(form = ~ row + col, 
+                      nugget = T, fixed = F,
+                      type = &amp;quot;exponential&amp;quot;)
+
+aug1_sp &amp;lt;- update(aug1, corr = cor_exp)
+
+# spatial parameters:
+aug1_sp$modelStruct$corStruct
+
+# extract BLUPs for unreplicated lines:
+aug_blups &amp;lt;- ranef(aug1_sp)$beta %&amp;gt;% rename(yieldg = &#39;(Intercept)&#39;)
+
+# look at variance components
+VarCorr(aug1_sp)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/p&gt;
 &lt;/details&gt;
-&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-2&#34;&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-1&#34;&gt;
   &lt;summary&gt;SAS&lt;/summary&gt;
-  &lt;p&gt;&lt;pre&gt;&lt;code&gt;here it is.
-more code
+  &lt;p&gt;&lt;pre&gt;&lt;code&gt;filename AUG url &amp;quot;https://raw.githubusercontent.com/IdahoAgStats/guide-to-field-trial-spatial-analysis/master/data/AB19F5_LIND.csv&amp;quot;;
+
+PROC IMPORT OUT= WORK.augmented
+     DATAFILE= AUG
+     DBMS=CSV REPLACE;
+     GETNAMES=YES;
+     DATAROW=2; 
+RUN;
+
+data augmented;
+	set augmented;
+	if yieldg = 999999 or yieldg=. then delete; /* Remove missing values */
+	prow=prow*11.7; /*convert row and column indices to feet */
+	pcol=pcol*5.5;
+run;
+
+proc freq noprint data=augmented;
+	tables name/out=controls;
+run;
+
+data controls;
+	set controls;
+	if count &amp;gt;1;
+run;
+
+proc sort data=controls;
+	by name;
+run;
+     
+proc sort data=augmented;
+	by name;
+run;
+
+data augmented;
+	merge augmented controls;
+	by name;
+	if count=. then d2=2; /* Unreplicated */
+	else d2=1;            /* Replicated */
+	yieldkg=yieldg/1000;
+run;
+
+PROC mixed data=augmented;
+	class name d2;
+	model yieldkg = d2/noint outp=residuals ddf=229 229;
+	lsmeans d2;
+	*lsmeans name(d2)/slice = d2;
+run;
+
+proc sgplot data=residuals;
+	HEATMAPPARM y=pRow x=pCol COLORRESPONSE=resid/ colormodel=(cx014458 cx1E8C6E cxE1FE01); 
+title1 &#39;Field Map&#39;;
+run;
+
+proc variogram data=residuals plots(only)=(fitplot);
+   where yieldkg ^= .;
+   coordinates xc=pcol yc=pRow;
+   compute lagd=6.6 maxlags=25;
+   model form=auto(mlist=(gau, exp, pow, sph) nest=1);
+  var resid;
+run;
+
+PROC mixed data=augmented;
+	class name d2;
+	model yieldkg = d2 name(d2)/outp=adjresiduals ddf=229 229;
+	lsmeans d2;
+	repeated/subject=intercept type=sp(pow)(prow pcol) local;
+	ods output SolutionR =parms;
+	parms (0.074) (0.0051)(0.475)  ;
+	*lsmeans name(d2)/slice = d2;  # alot of output!!
+run;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/p&gt;
 &lt;/details&gt;
@@ -1137,9 +1324,9 @@ more code
     
     <item>
       <title>Final thoughts</title>
-      <link>/workshops/spatial_workshop/conclusion/</link>
+      <link>/workshops/spatial-workshop/conclusion/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/workshops/spatial_workshop/conclusion/</guid>
+      <guid>/workshops/spatial-workshop/conclusion/</guid>
       <description>&lt;p&gt;Spatial analysis can be challenging, but I think it is worth the effort to learn and implement in analysis of field trials. Incorporating spatial statistics into analysis of feel trials can be overwhelming at time. However, investigating spatial correlation in a field trial and controlling for it if necessary using &lt;em&gt;any&lt;/em&gt; of the methods developed for this is recommended over doing nothing.&lt;/p&gt;
 &lt;p&gt;There is no denying that work is needed to develop scripts that automate this process so researchers can routinely incorporate spatial covariance into field trial analysis. Many current R tools are unwieldy to use and have insufficient options to support variety trial analysis.&lt;/p&gt;
 &lt;p&gt;Until this situation is improved, it is probably wisest to focus on using spatial models that are well-supported at this time. Any of the options implemented in the &lt;strong&gt;nlme&lt;/strong&gt; package (or that work with that package) are decent choices with excellent support for extracting least-squares means, running ANOVA, and standard model diagnostics. Furthermore, &lt;strong&gt;nlme&lt;/strong&gt; supports generalized linear models. &lt;strong&gt;INLA&lt;/strong&gt; is established is supported by a large and growing user base, and &lt;strong&gt;breedR&lt;/strong&gt; is likewise well established.&lt;/p&gt;
