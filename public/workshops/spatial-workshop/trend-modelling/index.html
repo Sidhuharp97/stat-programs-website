@@ -33,7 +33,7 @@
   
     
   
-  <meta name="description" content="still under construction&hellip;   The spatial models introduced in this workshop assume that spatial variation is localised and within a trial, plots located sufficiently far apart are independent of each other with no apparent spatial correlation." />
+  <meta name="description" content="The spatial models introduced in this workshop assume that spatial variation is localised and within a trial, plots located sufficiently far apart are independent of each other with no apparent spatial correlation." />
 
   
   <link rel="alternate" hreflang="en-us" href="/workshops/spatial-workshop/trend-modelling/" />
@@ -298,7 +298,7 @@
   <meta property="og:site_name" content="Idaho Ag Stats" />
   <meta property="og:url" content="/workshops/spatial-workshop/trend-modelling/" />
   <meta property="og:title" content="Modelling Spatial Trends | Idaho Ag Stats" />
-  <meta property="og:description" content="still under construction&hellip;   The spatial models introduced in this workshop assume that spatial variation is localised and within a trial, plots located sufficiently far apart are independent of each other with no apparent spatial correlation." /><meta property="og:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" />
+  <meta property="og:description" content="The spatial models introduced in this workshop assume that spatial variation is localised and within a trial, plots located sufficiently far apart are independent of each other with no apparent spatial correlation." /><meta property="og:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" />
     <meta property="twitter:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" /><meta property="og:locale" content="en-us" />
   
     
@@ -846,12 +846,7 @@
           <h1>Modelling Spatial Trends</h1>
 
           <div class="article-style">
-            <div class="alert alert-note">
-  <div>
-    <em>still under construction&hellip;</em>
-  </div>
-</div>
-<p>The spatial models introduced in this workshop assume that spatial variation is localised and within a trial, plots located sufficiently far apart are independent of each other with no apparent spatial correlation. However, sometimes that is accurately describe a field trial. There can be experiment-wide gradients due to position on a slope, proximity to an influential environmental factor (e.g. a road), and so on. In these instances, those gradients should be modelled as a trend.</p>
+            <p>The spatial models introduced in this workshop assume that spatial variation is localised and within a trial, plots located sufficiently far apart are independent of each other with no apparent spatial correlation. However, sometimes that is accurately describe a field trial. There can be experiment-wide gradients due to position on a slope, proximity to an influential environmental factor (e.g. a road), and so on. In these instances, those gradients should be modelled as a trend.</p>
 <h3 id="blocking">Blocking</h3>
 <p>Blocking is one example of modelling an experiment wide-trend:</p>
 <p>$$Y_ij = \mu + \alpha_i + \beta_j + \epsilon_{ij}$$</p>
@@ -859,7 +854,7 @@
 $\mu$ is the overall mean<br>
 $\alpha_i$ is the effect due to the $i^{th}$ treatment<br>
 $\beta_j$ is the effect due to the $j^{th}$ block<br>
-$\epsilon_ij$ are the error terms distributed as $N ~\sim (0,\sigma)$</p>
+$\epsilon_{ij}$ are the error terms distributed as $N ~\sim (0,\sigma)$</p>
 
 
 
@@ -890,10 +885,10 @@ $\epsilon_ij$ are the error terms distributed as $N ~\sim (0,\sigma)$</p>
 <p>Trials rows and ranges can likewise be modelled directly in a model:</p>
 <p>$$Y_ijk = \mu + \alpha_i + \beta_j + \gamma_k + \epsilon_{ijk}$$</p>
 <p>$\beta_j$ is the effect due to the $j^{th}$ row<br>
-$\beta_j$ is the effect due to the $k^{th}$ range (or column)</p>
+$\gamma_k$ is the effect due to the $k^{th}$ range (or column)</p>
 <h4 id="code-for-trends">Code for Trends</h4>
 <p><em>The following scripts build upon work done in previous section(s).</em></p>
-<details class="spoiler "  id="spoiler-2">
+<details class="spoiler "  id="spoiler-1">
   <summary>R</summary>
   <p><pre><code># load libraries
 library(lme4)
@@ -917,7 +912,7 @@ ranef(nin_rc)
 </code></pre>
 </p>
 </details>
-<details class="spoiler "  id="spoiler-3">
+<details class="spoiler "  id="spoiler-2">
   <summary>SAS</summary>
   <p><pre><code># exploratory boxplots
 proc sgplot data=alliance;
@@ -948,7 +943,7 @@ run;
 <p>Polynomial splines are an additional method for spatial adjustment and represent a more non-parametric method that does not rely on estimation or modeling of variograms. Instead, it uses the raw data and residuals to fit a surface to the spatial data and adjust the variance covariance matrix accordingly.</p>
 <h4 id="code-for-splines">Code for Splines</h4>
 <p><em>The following scripts build upon work done in previous section(s).</em></p>
-<details class="spoiler "  id="spoiler-4">
+<details class="spoiler "  id="spoiler-3">
   <summary>R</summary>
   <p><pre><code>nin_spline &lt;- SpATS(response = &quot;yield&quot;, 
                     spatial = ~ PSANOVA(col, row, nseg = c(10,20),
@@ -963,7 +958,7 @@ preds_spline &lt;- predict(nin_spline, which = &quot;gen&quot;) %&gt;%
 </code></pre>
 </p>
 </details>
-<details class="spoiler "  id="spoiler-5">
+<details class="spoiler "  id="spoiler-4">
   <summary>SAS</summary>
   <p><pre><code>proc glimmix data=alliance ;
     class entry rep;

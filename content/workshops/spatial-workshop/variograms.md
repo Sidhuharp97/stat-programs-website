@@ -91,7 +91,7 @@ Picking the right model is done both by comparing the sum of squares of error fo
 {{< spoiler text="R" >}}
 ```
 # load libraries
-librar(gstat)
+library(gstat)
 
 # set up spatial object
 Nin_spatial <- Nin_na
@@ -106,9 +106,37 @@ resid_var1 <- gstat::variogram(yield ~ rep + gen,
                         cutoff = max_dist,
                         width = max_dist/20, # 20 is the number of bins
                         data = Nin_spatial)
-plot(resid_var1)
+plot(resid_var1)  # empirical variogram
 
-#To fit a large number of models, the function 'autofitVariogram()' from the package automap can be used (is it calling gstat::variogram)
+#Note: To fit a large number of models, the function 'autofitVariogram()' from the package automap can be used (is it calling gstat::variogram)
+
+# starting value for the nugget
+nugget_start <- min(resid_var1$gamma) 
+
+# initialise the model (this does not do much)
+Nin_vgm_exp <- vgm(model = "Exp", nugget = nugget_start) # exponential
+Nin_vgm_gau <- vgm(model = "Gau", nugget = nugget_start) # Gaussian
+Nin_vgm_mat <- vgm(model = "Mat", nugget = nugget_start) # Matern
+
+# actually do some fitting! 
+Nin_variofit_exp <- fit.variogram(resid_var1, Nin_vgm_exp)
+Nin_variofit_gau <- fit.variogram(resid_var1, Nin_vgm_gau)
+Nin_variofit_mat <- fit.variogram(resid_var1, Nin_vgm_mat, fit.kappa = T)
+
+plot(resid_var1, Nin_variofit_exp, main = "Exponential model")
+plot(resid_var1, Nin_variofit_gau, main = "Gaussian model")
+plot(resid_var1, Nin_variofit_mat, main = "Matern model") 
+
+attr(Nin_variofit_exp, "SSErr")
+attr(Nin_variofit_gau, "SSErr")
+attr(Nin_variofit_mat, "SSErr")
+
+# parameters:
+Nin_variofit_gau
+
+nugget <- Nin_variofit3$psill[1] # measurement error (other random error)
+range <- Nin_variofit3$range[2] # distance to establish independence between data points
+sill <- sum(Nin_variofit3$psill) # maximum semivariance
 ``` 
 
 {{< /spoiler >}}

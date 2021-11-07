@@ -635,7 +635,7 @@ $$ r = range $$&lt;/p&gt;
 &lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-8&#34;&gt;
   &lt;summary&gt;R&lt;/summary&gt;
   &lt;p&gt;&lt;pre&gt;&lt;code&gt;# load libraries
-librar(gstat)
+library(gstat)
 
 # set up spatial object
 Nin_spatial &amp;lt;- Nin_na
@@ -650,9 +650,37 @@ resid_var1 &amp;lt;- gstat::variogram(yield ~ rep + gen,
                         cutoff = max_dist,
                         width = max_dist/20, # 20 is the number of bins
                         data = Nin_spatial)
-plot(resid_var1)
+plot(resid_var1)  # empirical variogram
 
-#To fit a large number of models, the function &#39;autofitVariogram()&#39; from the package automap can be used (is it calling gstat::variogram)
+#Note: To fit a large number of models, the function &#39;autofitVariogram()&#39; from the package automap can be used (is it calling gstat::variogram)
+
+# starting value for the nugget
+nugget_start &amp;lt;- min(resid_var1$gamma) 
+
+# initialise the model (this does not do much)
+Nin_vgm_exp &amp;lt;- vgm(model = &amp;quot;Exp&amp;quot;, nugget = nugget_start) # exponential
+Nin_vgm_gau &amp;lt;- vgm(model = &amp;quot;Gau&amp;quot;, nugget = nugget_start) # Gaussian
+Nin_vgm_mat &amp;lt;- vgm(model = &amp;quot;Mat&amp;quot;, nugget = nugget_start) # Matern
+
+# actually do some fitting! 
+Nin_variofit_exp &amp;lt;- fit.variogram(resid_var1, Nin_vgm_exp)
+Nin_variofit_gau &amp;lt;- fit.variogram(resid_var1, Nin_vgm_gau)
+Nin_variofit_mat &amp;lt;- fit.variogram(resid_var1, Nin_vgm_mat, fit.kappa = T)
+
+plot(resid_var1, Nin_variofit_exp, main = &amp;quot;Exponential model&amp;quot;)
+plot(resid_var1, Nin_variofit_gau, main = &amp;quot;Gaussian model&amp;quot;)
+plot(resid_var1, Nin_variofit_mat, main = &amp;quot;Matern model&amp;quot;) 
+
+attr(Nin_variofit_exp, &amp;quot;SSErr&amp;quot;)
+attr(Nin_variofit_gau, &amp;quot;SSErr&amp;quot;)
+attr(Nin_variofit_mat, &amp;quot;SSErr&amp;quot;)
+
+# parameters:
+Nin_variofit_gau
+
+nugget &amp;lt;- Nin_variofit3$psill[1] # measurement error (other random error)
+range &amp;lt;- Nin_variofit3$range[2] # distance to establish independence between data points
+sill &amp;lt;- sum(Nin_variofit3$psill) # maximum semivariance
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/p&gt;
 &lt;/details&gt;
@@ -714,12 +742,7 @@ more code
       <link>/workshops/spatial-workshop/trend-modelling/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
       <guid>/workshops/spatial-workshop/trend-modelling/</guid>
-      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    &lt;em&gt;still under construction&amp;hellip;&lt;/em&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;The spatial models introduced in this workshop assume that spatial variation is localised and within a trial, plots located sufficiently far apart are independent of each other with no apparent spatial correlation. However, sometimes that is accurately describe a field trial. There can be experiment-wide gradients due to position on a slope, proximity to an influential environmental factor (e.g. a road), and so on. In these instances, those gradients should be modelled as a trend.&lt;/p&gt;
+      <description>&lt;p&gt;The spatial models introduced in this workshop assume that spatial variation is localised and within a trial, plots located sufficiently far apart are independent of each other with no apparent spatial correlation. However, sometimes that is accurately describe a field trial. There can be experiment-wide gradients due to position on a slope, proximity to an influential environmental factor (e.g. a road), and so on. In these instances, those gradients should be modelled as a trend.&lt;/p&gt;
 &lt;h3 id=&#34;blocking&#34;&gt;Blocking&lt;/h3&gt;
 &lt;p&gt;Blocking is one example of modelling an experiment wide-trend:&lt;/p&gt;
 &lt;p&gt;$$Y_ij = \mu + \alpha_i + \beta_j + \epsilon_{ij}$$&lt;/p&gt;
@@ -727,7 +750,7 @@ more code
 $\mu$ is the overall mean&lt;br&gt;
 $\alpha_i$ is the effect due to the $i^{th}$ treatment&lt;br&gt;
 $\beta_j$ is the effect due to the $j^{th}$ block&lt;br&gt;
-$\epsilon_ij$ are the error terms distributed as $N ~\sim (0,\sigma)$&lt;/p&gt;
+$\epsilon_{ij}$ are the error terms distributed as $N ~\sim (0,\sigma)$&lt;/p&gt;
 
 
 
@@ -758,10 +781,10 @@ $\epsilon_ij$ are the error terms distributed as $N ~\sim (0,\sigma)$&lt;/p&gt;
 &lt;p&gt;Trials rows and ranges can likewise be modelled directly in a model:&lt;/p&gt;
 &lt;p&gt;$$Y_ijk = \mu + \alpha_i + \beta_j + \gamma_k + \epsilon_{ijk}$$&lt;/p&gt;
 &lt;p&gt;$\beta_j$ is the effect due to the $j^{th}$ row&lt;br&gt;
-$\beta_j$ is the effect due to the $k^{th}$ range (or column)&lt;/p&gt;
+$\gamma_k$ is the effect due to the $k^{th}$ range (or column)&lt;/p&gt;
 &lt;h4 id=&#34;code-for-trends&#34;&gt;Code for Trends&lt;/h4&gt;
 &lt;p&gt;&lt;em&gt;The following scripts build upon work done in previous section(s).&lt;/em&gt;&lt;/p&gt;
-&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-2&#34;&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-1&#34;&gt;
   &lt;summary&gt;R&lt;/summary&gt;
   &lt;p&gt;&lt;pre&gt;&lt;code&gt;# load libraries
 library(lme4)
@@ -785,7 +808,7 @@ ranef(nin_rc)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/p&gt;
 &lt;/details&gt;
-&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-3&#34;&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-2&#34;&gt;
   &lt;summary&gt;SAS&lt;/summary&gt;
   &lt;p&gt;&lt;pre&gt;&lt;code&gt;# exploratory boxplots
 proc sgplot data=alliance;
@@ -816,7 +839,7 @@ run;
 &lt;p&gt;Polynomial splines are an additional method for spatial adjustment and represent a more non-parametric method that does not rely on estimation or modeling of variograms. Instead, it uses the raw data and residuals to fit a surface to the spatial data and adjust the variance covariance matrix accordingly.&lt;/p&gt;
 &lt;h4 id=&#34;code-for-splines&#34;&gt;Code for Splines&lt;/h4&gt;
 &lt;p&gt;&lt;em&gt;The following scripts build upon work done in previous section(s).&lt;/em&gt;&lt;/p&gt;
-&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-4&#34;&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-3&#34;&gt;
   &lt;summary&gt;R&lt;/summary&gt;
   &lt;p&gt;&lt;pre&gt;&lt;code&gt;nin_spline &amp;lt;- SpATS(response = &amp;quot;yield&amp;quot;, 
                     spatial = ~ PSANOVA(col, row, nseg = c(10,20),
@@ -831,7 +854,7 @@ preds_spline &amp;lt;- predict(nin_spline, which = &amp;quot;gen&amp;quot;) %&am
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/p&gt;
 &lt;/details&gt;
-&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-5&#34;&gt;
+&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-4&#34;&gt;
   &lt;summary&gt;SAS&lt;/summary&gt;
   &lt;p&gt;&lt;pre&gt;&lt;code&gt;proc glimmix data=alliance ;
     class entry rep;
