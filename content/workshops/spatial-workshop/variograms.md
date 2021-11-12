@@ -1,5 +1,5 @@
 ---
-date: "2021-11-01"
+date: "2021-11-07"
 title: Empirical Variograms
 type: book
 weight: 30
@@ -87,7 +87,7 @@ Picking the right model is done both by comparing the sum of squares of error fo
 {{< spoiler text="R" >}}
 ```
 # load libraries
-library(gstat)
+library(gstat); library(spaMM)
 
 # set up spatial object
 Nin_spatial <- Nin_na
@@ -95,12 +95,12 @@ coordinates(Nin_spatial) <- ~ col.width + row.length # add attribte
 class(Nin_spatial)
 
 # establish max distance for variogram estimation
-max_dist = 0.5*max(dist(coordinates(Nin_spatial)))
+max_dist = 0.6*max(dist(coordinates(Nin_spatial)))
 
 # calculate empirical variogram
 resid_var1 <- gstat::variogram(yield ~ rep + gen, 
                         cutoff = max_dist,
-                        width = max_dist/20, # 20 is the number of bins
+                        width = max_dist/15, # 15 is the number of bins
                         data = Nin_spatial)
 plot(resid_var1)  # empirical variogram
 

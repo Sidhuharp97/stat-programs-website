@@ -34,7 +34,7 @@ names(nlme_mods) <- c("LMM", "exponential", "gaussian", "matern")
 # extract log likelihood, AIC, BIC
 data.frame(loglik = sapply(nlme_mods, logLik),  
            AIC = sapply(nlme_mods, AIC),
-           BIC = sapply(nlme_mods, AIC, k = log(nrow(Nin_na)))) %>% arrange(desc(loglikelihood))
+           BIC = sapply(nlme_mods, AIC, k = log(nrow(Nin_na)))) %>% arrange(desc(loglik))
 # (higher is better for loglik, lower is better for AIC and BIC)
 
 # compare post-hoc power
@@ -43,10 +43,9 @@ anovas <- lapply(nlme_mods[-7], function(x){
   aov <- as.data.frame(anova(x))[2,]})
 # bind all the output together
 a <- bind_rows(anovas) %>% 
-  mutate(model = c("LMM", "exponential", "gaussian", "matern")) %>% 
+  mutate(model = c("LMM", "exponential", "gaussian", "matern", "row-col")) %>% 
   arrange(desc(`p-value`)) %>% select(c(model, 1:4)) 
 rownames(a) <- 1:nrow(a)
-a[6,2:5] <- anova(nin_trend)[3:6]
 a
 
 ## compare precision of estimates
@@ -72,7 +71,7 @@ pivot_longer(preds_df, cols = !gen, names_to = "model", values_to = "emmeans") %
   geom_point(size = 5, alpha = 0.5, col = "navy") +
   geom_line() +
   ylab("yield means for gen") + 
-  theme_minimal(base_size = 14)
+  theme_minimal()
 ``` 
 {{< /spoiler >}}
 

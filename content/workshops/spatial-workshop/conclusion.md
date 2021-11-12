@@ -1,5 +1,5 @@
 ---
-date: "2021-11-01"
+date: "2021-11-07"
 title: Final thoughts
 type: book
 weight: 80

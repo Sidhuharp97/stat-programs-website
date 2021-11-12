@@ -1,5 +1,5 @@
 ---
-date: "2021-11-01"
+date: "2021-11-07"
 title: Modelling Spatial Trends
 type: book
 weight: 50
@@ -57,6 +57,8 @@ nin.rc <- lmer(yield ~ gen + (1|colfF) + (1|rowF),
               data = Nin, na.action = na.exclude)
 # extract random effects for row and column
 ranef(nin_rc)
+# extract predictions
+nin_rc <- as.data.frame(emmeans(nin.rc, "gen"))
 ``` 
 {{< /spoiler >}}
 
