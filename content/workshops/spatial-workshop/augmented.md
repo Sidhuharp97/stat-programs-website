@@ -56,8 +56,8 @@ library(dplyr); library(nlme); library(ggplot2)
 library(gstat); library(sp)
 
 # read in data
-aug_data_origin <- read.csv("data/AB19F5_LIND.csv", 
-                     na.strings = c("", "NA", ".", "999999")) %>% 
+aug_data_origin <- read.csv("data/augmented_lind.csv", 
+                            na.strings = c("", "NA", ".", "999999")) %>% 
   slice(-1) %>% # first line not needed
   mutate(yieldkg = yieldg/1000)  # to prevent overflow
 
@@ -77,36 +77,24 @@ gen_sum2 <- gen_sum  %>%  mutate(gamma = name) %>%
     delta == "unrep" ~ "unreplicate_obs")) %>% 
   mutate(beta = case_when(
     delta == "unrep" ~ gamma,
-    delta == "check" ~ NA_integer_)) # or maybe "check"
+    delta == "check" ~ gamma))
 
 # merge original data set with info on treatment levels
 aug_data <- aug_data_origin %>% 
-  select(name, prow, pcol, yieldg) %>%
+  select(name, prow, pcol, yieldkg, yieldg) %>%
   mutate(row = prow*11.7, col = pcol*5.5) %>% 
   full_join(gen_sum2, by = "name") 
 
-# calculate denominator degrees of freedom
-ddf = sum(checks$counts) - nrow(checks) - 1
+## modelling
 
-## initial linear model:
-
-# tau estimates effects of checks versus all unreplicated genotypes)
-# beta predicts effects each unreplicated genotypes, nested in tau 
 aug1 <- lme(fixed = yieldg ~ tau,
-                 random = ~ 1|tau/beta,
-                 data = aug_data, na.action = na.exclude)
-
-# another formulation
-# delta estimates effects of replicated versus unreplicated genotypes
-# gamma estimates the effecs of all genotypes evaluated in the trial
-aug2 <- lme(fixed = yieldg ~ delta,
-                 random = ~ 1|delta/gamma,
-                 data = aug_data, na.action = na.exclude)
+            random = ~ 1|tau/beta,
+            data = aug_data, na.action = na.exclude)
 
 # extract residuals
 aug_data$res <- residuals(aug1)
 
-# plot residual chlorpleth map:
+# plot residual chloroepleth map:
 ggplot(aug_data, aes(y = row, x = col)) +
   geom_tile(aes(fill = res)) +
   scale_fill_gradient(low = "yellow", high = "black") +
@@ -121,16 +109,15 @@ coordinates(aug_spatial) <- ~ col + row
 max_dist = 0.5*max(dist(coordinates(aug_spatial)))
 
 aug_vario <- gstat::variogram(res ~ 1, 
-                               cutoff = max_dist,
-                               width = max_dist/10, # 20 is the number of bins
-                               data = aug_spatial)
-plot(aug_vario)
+                              cutoff = max_dist,
+                              width = max_dist/10, 
+                              data = aug_spatial)
 
 # optional to run: 
-# nugget_start <- min(aug_vario$gamma)
-# aug_vgm <- vgm(model = "Exp", nugget = nugget_start) 
-# aug_variofit <- fit.variogram(aug_vario, aug_vgm)
-# plot(aug_vario, aug_variofit, main = "Exponential model")     
+nugget_start <- min(aug_vario$gamma)
+aug_vgm <- vgm(model = "Exp", nugget = nugget_start)
+aug_variofit <- fit.variogram(aug_vario, aug_vgm)
+plot(aug_vario, aug_variofit, main = "Exponential model")
 
 cor_exp <- corSpatial(form = ~ row + col, 
                       nugget = T, fixed = F,
@@ -142,7 +129,27 @@ aug1_sp <- update(aug1, corr = cor_exp)
 aug1_sp$modelStruct$corStruct
 
 # extract BLUPs for unreplicated lines:
-aug_blups <- ranef(aug1_sp)$beta %>% rename(yieldg = '(Intercept)')
+aug1_blups <- ranef(aug1_sp)$beta %>% rename(yieldg = '(Intercept)')
+
+# look at variance components
+VarCorr(aug1_sp)
+
+##### OR #######
+
+# another formulation
+# delta estimates effects of replicated versus unreplicated genotypes
+# gamma estimates the effecs of all genotypes evaluated in the trial
+aug2 <- lme(fixed = yieldkg ~ delta,
+            random = ~ 1|delta/gamma,
+            data = aug_data, na.action = na.exclude)
+
+aug2_sp <- update(aug2, corr = cor_exp)
+
+# spatial parameters:
+aug2_sp$modelStruct$corStruct
+
+# extract BLUPs for unreplicated lines:
+aug_blups2 <- ranef(aug2_sp)$gamma %>% rename(yieldg = '(Intercept)')
 
 # look at variance components
 VarCorr(aug1_sp)
