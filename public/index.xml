@@ -5,7 +5,7 @@
     <link>/</link>
       <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <description>Idaho Ag Stats</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 01 Nov 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 07 Nov 2021 09:00:00 +0000</lastBuildDate>
     <image>
       <url>/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png</url>
       <title>Idaho Ag Stats</title>
@@ -774,107 +774,6 @@ run;
     </item>
     
     <item>
-      <title>Row-and-Column Models</title>
-      <link>/courses/rowcolumn/</link>
-      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/courses/rowcolumn/</guid>
-      <description>&lt;p&gt;The spatial models we will introduce later in this workshop assume that spatial variation is localised and within a trial, plots located sufficiently far apart are independent of each other with no apparent spatial correlation. However, sometimes that is accurately describe a field trial. There can be experiment-wide gradients due to position on a slope, proximity to an influential environmental factor (e.g. a road), and so on. In these instances, those gradients should be modelled as a trend.&lt;/p&gt;
-&lt;h3 id=&#34;blocking&#34;&gt;Blocking&lt;/h3&gt;
-&lt;p&gt;Blocking is one example of modelling an experiment wide-trend:&lt;/p&gt;
-&lt;p&gt;$$Y_ij = \mu + \alpha_i + \beta_j + \epsilon_{ij}$$&lt;/p&gt;
-&lt;p&gt;$Y_ij$ is the independent variable&lt;br&gt;
-$\mu$ is the overall mean&lt;br&gt;
-$\alpha_i$ is the effect due to the $i^{th}$ treatment&lt;br&gt;
-$\beta_j$ is the effect due to the $j^{th}$ block&lt;br&gt;
-$\epsilon_ij$ are the error terms distributed as $N ~\sim (0,\sigma)$&lt;/p&gt;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-&lt;figure  &gt;
-  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;&#34; srcset=&#34;
-               /media/blocking_hu10ad972e63ec33f6cccede6b15d61278_254605_d4a9434e4d64be2fa5ae0fabbb1a7d9f.png 400w,
-               /media/blocking_hu10ad972e63ec33f6cccede6b15d61278_254605_cc366fc98ad7465ff769b5f4863a991d.png 760w,
-               /media/blocking_hu10ad972e63ec33f6cccede6b15d61278_254605_1200x1200_fit_lanczos_2.png 1200w&#34;
-               src=&#34;/media/blocking_hu10ad972e63ec33f6cccede6b15d61278_254605_d4a9434e4d64be2fa5ae0fabbb1a7d9f.png&#34;
-               width=&#34;760&#34;
-               height=&#34;434&#34;
-               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
-  &lt;/div&gt;&lt;/figure&gt;
-&lt;p&gt;The expectation is that each block will capture and model existing variation  within it. This becomes difficult to justify as blocks become large.&lt;/p&gt;
-&lt;h3 id=&#34;rows--ranges&#34;&gt;Rows &amp;amp; Ranges&lt;/h3&gt;
-&lt;p&gt;Trials rows and ranges can likewise be modelled directly in a model:&lt;/p&gt;
-&lt;p&gt;$$Y_ijk = \mu + \alpha_i + \beta_j + \gamma_k + \epsilon_{ijk}$$&lt;/p&gt;
-&lt;p&gt;$\beta_j$ is the effect due to the $j^{th}$ row&lt;br&gt;
-$\beta_j$ is the effect due to the $k^{th}$ range (or column)&lt;/p&gt;
-&lt;h3 id=&#34;code-for-trends&#34;&gt;Code for Trends&lt;/h3&gt;
-&lt;p&gt;&lt;em&gt;The following scripts build upon work done in previous section(s).&lt;/em&gt;&lt;/p&gt;
-&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-1&#34;&gt;
-  &lt;summary&gt;R&lt;/summary&gt;
-  &lt;p&gt;&lt;pre&gt;&lt;code&gt;# load libraries
-library(lme4)
-
-# exploratory plots 
-boxplot(yield ~ rep, data = Nin, xlab = &amp;quot;block&amp;quot;, col = &amp;quot;red2&amp;quot;)
-boxplot(yield ~ row, data = Nin, xlab = &amp;quot;row&amp;quot;, col = &amp;quot;dodgerblue2&amp;quot;)
-boxplot(yield ~ col, data = Nin, xlab = &amp;quot;column&amp;quot;, col = &amp;quot;gold&amp;quot;)
-
-## row/column model ##
-
-# data prep
-Nin$rowF = as.factor(Nin$row)
-Nin$colF = as.factor(Nin$col)
-
-# specify model
-nin.rc &amp;lt;- lmer(yield ~ gen + (1|colfF) + (1|rowF),
-              data = Nin, na.action = na.exclude)
-# extract random effects for row and column
-ranef(nin_rc)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/p&gt;
-&lt;/details&gt;
-&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-2&#34;&gt;
-  &lt;summary&gt;SAS&lt;/summary&gt;
-  &lt;p&gt;&lt;pre&gt;&lt;code&gt;# exploratory boxplots
-proc sgplot data=alliance;
-    vbox yield/category=rep FILLATTRS=(color=red) LINEATTRS=(color=black) WHISKERATTRS=(color=black);
-run;
-
-proc sgplot data=alliance;
-    vbox yield/category=Col FILLATTRS=(color=yellow) LINEATTRS=(color=black) WHISKERATTRS=(color=black);
-run;
-
-proc sgplot data=alliance;
-    vbox yield/category=Row FILLATTRS=(color=blue) LINEATTRS=(color=black) WHISKERATTRS=(color=black);
-run;
-
-# row/column model
-proc mixed data=alliance ;
-	class entry rep;
-	model yield = entry  row col/ddfm=kr;
-	random rep;
-	lsmeans entry/cl;
-	ods output LSMeans=NIN_row_col_means;
-	title1 &#39;NIN data: RCBD&#39;;
-run;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/p&gt;
-&lt;/details&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Visualization</title>
       <link>/draft-workshops/example/visualization/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
@@ -1165,7 +1064,7 @@ run;
     <item>
       <title>Comparing Models</title>
       <link>/workshops/spatial-workshop/model-comparison/</link>
-      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 07 Nov 2021 00:00:00 +0000</pubDate>
       <guid>/workshops/spatial-workshop/model-comparison/</guid>
       <description>&lt;p&gt;Now that we have built these spatial models, how do we pick the right one? Unfortunately, there is no one model that works best in all circumstances. In addition, there is no single way for choosing the best model. Some approaches include:&lt;/p&gt;
 &lt;ul&gt;
@@ -1605,29 +1504,38 @@ run;
     </item>
     
     <item>
+      <title>Slide set of spatial recipes</title>
+      <link>/draft-workshops/spatial_workshop_new/slide-set/</link>
+      <pubDate>Sun, 07 Nov 2021 09:00:00 +0000</pubDate>
+      <guid>/draft-workshops/spatial_workshop_new/slide-set/</guid>
+      <description>&lt;p&gt;Here is the slide set for the workshop. A more extensive resource is also available [here](Spatial Recipes for Field Trials).&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Getting R Set Up</title>
       <link>/post/getting-r-setup/</link>
       <pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate>
       <guid>/post/getting-r-setup/</guid>
       <description>&lt;h3 id=&#34;install-r&#34;&gt;Install R:&lt;/h3&gt;
-&lt;p&gt;You can download R &lt;a href=&#34;https://cloud.r-project.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;. Get the correction R distribution for your operating system. Once downloaded, click on downloaded file, and follow the installation instructions.&lt;/p&gt;
-&lt;p&gt;Note that R is updated several times per year. If you installation is a year older or more, consider updating your version of R to the latest version.&lt;/p&gt;
+&lt;p&gt;You can download R &lt;a href=&#34;https://cloud.r-project.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;. Get the correct R distribution for your operating system. Once downloaded, click on downloaded file, and follow the installation instructions.&lt;/p&gt;
+&lt;p&gt;Note that R is updated several times per year. If your installation is a year old or more, consider updating your version of R to the latest version.&lt;/p&gt;
 &lt;h3 id=&#34;install-rstudio&#34;&gt;Install RStudio&lt;/h3&gt;
-&lt;p&gt;Rstudio is not R, rather, it is a user interface for accessing R. It is complicated with many features for developers. Despite that, it is still a very helpful R user interface for users of all abilities. It can downloaded &lt;a href=&#34;https://www.rstudio.com/products/rstudio/download/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;. For most users, the free version of &amp;ldquo;RStudio Desktop&amp;rdquo; should be chosen. Once downloaded, click on downloaded file, and follow the installation instructions.&lt;/p&gt;
+&lt;p&gt;Rstudio is not R, rather, it is a user interface for accessing R. It is a complicated interface with many features for developers. Despite its complexity, RStudio is nevertheless a very helpful R user interface for users of all abilities. It can downloaded &lt;a href=&#34;https://www.rstudio.com/products/rstudio/download/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;. For most users, the free version of &amp;ldquo;RStudio Desktop&amp;rdquo; should be chosen. Once downloaded, click on downloaded file, and follow the installation instructions.&lt;/p&gt;
 &lt;h3 id=&#34;install-rtools-optional&#34;&gt;Install Rtools (optional)&lt;/h3&gt;
 &lt;p&gt;Only Windows users need to consider this step. This app is for compiling R packages with C, C++ and Fortran code. It is a separate piece of software that has to be downloaded and installed (it is not an R package). Rtools is not needed by all users and if you don&amp;rsquo;t know if you need this, it is absolutely fine to skip this step.  If you do think you need this, You can find it &lt;a href=&#34;https://cran.r-project.org/bin/windows/Rtools/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;. Download and install.&lt;/p&gt;
 &lt;h3 id=&#34;setting-up-rstudio-setup-optional&#34;&gt;Setting up RStudio Setup (optional)&lt;/h3&gt;
-&lt;p&gt;This is an optional step, but it is highly recommended. This step will prevent RStudio from saving all of your objects in a session to .Rdata file that is then automatically loaded whenever you open R.&lt;/p&gt;
+&lt;p&gt;This is an optional step, but it is highly recommended. This step will prevent RStudio from saving all of your objects in a session to &lt;em&gt;.Rdata&lt;/em&gt; file that is then automatically loaded whenever you open R.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;install.packages(&amp;quot;usethis&amp;quot;); library(usethis)
 usethis::use_blank_slate()
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;You can disable this across all projects in R with the drop-down menu &lt;strong&gt;Tools&lt;/strong&gt; &amp;ndash;&amp;gt; &lt;strong&gt;Global Options&amp;hellip;&lt;/strong&gt; &amp;ndash;&amp;gt; unclick &lt;code&gt;Restore .RData into workspace at startup&lt;/code&gt; and set &lt;code&gt;Save workspace to .rRData on exit&lt;/code&gt; to &amp;ldquo;Never&amp;rdquo;.&lt;/p&gt;
-&lt;p&gt;Why is automatic loading of an .Rdata file not recommended? Because it makes your work less reproducible. You may have created test objects that will unexpectedly interfere with downstream operations or analysis. You may have changed the original data source, but an older version is saved in the .Rdata file. More explanation is given by &lt;a href=&#34;https://usethis.r-lib.org/reference/use_blank_slate.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;RStudio&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;IF you are used to opening R and seeing all of your previous objects automatically loaded into the objects pane, this will be an adjustment. The solution is to save your processes into &lt;code&gt;.R&lt;/code&gt; scripts that capture all information from packages loaded, file import, all data manipulations and other operations important. If these steps are slow and there is a need to access intermediate objects, these can be saved in tabular formats readable by many applications (e.g. .txt or .csv) or saved as a specific R object (see &lt;code&gt;saveRDS()&lt;/code&gt; in the R help files) and reloaded in another session.&lt;/p&gt;
+&lt;p&gt;You can disable this across all projects in R with the drop-down menu &lt;strong&gt;Tools&lt;/strong&gt; &amp;ndash;&amp;gt; &lt;strong&gt;Global Options&amp;hellip;&lt;/strong&gt; &amp;ndash;&amp;gt; unclick &amp;lsquo;&lt;strong&gt;Restore .RData into workspace at startup&lt;/strong&gt;&amp;rsquo; and set &amp;lsquo;&lt;strong&gt;Save workspace to .rRData on exit&lt;/strong&gt;&amp;rsquo; to &amp;lsquo;&lt;strong&gt;Never&lt;/strong&gt;&amp;rsquo;.&lt;/p&gt;
+&lt;p&gt;Why is automatic loading of an &lt;em&gt;.Rdata&lt;/em&gt; file not recommended? Because it makes your work less reproducible. You may have created test objects that will unexpectedly interfere with downstream operations or analysis. You may have changed the original data source, but an older version is saved in the &lt;em&gt;.Rdata&lt;/em&gt; file. More explanation is given by &lt;a href=&#34;https://usethis.r-lib.org/reference/use_blank_slate.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;RStudio&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;IF you are used to opening R and seeing all of your previous objects automatically loaded into the objects pane, this will be an adjustment. The solution is to save your processes into &lt;em&gt;.R&lt;/em&gt; scripts that capture all information from packages loaded, file import, all data manipulations and other operations important. If these steps are slow and there is a need to access intermediate objects, these can be saved in tabular formats readable by many applications (e.g. &lt;em&gt;.txt&lt;/em&gt; or &lt;em&gt;.csv&lt;/em&gt;) or saved as a specific R object (see &lt;code&gt;saveRDS()&lt;/code&gt; in the R help files) and reloaded in another session.&lt;/p&gt;
 &lt;h4 id=&#34;set-up-version-control-optional&#34;&gt;Set up version control (optional)&lt;/h4&gt;
-&lt;p&gt;If you use Git or SVN, you can perform Git operations directions from RStudio and interact with remote repositories. If you don&amp;rsquo;t use version control, this step can be skipped. If you do use version control, the command line or other third-party software (e.g. Gitkraken) are fine to use instead or in addition to RStudio&amp;rsquo;s interface. The implementation of git in R is very minimal and can support only a limited number of actions, so you are likely to need to use other software for complicated git actions. It is useful for file additions (equivalent to &lt;code&gt;git add&lt;/code&gt;), commits, pushes and pulls.&lt;/p&gt;
+&lt;p&gt;If you use Git or SVN, you can perform Git operations directions from RStudio and interact with remote repositories. If you don&amp;rsquo;t use version control, this step can be skipped. If you do use version control, the command line or other third-party software (e.g. Gitkraken) are fine to use instead or in addition to RStudio&amp;rsquo;s interface. The implementation of git in R is very minimal and supports only a limited number of actions, so you are likely to need other software to perform complicated git actions. It is useful for file additions, commits, pushes and pulls.&lt;/p&gt;
 &lt;p&gt;You can set up Git by going to &lt;strong&gt;Tools&lt;/strong&gt; &amp;ndash;&amp;gt; &lt;strong&gt;Global Options&lt;/strong&gt; &amp;ndash;&amp;gt; &lt;strong&gt;Git/SVN&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;This is not the right space to discuss how to use Git as an R user, but Jenny Bryan wrote a very good &lt;a href=&#34;https://happygitwithr.com/index.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;tutorial&lt;/a&gt; covering this subject.&lt;/p&gt;
+&lt;p&gt;This is not the right space to provide detailed instructions for using git as an R user, but Jenny Bryan has written a very helpful &lt;a href=&#34;https://happygitwithr.com/index.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;tutorial&lt;/a&gt; covering this subject.&lt;/p&gt;
 </description>
     </item>
     
@@ -1637,24 +1545,23 @@ usethis::use_blank_slate()
       <pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate>
       <guid>/post/reproducible-r/</guid>
       <description>&lt;h3 id=&#34;make-sure-your-rstudio-session-is-not-saving-rdata-automatically&#34;&gt;Make sure your Rstudio session is not saving .RData automatically:&lt;/h3&gt;
-&lt;p&gt;&lt;em&gt;Note: this step requires the&lt;/em&gt; &lt;code&gt;usethis&lt;/code&gt; &lt;em&gt;package; please install this package if you do not already have it installed.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;Step 1 is to disable automatic saving of your objects to a .RData file. This file is automatically loaded when R restarts. Since we often create all sorts of miscellaneous objects during a session with a clear record of why, loading all objects without a clear sense of their provenance is often not reproducible by other.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Note: this step requires the &amp;lsquo;usethis&amp;rsquo; package; please install this package if you do not already have it installed.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Step 1 is to disable automatic saving of your objects to a &lt;em&gt;.RDat&lt;/em&gt;a file. This file is automatically loaded when R restarts. Since we often create all sorts of miscellaneous objects during a session with a clear record of why, loading all objects without a clear sense of their provenance is often not reproducible by other.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;usethis::use_blank_slate()
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;You can read more about this function in its &lt;a href=&#34;https://usethis%60.R%60-lib.org/reference/use_blank_slate.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;You can disable this across all projects in R with the drop-down menu &lt;strong&gt;Tools&lt;/strong&gt; &amp;ndash;&amp;gt; &lt;strong&gt;Global Options&amp;hellip;&lt;/strong&gt; &amp;ndash;&amp;gt; unclick &lt;code&gt;Restore .RData into workspace at startup&lt;/code&gt; and set &lt;code&gt;Save workspace to .rRData on exit&lt;/code&gt; to &amp;ldquo;Never&amp;rdquo;.&lt;/p&gt;
-&lt;h3 id=&#34;save-all-code-you-run-in-an-r-or-rmd-file&#34;&gt;Save all code you run in an &lt;code&gt;.R&lt;/code&gt; or &lt;code&gt;.Rmd&lt;/code&gt; file&lt;/h3&gt;
+&lt;p&gt;You can disable this across all projects in R with the drop-down menu &lt;strong&gt;Tools&lt;/strong&gt; &amp;ndash;&amp;gt; &lt;strong&gt;Global Options&amp;hellip;&lt;/strong&gt; &amp;ndash;&amp;gt; unclick &amp;lsquo;&lt;strong&gt;Restore .RData into workspace at startup&lt;/strong&gt;&amp;rsquo; and set &amp;lsquo;&lt;strong&gt;Save workspace to .rRData on exit&lt;/strong&gt;&amp;rsquo; to &amp;lsquo;&lt;strong&gt;Never&lt;/strong&gt;&amp;rsquo;.&lt;/p&gt;
+&lt;h3 id=&#34;save-all-code-you-run-in-an-r-or-rmd-file&#34;&gt;Save all code you run in an &lt;em&gt;.R&lt;/em&gt; or &lt;em&gt;.Rmd&lt;/em&gt; file&lt;/h3&gt;
 &lt;p&gt;This is your source code. It&amp;rsquo;s as real and as important as your input data. This file should capture a set of actions that can be repeated by another person (e.g. your PI, other colleagues yourself in the future) including packages loaded, files imported, all data manipulations and the outputs from these actions (e.g. visualisations, analytical outcomes). The idea is to capture your thought process and specific actions so this can be repeated in full. In most analyses, it is extremely likely* you will revisit a project and need to repeat what has already been done! Keeping a record of actions will save you considerable time because you will not have to attempt to recall and/or reconstruct exactly what you did in previous sessions.&lt;/p&gt;
 &lt;p&gt;*This is &lt;em&gt;almost&lt;/em&gt; guaranteed to happen!&lt;/p&gt;
 &lt;h3 id=&#34;regularly-restart-your-r-session&#34;&gt;Regularly restart your R session&lt;/h3&gt;
 &lt;p&gt;Yes, that means wiping all the loaded packaged and objects from the session (if you followed the first recommendation in these instructions), but the upside is that your analysis are reproducible. This means future you can repeat those analyses and get the same results back you did earlier.&lt;/p&gt;
 &lt;p&gt;You can restart R by manually closing and opening RStudio. You can also restart the R session with RStudio by navigating to the menu item &lt;strong&gt;Session&lt;/strong&gt; &amp;ndash;&amp;gt; &lt;strong&gt;Restart R&lt;/strong&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;use-r-projects&#34;&gt;Use R projects&lt;/h3&gt;
-&lt;p&gt;This is optional, but it will make your life easier. Whenever you start a new analytical endeavor in R, create an R project by navigating to &lt;strong&gt;File&lt;/strong&gt; &amp;ndash;&amp;gt; &lt;strong&gt;New Project&lt;/strong&gt; in RStudio. There are many options available for setting the [project directory (where the .Rpoj file lives), the type of project (e.g. R package, Shiny app or blank), and options to initialise a git repo. The simplest option is to choose &lt;strong&gt;New Project&lt;/strong&gt; (no special type) in a dedicated directory. The main advantage of projects is that by opening an .Rproj file, the working directory is automatically set to that directory. If you are using a cloud solution for working across different computers or working with collaborators, this will make things easier because you can use relative paths for importing data and outputting files. There would be no more need for this at the top of your script:&lt;/p&gt;
+&lt;p&gt;This is optional, but it will make your life easier. Whenever you start a new analytical endeavor in R, create an R project by navigating to &lt;strong&gt;File&lt;/strong&gt; &amp;ndash;&amp;gt; &lt;strong&gt;New Project&lt;/strong&gt; in RStudio. There are many options available for setting the [project directory (where the &lt;em&gt;.Rproj&lt;/em&gt; file lives), the type of project (e.g. R package, Shiny app or blank), and options to initialise a git repo. The simplest option is to choose &lt;strong&gt;New Project&lt;/strong&gt; (no special type) in a dedicated directory. The main advantage of projects is that by opening an &lt;em&gt;.Rproj&lt;/em&gt; file, the working directory is automatically set to that directory. If you are using a cloud solution for working across different computers or working with collaborators, this will make things easier because you can use relative paths for importing data and outputting files. There would be no more need for this at the top of your script:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;setwd(&amp;quot;specific/path/to/my/computer&amp;quot;)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Additionally, for setting up gitbooks through &lt;code&gt;bookdown&lt;/code&gt;, R packages, Shiny apps, and other complicated R endeavors, the automated set-up through Rprojects can be immensely helpful.&lt;/p&gt;
-&lt;p&gt;This is sometimes referred to as &amp;ldquo;project-oriented workflow.&amp;rdquo; I prefer to have a consistent directory structure like this one:&lt;/p&gt;
+&lt;p&gt;Additionally, for setting up gitbooks through &amp;lsquo;bookdown&amp;rsquo;, R packages, Shiny apps, and other complicated R endeavors, the automated set-up through R projects can be immensely helpful.  This is sometimes referred to as &amp;ldquo;project-oriented workflow.&amp;rdquo; In addition to using R projects with a dedicated directory for each research project, I also prefer to have a consistent directory structure for each project like this one:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;top-level-directory
 │   README.md
 │
@@ -1681,9 +1588,9 @@ usethis::use_blank_slate()
     │   some_paper.pdf
     │   ...
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I put all raw data needed for analysis into the &amp;lsquo;data&amp;rsquo; directory, any and all programming scripts in the &amp;ldquo;scripts&amp;rdquo; directory, all outputs (plots, tables, intermediate data object) in the &amp;lsquo;outputs&amp;rsquo; directory and everything else ends up &amp;lsquo;extra&amp;rsquo;. Naturally, there are many different directory structures to use and this is just one example. Find something that works best for your needs!&lt;/p&gt;
-&lt;h3 id=&#34;use-the-here-package&#34;&gt;Use the &lt;code&gt;here&lt;/code&gt; package.&lt;/h3&gt;
-&lt;p&gt;This is also optional. It works like Rprojects for setting the working directory. However, for an Rproject to work, you have to open the .Rproj file in RStudio. What if you or your collaborators prefer to open R files directly and start using those? Here will look for the next directory level which there is a .Rproj file and set the working directory there.&lt;/p&gt;
+&lt;p&gt;I put all raw data needed for analysis into the &amp;lsquo;data&amp;rsquo; directory, any and all programming scripts in the &amp;lsquo;scripts&amp;rsquo; directory, all outputs (plots, tables, intermediate data object) in the &amp;lsquo;outputs&amp;rsquo; directory and everything else ends up &amp;lsquo;extra&amp;rsquo;. Naturally, there are many different directory structures to use and this is just one example. Find something that works best for your needs!&lt;/p&gt;
+&lt;h3 id=&#34;use-the-here-package&#34;&gt;Use the &amp;lsquo;here&amp;rsquo; package.&lt;/h3&gt;
+&lt;p&gt;This is also optional. It works like R projects for setting the working directory. However, for an R project to work, you have to open the .Rproj file in RStudio. What if you or your collaborators prefer to open R files directly and start using those? Here will look for the next directory level which there is a .Rproj file and set the working directory there.&lt;/p&gt;
 &lt;p&gt;If you want to import a file, &amp;ldquo;datafile.csv&amp;rdquo; that located in the data directory. Your .R script is actually located in the &amp;lsquo;scripts&amp;rsquo; directory. Normally, if you try to read that in, you need to specify the full path to &amp;ldquo;mydata.csv&amp;rdquo; or set the working directory and use a relative path. Again, these paths will not work if you switch computers or your collaborators are running these scripts on their own systems. This system gets even more complicated when working with an .Rmd file. Here&amp;rsquo;s an alternative approach that works the same across files and systems:&lt;/p&gt;
 &lt;p&gt;First, make sure you have .Rproj file to define the top-level directory.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;library(here)
@@ -1704,7 +1611,8 @@ renv::init()
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;If you&amp;rsquo;re familiar with &lt;strong&gt;Packrat&lt;/strong&gt;, this is a replacement for that. This is particularly helpful for things that may have a long life span, like Shiny apps. The &lt;a href=&#34;https://rstudio.github.io/renv/articles/renv.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;renv package&lt;/a&gt; has extensive documentation worth reading.&lt;/p&gt;
 &lt;h3 id=&#34;final-comments&#34;&gt;Final Comments&lt;/h3&gt;
-&lt;p&gt;There are many more resources and recommendations for conducting reproducible research in R. There an entire &lt;a href=&#34;https://cran%60.R%60-project.org/web/views/ReproducibleResearch.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CRAN task view&lt;/a&gt; devoted to this!&lt;/p&gt;
+&lt;p&gt;There are many more resources and recommendations for conducting reproducible research in R. There an entire &lt;a href=&#34;https://cran%60.R%60-project.org/web/views/ReproducibleResearch.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CRAN task view&lt;/a&gt; devoted to this!
+three-elk-FARM-2001&lt;/p&gt;
 </description>
     </item>
     
@@ -1726,20 +1634,6 @@ renv::init()
     </item>
     
     <item>
-      <title>An example preprint / working paper</title>
-      <link>/publication/preprint/</link>
-      <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
-      <guid>/publication/preprint/</guid>
-      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code, math, and images&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>External Project</title>
       <link>/project/external-project/</link>
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
@@ -1757,44 +1651,6 @@ renv::init()
 &lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
 &lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
 &lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>An example journal article</title>
-      <link>/publication/journal-article/</link>
-      <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
-      <guid>/publication/journal-article/</guid>
-      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code, math, and images&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>An example conference paper</title>
-      <link>/publication/conference-paper/</link>
-      <pubDate>Mon, 01 Jul 2013 00:00:00 +0000</pubDate>
-      <guid>/publication/conference-paper/</guid>
-      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code, math, and images&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     

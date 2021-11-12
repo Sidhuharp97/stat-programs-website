@@ -47,5 +47,14 @@ sapply(package_list, require, character.only = TRUE)
 </description>
     </item>
     
+    <item>
+      <title>Slide set of spatial recipes</title>
+      <link>/draft-workshops/spatial_workshop_new/slide-set/</link>
+      <pubDate>Sun, 07 Nov 2021 09:00:00 +0000</pubDate>
+      <guid>/draft-workshops/spatial_workshop_new/slide-set/</guid>
+      <description>&lt;p&gt;Here is the slide set for the workshop. A more extensive resource is also available [here](Spatial Recipes for Field Trials).&lt;/p&gt;
+</description>
+    </item>
+    
   </channel>
 </rss>

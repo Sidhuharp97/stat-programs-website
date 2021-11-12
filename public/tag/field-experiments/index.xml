@@ -5,12 +5,21 @@
     <link>/tag/field-experiments/</link>
       <atom:link href="/tag/field-experiments/index.xml" rel="self" type="application/rss+xml" />
     <description>field experiments</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 09 Apr 2021 15:30:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 07 Nov 2021 09:00:00 +0000</lastBuildDate>
     <image>
       <url>/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png</url>
       <title>field experiments</title>
       <link>/tag/field-experiments/</link>
     </image>
+    
+    <item>
+      <title>Slide set of spatial recipes</title>
+      <link>/draft-workshops/spatial_workshop_new/slide-set/</link>
+      <pubDate>Sun, 07 Nov 2021 09:00:00 +0000</pubDate>
+      <guid>/draft-workshops/spatial_workshop_new/slide-set/</guid>
+      <description>&lt;p&gt;Here is the slide set for the workshop. A more extensive resource is also available [here](Spatial Recipes for Field Trials).&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Routine Incorporation of Spatial Covariates into Analysis of Planned Field Experiments</title>
