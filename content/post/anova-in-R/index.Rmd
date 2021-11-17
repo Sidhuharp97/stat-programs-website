@@ -1,0 +1,530 @@
+---
+title: "Applied ANOVA in R"
+authors:
+- jpiaskowski
+categories: ["R"]
+draft: true
+date: "2021-11-17T00:00:00Z"
+image:
+  caption: ""
+  focal_point: ""
+lastMod: "2021-11-17T00:00:00Z"
+projects: []
+subtitle: "Navigating the R linear model wilderness"
+summary: 
+tags: ["ANOVA", "linear models", "lme4", "emmeans"]
+---
+
+ 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+![xkcd commentary on p-values](p_values.png)
+
+#### Packages Needed 
+There are many packages to load. Here is a summary table of what each package does.
+
+| Package | Purpose |
+|------------|---------------|
+|car | Anova() function to extract type III sums of squares |
+|lme4 | mixed models |
+|nlme | mixed models, non-linear models, alternative covariance structures |
+|emmeans | for extracting least squares means and contrasts |
+|lmer test | improved summary functions of lmer objects |
+|dplyr | data organization |
+|forcats | for managing categorical data |
+|agridat | has many agricultural data sets |
+|agricolae | has options for many common agricultural experimental designs |
+
+
+```{r message=FALSE, warning=FALSE}
+library(car)
+library(lme4)
+library(nlme)
+library(emmeans) #in older version of R, you may need to install "multcompView" separately for this package
+library(lmerTest)
+library(dplyr)
+library(forcats)
+library(agridat)
+```
+
+#### A function for evaluating the number of missing data:
+(we will use this later, but it is not actually related to ANOVA)
+
+```{r}
+na_func <- function(df) {
+  apply(df, 2, function(x) sum(is.na(x))) 
+}
+```
+
+### Introduction
+
+ANOVA in R is a unfortunately a bit complicated. Unlike SAS, ANOVA functions in R lack a consistent structure, consistent output and the accessory packages for ANOVA display a patchwork of compatibility. The result is that it is easy to misspecify a model or make other mistakes. The information below is intended to serve as a guide through the R ANOVA wilderness. 
+
+#### Formula Notation
+
+There are some consistent features across ANOVA methods in R. Formula notation is often used in the R syntax for ANOVA functions. It looks like this: `$Y ~ X`, where Y is the dependent variable (the response) and X is/are the independent variable(s) (e.g. the experimental treatments). 
+
+```{r}
+my_formula <- formula(Y ~ treatment1 + treatment2)
+class(my_formula)
+my_formula
+```
+
+Often the independent variables (i,e, the treatments or the x variables) are expected to be factors, another type of R object:
+
+```{r}
+my_var <- c(rep("low",5), rep("high", 5))
+class(my_var) #check what variable type it is
+```
+
+Although "my_var" is not type factor, it is type "character" which is automatically converted to a factor in `lm()`, `lmer()`, `lme()` and many other linear modeling functions. There are some packages that do not follow this convention, so it's helpful to read function documentation, especially if you get unexpected results. 
+
+Variables like year, which are often imported as a number or integer, do need to be converted to a factor or a character variable prior to analysis. Otherwise, they will be interpreted as a number in linear modelling and treated as a covariate, e.g, 2020 would be 2,020. Here is one way to do this conversion: 
+
+```{r}
+my_factor <- as.factor(my_var) # convert to a factor
+my_factor <- as.character(my_var) # convert to a character
+class(my_factor) # check variable type again to confirm
+```
+
+The choice of whether to convert a categorical variable to a character or factor depends on the comfort of the user with these structures and package requirements. 
+
+Sometimes, there is a need to alter the order of treatment levels (that is, how R sees those levels). The default behavior of R is to order categorical levels alphanumerically.  However, sometimes there are reasons you may not want this (for example, you want to set a particular reference level as the first factor level). 
+
+Below is one example of how to reorder factor levels in a variable. The first step is to see which levels are present in the variable and how they are ordered: 
+
+```{r}
+levels(my_factor) 
+```
+
+Once that is known, you can use that information to manually set the levels and their order. Note that spelling of each level much match what is actually present in the variable. Unmatched levels in the variable will be set to NA automatically by R in the following step. 
+
+```{r}
+my_factor <- factor(my_factor, levels = c("low", "high")) 
+levels(my_factor) # check the new ordering
+```
+
+Knowing the level order is important because in the implementation of ANOVA in R, the first level is treated as the reference level. 
+
+*More on formulas:*
+
+The formula first shown, `Y ~ treatment1 + treatment2`, includes main effects only. Other formula notation includes the symbols `:` and `*`, indicating notation for interaction only and main effects plus the interaction term, respectively. 
+
+```{r}
+formula(Y ~ treatment1:treatment2) # interaction only
+formula(Y ~ treatment1*treatment2) # interaction plus main effects
+```
+
+These two formulas are equivalent:
+```
+formula(Y ~ treatment1 + treatment2 + treatment1:treatment2) 
+formula(Y ~ treatment1*treatment2) 
+```
+Perhaps you can see from these examples that formulas are a really just a collections of characters (that is, a string) and exist independent of any data set. Later, we will need to link these formulas to a data set to actually construct a linear model and conduct statistical analysis.  
+
+
+### ANOVA for fixed effects models
+
+#### Completely Randomised design 
+
+First, load the data set "warpbreaks" (a data set from base R). This is an old data set with variables for wool type (A and B) and tension on the loom (L, M or H). The response variable is "breaks", the number of times the wool thread breaks on industrial looms. 
+
+I always like to have a quick look at the data before running any statistical tests. So, here we go:  
+
+```{r}
+data(warpbreaks)
+na_func(warpbreaks)
+str(warpbreaks)
+
+warpbreaks$wool <- factor(warpbreaks$wool, levels = c("A", "B", "C"))
+
+table(warpbreaks$wool, warpbreaks$tension)
+hist(warpbreaks$breaks, col = "gold")
+boxplot(breaks ~ wool, data = warpbreaks, col = "orangered")
+boxplot(breaks ~ tension, data = warpbreaks, col = "chartreuse")
+
+
+```
+
+This data set has 2 treatments. We don't know if there is an interaction between the variables, yet. A good start is to run a linear model using `lm()` function, the linear regression function. As a reminder, ANOVA is a special case of the linear regression model where the predictors (the experimental treatments) are categories rather than a continuous variable. 
+
+```{r}
+# run standard linear model for main effects only
+lm.mod1 <- lm(breaks ~ wool + tension, data = warpbreaks)
+
+# extract type III sums of squares from that model
+Anova(lm.mod1, type = "3") 
+
+# run a linear model with main effects and interactions
+lm.mod2 <- lm(breaks ~ wool*tension, data = warpbreaks)
+
+# ...and type III sums of squares 
+Anova(lm.mod2, type = "III")
+```
+
+**FYI**
+```
+# this function runs type II sums of squares: 
+Anova(lm.mod2, type = "II")
+# this function runs type I sums of squares: 
+anova(lm.mod2)
+```
+
+<span style="color:mediumblue"> **A few comments on types of sums of squares:** </span>
+
+As a reminder, the type of sums of squares used in statistical tests can impact the results and subsequent interpretation. Type I, sums of squares tests for statistical significance by adding one variable to the model at time (and hence is also called "sequential"). If there is any unbalance in the treatments, the type I sums of squares are dependent on the order variables are added to the model and hence is often not the best choice for many agricultural experiment. Type III sums of squares (also called "partial" or "marginal") evaluates the statistical significance of variable or interaction, assuming that the other variables are in the model. This is a decent default option. The last option is Type II sums of squares, which is the best option when *you are sure there are no interactions between variables*. If there is complete balance among treatments (each treatment is observed the same number of times with no missing data), then there is no need to concern yourself with these different types of sums of squares. 
+
+#### Compare Models
+
+```{r}
+# conduct an F test comparing the models
+anova(lm.mod1, lm.mod2)
+
+# also, consider doing a stepwise approach for finding the best model:
+step(lm.mod2)
+```
+#### Model diagnostics
+
+```{r}
+plot(lm.mod2) #this will produce 4 plots of residuals
+shapiro.test(resid(lm.mod2)) #standard shapiro-wilk test. interpret with a grain of salt
+```
+
+#### Least squares means & contrasts
+
+```{r}
+# extract least squares means
+(lsm <- emmeans(lm.mod2, ~ tension))
+emmeans(lm.mod2, "wool")
+
+# make all pairwise comparisons within each factor
+contrast(lsm, "pairwise")
+
+# compare low tensions versus Medium and High
+levels(warpbreaks$tension)
+cList <- list(LvMH = c(1, -0.5, -0.5), 
+              HvLM = c(0.5, 0.5, -1))
+
+# check that contrast sums to zero
+lapply(cList, sum)
+
+# perform contrast
+summary(contrast(lsm, cList, adjust = "bonferroni"))
+```
+
+#### Randomised Complete Block Design (RCBD) - fixed effects model
+
+This example uses rapeseed yield data from multiple locations, years and cultivars. Within a single location or year, the replication is often balanced. 
+
+**Load Data and examine:**
+```{r}
+data(shafii.rapeseed) # from the 'agridat' package
+
+rapeseed1987 <- shafii.rapeseed %>% filter(year == 87) %>% 
+  mutate(block = fct_drop(rep), Cv = fct_drop(gen), loc = fct_drop(loc))
+
+str(rapeseed1987)
+na_func(rapeseed1987)
+table(rapeseed1987$Cv, rapeseed1987$loc) #experiment has 1 rep per block 
+
+hist(rapeseed1987$yield, col = "gold")
+boxplot(yield ~ Cv, data = rapeseed1987, col = "orangered")
+boxplot(yield ~ loc, data = rapeseed1987, col = "chartreuse")
+```
+
+**Analyse experiment:**
+
+```{r}
+# for this example, the analysis will only be done for a single year
+# block is nested within location
+# if each block had a unique name, 'Error(block)' would suffce
+shaf.aov <- aov(yield ~ Cv*loc + Error(block), data = rapeseed1987)
+
+summary(shaf.aov)
+emmeans(shaf.aov, ~ Cv | loc)
+```
+
+### ANOVA for mixed models
+*(models with random and fixed effects)*
+
+Random effects are often those treatments levels drawn from a large population of possible treatment levels and there is interest in understanding the distribution and variance of that population. This in contrast to fixed effects, where the inferences are restricted to the treatment levels tested.
+
+Blocking factors and Year are often considered random factors because a researcher is not interested in particular years or a blocking factor. When there is unbalanced replication, the variance components should be estimated with maximum likelihood or REML, which implies use of the packages "lmer" and/or "nlme". 
+
+
+#### Randomised Complete Block Design (RCBD) - mixed effects
+
+The "shafii.rapeseed" data set will be used for this section. 
+
+**Analyse experiment using a mixed model:**
+
+This uses the function `lme()` from the package "nlme". Functionally, it is very similar to calling `lme4::lmer()`. The degrees of freedom are different (lmer is using Satterthwaite's approximation), but the p-values are the same. 
+```{r}
+# turn year into the factor "Year"
+shafii.rapeseed$Year <- as.factor(shafii.rapeseed$year)
+# create a blocking variable that is unique for each location-by-year combination
+# so R doesn't conflate "R1" from one location/year with another location/year
+shafii.rapeseed$Rep <- as.factor(paste(shafii.rapeseed$loc, shafii.rapeseed$year, shafii.rapeseed$rep, sep = "_"))
+
+shaf.lme <- lme(fixed = yield ~ gen*loc + Year,
+                  random = ~ 1|Rep,
+                  data = shafii.rapeseed, method = "REML")
+
+# view sum of squares table 
+# when anova() is called for an lme object, the function called is actually anova.lme()
+anova(shaf.lme, type = "marginal") # "marginal" is equivalent to type III sums of squares
+Anova(shaf.lme, type = "3")
+# FYI: use "anova(model.lme)" for type I sums of squares
+
+# lmer notation
+shaf.lmer <- lmer(yield ~ gen*loc + Year + (1|Rep),
+                  data = shafii.rapeseed, REML = T)
+anova(shaf.lmer, type = "marginal")
+Anova(shaf.lmer, type = "3")
+
+```
+
+#### Diagnostics, model building
+```{r}
+plot(shaf.lme)
+qqnorm(shaf.lme, abline = c(0, 1))
+```
+
+#### Least squares means
+```{r}
+# for cultivar 
+(lme.means.cv <- emmeans(shaf.lme, "gen"))
+# for location
+(lme.means.loc <- emmeans(shaf.lme, "loc"))
+# for cultivar means within each location
+lme.means.int <- emmeans(shaf.lme, ~ gen | loc + Year)
+
+# this code would produce location means within each cultivar 
+# emmeans(model.lme, ~ loc | gen))
+#  all possible combinations exist!
+
+# also: 
+# emmeans(model.lme, ~ loc | gen)) is the same as emmeans(model.lme, ~ gen | loc))
+```
+
+#### Pairwise Contrasts:
+```{r}
+# all pairwise
+pairs(lme.means.cv)
+
+# HSD-like comparisons:
+
+CLD(lme.means.cv)
+CLD(lme.means.loc)
+# CLD(lme.means.int) # not actually run because it results in copious output
+
+# plot same results
+plot(lme.means.cv, comparison = T)
+plot(lme.means.loc, comparison = T, horizontal = F) # rotate plots to vertical position
+# blue bars = lsmeans confidence 95% confidence intervals
+# red arrows. pairwise differnces (overlapping arrows = not significantly different)
+```
+
+**Interaction plots can also be done:**  
+
+*(but, it gets unwieldy)*
+
+```{r fig.height=20}
+plot(lme.means.int, comparison = T, adjust = "tukey")
+```
+
+
+#### Other preset contrasts: 
+
+```{r}
+# compare to a control, e.g. "Bridger"
+levels(shafii.rapeseed$gen)
+
+# Bridger is listed in position 2 of the factor 'shafii.rapeseed$gen'
+# so '2' is set as the reference level in the following contrast statement: 
+
+# "trt.vs.ctrlk" (treatment versus control treatment k) is a specific option to compare all treatment levels to a user-defined level
+# by default, it will use the last level as the reference level
+
+contrast(lme.means.cv, "trt.vs.ctrlk", ref = 2) 
+
+```
+Search `?contrast.emmGrid` to see full list of options for preset contrasts. 
+
+#### Custom contrasts
+```{r}
+# example: contrast Western locations versus Southern locations
+
+# first, find out what levels are present
+unique(shafii.rapeseed$loc)
+
+# next create a contrast list 
+# this is a list of coefficients as long your list of treatement levels
+# indicating what coefficients to give each treatment level
+
+# in this example, levels "ID", "MT", "OR", and "WA" are contrasted versus
+# "NC", "SC", "MS", "TN", "TX" and "VA"
+
+cList <- list(West_V_South = c(0, 1/4, 0, -1/6, 1/4, -1/6, 0, 1/4, -1/6, 0, -1/6, -1/6, -1/6, 1/4))
+
+# check that each contrast sums to zero:
+lapply(cList, sum)
+
+lme.means.loc2 <- emmeans(shaf.lme, "loc", contr = cList)
+summary(lme.means.loc2)
+
+# same contrast can also be done within each level of Cv:
+emmeans(shaf.lme, ~ loc | gen, contr = cList)
+
+```
+
+To perform custom contrasts on a another variable, a cList and emmeans call for that variable is required.  
+
+### ANCOVA
+(analysis of covariance)
+From a R programming perspective, this is no different than running a standard linear model. A data set from **agridat**, "theobald.covariate" comparing corn silage yields across multiple years, locations and cultivars. The data set includes a covariate, "chu" (corn heat units, a bit like growing degree days). 
+
+**Load data and examine:**
+```{r}
+data(theobald.covariate)
+str(theobald.covariate)
+na_func(theobald.covariate)
+```
+
+**Exploratory plots:**
+```{r}
+# distributions of continuous variables
+hist(theobald.covariate$yield, col = "gold")
+hist(theobald.covariate$chu, col = "gray70")
+
+# relationship between reponse variable and covariate:
+with(theobald.covariate, plot(chu, yield))
+length(unique(theobald.covariate$chu))
+
+# the usual boxplots: 
+boxplot(yield ~ env, data = theobald.covariate, col = "orangered")
+boxplot(yield ~ year, data = theobald.covariate, col = "chartreuse")
+boxplot(yield ~ gen, data = theobald.covariate, col = "darkcyan")
+```
+
+Check level of replication: 
+```{r}
+theobald.covariate$Year <- as.factor(theobald.covariate$year)
+replications(yield ~ Year + env + gen, data = theobald.covariate)
+# with(theobald.covariate, table(gen, env, Year)) # lots of useful output
+```
+
+The treatments are not fully crossed, so a fully specified model of the form `yield ~  Year*env*gen*chu` cannot be tested. The treatments and interactions were tested in reduced models and compared. The final "best" model is shown below. 
+
+```{r}
+# the covariate, chu, is added in like any other effect. 
+theobald.lm2 <- lm(yield ~  Year + env*chu, data = theobald.covariate)
+Anova(theobald.lm2, type = "III")
+
+# how to extract the covariate slope(s): 
+emtrends(theobald.lm2, ~ env, "chu")
+
+# emmeans extracted as usual:
+emmeans(theobald.lm2, ~ env)
+emmeans(theobald.lm2, ~ Year)
+```
+
+
+
+
+### ANOVA - Special Designs
+  * split plot
+  * split-split plot (see the agricolae package)
+  * split-block (see the agricolae package)
+  * lattice (see the agricolae package)
+
+#### Split-plot
+
+**Load data**
+Load "Oats" from nlme. Nitrogen level ("nitro") is the main plot, cultivar ("Variety") is the sub-plot and "Block" describes the blocking design.
+
+```{r}
+data(Oats) 
+str(Oats)
+na_func(Oats)
+
+Oats$N <- as.factor(Oats$nitro)
+replications(yield ~ Variety*N*Block, data = Oats)
+table(Oats$Variety, Oats$N)
+
+hist(Oats$yield, col = "gold")
+boxplot(yield ~ N, data = Oats, col = "dodgerblue1")
+boxplot(yield ~ Variety, data = Oats, col = "red3")
+```
+
+**Balanced Trial Analysis**  
+
+The format for specifying split-plot error terms is `Error(blocking factor/main plot)`. 
+```{r warning=FALSE}
+#contrasts("contr.sum")
+spl.oats <- aov(yield ~ Variety*N + Error(Block:N), data = Oats) 
+summary(spl.oats)
+
+emmeans(spl.oats, "N") 
+emmeans(spl.oats, ~ Variety) 
+```
+
+**Unbalanced Trial Analysis**  
+
+```{r warning=FALSE}
+spl.oats2 <- lmer(yield ~ N*Variety + (1|Block:N), data = Oats) 
+Anova(spl.oats2, type = "3")
+
+
+emmeans(spl.oats2, "N") 
+emmeans(spl.oats2, ~ Variety) 
+```
+
+### Extra Functions 
+**for extracting model parameters, diagnostics and other model information**  
+
+These work differently with different R object types. That is, different output will result depending on if a "lm", "lme" or "merMod" (lmer) object is used in the function call. 
+
+```
+# extract model summary
+summary()
+
+#extract coefficients:
+coef()
+
+#extract residuals
+resid()
+rstudent()
+residuals()
+
+# extract predicted values
+fits()
+
+# make diagnostic plots
+plot()
+
+# extract influence measures:
+influence.measures()
+
+#other fir diagnostics:
+cooks.distance()
+dffits()
+dfbeta()
+hat()
+
+```
+
+To see the all functions available for a particular type of linear model object, use:
+
+```{r}
+methods(class = "lm") # for lm objects
+methods(class = "lme") # for lme4 objects
+methods(class = "merMod") # for nlme objects 
+```
+ 
+The package "emmeans" also supports [a large number of models](https://cran.r-project.org/web/packages/emmeans/vignettes/models.html).  
+
+ 

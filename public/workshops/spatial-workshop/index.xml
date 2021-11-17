@@ -15,7 +15,7 @@
     <item>
       <title>Computational Set-up</title>
       <link>/workshops/spatial-workshop/prep-work/</link>
-      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 07 Nov 2021 00:00:00 +0000</pubDate>
       <guid>/workshops/spatial-workshop/prep-work/</guid>
       <description>&lt;p&gt;
   &lt;i class=&#34;fab fa-r-project  pr-1 fa-fw&#34;&gt;&lt;/i&gt; Here are instructions for how check your R installation and install packages needed for the workshop.&lt;/p&gt;
@@ -34,23 +34,78 @@
                   &amp;quot;ggplot2&amp;quot;, &amp;quot;desplot&amp;quot;,            # for plotting
                   &amp;quot;nlme&amp;quot;, &amp;quot;lme4&amp;quot;, &amp;quot;emmeans&amp;quot;,       # for linear modelling
                   &amp;quot;SpATS&amp;quot;,                         # for fitting splines
-                  &amp;quot;sp&amp;quot;, &amp;quot;spdep&amp;quot;, &amp;quot;gstat&amp;quot;, &amp;quot;sf&amp;quot;)    # for spatial modelling
+                  &amp;quot;sp&amp;quot;, &amp;quot;spdep&amp;quot;, &amp;quot;gstat&amp;quot;, &amp;quot;spaMM&amp;quot;, &amp;quot;sf&amp;quot;)    # for spatial modelling
 
 install.packages(package_list)
 sapply(package_list, require, character.only = TRUE)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;div class=&#34;alert alert-warning&#34;&gt;
   &lt;div&gt;
-    Please note that the spatial packages may take awhile to install, and you may run into problems with the installation. Please attempt installation &lt;em&gt;in advance&lt;/em&gt; of the workshop. If you have problems installing and/or loading any of these packages that you are not able to resolve, contact us so we can help you, preferably &lt;em&gt;before&lt;/em&gt; the workshop.
+    Please note that the spatial packages may take awhile to install, and you may run into problems with the installation. Please attempt installation &lt;em&gt;in advance&lt;/em&gt; of the workshop. The packages have all been successfully installed if after the &lt;code&gt;sapply(package_list, require, character.only = TRUE)&lt;/code&gt; is run, the R output is &amp;ldquo;TRUE&amp;rdquo; for each package. If you have problems installing and/or loading any of these packages that you are not able to resolve, contact us so we can help you, preferably &lt;em&gt;before&lt;/em&gt; the workshop.
   &lt;/div&gt;
 &lt;/div&gt;
+&lt;h3 id=&#34;library-information&#34;&gt;Library Information&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;package&lt;/th&gt;
+&lt;th&gt;usage&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://dplyr.tidyverse.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;dplyr&lt;/a&gt;, &lt;a href=&#34;https://tidyr.tidyverse.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;tidyr&lt;/a&gt;,&lt;/td&gt;
+&lt;td&gt;standard data manipulation&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://purrr.tidyverse.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;purrr&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;for repeat functions&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://CRAN.R-project.org/package=nlme&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;nlme&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;mixed linear models with options for spatial covariates&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://CRAN.R-project.org/package=lme4&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;lme4&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;mixed linear models with crossed random effects&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://ggplot2-book.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ggplot&lt;/a&gt;, &lt;a href=&#34;http://kwstat.github.io/desplot/index.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;desplot&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;standard plotting packge and extension for plotting block outlines&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://CRAN.R-project.org/package=SpATS&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;SpATS&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;spline-fitting&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://CRAN.R-project.org/package=sp&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;sp&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;preparation of spatial objects&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://r-spatial.github.io/spdep/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;spdep&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Moran&amp;rsquo;s I test&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://CRAN.R-project.org/package=gstat&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;gstat&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;for fitting empirical variogram&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://gitlab.mbb.univ-montp2.fr/francois/spamm-ref&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;spaMM&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;fits Matern covariances structure for mixed linear models&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/rvlenth/emmeans&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;emmeans&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;extracts marginal means from linear model objects&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 </description>
     </item>
     
     <item>
       <title>Why Care about Spatial Variation?</title>
       <link>/workshops/spatial-workshop/why-spatial/</link>
-      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 07 Nov 2021 00:00:00 +0000</pubDate>
       <guid>/workshops/spatial-workshop/why-spatial/</guid>
       <description>&lt;h4 id=&#34;agricultural-field-trials&#34;&gt;Agricultural field trials&lt;/h4&gt;
 
@@ -420,7 +475,7 @@ run;
     <item>
       <title>Empirical Variograms</title>
       <link>/workshops/spatial-workshop/variograms/</link>
-      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 07 Nov 2021 00:00:00 +0000</pubDate>
       <guid>/workshops/spatial-workshop/variograms/</guid>
       <description>&lt;p&gt;The empirical variogram is a visual tool for quantifying spatial covariance. It uses semivariance ($\gamma$), which is a measure of covariance between points or units ($i$ and $j$) as a function of distance ($h$):&lt;/p&gt;
 &lt;p&gt;$$\gamma(h) = \frac{1}{2|N(h)|}\sum_{N(h)}(x_i - x_j)^2$$&lt;/p&gt;
@@ -630,7 +685,7 @@ $$ r = range $$&lt;/p&gt;
 &lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-7&#34;&gt;
   &lt;summary&gt;R&lt;/summary&gt;
   &lt;p&gt;&lt;pre&gt;&lt;code&gt;# load libraries
-library(gstat)
+library(gstat); library(spaMM)
 
 # set up spatial object
 Nin_spatial &amp;lt;- Nin_na
@@ -638,12 +693,12 @@ coordinates(Nin_spatial) &amp;lt;- ~ col.width + row.length # add attribte
 class(Nin_spatial)
 
 # establish max distance for variogram estimation
-max_dist = 0.5*max(dist(coordinates(Nin_spatial)))
+max_dist = 0.6*max(dist(coordinates(Nin_spatial)))
 
 # calculate empirical variogram
 resid_var1 &amp;lt;- gstat::variogram(yield ~ rep + gen, 
                         cutoff = max_dist,
-                        width = max_dist/20, # 20 is the number of bins
+                        width = max_dist/15, # 15 is the number of bins
                         data = Nin_spatial)
 plot(resid_var1)  # empirical variogram
 
@@ -704,7 +759,7 @@ run;
     <item>
       <title>Linear Models with Correlated Errors</title>
       <link>/workshops/spatial-workshop/correlated-error-models/</link>
-      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 07 Nov 2021 00:00:00 +0000</pubDate>
       <guid>/workshops/spatial-workshop/correlated-error-models/</guid>
       <description>&lt;p&gt;Now that we have a sense of how to model spatial variation, the next step is to incorporate that into a linear model. The starting point is the linear mixed model. In RCBD design, often the treatments are treated as fixed and the block effect as random.&lt;/p&gt;
 &lt;p&gt;$$Y_ij = \mu + \alpha_i + \beta_j + \epsilon_{ij}$$&lt;/p&gt;
@@ -801,7 +856,7 @@ run;
     <item>
       <title>Modelling Spatial Trends</title>
       <link>/workshops/spatial-workshop/trend-modelling/</link>
-      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 07 Nov 2021 00:00:00 +0000</pubDate>
       <guid>/workshops/spatial-workshop/trend-modelling/</guid>
       <description>&lt;p&gt;The spatial models introduced in this workshop assume that spatial variation is localised and within a trial, plots located sufficiently far apart are independent of each other with no apparent spatial correlation. However, sometimes that is accurately describe a field trial. There can be experiment-wide gradients due to position on a slope, proximity to an influential environmental factor (e.g. a road), and so on. In these instances, those gradients should be modelled as a trend.&lt;/p&gt;
 &lt;h3 id=&#34;blocking&#34;&gt;Blocking&lt;/h3&gt;
@@ -866,6 +921,8 @@ nin.rc &amp;lt;- lmer(yield ~ gen + (1|colfF) + (1|rowF),
               data = Nin, na.action = na.exclude)
 # extract random effects for row and column
 ranef(nin_rc)
+# extract predictions
+nin_rc &amp;lt;- as.data.frame(emmeans(nin.rc, &amp;quot;gen&amp;quot;))
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/p&gt;
 &lt;/details&gt;
@@ -965,7 +1022,7 @@ names(nlme_mods) &amp;lt;- c(&amp;quot;LMM&amp;quot;, &amp;quot;exponential&amp;
 # extract log likelihood, AIC, BIC
 data.frame(loglik = sapply(nlme_mods, logLik),  
            AIC = sapply(nlme_mods, AIC),
-           BIC = sapply(nlme_mods, AIC, k = log(nrow(Nin_na)))) %&amp;gt;% arrange(desc(loglikelihood))
+           BIC = sapply(nlme_mods, AIC, k = log(nrow(Nin_na)))) %&amp;gt;% arrange(desc(loglik))
 # (higher is better for loglik, lower is better for AIC and BIC)
 
 # compare post-hoc power
@@ -974,10 +1031,9 @@ anovas &amp;lt;- lapply(nlme_mods[-7], function(x){
   aov &amp;lt;- as.data.frame(anova(x))[2,]})
 # bind all the output together
 a &amp;lt;- bind_rows(anovas) %&amp;gt;% 
-  mutate(model = c(&amp;quot;LMM&amp;quot;, &amp;quot;exponential&amp;quot;, &amp;quot;gaussian&amp;quot;, &amp;quot;matern&amp;quot;)) %&amp;gt;% 
+  mutate(model = c(&amp;quot;LMM&amp;quot;, &amp;quot;exponential&amp;quot;, &amp;quot;gaussian&amp;quot;, &amp;quot;matern&amp;quot;, &amp;quot;row-col&amp;quot;)) %&amp;gt;% 
   arrange(desc(`p-value`)) %&amp;gt;% select(c(model, 1:4)) 
 rownames(a) &amp;lt;- 1:nrow(a)
-a[6,2:5] &amp;lt;- anova(nin_trend)[3:6]
 a
 
 ## compare precision of estimates
@@ -1003,7 +1059,7 @@ pivot_longer(preds_df, cols = !gen, names_to = &amp;quot;model&amp;quot;, values
   geom_point(size = 5, alpha = 0.5, col = &amp;quot;navy&amp;quot;) +
   geom_line() +
   ylab(&amp;quot;yield means for gen&amp;quot;) + 
-  theme_minimal(base_size = 14)
+  theme_minimal()
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/p&gt;
 &lt;/details&gt;
@@ -1055,7 +1111,7 @@ run;
     <item>
       <title>Augmented Designs</title>
       <link>/workshops/spatial-workshop/augmented/</link>
-      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 07 Nov 2021 00:00:00 +0000</pubDate>
       <guid>/workshops/spatial-workshop/augmented/</guid>
       <description>&lt;p&gt;The augmented experimental design is a special design where there is a large number of unreplicated plots interspersed with frequent checks that are replicated. This type of model is  useful when the number of treatments is very large and/or replication is either impossible or unfeasible. Often, the primary goal of the studies using this design is to rank or select genotypes.&lt;/p&gt;
 &lt;p&gt;Augmented models are analyzed in a fundamentally different method than RCBD models due to the large number of unreplicated observations. To adjust for the lack of replication, only a select set of treatments, usually of known performance, are replicated in the experiments. The error estimated from these replicated treatments is used in the analysis to evaluate the remaining genotypes.&lt;/p&gt;
@@ -1097,8 +1153,8 @@ library(dplyr); library(nlme); library(ggplot2)
 library(gstat); library(sp)
 
 # read in data
-aug_data_origin &amp;lt;- read.csv(&amp;quot;data/AB19F5_LIND.csv&amp;quot;, 
-                     na.strings = c(&amp;quot;&amp;quot;, &amp;quot;NA&amp;quot;, &amp;quot;.&amp;quot;, &amp;quot;999999&amp;quot;)) %&amp;gt;% 
+aug_data_origin &amp;lt;- read.csv(&amp;quot;data/augmented_lind.csv&amp;quot;, 
+                            na.strings = c(&amp;quot;&amp;quot;, &amp;quot;NA&amp;quot;, &amp;quot;.&amp;quot;, &amp;quot;999999&amp;quot;)) %&amp;gt;% 
   slice(-1) %&amp;gt;% # first line not needed
   mutate(yieldkg = yieldg/1000)  # to prevent overflow
 
@@ -1118,36 +1174,24 @@ gen_sum2 &amp;lt;- gen_sum  %&amp;gt;%  mutate(gamma = name) %&amp;gt;%
     delta == &amp;quot;unrep&amp;quot; ~ &amp;quot;unreplicate_obs&amp;quot;)) %&amp;gt;% 
   mutate(beta = case_when(
     delta == &amp;quot;unrep&amp;quot; ~ gamma,
-    delta == &amp;quot;check&amp;quot; ~ NA_integer_)) # or maybe &amp;quot;check&amp;quot;
+    delta == &amp;quot;check&amp;quot; ~ gamma))
 
 # merge original data set with info on treatment levels
 aug_data &amp;lt;- aug_data_origin %&amp;gt;% 
-  select(name, prow, pcol, yieldg) %&amp;gt;%
+  select(name, prow, pcol, yieldkg, yieldg) %&amp;gt;%
   mutate(row = prow*11.7, col = pcol*5.5) %&amp;gt;% 
   full_join(gen_sum2, by = &amp;quot;name&amp;quot;) 
 
-# calculate denominator degrees of freedom
-ddf = sum(checks$counts) - nrow(checks) - 1
+## modelling
 
-## initial linear model:
-
-# tau estimates effects of checks versus all unreplicated genotypes)
-# beta predicts effects each unreplicated genotypes, nested in tau 
 aug1 &amp;lt;- lme(fixed = yieldg ~ tau,
-                 random = ~ 1|tau/beta,
-                 data = aug_data, na.action = na.exclude)
-
-# another formulation
-# delta estimates effects of replicated versus unreplicated genotypes
-# gamma estimates the effecs of all genotypes evaluated in the trial
-aug2 &amp;lt;- lme(fixed = yieldg ~ delta,
-                 random = ~ 1|delta/gamma,
-                 data = aug_data, na.action = na.exclude)
+            random = ~ 1|tau/beta,
+            data = aug_data, na.action = na.exclude)
 
 # extract residuals
 aug_data$res &amp;lt;- residuals(aug1)
 
-# plot residual chlorpleth map:
+# plot residual chloroepleth map:
 ggplot(aug_data, aes(y = row, x = col)) +
   geom_tile(aes(fill = res)) +
   scale_fill_gradient(low = &amp;quot;yellow&amp;quot;, high = &amp;quot;black&amp;quot;) +
@@ -1162,16 +1206,15 @@ coordinates(aug_spatial) &amp;lt;- ~ col + row
 max_dist = 0.5*max(dist(coordinates(aug_spatial)))
 
 aug_vario &amp;lt;- gstat::variogram(res ~ 1, 
-                               cutoff = max_dist,
-                               width = max_dist/10, # 20 is the number of bins
-                               data = aug_spatial)
-plot(aug_vario)
+                              cutoff = max_dist,
+                              width = max_dist/10, 
+                              data = aug_spatial)
 
 # optional to run: 
-# nugget_start &amp;lt;- min(aug_vario$gamma)
-# aug_vgm &amp;lt;- vgm(model = &amp;quot;Exp&amp;quot;, nugget = nugget_start) 
-# aug_variofit &amp;lt;- fit.variogram(aug_vario, aug_vgm)
-# plot(aug_vario, aug_variofit, main = &amp;quot;Exponential model&amp;quot;)     
+nugget_start &amp;lt;- min(aug_vario$gamma)
+aug_vgm &amp;lt;- vgm(model = &amp;quot;Exp&amp;quot;, nugget = nugget_start)
+aug_variofit &amp;lt;- fit.variogram(aug_vario, aug_vgm)
+plot(aug_vario, aug_variofit, main = &amp;quot;Exponential model&amp;quot;)
 
 cor_exp &amp;lt;- corSpatial(form = ~ row + col, 
                       nugget = T, fixed = F,
@@ -1183,7 +1226,27 @@ aug1_sp &amp;lt;- update(aug1, corr = cor_exp)
 aug1_sp$modelStruct$corStruct
 
 # extract BLUPs for unreplicated lines:
-aug_blups &amp;lt;- ranef(aug1_sp)$beta %&amp;gt;% rename(yieldg = &#39;(Intercept)&#39;)
+aug1_blups &amp;lt;- ranef(aug1_sp)$beta %&amp;gt;% rename(yieldg = &#39;(Intercept)&#39;)
+
+# look at variance components
+VarCorr(aug1_sp)
+
+##### OR #######
+
+# another formulation
+# delta estimates effects of replicated versus unreplicated genotypes
+# gamma estimates the effecs of all genotypes evaluated in the trial
+aug2 &amp;lt;- lme(fixed = yieldkg ~ delta,
+            random = ~ 1|delta/gamma,
+            data = aug_data, na.action = na.exclude)
+
+aug2_sp &amp;lt;- update(aug2, corr = cor_exp)
+
+# spatial parameters:
+aug2_sp$modelStruct$corStruct
+
+# extract BLUPs for unreplicated lines:
+aug_blups2 &amp;lt;- ranef(aug2_sp)$gamma %&amp;gt;% rename(yieldg = &#39;(Intercept)&#39;)
 
 # look at variance components
 VarCorr(aug1_sp)
@@ -1271,7 +1334,7 @@ run;
     <item>
       <title>Final thoughts</title>
       <link>/workshops/spatial-workshop/conclusion/</link>
-      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 07 Nov 2021 00:00:00 +0000</pubDate>
       <guid>/workshops/spatial-workshop/conclusion/</guid>
       <description>&lt;p&gt;Spatial analysis can be challenging, but I think it is worth the effort to learn and implement in analysis of field trials. Incorporating spatial statistics into analysis of feel trials can be overwhelming at time. However, investigating spatial correlation in a field trial and controlling for it if necessary using &lt;em&gt;any&lt;/em&gt; of the methods developed for this is recommended over doing nothing.&lt;/p&gt;
 &lt;p&gt;There is no denying that work is needed to develop scripts that automate this process so researchers can routinely incorporate spatial covariance into field trial analysis. Many current R tools are unwieldy to use and have insufficient options to support variety trial analysis.&lt;/p&gt;

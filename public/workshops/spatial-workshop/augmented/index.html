@@ -304,10 +304,10 @@
     
       <meta
         property="article:published_time"
-        content="2021-11-01T00:00:00&#43;00:00"
+        content="2021-11-07T00:00:00&#43;00:00"
       />
     
-    <meta property="article:modified_time" content="2021-11-01T00:00:00&#43;00:00">
+    <meta property="article:modified_time" content="2021-11-07T00:00:00&#43;00:00">
   
 
   
@@ -886,8 +886,8 @@ library(dplyr); library(nlme); library(ggplot2)
 library(gstat); library(sp)
 
 # read in data
-aug_data_origin &lt;- read.csv(&quot;data/AB19F5_LIND.csv&quot;, 
-                     na.strings = c(&quot;&quot;, &quot;NA&quot;, &quot;.&quot;, &quot;999999&quot;)) %&gt;% 
+aug_data_origin &lt;- read.csv(&quot;data/augmented_lind.csv&quot;, 
+                            na.strings = c(&quot;&quot;, &quot;NA&quot;, &quot;.&quot;, &quot;999999&quot;)) %&gt;% 
   slice(-1) %&gt;% # first line not needed
   mutate(yieldkg = yieldg/1000)  # to prevent overflow
 
@@ -907,36 +907,24 @@ gen_sum2 &lt;- gen_sum  %&gt;%  mutate(gamma = name) %&gt;%
     delta == &quot;unrep&quot; ~ &quot;unreplicate_obs&quot;)) %&gt;% 
   mutate(beta = case_when(
     delta == &quot;unrep&quot; ~ gamma,
-    delta == &quot;check&quot; ~ NA_integer_)) # or maybe &quot;check&quot;
+    delta == &quot;check&quot; ~ gamma))
 
 # merge original data set with info on treatment levels
 aug_data &lt;- aug_data_origin %&gt;% 
-  select(name, prow, pcol, yieldg) %&gt;%
+  select(name, prow, pcol, yieldkg, yieldg) %&gt;%
   mutate(row = prow*11.7, col = pcol*5.5) %&gt;% 
   full_join(gen_sum2, by = &quot;name&quot;) 
 
-# calculate denominator degrees of freedom
-ddf = sum(checks$counts) - nrow(checks) - 1
+## modelling
 
-## initial linear model:
-
-# tau estimates effects of checks versus all unreplicated genotypes)
-# beta predicts effects each unreplicated genotypes, nested in tau 
 aug1 &lt;- lme(fixed = yieldg ~ tau,
-                 random = ~ 1|tau/beta,
-                 data = aug_data, na.action = na.exclude)
-
-# another formulation
-# delta estimates effects of replicated versus unreplicated genotypes
-# gamma estimates the effecs of all genotypes evaluated in the trial
-aug2 &lt;- lme(fixed = yieldg ~ delta,
-                 random = ~ 1|delta/gamma,
-                 data = aug_data, na.action = na.exclude)
+            random = ~ 1|tau/beta,
+            data = aug_data, na.action = na.exclude)
 
 # extract residuals
 aug_data$res &lt;- residuals(aug1)
 
-# plot residual chlorpleth map:
+# plot residual chloroepleth map:
 ggplot(aug_data, aes(y = row, x = col)) +
   geom_tile(aes(fill = res)) +
   scale_fill_gradient(low = &quot;yellow&quot;, high = &quot;black&quot;) +
@@ -951,16 +939,15 @@ coordinates(aug_spatial) &lt;- ~ col + row
 max_dist = 0.5*max(dist(coordinates(aug_spatial)))
 
 aug_vario &lt;- gstat::variogram(res ~ 1, 
-                               cutoff = max_dist,
-                               width = max_dist/10, # 20 is the number of bins
-                               data = aug_spatial)
-plot(aug_vario)
+                              cutoff = max_dist,
+                              width = max_dist/10, 
+                              data = aug_spatial)
 
 # optional to run: 
-# nugget_start &lt;- min(aug_vario$gamma)
-# aug_vgm &lt;- vgm(model = &quot;Exp&quot;, nugget = nugget_start) 
-# aug_variofit &lt;- fit.variogram(aug_vario, aug_vgm)
-# plot(aug_vario, aug_variofit, main = &quot;Exponential model&quot;)     
+nugget_start &lt;- min(aug_vario$gamma)
+aug_vgm &lt;- vgm(model = &quot;Exp&quot;, nugget = nugget_start)
+aug_variofit &lt;- fit.variogram(aug_vario, aug_vgm)
+plot(aug_vario, aug_variofit, main = &quot;Exponential model&quot;)
 
 cor_exp &lt;- corSpatial(form = ~ row + col, 
                       nugget = T, fixed = F,
@@ -972,7 +959,27 @@ aug1_sp &lt;- update(aug1, corr = cor_exp)
 aug1_sp$modelStruct$corStruct
 
 # extract BLUPs for unreplicated lines:
-aug_blups &lt;- ranef(aug1_sp)$beta %&gt;% rename(yieldg = '(Intercept)')
+aug1_blups &lt;- ranef(aug1_sp)$beta %&gt;% rename(yieldg = '(Intercept)')
+
+# look at variance components
+VarCorr(aug1_sp)
+
+##### OR #######
+
+# another formulation
+# delta estimates effects of replicated versus unreplicated genotypes
+# gamma estimates the effecs of all genotypes evaluated in the trial
+aug2 &lt;- lme(fixed = yieldkg ~ delta,
+            random = ~ 1|delta/gamma,
+            data = aug_data, na.action = na.exclude)
+
+aug2_sp &lt;- update(aug2, corr = cor_exp)
+
+# spatial parameters:
+aug2_sp$modelStruct$corStruct
+
+# extract BLUPs for unreplicated lines:
+aug_blups2 &lt;- ranef(aug2_sp)$gamma %&gt;% rename(yieldg = '(Intercept)')
 
 # look at variance components
 VarCorr(aug1_sp)
@@ -1088,7 +1095,7 @@ run;
         </div>
 
         <div class="body-footer">
-          <p>Last updated on Nov 1, 2021</p>
+          <p>Last updated on Nov 7, 2021</p>
 
           
 

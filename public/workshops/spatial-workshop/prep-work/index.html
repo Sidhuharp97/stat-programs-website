@@ -306,10 +306,10 @@ Check software versions Open R and run this code to check what version of R your
     
       <meta
         property="article:published_time"
-        content="2021-11-01T00:00:00&#43;00:00"
+        content="2021-11-07T00:00:00&#43;00:00"
       />
     
-    <meta property="article:modified_time" content="2021-11-01T00:00:00&#43;00:00">
+    <meta property="article:modified_time" content="2021-11-07T00:00:00&#43;00:00">
   
 
   
@@ -785,6 +785,7 @@ Check software versions Open R and run this code to check what version of R your
       <ul>
         <li><a href="#check-software-versions">Check software versions</a></li>
         <li><a href="#install-workshop-packages">Install workshop packages</a></li>
+        <li><a href="#library-information">Library Information</a></li>
       </ul>
     </li>
   </ul>
@@ -864,16 +865,71 @@ Check software versions Open R and run this code to check what version of R your
                   &quot;ggplot2&quot;, &quot;desplot&quot;,            # for plotting
                   &quot;nlme&quot;, &quot;lme4&quot;, &quot;emmeans&quot;,       # for linear modelling
                   &quot;SpATS&quot;,                         # for fitting splines
-                  &quot;sp&quot;, &quot;spdep&quot;, &quot;gstat&quot;, &quot;sf&quot;)    # for spatial modelling
+                  &quot;sp&quot;, &quot;spdep&quot;, &quot;gstat&quot;, &quot;spaMM&quot;, &quot;sf&quot;)    # for spatial modelling
 
 install.packages(package_list)
 sapply(package_list, require, character.only = TRUE)
 </code></pre>
 <div class="alert alert-warning">
   <div>
-    Please note that the spatial packages may take awhile to install, and you may run into problems with the installation. Please attempt installation <em>in advance</em> of the workshop. If you have problems installing and/or loading any of these packages that you are not able to resolve, contact us so we can help you, preferably <em>before</em> the workshop.
+    Please note that the spatial packages may take awhile to install, and you may run into problems with the installation. Please attempt installation <em>in advance</em> of the workshop. The packages have all been successfully installed if after the <code>sapply(package_list, require, character.only = TRUE)</code> is run, the R output is &ldquo;TRUE&rdquo; for each package. If you have problems installing and/or loading any of these packages that you are not able to resolve, contact us so we can help you, preferably <em>before</em> the workshop.
   </div>
 </div>
+<h3 id="library-information">Library Information</h3>
+<table>
+<thead>
+<tr>
+<th>package</th>
+<th>usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://dplyr.tidyverse.org/" target="_blank" rel="noopener">dplyr</a>, <a href="https://tidyr.tidyverse.org/" target="_blank" rel="noopener">tidyr</a>,</td>
+<td>standard data manipulation</td>
+</tr>
+<tr>
+<td><a href="https://purrr.tidyverse.org/" target="_blank" rel="noopener">purrr</a></td>
+<td>for repeat functions</td>
+</tr>
+<tr>
+<td><a href="https://CRAN.R-project.org/package=nlme" target="_blank" rel="noopener">nlme</a></td>
+<td>mixed linear models with options for spatial covariates</td>
+</tr>
+<tr>
+<td><a href="https://CRAN.R-project.org/package=lme4" target="_blank" rel="noopener">lme4</a></td>
+<td>mixed linear models with crossed random effects</td>
+</tr>
+<tr>
+<td><a href="https://ggplot2-book.org/" target="_blank" rel="noopener">ggplot</a>, <a href="http://kwstat.github.io/desplot/index.html" target="_blank" rel="noopener">desplot</a></td>
+<td>standard plotting packge and extension for plotting block outlines</td>
+</tr>
+<tr>
+<td><a href="https://CRAN.R-project.org/package=SpATS" target="_blank" rel="noopener">SpATS</a></td>
+<td>spline-fitting</td>
+</tr>
+<tr>
+<td><a href="https://CRAN.R-project.org/package=sp" target="_blank" rel="noopener">sp</a></td>
+<td>preparation of spatial objects</td>
+</tr>
+<tr>
+<td><a href="https://r-spatial.github.io/spdep/" target="_blank" rel="noopener">spdep</a></td>
+<td>Moran&rsquo;s I test</td>
+</tr>
+<tr>
+<td><a href="https://CRAN.R-project.org/package=gstat" target="_blank" rel="noopener">gstat</a></td>
+<td>for fitting empirical variogram</td>
+</tr>
+<tr>
+<td><a href="https://gitlab.mbb.univ-montp2.fr/francois/spamm-ref" target="_blank" rel="noopener">spaMM</a></td>
+<td>fits Matern covariances structure for mixed linear models</td>
+</tr>
+<tr>
+<td><a href="https://github.com/rvlenth/emmeans" target="_blank" rel="noopener">emmeans</a></td>
+<td>extracts marginal means from linear model objects</td>
+</tr>
+</tbody>
+</table>
 
           </div>
 
@@ -901,7 +957,7 @@ sapply(package_list, require, character.only = TRUE)
         </div>
 
         <div class="body-footer">
-          <p>Last updated on Nov 1, 2021</p>
+          <p>Last updated on Nov 7, 2021</p>
 
           
 

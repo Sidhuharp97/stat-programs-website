@@ -872,7 +872,7 @@ names(nlme_mods) &lt;- c(&quot;LMM&quot;, &quot;exponential&quot;, &quot;gaussia
 # extract log likelihood, AIC, BIC
 data.frame(loglik = sapply(nlme_mods, logLik),  
            AIC = sapply(nlme_mods, AIC),
-           BIC = sapply(nlme_mods, AIC, k = log(nrow(Nin_na)))) %&gt;% arrange(desc(loglikelihood))
+           BIC = sapply(nlme_mods, AIC, k = log(nrow(Nin_na)))) %&gt;% arrange(desc(loglik))
 # (higher is better for loglik, lower is better for AIC and BIC)
 
 # compare post-hoc power
@@ -881,10 +881,9 @@ anovas &lt;- lapply(nlme_mods[-7], function(x){
   aov &lt;- as.data.frame(anova(x))[2,]})
 # bind all the output together
 a &lt;- bind_rows(anovas) %&gt;% 
-  mutate(model = c(&quot;LMM&quot;, &quot;exponential&quot;, &quot;gaussian&quot;, &quot;matern&quot;)) %&gt;% 
+  mutate(model = c(&quot;LMM&quot;, &quot;exponential&quot;, &quot;gaussian&quot;, &quot;matern&quot;, &quot;row-col&quot;)) %&gt;% 
   arrange(desc(`p-value`)) %&gt;% select(c(model, 1:4)) 
 rownames(a) &lt;- 1:nrow(a)
-a[6,2:5] &lt;- anova(nin_trend)[3:6]
 a
 
 ## compare precision of estimates
@@ -910,7 +909,7 @@ pivot_longer(preds_df, cols = !gen, names_to = &quot;model&quot;, values_to = &q
   geom_point(size = 5, alpha = 0.5, col = &quot;navy&quot;) +
   geom_line() +
   ylab(&quot;yield means for gen&quot;) + 
-  theme_minimal(base_size = 14)
+  theme_minimal()
 </code></pre>
 </p>
 </details>

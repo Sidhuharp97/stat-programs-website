@@ -1,0 +1,50 @@
+---
+title: "How to Write Custom Functions in R"
+author: jpiaskowski
+date: 2021-11-18
+categories: ["R"]
+tags: ["function", "source code"]
+draft: true
+---
+
+
+Super simple functions
+```{r}
+my_func1 <- function(x) {
+  x^2
+}
+
+my_func2 <- function(y) {
+  y + 1
+}
+```
+Call the function:
+```{r}
+x1 <- 10
+x2 <- 1:5
+x3 <- rnorm(5)
+
+my_func(x1)
+my_func(x2)
+my_func(x3)
+```
+Note that it works with data of all sizes. 
+
+Assign the function:
+```{r}
+(rsquares <- my_func2(x3))
+```
+
+Build a more complex function
+```{r}
+my_boxplot_func <- function(df, yvar, xvar, col){
+  boxplot(yvar ~ xvar, data = df, col = col)
+}
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+
