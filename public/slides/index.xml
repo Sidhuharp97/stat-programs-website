@@ -191,12 +191,12 @@ $H_a:$  There is spatial autocorrelation!&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;basic-linear-model&#34;&gt;Basic Linear Model&lt;/h2&gt;
-&lt;p&gt;$$Y_{ij} = \mu + A_i + \epsilon_{ij}$$
+&lt;p&gt;$$Y_{ij} = \mu + A_i + \epsilon_{ij}$$ 
 $$\epsilon_i \sim  N(0,\sigma)$$&lt;/p&gt;
 &lt;p&gt;If N = 4:&lt;/p&gt;
-&lt;p&gt;$$e_i ~\sim N \Bigg( 0,
-\left[ {\begin{array}{ccc} \sigma^2 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0\
-0 &amp;amp; \sigma^2 &amp;amp; 0 &amp;amp; 0\
+&lt;p&gt;$$e_i ~\sim N \Bigg( 0, 
+\left[ {\begin{array}{ccc} \sigma^2 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0\ 
+0 &amp;amp; \sigma^2 &amp;amp; 0 &amp;amp; 0\ 
 0 &amp;amp; 0 &amp;amp; \sigma^2 &amp;amp; 0\&lt;br&gt;
 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; \sigma^2
 \end{array}  } \right] \Bigg) $$&lt;/p&gt;
@@ -209,7 +209,7 @@ $$Y_{ij} = \mu + A_i + \epsilon_{ij}$$&lt;/p&gt;
 \left[ {\begin{array}{cc} 1 &amp;amp; \rho &amp;amp; \rho^2 &amp;amp; \rho^3 \&lt;br&gt;
 \rho &amp;amp; 1 &amp;amp; \rho &amp;amp; \rho^2 \&lt;br&gt;
 \rho^2 &amp;amp; \rho &amp;amp; 1 &amp;amp; \rho \&lt;br&gt;
-\rho^3 &amp;amp; \rho^2 &amp;amp; \rho &amp;amp; 1 \
+\rho^3 &amp;amp; \rho^2 &amp;amp; \rho &amp;amp; 1 \ 
 \end{array} } \right] \Bigg) $$&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;$\rho$ is a correlation parameter ranging from -1 to 1 where 0 is no correlation and values approaching 1 indicate spatial correlation.&lt;/li&gt;

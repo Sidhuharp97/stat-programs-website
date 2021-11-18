@@ -68,6 +68,15 @@
     <loc>/workshops/</loc>
     <lastmod>2021-11-07T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>/tag/demo/</loc>
+    <lastmod>2021-11-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/project/spatial-stats-field-trials/</loc>
+    <lastmod>2021-11-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/project/</loc>
+    <lastmod>2021-11-01T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>/workshops/spatial-workshop/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
@@ -84,9 +93,6 @@
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/post/</loc>
-    <lastmod>2021-04-15T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/project/</loc>
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/post/reproducible-r/</loc>
@@ -115,18 +121,6 @@
   </url><url>
     <loc>/draft-workshops/example/</loc>
     <lastmod>2021-01-24T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tag/deep-learning/</loc>
-    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tag/demo/</loc>
-    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/project/external-project/</loc>
-    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/project/internal-project/</loc>
-    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/admin/</loc>
   </url><url>
