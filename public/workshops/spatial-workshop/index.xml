@@ -5,7 +5,7 @@
     <link>/workshops/spatial-workshop/</link>
       <atom:link href="/workshops/spatial-workshop/index.xml" rel="self" type="application/rss+xml" />
     <description>Spatial Recipes for Field Trials</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Copyright @2021 by the University of Idaho Statistical Programs</copyright><lastBuildDate>Mon, 01 Nov 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Copyright @ 2021 by the [University of Idaho Statistical Programs](https://www.uidaho.edu/cals/statistical-programs). Built with [WowChemy](https://wowchemy.com/).</copyright><lastBuildDate>Mon, 01 Nov 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/workshops/spatial-workshop/featured.jpg</url>
       <title>Spatial Recipes for Field Trials</title>
@@ -350,7 +350,7 @@ sapply(package_list, require, character.only = TRUE)
 &lt;p&gt;While there is always ambiguity associated with using plots for decision making, early exploration of these plots can be helpful in understanding the extent of spatial correlation.&lt;/p&gt;
 &lt;h3 id=&#34;morans-i&#34;&gt;Moran&amp;rsquo;s I&lt;/h3&gt;
 &lt;p&gt;Moran&amp;rsquo;s I, sometimes called &amp;ldquo;Global Moran&amp;rsquo;s I&amp;rdquo; can be used for conducting a hypothesis test on whether there is correlation between spatial units located adjacent to one another.&lt;/p&gt;
-&lt;p&gt;$$ I = \frac{N}{W}\frac{\sum_i \sum_j w_{ij} (x_i - \bar{x})(x_j - \bar{x})}{\sum_i(x_i - \bar{x})^2} 
+&lt;p&gt;$$ I = \frac{N}{W}\frac{\sum_i \sum_j w_{ij} (x_i - \bar{x})(x_j - \bar{x})}{\sum_i(x_i - \bar{x})^2}
 \qquad i \neq j$$&lt;/p&gt;
 &lt;p&gt;Where N is total number of spatial locations indexed by $i$ and $j$, x is the variable of interest, $w_{ij}$ are a spatial weights between each $i$ and $j$, and W is the sum of all weights.&lt;/p&gt;
 &lt;p&gt;The expected values of Moran&amp;rsquo;s I is $-1/(N-1)$. Values greater than the expected value indicate positive spatial correlation (areas close to each other are similar), while values less than that indicate dissimilarity as spatial distance between points decreases.&lt;/p&gt;

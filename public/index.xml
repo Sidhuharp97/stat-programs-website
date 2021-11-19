@@ -5,7 +5,7 @@
     <link>/</link>
       <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <description>Idaho Ag Stats</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Copyright @2021 by the University of Idaho Statistical Programs</copyright><lastBuildDate>Wed, 17 Nov 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Copyright @ 2021 by the [University of Idaho Statistical Programs](https://www.uidaho.edu/cals/statistical-programs). Built with [WowChemy](https://wowchemy.com/).</copyright><lastBuildDate>Wed, 17 Nov 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png</url>
       <title>Idaho Ag Stats</title>
@@ -385,7 +385,7 @@ sapply(package_list, require, character.only = TRUE)
 &lt;p&gt;While there is always ambiguity associated with using plots for decision making, early exploration of these plots can be helpful in understanding the extent of spatial correlation.&lt;/p&gt;
 &lt;h3 id=&#34;morans-i&#34;&gt;Moran&amp;rsquo;s I&lt;/h3&gt;
 &lt;p&gt;Moran&amp;rsquo;s I, sometimes called &amp;ldquo;Global Moran&amp;rsquo;s I&amp;rdquo; can be used for conducting a hypothesis test on whether there is correlation between spatial units located adjacent to one another.&lt;/p&gt;
-&lt;p&gt;$$ I = \frac{N}{W}\frac{\sum_i \sum_j w_{ij} (x_i - \bar{x})(x_j - \bar{x})}{\sum_i(x_i - \bar{x})^2} 
+&lt;p&gt;$$ I = \frac{N}{W}\frac{\sum_i \sum_j w_{ij} (x_i - \bar{x})(x_j - \bar{x})}{\sum_i(x_i - \bar{x})^2}
 \qquad i \neq j$$&lt;/p&gt;
 &lt;p&gt;Where N is total number of spatial locations indexed by $i$ and $j$, x is the variable of interest, $w_{ij}$ are a spatial weights between each $i$ and $j$, and W is the sum of all weights.&lt;/p&gt;
 &lt;p&gt;The expected values of Moran&amp;rsquo;s I is $-1/(N-1)$. Values greater than the expected value indicate positive spatial correlation (areas close to each other are similar), while values less than that indicate dissimilarity as spatial distance between points decreases.&lt;/p&gt;
@@ -3159,12 +3159,12 @@ $H_a:$  There is spatial autocorrelation!&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;basic-linear-model&#34;&gt;Basic Linear Model&lt;/h2&gt;
-&lt;p&gt;$$Y_{ij} = \mu + A_i + \epsilon_{ij}$$ 
+&lt;p&gt;$$Y_{ij} = \mu + A_i + \epsilon_{ij}$$
 $$\epsilon_i \sim  N(0,\sigma)$$&lt;/p&gt;
 &lt;p&gt;If N = 4:&lt;/p&gt;
-&lt;p&gt;$$e_i ~\sim N \Bigg( 0, 
-\left[ {\begin{array}{ccc} \sigma^2 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0\ 
-0 &amp;amp; \sigma^2 &amp;amp; 0 &amp;amp; 0\ 
+&lt;p&gt;$$e_i ~\sim N \Bigg( 0,
+\left[ {\begin{array}{ccc} \sigma^2 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0\
+0 &amp;amp; \sigma^2 &amp;amp; 0 &amp;amp; 0\
 0 &amp;amp; 0 &amp;amp; \sigma^2 &amp;amp; 0\&lt;br&gt;
 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; \sigma^2
 \end{array}  } \right] \Bigg) $$&lt;/p&gt;
@@ -3177,7 +3177,7 @@ $$Y_{ij} = \mu + A_i + \epsilon_{ij}$$&lt;/p&gt;
 \left[ {\begin{array}{cc} 1 &amp;amp; \rho &amp;amp; \rho^2 &amp;amp; \rho^3 \&lt;br&gt;
 \rho &amp;amp; 1 &amp;amp; \rho &amp;amp; \rho^2 \&lt;br&gt;
 \rho^2 &amp;amp; \rho &amp;amp; 1 &amp;amp; \rho \&lt;br&gt;
-\rho^3 &amp;amp; \rho^2 &amp;amp; \rho &amp;amp; 1 \ 
+\rho^3 &amp;amp; \rho^2 &amp;amp; \rho &amp;amp; 1 \
 \end{array} } \right] \Bigg) $$&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;$\rho$ is a correlation parameter ranging from -1 to 1 where 0 is no correlation and values approaching 1 indicate spatial correlation.&lt;/li&gt;
