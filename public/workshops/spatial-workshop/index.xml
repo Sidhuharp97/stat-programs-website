@@ -5,7 +5,7 @@
     <link>/workshops/spatial-workshop/</link>
       <atom:link href="/workshops/spatial-workshop/index.xml" rel="self" type="application/rss+xml" />
     <description>Spatial Recipes for Field Trials</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 01 Nov 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Copyright @2021 by the University of Idaho Statistical Programs</copyright><lastBuildDate>Mon, 01 Nov 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/workshops/spatial-workshop/featured.jpg</url>
       <title>Spatial Recipes for Field Trials</title>

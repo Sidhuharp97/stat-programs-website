@@ -348,7 +348,7 @@
   
   "publisher": {
     "@type": "Organization",
-    "name": "Agricultural Statistical Progarms",
+    "name": "Agricultural Statistical Programs",
     "logo": {
       "@type": "ImageObject",
       "url": "/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_192x192_fill_lanczos_center_2.png"
@@ -853,7 +853,7 @@ usethis::use_blank_slate()
 </code></pre>
 <p>You can disable this across all projects in R with the drop-down menu <strong>Tools</strong> &ndash;&gt; <strong>Global Options&hellip;</strong> &ndash;&gt; unclick &lsquo;<strong>Restore .RData into workspace at startup</strong>&rsquo; and set &lsquo;<strong>Save workspace to .rRData on exit</strong>&rsquo; to &lsquo;<strong>Never</strong>&rsquo;.</p>
 <p>Why is automatic loading of an <em>.Rdata</em> file not recommended? Because it makes your work less reproducible. You may have created test objects that will unexpectedly interfere with downstream operations or analysis. You may have changed the original data source, but an older version is saved in the <em>.Rdata</em> file. More explanation is given by <a href="https://usethis.r-lib.org/reference/use_blank_slate.html" target="_blank" rel="noopener">RStudio</a>.</p>
-<p>IF you are used to opening R and seeing all of your previous objects automatically loaded into the objects pane, this will be an adjustment. The solution is to save your processes into <em>.R</em> scripts that capture all information from packages loaded, file import, all data manipulations and other operations important. If these steps are slow and there is a need to access intermediate objects, these can be saved in tabular formats readable by many applications (e.g. <em>.txt</em> or <em>.csv</em>) or saved as a specific R object (see <code>saveRDS()</code> in the R help files) and reloaded in another session.</p>
+<p>If you are used to opening R and seeing all of your previous objects automatically loaded into the objects pane, this will be an adjustment. The solution is to save your processes into <em>.R</em> scripts that capture all information from packages loaded, file import, all data manipulations and other operations important. If these steps are slow and there is a need to access intermediate objects, these can be saved in tabular formats readable by many applications (e.g. <em>.txt</em> or <em>.csv</em>) or saved as a specific R object (see <code>saveRDS()</code> in the R help files) and reloaded in another session.</p>
 <h4 id="set-up-version-control-optional">Set up version control (optional)</h4>
 <p>If you use Git or SVN, you can perform Git operations directions from RStudio and interact with remote repositories. If you don&rsquo;t use version control, this step can be skipped. If you do use version control, the command line or other third-party software (e.g. Gitkraken) are fine to use instead or in addition to RStudio&rsquo;s interface. The implementation of git in R is very minimal and supports only a limited number of actions, so you are likely to need other software to perform complicated git actions. It is useful for file additions, commits, pushes and pulls.</p>
 <p>You can set up Git by going to <strong>Tools</strong> &ndash;&gt; <strong>Global Options</strong> &ndash;&gt; <strong>Git/SVN</strong>.</p>
@@ -1047,7 +1047,7 @@ usethis::use_blank_slate()
   
 
   <p class="powered-by">
-    
+    Copyright @2021 by the University of Idaho Statistical Programs
   </p>
 
   

@@ -1,18 +1,23 @@
 ---
-title: "Applied ANOVA in R"
 authors:
 - jpiaskowski
-categories: ["R"]
+categories: 
+- R
 draft: false
 date: "2021-11-17T00:00:00Z"
 image:
   caption: ""
   focal_point: ""
 lastMod: "2021-11-17T00:00:00Z"
-projects: []
-subtitle: "Navigating the R linear model wilderness"
+projects: 
+subtitle: Navigating the R linear model wilderness
 summary: 
-tags: ["ANOVA", "linear models", "lme4", "emmeans"]
+tags: 
+- ANOVA
+- linear models
+- lme4
+- emmeans
+title: Applied ANOVA in R
 ---
 
  

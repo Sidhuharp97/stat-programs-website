@@ -51,7 +51,7 @@ You can disable this across all projects in R with the drop-down menu **Tools** 
 
 Why is automatic loading of an *.Rdata* file not recommended? Because it makes your work less reproducible. You may have created test objects that will unexpectedly interfere with downstream operations or analysis. You may have changed the original data source, but an older version is saved in the *.Rdata* file. More explanation is given by [RStudio](https://usethis.r-lib.org/reference/use_blank_slate.html).
 
-IF you are used to opening R and seeing all of your previous objects automatically loaded into the objects pane, this will be an adjustment. The solution is to save your processes into *.R* scripts that capture all information from packages loaded, file import, all data manipulations and other operations important. If these steps are slow and there is a need to access intermediate objects, these can be saved in tabular formats readable by many applications (e.g. *.txt* or *.csv*) or saved as a specific R object (see `saveRDS()` in the R help files) and reloaded in another session.
+If you are used to opening R and seeing all of your previous objects automatically loaded into the objects pane, this will be an adjustment. The solution is to save your processes into *.R* scripts that capture all information from packages loaded, file import, all data manipulations and other operations important. If these steps are slow and there is a need to access intermediate objects, these can be saved in tabular formats readable by many applications (e.g. *.txt* or *.csv*) or saved as a specific R object (see `saveRDS()` in the R help files) and reloaded in another session.
 
 #### Set up version control (optional)
 

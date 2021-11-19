@@ -304,7 +304,7 @@ P +
   * Adjustments to the background, text size and other details are done in the `theme()` argument command. 
   * there are several pre-built themes:
 
-![](images/ggplot_themes.png)
+![](ggplot_themes.png)
 
 #### Implementing a ggplot theme
 
@@ -369,7 +369,6 @@ ggplot(hay_pnw) +
 This looks okay, but it could be better. There is room to put the legend inside the plot and the text should probably be larger. Also, the legend title is not really needed. 
 
 ```{r}
-
 ggplot(hay_pnw) +
   geom_line(aes(x = year, y = yield, col = state)) +
   scale_x_continuous(breaks = c(seq(1910, 2015, by = 10)))  +
@@ -409,8 +408,12 @@ The package 'viridis' also has some nice color palettes that are widely used and
 ggplot(hay_pnw) +
   geom_line(aes(x = year, y = yield), col = "violetred") +
   facet_wrap(. ~ state, nrow = 2, ncol = 2)
+```
+
+```
 ggsave("PNW_hay_production.png", dpi = 400)
 ```
+
   * other acceptable formats:
     * .jpeg
     * .tiff
@@ -458,7 +461,7 @@ ggplot(nass.hay, aes(x = yield, y = reorder(decade, desc(decade)), fill = ..x..)
 
 #### plotly
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 library(plotly)
 
 pl <- ggplot(nass.hay, aes(x = acres, y = yield, color = year)) +
@@ -493,7 +496,7 @@ vignette("ggplot2")
   * [R Graphics Cookbook](https://www.amazon.com/Graphics-Cookbook-Practical-Recipes-Visualizing-ebook/dp/B07JPL9K64/ref=sr_1_3?crid=2MKCW89GC5VP6&keywords=r+graphics+cookbook&qid=1554928039&s=books&sprefix=R+gra%2Cstripbooks%2C218&sr=1-3) ($$). This book is written by Winston Change, the main author of the ggplot2 package. 
   
 ![](R_graphics_cookbook2.jpg)
-```{r include=FALSE}
+```{r eval=FALSE, include=FALSE}
 
 # instructions from: 
 
@@ -524,7 +527,7 @@ shots_made <- shotDataf %>% filter(EVENT_TYPE == "Made Shot") %>% select(LOC_X, 
 **ggplot can be fun**  
 
 Plot of shots made by NBA Player Steph Curry:  
-```{r}
+```{r eval=FALSE, include=FALSE}
 cols <- rep(c("blue", "blueviolet","cyan", "magenta"), ceiling(653/4))[1:653]
 
 ggplot(shots_made, aes(x=LOC_X, y=LOC_Y)) +
@@ -541,7 +544,7 @@ ggplot(shots_made, aes(x=LOC_X, y=LOC_Y)) +
 
 ```
 
-```{r include=FALSE}
+```{r eval=FALSE, include=FALSE}
 ggsave("featured.png")
 ```
 

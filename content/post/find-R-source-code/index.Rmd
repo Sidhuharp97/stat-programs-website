@@ -47,10 +47,7 @@ or, it works, but the functon calls another internal function that you can't acc
 ```{r}
 var
 ```
-```{r}
-C_cov
-```
-That's actually pretty helpful
+
 
 
 what methods are out there?

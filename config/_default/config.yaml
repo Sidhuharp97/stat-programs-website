@@ -5,7 +5,8 @@
 
 title: Idaho Ag Stats # Website name
 baseurl: '' # Website URL
-copyright: '' # Footer text, e.g. '© {year} Me'
+copyright: 'Copyright @2021 by the University of Idaho Statistical Programs' 
+    # Footer text, e.g. '© {year} Me'
 
 ############################
 ## LANGUAGE
