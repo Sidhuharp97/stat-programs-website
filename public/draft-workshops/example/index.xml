@@ -5,7 +5,7 @@
     <link>/draft-workshops/example/</link>
       <atom:link href="/draft-workshops/example/index.xml" rel="self" type="application/rss+xml" />
     <description>📊 Learn Data Science</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Copyright @ 2021 by the [University of Idaho Statistical Programs](https://www.uidaho.edu/cals/statistical-programs). Built with [WowChemy](https://wowchemy.com/).</copyright><lastBuildDate>Sun, 24 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Copyright @ 2022 by the [University of Idaho Statistical Programs](https://www.uidaho.edu/cals/statistical-programs). Built with [Wowchemy](https://wowchemy.com/), a free open-source web builder.</copyright><lastBuildDate>Sun, 24 Jan 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/draft-workshops/example/featured.jpg</url>
       <title>📊 Learn Data Science</title>

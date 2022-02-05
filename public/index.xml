@@ -5,7 +5,7 @@
     <link>/</link>
       <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <description>Idaho Ag Stats</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Copyright @ 2021 by the [University of Idaho Statistical Programs](https://www.uidaho.edu/cals/statistical-programs). Built with [WowChemy](https://wowchemy.com/).</copyright><lastBuildDate>Wed, 17 Nov 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Copyright @ 2022 by the [University of Idaho Statistical Programs](https://www.uidaho.edu/cals/statistical-programs). Built with [Wowchemy](https://wowchemy.com/), a free open-source web builder.</copyright><lastBuildDate>Wed, 17 Nov 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png</url>
       <title>Idaho Ag Stats</title>
@@ -2945,8 +2945,7 @@ renv::init()
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;If you&amp;rsquo;re familiar with &lt;strong&gt;Packrat&lt;/strong&gt;, this is a replacement for that. This is particularly helpful for things that may have a long life span, like Shiny apps. The &lt;a href=&#34;https://rstudio.github.io/renv/articles/renv.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;renv package&lt;/a&gt; has extensive documentation worth reading.&lt;/p&gt;
 &lt;h3 id=&#34;final-comments&#34;&gt;Final Comments&lt;/h3&gt;
-&lt;p&gt;There are many more resources and recommendations for conducting reproducible research in R. There an entire &lt;a href=&#34;https://cran%60.R%60-project.org/web/views/ReproducibleResearch.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CRAN task view&lt;/a&gt; devoted to this!
-three-elk-FARM-2001&lt;/p&gt;
+&lt;p&gt;There are many more resources and recommendations for conducting reproducible research in R. There an entire &lt;a href=&#34;https://cran%60.R%60-project.org/web/views/ReproducibleResearch.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CRAN task view&lt;/a&gt; devoted to this!&lt;/p&gt;
 </description>
     </item>
     

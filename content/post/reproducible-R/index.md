@@ -25,9 +25,9 @@ title: Quick Tricks and Tips for Reproducible Research in R
 
 ### Make sure your Rstudio session is not saving .RData automatically:
 
-*Note: this step requires the 'usethis' package; please install this package if you do not already have it installed.*
+*Note: this step requires the* **usethis** *package; please install this package if you do not already have it installed.*
 
-Step 1 is to disable automatic saving of your objects to a *.RDat*a file. This file is automatically loaded when R restarts. Since we often create all sorts of miscellaneous objects during a session with a clear record of why, loading all objects without a clear sense of their provenance is often not reproducible by other.
+Step 1 is to disable automatic saving of your objects to a *.RData* file. This file is automatically loaded when R restarts. Since we often create all sorts of miscellaneous objects during a session with a clear record of why, loading all objects without a clear sense of their provenance is often not reproducible by other.
 
 ```
 usethis::use_blank_slate()
@@ -35,13 +35,13 @@ usethis::use_blank_slate()
 
 You can read more about this function in its [documentation](https://usethis`.R`-lib.org/reference/use_blank_slate.html). 
 
-You can disable this across all projects in R with the drop-down menu **Tools** --> **Global Options...** --> unclick '**Restore .RData into workspace at startup**' and set '**Save workspace to .rRData on exit**' to '**Never**'. 
+You can disable this across all projects in R with the drop-down menu **Tools** --> *Global Options...* --> unclick '*Restore .RData into workspace at startup*' and set '*Save workspace to .rRData on exit*' to '*Never*'. 
 
 ### Save all code you run in an *.R* or *.Rmd* file
 
 This is your source code. It's as real and as important as your input data. This file should capture a set of actions that can be repeated by another person (e.g. your PI, other colleagues yourself in the future) including packages loaded, files imported, all data manipulations and the outputs from these actions (e.g. visualisations, analytical outcomes). The idea is to capture your thought process and specific actions so this can be repeated in full. In most analyses, it is extremely likely* you will revisit a project and need to repeat what has already been done! Keeping a record of actions will save you considerable time because you will not have to attempt to recall and/or reconstruct exactly what you did in previous sessions.   
 
-\*This is *almost* guaranteed to happen!
+\**Consider yourself very lucky if this does not happen!*
 
 ### Regularly restart your R session
 
@@ -110,7 +110,7 @@ Again: optional, but it will make your life easier.
 Often in academia, I might do an analysis, move on to something else and then have to return that analysis months or years later. I probably will have updated R and some or all of the packages used in that analysis. As a result of these updates, my original code may not work at all or may not do the intended actions. What I need are both the older version of R and the older packages. The package 'renv' is a solution. It captures the versions of R and the loaded packages. It also builds a custom package library for your package (and caches this information across other projects using `renv`).
 
 Start here:
-*(you need to also be using Rprojects since* `renv` *is searching for .Rproj file)*
+*(you need to also be using Rprojects since* **renv** *is searching for .Rproj file)*
 ```
 library(renv)
 renv::init()
@@ -127,4 +127,3 @@ If you're familiar with **Packrat**, this is a replacement for that. This is par
 ### Final Comments
 
 There are many more resources and recommendations for conducting reproducible research in R. There an entire [CRAN task view](https://cran`.R`-project.org/web/views/ReproducibleResearch.html) devoted to this!
-three-elk-FARM-2001

@@ -5,7 +5,7 @@
     <link>/slides/</link>
       <atom:link href="/slides/index.xml" rel="self" type="application/rss+xml" />
     <description>Slides</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Copyright @ 2021 by the [University of Idaho Statistical Programs](https://www.uidaho.edu/cals/statistical-programs). Built with [WowChemy](https://wowchemy.com/).</copyright>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Copyright @ 2022 by the [University of Idaho Statistical Programs](https://www.uidaho.edu/cals/statistical-programs). Built with [Wowchemy](https://wowchemy.com/), a free open-source web builder.</copyright>
     <item>
       <title>Routine incorporation of Spatial Covariates into Analysis of Planned Field Experiments</title>
       <link>/slides/spatial_seminar_20210409/</link>
