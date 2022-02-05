@@ -69,11 +69,11 @@ boxplot_func = function() {
 }
 ```
 
-Decide on arguments you want to control and put that inside the `function()` parentheses. Probably the independent and dependent variable (x and y, respectively).  
+Decide on arguments you want to control and put that inside the `function()` parentheses. Probably the independent and dependent variable (x and y, respectively), as well as the data frame needed.
 
 First, put those arguments inside `function()`. 
 ```
-boxplot_func = function(x, y) {
+boxplot_func = function(df, x, y) {
     boxplot(var1 ~ cat1, data = mydata,
     main = NA, col = "orangered")
 }
@@ -114,9 +114,9 @@ boxplot_func = function(x, y, color) {
 }
 ```
 
-If you want the option to set the color, but it also to have a default value in case you don't want to set it, you can set that as thus:
+If you want the option to set the some options or if you choose not to, have the function choose values automatically as defaults, that can be done by naming the argument in `formula()`. 
 ```{r}
-boxplot_func = function(df, x, y, color = "springgreen") {
+boxplot_func = function(df = mydata, x, y, color = "springgreen") {
     f = formula(paste(y, "~", x))
     boxplot(f, data = df,
     main = NA, col = color)
@@ -131,9 +131,9 @@ ls()
 Lastly, call the function! See how it works. 
 
 ```{r}
-boxplot_func("cat1", "var1")
-boxplot_func("cat2", "var1", col = "darkcyan")
-boxplot_func("cat2", "var4", col = "khaki")
+boxplot_func(mydata, "cat1", "var1")
+boxplot_func(x = "cat2", y = "var1", col = "darkcyan")
+boxplot_func(mydata, "cat2", "var4", col = "khaki")
 ```
 
 
