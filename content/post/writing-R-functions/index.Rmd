@@ -1,55 +1,142 @@
 ---
-title: "How to Write Custom Functions in R"
-author: jpiaskowski
-date: 2021-11-18
-categories: ["R"]
-tags: ["function", "source code"]
+authors:
+- jpiaskowski
+categories: 
+- R
 draft: true
+date: "2022-02-04T00:00:00Z"
+image:
+  caption: ""
+  focal_point: ""
+lastMod: "2021-11-17T00:00:00Z"
+projects: 
+subtitle: How to Write Custom Functions in R
+summary: 
+tags: 
+- functions
+title: Applied ANOVA in R
 ---
 
- 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval=FALSE, include=FALSE)
+
+You may find yourself needing to do something repeatedly in R. Sure, you can cut-and-paste and change that one thing, or two things, or five things, but this quickly becomes cumbersome. The result can be a very long R file and the likelihood of making a mistake that you don't notice increases (e.g. forgetting to change a variable or an argument). 
+
+There is a general rule of DRY, don't repeat yourself. In practice, if something has to pasted more than twice, then consider writing a function to do that.
+
+## Writing Functions
+
+Functions follow a general structure:
+
 ```
-
-
-Super simple functions
-```{r}
-my_func1 <- function(x) {
-  x^2
-}
-
-my_func2 <- function(y) {
-  y + 1
-}
-```
-Call the function:
-```{r}
-x1 <- 10
-x2 <- 1:5
-x3 <- rnorm(5)
-
-my_func(x1)
-my_func(x2)
-my_func(x3)
-```
-Note that it works with data of all sizes. 
-
-Assign the function:
-```{r}
-(rsquares <- my_func2(x3))
-```
-
-Build a more complex function
-```{r}
-my_boxplot_func <- function(df, yvar, xvar, col){
-  boxplot(yvar ~ xvar, data = df, col = col)
+my_function_name <- function(argument1, argument2) {
+  final_output <- action(argument1, argument2)
+  return(final_output)
 }
 ```
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
 
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+#### Let's write a function for boxplots using base R:
+
+First, simulate some data. This data set has two categorical variables, `cat1` and `cat2`, and 4 different continuous variables generated through data simulation.
+```{r}
+mydata <- data.frame(cat1 = rep(c("A", "B", "C", "D"), 10),
+                     cat2 = rep(c("one", "two"), each = 20),
+                     var1 = rnorm(40),
+                     var2 = runif(40), 
+                     var3 = rlnorm(40),
+                     var4 = rbeta(40, 1, 5))
+```
+
+Next, write up an example of what you want to do. In this example, let's create a boxplot:
+```{r}
+boxplot(var1 ~ cat1, data = mydata,
+        main = NA, col = "orangered")
+```
+
+Now, let's put that in a function. Start with the basic function framework:
+```
+boxplot_func = function() {
+
+}
+
+```
+
+Next, insert the function code. I'll start by cut-and-pasting the original boxplot command ran above: 
+```
+boxplot_func = function() {
+    boxplot(var1 ~ cat1, data = mydata,
+    main = NA, col = "orangered")
+}
+```
+
+Decide on arguments you want to control and put that inside the `function()` parentheses. Probably the independent and dependent variable (x and y, respectively).  
+
+First, put those arguments inside `function()`. 
+```
+boxplot_func = function(x, y) {
+    boxplot(var1 ~ cat1, data = mydata,
+    main = NA, col = "orangered")
+}
+```
+
+Then indicate where those arguments are used in the function. They must be used in the function (otherwise, why have them?). 
+
+```{r}
+boxplot_func = function(df, x, y) {
+    boxplot(y ~ x, data = df,
+    main = NA, col = "orangered")
+}
+```
+
+However, if you try to use this function, it won't work. The argument `y ~ x` is a special class of object in R called "formula" and the formatting and object type must match. Formulas are used widely in R for linear modelling and follow the exact same convention:
+
+```
+y ~ x  
+```
+*Note that the information on either side of `~` can become more complicated. (but not in this function).*
+
+So, create a formula object within the function and insert that into the basic boxplot code: 
+
+```
+boxplot_func = function(df, x, y) {
+    f = formula(paste(y, "~", x))
+    boxplot(f, data = df,
+    main = NA, col = "orangered")
+}
+```
+
+What if you want the ability to change the color? Insert a new argument and replace it in the function body:
+```
+boxplot_func = function(x, y, color) {
+    f = formula(paste(y, "~", x))
+    boxplot(f, data = df,
+    main = NA, col = color)
+}
+```
+
+If you want the option to set the color, but it also to have a default value in case you don't want to set it, you can set that as thus:
+```{r}
+boxplot_func = function(df, x, y, color = "springgreen") {
+    f = formula(paste(y, "~", x))
+    boxplot(f, data = df,
+    main = NA, col = color)
+}
+```
+
+Next step is to run the function as it is currently written (highlight the function code and click run). That should result in no output, but it should exist in your global environment. You can check that with: 
+```{r}
+ls()
+```
+
+Lastly, call the function! See how it works. 
+
+```{r}
+boxplot_func("cat1", "var1")
+boxplot_func("cat2", "var1", col = "darkcyan")
+boxplot_func("cat2", "var4", col = "khaki")
+```
+
+
+
+
 
