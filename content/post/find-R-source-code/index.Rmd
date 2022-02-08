@@ -15,14 +15,6 @@ summary:
 tags: ["source code", "pryr"]
 ---
 
----
-title: "How to Find Function Source Code in R"
-author: jpiaskowski
-date: 2021-11-18
-categories: ["R"]
-tags: ["function", "source code"]
-draft: true
----
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)

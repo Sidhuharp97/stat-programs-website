@@ -15,14 +15,6 @@ summary:
 tags: ["source code", "pryr"]
 ---
 
----
-title: "How to Find Function Source Code in R"
-author: jpiaskowski
-date: 2021-11-18
-categories: ["R"]
-tags: ["function", "source code"]
-draft: true
----
 
 
 
@@ -108,7 +100,7 @@ lm
 ##         z$qr <- NULL
 ##     z
 ## }
-## <bytecode: 0x000000000923fdc8>
+## <bytecode: 0x7fec4a60b418>
 ## <environment: namespace:stats>
 ```
 
@@ -122,7 +114,7 @@ mean
 ```
 ## function (x, ...) 
 ## UseMethod("mean")
-## <bytecode: 0x000000000e099528>
+## <bytecode: 0x7fec4ce24770>
 ## <environment: namespace:base>
 ```
 
@@ -152,7 +144,7 @@ var
 ##     else stopifnot(is.atomic(y))
 ##     .Call(C_cov, x, y, na.method, FALSE)
 ## }
-## <bytecode: 0x000000000dc5d510>
+## <bytecode: 0x7fec4be95ad8>
 ## <environment: namespace:stats>
 ```
 
@@ -200,7 +192,7 @@ mean.default
 ##     }
 ##     .Internal(mean(x))
 ## }
-## <bytecode: 0x000000000e02cb08>
+## <bytecode: 0x7fec4e252320>
 ## <environment: namespace:base>
 ```
 by looking at this, you can see there is considerable error checking. If you are confident that error checking is not needed for a particular data set, you can rewrite the function to skip those steps. 

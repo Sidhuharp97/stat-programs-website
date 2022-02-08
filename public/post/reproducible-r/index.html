@@ -838,15 +838,15 @@
 
     <div class="article-style">
       <h3 id="make-sure-your-rstudio-session-is-not-saving-rdata-automatically">Make sure your Rstudio session is not saving .RData automatically:</h3>
-<p><em>Note: this step requires the &lsquo;usethis&rsquo; package; please install this package if you do not already have it installed.</em></p>
-<p>Step 1 is to disable automatic saving of your objects to a <em>.RDat</em>a file. This file is automatically loaded when R restarts. Since we often create all sorts of miscellaneous objects during a session with a clear record of why, loading all objects without a clear sense of their provenance is often not reproducible by other.</p>
+<p><em>Note: this step requires the</em> <strong>usethis</strong> <em>package; please install this package if you do not already have it installed.</em></p>
+<p>Step 1 is to disable automatic saving of your objects to a <em>.RData</em> file. This file is automatically loaded when R restarts. Since we often create all sorts of miscellaneous objects during a session with a clear record of why, loading all objects without a clear sense of their provenance is often not reproducible by other.</p>
 <pre><code>usethis::use_blank_slate()
 </code></pre>
 <p>You can read more about this function in its <a href="https://usethis%60.R%60-lib.org/reference/use_blank_slate.html" target="_blank" rel="noopener">documentation</a>.</p>
-<p>You can disable this across all projects in R with the drop-down menu <strong>Tools</strong> &ndash;&gt; <strong>Global Options&hellip;</strong> &ndash;&gt; unclick &lsquo;<strong>Restore .RData into workspace at startup</strong>&rsquo; and set &lsquo;<strong>Save workspace to .rRData on exit</strong>&rsquo; to &lsquo;<strong>Never</strong>&rsquo;.</p>
+<p>You can disable this across all projects in R with the drop-down menu <strong>Tools</strong> &ndash;&gt; <em>Global Options&hellip;</em> &ndash;&gt; unclick &lsquo;<em>Restore .RData into workspace at startup</em>&rsquo; and set &lsquo;<em>Save workspace to .rRData on exit</em>&rsquo; to &lsquo;<em>Never</em>&rsquo;.</p>
 <h3 id="save-all-code-you-run-in-an-r-or-rmd-file">Save all code you run in an <em>.R</em> or <em>.Rmd</em> file</h3>
 <p>This is your source code. It&rsquo;s as real and as important as your input data. This file should capture a set of actions that can be repeated by another person (e.g. your PI, other colleagues yourself in the future) including packages loaded, files imported, all data manipulations and the outputs from these actions (e.g. visualisations, analytical outcomes). The idea is to capture your thought process and specific actions so this can be repeated in full. In most analyses, it is extremely likely* you will revisit a project and need to repeat what has already been done! Keeping a record of actions will save you considerable time because you will not have to attempt to recall and/or reconstruct exactly what you did in previous sessions.</p>
-<p>*This is <em>almost</em> guaranteed to happen!</p>
+<p>*<em>Consider yourself very lucky if this does not happen!</em></p>
 <h3 id="regularly-restart-your-r-session">Regularly restart your R session</h3>
 <p>Yes, that means wiping all the loaded packaged and objects from the session (if you followed the first recommendation in these instructions), but the upside is that your analysis are reproducible. This means future you can repeat those analyses and get the same results back you did earlier.</p>
 <p>You can restart R by manually closing and opening RStudio. You can also restart the R session with RStudio by navigating to the menu item <strong>Session</strong> &ndash;&gt; <strong>Restart R</strong>.</p>
@@ -894,7 +894,7 @@ mydata &lt;- read.csv(here(&quot;data&quot;, &quot;datafile.csv&quot;))
 <p>Again: optional, but it will make your life easier.</p>
 <p>Often in academia, I might do an analysis, move on to something else and then have to return that analysis months or years later. I probably will have updated R and some or all of the packages used in that analysis. As a result of these updates, my original code may not work at all or may not do the intended actions. What I need are both the older version of R and the older packages. The package &lsquo;renv&rsquo; is a solution. It captures the versions of R and the loaded packages. It also builds a custom package library for your package (and caches this information across other projects using <code>renv</code>).</p>
 <p>Start here:
-<em>(you need to also be using Rprojects since</em> <code>renv</code> <em>is searching for .Rproj file)</em></p>
+<em>(you need to also be using Rprojects since</em> <strong>renv</strong> <em>is searching for .Rproj file)</em></p>
 <pre><code>library(renv)
 renv::init()
 </code></pre>

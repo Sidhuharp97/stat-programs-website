@@ -41,31 +41,22 @@
     <loc>/workshops/spatial-workshop/conclusion/</loc>
     <lastmod>2021-11-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tag/anova/</loc>
-    <lastmod>2021-11-17T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/post/anova-in-r/</loc>
-    <lastmod>2021-11-17T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>/authors/</loc>
     <lastmod>2021-11-17T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/categories/</loc>
     <lastmod>2021-11-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tag/emmeans/</loc>
+    <loc>/tag/functions/</loc>
+    <lastmod>2021-11-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/post/writing-r-functions/</loc>
     <lastmod>2021-11-17T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/</loc>
     <lastmod>2021-11-17T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/author/julia-piaskowski/</loc>
-    <lastmod>2021-11-17T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tag/linear-models/</loc>
-    <lastmod>2021-11-17T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tag/lme4/</loc>
     <lastmod>2021-11-17T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/post/</loc>
@@ -75,6 +66,21 @@
     <lastmod>2021-11-17T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/tags/</loc>
+    <lastmod>2021-11-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tag/anova/</loc>
+    <lastmod>2021-11-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/post/anova-in-r/</loc>
+    <lastmod>2021-11-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tag/emmeans/</loc>
+    <lastmod>2021-11-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tag/linear-models/</loc>
+    <lastmod>2021-11-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tag/lme4/</loc>
     <lastmod>2021-11-17T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/draft-workshops/</loc>
