@@ -5,29 +5,17 @@
     <loc>/workshops/spatial-workshop/prep-work/</loc>
     <lastmod>2021-11-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/draft-workshops/spatial_workshop_new/prep-work/</loc>
-    <lastmod>2021-11-01T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>/workshops/spatial-workshop/why-spatial/</loc>
     <lastmod>2021-11-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/workshops/spatial-workshop/diagnosis/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/draft-workshops/example/python/</loc>
-    <lastmod>2021-01-01T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>/workshops/spatial-workshop/variograms/</loc>
     <lastmod>2021-11-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/draft-workshops/example/visualization/</loc>
-    <lastmod>2021-01-01T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>/workshops/spatial-workshop/correlated-error-models/</loc>
     <lastmod>2021-11-07T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/draft-workshops/example/stats/</loc>
-    <lastmod>2021-01-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/workshops/spatial-workshop/trend-modelling/</loc>
     <lastmod>2021-11-07T00:00:00+00:00</lastmod>
@@ -83,37 +71,10 @@
     <loc>/tag/lme4/</loc>
     <lastmod>2021-11-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/draft-workshops/</loc>
-    <lastmod>2021-11-07T09:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tag/field-experiments/</loc>
-    <lastmod>2021-11-07T09:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/draft-workshops/spatial_workshop_new/slide-set/</loc>
-    <lastmod>2021-11-07T09:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tag/spatial-statistics/</loc>
-    <lastmod>2021-11-07T09:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/author/statistical-programs/</loc>
-    <lastmod>2021-11-07T09:00:00+00:00</lastmod>
-  </url><url>
     <loc>/workshops/</loc>
     <lastmod>2021-11-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tag/demo/</loc>
-    <lastmod>2021-11-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/project/spatial-stats-field-trials/</loc>
-    <lastmod>2021-11-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/project/</loc>
-    <lastmod>2021-11-01T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>/workshops/spatial-workshop/</loc>
-    <lastmod>2021-11-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/draft-workshops/spatial_workshop_new/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/post/getting-r-setup/</loc>
@@ -125,14 +86,14 @@
     <loc>/tag/r/</loc>
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/project/reproducible-research/</loc>
-    <lastmod>2021-04-15T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>/tag/reproducible-research/</loc>
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/category/reproducible-research/</loc>
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tag/field-experiments/</loc>
+    <lastmod>2021-04-09T15:30:00+00:00</lastmod>
   </url><url>
     <loc>/talks/</loc>
     <lastmod>2021-04-09T15:30:00+00:00</lastmod>
@@ -140,14 +101,15 @@
     <loc>/talks/spatial_seminar_20210409/</loc>
     <lastmod>2021-04-09T15:30:00+00:00</lastmod>
   </url><url>
-    <loc>/draft-workshops/example/</loc>
-    <lastmod>2021-01-24T00:00:00+00:00</lastmod>
+    <loc>/tag/spatial-statistics/</loc>
+    <lastmod>2021-04-09T15:30:00+00:00</lastmod>
+  </url><url>
+    <loc>/author/statistical-programs/</loc>
+    <lastmod>2021-04-09T15:30:00+00:00</lastmod>
   </url><url>
     <loc>/admin/</loc>
   </url><url>
     <loc>/publication_types/</loc>
-  </url><url>
-    <loc>/event/</loc>
   </url><url>
     <loc>/slides/spatial_seminar_20210409/</loc>
   </url><url>

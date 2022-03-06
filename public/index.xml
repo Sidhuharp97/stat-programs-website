@@ -103,41 +103,6 @@ sapply(package_list, require, character.only = TRUE)
     </item>
     
     <item>
-      <title>Computational Set-up</title>
-      <link>/draft-workshops/spatial_workshop_new/prep-work/</link>
-      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/draft-workshops/spatial_workshop_new/prep-work/</guid>
-      <description>&lt;p&gt;Here are instructions for how check your R installation and install packages needed for the workshop.&lt;/p&gt;
-&lt;h3 id=&#34;check-software-versions&#34;&gt;Check software versions&lt;/h3&gt;
-&lt;p&gt;Open R and run this code to check what version of R your system is running:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;R.Version()
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If the version printed is not 4.0 or newer, please &lt;a href=&#34;https://cran.r-project.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;upgrade R&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;This step is not required if you do not use RStudio.&lt;/em&gt; Open RStudio and run this code to check what version of RStudio is installed on your system:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;rstudioapi::versionInfo()
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If the version printed is not 1.4 or newer, please &lt;a href=&#34;https://www.rstudio.com/products/rstudio/download/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;upgrade Rstudio&lt;/a&gt;.&lt;/p&gt;
-&lt;h3 id=&#34;install-workshop-packages&#34;&gt;Install workshop packages&lt;/h3&gt;
-&lt;p&gt;Open R and run this script:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;package_list &amp;lt;- c(&amp;quot;dplyr&amp;quot;, &amp;quot;tidyr&amp;quot;, &amp;quot;purrr&amp;quot;,       # for standard data manipulation
-                  &amp;quot;ggplot2&amp;quot;, &amp;quot;desplot&amp;quot;,            # for plotting
-                  &amp;quot;nlme&amp;quot;, &amp;quot;lme4&amp;quot;, &amp;quot;emmeans&amp;quot;,       # for linear modelling
-                  &amp;quot;SpATS&amp;quot;,                         # for fitting splines
-                  &amp;quot;sp&amp;quot;, &amp;quot;spdep&amp;quot;, &amp;quot;gstat&amp;quot;, &amp;quot;sf&amp;quot;)    # for spatial modelling
-
-install.packages(package_list)
-sapply(package_list, require, character.only = TRUE)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Please note that the spatial packages may take awhile to install, and you may run into problems with the installation. Please install these in advance of the workshop. If you have problems installing and/or loading any of these packages that you are not able to resolve, contact us so we can help you, preferably &lt;em&gt;before&lt;/em&gt; the workshop.&lt;/p&gt;
-&lt;h3 id=&#34;download-files-for-workshop&#34;&gt;Download files for workshop&lt;/h3&gt;
-&lt;p&gt;The following files are used in the workshop:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://raw.githubusercontent.com/IdahoAgStats/guide-to-field-trial-spatial-analysis/master/data/stroup_nin_wheat.csv&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Nebraska Interstate Nursery&lt;/a&gt;, a wheat variety trial arranged in a randomised complete block design with 4 blocks. This data set was first described by W. Stroup (2004) and has been used extensively for spatial analysis.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://raw.githubusercontent.com/IdahoAgStats/guide-to-field-trial-spatial-analysis/master/data/AB19F5_LIND.csv&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Lind&lt;/a&gt;, a winter wheat variety trial from Washington using an augmented design. This data set was kindly donated by &lt;a href=&#34;https://www.ars.usda.gov/pacific-west-area/pullman-wa/whgq/people/kimberly-garland-campbell/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Kimberly Garland Campbell&lt;/a&gt; of the USDA-ARS.&lt;/p&gt;
-&lt;p&gt;Please download these in advance so you can run the R and/or SAS scripts in the workshop.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Why Care about Spatial Variation?</title>
       <link>/workshops/spatial-workshop/why-spatial/</link>
       <pubDate>Sun, 07 Nov 2021 00:00:00 +0000</pubDate>
@@ -508,43 +473,6 @@ run;
     </item>
     
     <item>
-      <title>Python basics</title>
-      <link>/draft-workshops/example/python/</link>
-      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>/draft-workshops/example/python/</guid>
-      <description>&lt;p&gt;Build a foundation in Python.&lt;/p&gt;
-&lt;p&gt;
-  &lt;i class=&#34;fas fa-clock  pr-1 fa-fw&#34;&gt;&lt;/i&gt; 1-2 hours per week, for 8 weeks&lt;/p&gt;
-&lt;h2 id=&#34;learn&#34;&gt;Learn&lt;/h2&gt;
-
-&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
-  &lt;iframe src=&#34;https://www.youtube.com/embed/rfscVS0vtbw&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&#34;quiz&#34;&gt;Quiz&lt;/h2&gt;
-&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-2&#34;&gt;
-  &lt;summary&gt;What is the difference between lists and tuples?&lt;/summary&gt;
-  &lt;p&gt;&lt;p&gt;Lists&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Lists are mutable - they can be changed&lt;/li&gt;
-&lt;li&gt;Slower than tuples&lt;/li&gt;
-&lt;li&gt;Syntax: &lt;code&gt;a_list = [1, 2.0, &#39;Hello world&#39;]&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Tuples&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Tuples are immutable - they can&amp;rsquo;t be changed&lt;/li&gt;
-&lt;li&gt;Tuples are faster than lists&lt;/li&gt;
-&lt;li&gt;Syntax: &lt;code&gt;a_tuple = (1, 2.0, &#39;Hello world&#39;)&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/p&gt;
-&lt;/details&gt;
-&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-3&#34;&gt;
-  &lt;summary&gt;Is Python case-sensitive?&lt;/summary&gt;
-  &lt;p&gt;Yes&lt;/p&gt;
-&lt;/details&gt;</description>
-    </item>
-    
-    <item>
       <title>Empirical Variograms</title>
       <link>/workshops/spatial-workshop/variograms/</link>
       <pubDate>Sun, 07 Nov 2021 00:00:00 +0000</pubDate>
@@ -829,35 +757,6 @@ run;
     </item>
     
     <item>
-      <title>Visualization</title>
-      <link>/draft-workshops/example/visualization/</link>
-      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>/draft-workshops/example/visualization/</guid>
-      <description>&lt;p&gt;
-  &lt;i class=&#34;fas fa-clock  pr-1 fa-fw&#34;&gt;&lt;/i&gt; 1-2 hours per week, for 8 weeks&lt;/p&gt;
-&lt;h2 id=&#34;learn&#34;&gt;Learn&lt;/h2&gt;
-
-&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
-  &lt;iframe src=&#34;https://www.youtube.com/embed/hSPmj7mK6ng&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&#34;quiz&#34;&gt;Quiz&lt;/h2&gt;
-&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-2&#34;&gt;
-  &lt;summary&gt;When is a heatmap useful?&lt;/summary&gt;
-  &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
-&lt;/details&gt;
-&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-3&#34;&gt;
-  &lt;summary&gt;Write Plotly code to render a bar chart&lt;/summary&gt;
-  &lt;p&gt;&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import plotly.express as px
-data_canada = px.data.gapminder().query(&amp;quot;country == &#39;Canada&#39;&amp;quot;)
-fig = px.bar(data_canada, x=&#39;year&#39;, y=&#39;pop&#39;)
-fig.show()
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/p&gt;
-&lt;/details&gt;</description>
-    </item>
-    
-    <item>
       <title>Linear Models with Correlated Errors</title>
       <link>/workshops/spatial-workshop/correlated-error-models/</link>
       <pubDate>Sun, 07 Nov 2021 00:00:00 +0000</pubDate>
@@ -952,34 +851,6 @@ run;
 &lt;/p&gt;
 &lt;/details&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>Statistics</title>
-      <link>/draft-workshops/example/stats/</link>
-      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>/draft-workshops/example/stats/</guid>
-      <description>&lt;p&gt;Introduction to statistics for data science.&lt;/p&gt;
-&lt;p&gt;
-  &lt;i class=&#34;fas fa-clock  pr-1 fa-fw&#34;&gt;&lt;/i&gt; 1-2 hours per week, for 8 weeks&lt;/p&gt;
-&lt;h2 id=&#34;learn&#34;&gt;Learn&lt;/h2&gt;
-&lt;p&gt;The general form of the &lt;strong&gt;normal&lt;/strong&gt; probability density function is:&lt;/p&gt;
-&lt;p&gt;$$
-f(x) = \frac{1}{\sigma \sqrt{2\pi} } e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}
-$$&lt;/p&gt;
-&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    The parameter $\mu$ is the mean or expectation of the distribution.
-$\sigma$ is its standard deviation.
-The variance of the distribution is $\sigma^{2}$.
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&#34;quiz&#34;&gt;Quiz&lt;/h2&gt;
-&lt;details class=&#34;spoiler &#34;  id=&#34;spoiler-2&#34;&gt;
-  &lt;summary&gt;What is the parameter $\mu$?&lt;/summary&gt;
-  &lt;p&gt;The parameter $\mu$ is the mean or expectation of the distribution.&lt;/p&gt;
-&lt;/details&gt;</description>
     </item>
     
     <item>
@@ -3033,23 +2904,6 @@ hat()
     </item>
     
     <item>
-      <title>Slide set of spatial recipes</title>
-      <link>/draft-workshops/spatial_workshop_new/slide-set/</link>
-      <pubDate>Sun, 07 Nov 2021 09:00:00 +0000</pubDate>
-      <guid>/draft-workshops/spatial_workshop_new/slide-set/</guid>
-      <description>&lt;p&gt;Here is the slide set for the workshop. A more extensive resource is also available [here](Spatial Recipes for Field Trials).&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Incorporating Spatial Covariates into Planned Field Experienments</title>
-      <link>/project/spatial-stats-field-trials/</link>
-      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/project/spatial-stats-field-trials/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Getting R Set Up</title>
       <link>/post/getting-r-setup/</link>
       <pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate>
@@ -3150,14 +3004,6 @@ renv::init()
 &lt;h3 id=&#34;final-comments&#34;&gt;Final Comments&lt;/h3&gt;
 &lt;p&gt;There are many more resources and recommendations for conducting reproducible research in R. There an entire &lt;a href=&#34;https://cran%60.R%60-project.org/web/views/ReproducibleResearch.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CRAN task view&lt;/a&gt; devoted to this!&lt;/p&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>Reproducible Research</title>
-      <link>/project/reproducible-research/</link>
-      <pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate>
-      <guid>/project/reproducible-research/</guid>
-      <description></description>
     </item>
     
     <item>

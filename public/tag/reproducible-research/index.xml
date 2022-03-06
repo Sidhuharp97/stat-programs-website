@@ -115,13 +115,5 @@ renv::init()
 </description>
     </item>
     
-    <item>
-      <title>Reproducible Research</title>
-      <link>/project/reproducible-research/</link>
-      <pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate>
-      <guid>/project/reproducible-research/</guid>
-      <description></description>
-    </item>
-    
   </channel>
 </rss>
