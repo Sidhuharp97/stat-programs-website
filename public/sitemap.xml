@@ -2,31 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/workshops/spatial-workshop/prep-work/</loc>
+    <loc>/tutorials/spatial-workshop/prep-work/</loc>
     <lastmod>2021-11-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/workshops/spatial-workshop/why-spatial/</loc>
+    <loc>/tutorials/spatial-workshop/why-spatial/</loc>
     <lastmod>2021-11-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/workshops/spatial-workshop/diagnosis/</loc>
+    <loc>/tutorials/spatial-workshop/diagnosis/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/workshops/spatial-workshop/variograms/</loc>
+    <loc>/tutorials/spatial-workshop/variograms/</loc>
     <lastmod>2021-11-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/workshops/spatial-workshop/correlated-error-models/</loc>
+    <loc>/tutorials/spatial-workshop/correlated-error-models/</loc>
     <lastmod>2021-11-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/workshops/spatial-workshop/trend-modelling/</loc>
+    <loc>/tutorials/spatial-workshop/trend-modelling/</loc>
     <lastmod>2021-11-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/workshops/spatial-workshop/model-comparison/</loc>
+    <loc>/tutorials/spatial-workshop/model-comparison/</loc>
     <lastmod>2021-11-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/workshops/spatial-workshop/augmented/</loc>
+    <loc>/tutorials/spatial-workshop/augmented/</loc>
     <lastmod>2021-11-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/workshops/spatial-workshop/conclusion/</loc>
+    <loc>/tutorials/spatial-workshop/conclusion/</loc>
     <lastmod>2021-11-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/authors/</loc>
@@ -71,10 +71,10 @@
     <loc>/tag/lme4/</loc>
     <lastmod>2021-11-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/workshops/</loc>
+    <loc>/tutorials/</loc>
     <lastmod>2021-11-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/workshops/spatial-workshop/</loc>
+    <loc>/tutorials/spatial-workshop/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/post/getting-r-setup/</loc>
@@ -110,10 +110,6 @@
     <loc>/admin/</loc>
   </url><url>
     <loc>/publication_types/</loc>
-  </url><url>
-    <loc>/slides/spatial_seminar_20210409/</loc>
-  </url><url>
-    <loc>/slides/</loc>
   </url><url>
     <loc>/author/william-price/</loc>
   </url><url>

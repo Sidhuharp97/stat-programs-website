@@ -13,7 +13,7 @@
 #   Guide to color themes: https://wowchemy.com/docs/customization/#color-themes
 #   Browse the latest built-in font sets at https://github.com/wowchemy/wowchemy-hugo-modules/tree/master/wowchemy/themes/
 #   Browse user installed themes in `data/themes/`
-theme = "minimal"
+theme = "1950s"
 
 # Enable users to switch between day and night mode?
 day_night = true
@@ -48,7 +48,7 @@ local_business_type = ""
 org_name = "Agricultural Statistical Programs"
 
 # Description for social sharing and search engines. If undefined, superuser role is used in place.
-description = ""
+description = "Educational resources supporting agricultural data and analysis"
 
 ############################
 ## Site Features
@@ -88,7 +88,7 @@ show_related = {book = true, page = false, post = true, project = true, publicat
 ############################
 
 # Enter contact details (optional). To hide a field, clear it to "".
-email = ""
+email = "jpiaskowski@uidaho.edu"
 phone = ""
 
 # Address

@@ -14,9 +14,21 @@
   weight = 20
 
 [[main]]
-  name = "Talks"
-  url = "talks"
+  name = "Events"
+  url = "events"
   weight = 30
+  
+[[main]]
+  name = "Talks"
+  parent = "Events"
+  url = "events/talks"
+  weight = 10
+  
+[[main]]
+  name = "Workshops"
+  parent = "Events"
+  url = "events/workshops"
+  weight = 20
   
 # [[main]]
 #   name = "Projects"
@@ -29,14 +41,10 @@
 #   weight = 50
 
 [[main]]
-  name = "Workshops"
-  url = "workshops"
+  name = "Tutorials"
+  url = "tutorials"
   weight = 60
-
-[[main]]
-  name = "Contact"
-  url = "#contact"
-  weight = 70
+  
 
 # Link to a PDF of your resume/CV from the menu.
 # To enable, copy your resume/CV to `static/media/resume.pdf` and uncomment the lines below.
