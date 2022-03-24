@@ -5,7 +5,7 @@
     <link>/</link>
       <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <description>Idaho Ag Stats</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Copyright @ 2022 by the [University of Idaho Statistical Programs](https://www.uidaho.edu/cals/statistical-programs). Built with [Wowchemy](https://wowchemy.com/), a free open-source web builder.</copyright><lastBuildDate>Tue, 08 Feb 2022 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Copyright @ 2022 by the [University of Idaho Statistical Programs](https://www.uidaho.edu/cals/statistical-programs). Built with [Wowchemy](https://wowchemy.com/), a free open-source web builder.</copyright><lastBuildDate>Tue, 01 Mar 2022 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png</url>
       <title>Idaho Ag Stats</title>
@@ -14,9 +14,9 @@
     
     <item>
       <title>Computational Set-up</title>
-      <link>/tutorials/spatial-workshop/prep-work/</link>
+      <link>/events/workshops/spatial-workshop/prep-work/</link>
       <pubDate>Sun, 07 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/tutorials/spatial-workshop/prep-work/</guid>
+      <guid>/events/workshops/spatial-workshop/prep-work/</guid>
       <description>&lt;p&gt;
   &lt;i class=&#34;fab fa-r-project  pr-1 fa-fw&#34;&gt;&lt;/i&gt; Here are instructions for how check your R installation and install packages needed for the workshop.&lt;/p&gt;
 &lt;h3 id=&#34;check-software-versions&#34;&gt;Check software versions&lt;/h3&gt;
@@ -104,9 +104,9 @@ sapply(package_list, require, character.only = TRUE)
     
     <item>
       <title>Why Care about Spatial Variation?</title>
-      <link>/tutorials/spatial-workshop/why-spatial/</link>
+      <link>/events/workshops/spatial-workshop/why-spatial/</link>
       <pubDate>Sun, 07 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/tutorials/spatial-workshop/why-spatial/</guid>
+      <guid>/events/workshops/spatial-workshop/why-spatial/</guid>
       <description>&lt;h4 id=&#34;agricultural-field-trials&#34;&gt;Agricultural field trials&lt;/h4&gt;
 
 
@@ -311,9 +311,9 @@ sapply(package_list, require, character.only = TRUE)
     
     <item>
       <title>Diagnosing Spatial Autocorrelation</title>
-      <link>/tutorials/spatial-workshop/diagnosis/</link>
+      <link>/events/workshops/spatial-workshop/diagnosis/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/tutorials/spatial-workshop/diagnosis/</guid>
+      <guid>/events/workshops/spatial-workshop/diagnosis/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     This workshop is concerned with &lt;strong&gt;areal&lt;/strong&gt; data, that is, data that occurs in discrete units (plots, in most cases). This attribute of trial data impacts many aspects of spatial analysis
@@ -474,9 +474,9 @@ run;
     
     <item>
       <title>Empirical Variograms</title>
-      <link>/tutorials/spatial-workshop/variograms/</link>
+      <link>/events/workshops/spatial-workshop/variograms/</link>
       <pubDate>Sun, 07 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/tutorials/spatial-workshop/variograms/</guid>
+      <guid>/events/workshops/spatial-workshop/variograms/</guid>
       <description>&lt;p&gt;The empirical variogram is a visual tool for quantifying spatial covariance. It uses semivariance ($\gamma$), which is a measure of covariance between points or units ($i$ and $j$) as a function of distance ($h$):&lt;/p&gt;
 &lt;p&gt;$$\gamma(h) = \frac{1}{2|N(h)|}\sum_{N(h)}(x_i - x_j)^2$$&lt;/p&gt;
 &lt;p&gt;Semivariances are binned for distance intervals. The average values for semivariance and distance interval can be fit to mathematical models designed to explain how semivariance changes over distance.&lt;/p&gt;
@@ -758,9 +758,9 @@ run;
     
     <item>
       <title>Linear Models with Correlated Errors</title>
-      <link>/tutorials/spatial-workshop/correlated-error-models/</link>
+      <link>/events/workshops/spatial-workshop/correlated-error-models/</link>
       <pubDate>Sun, 07 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/tutorials/spatial-workshop/correlated-error-models/</guid>
+      <guid>/events/workshops/spatial-workshop/correlated-error-models/</guid>
       <description>&lt;p&gt;Now that we have a sense of how to model spatial variation, the next step is to incorporate that into a linear model. The starting point is the linear mixed model. In RCBD design, often the treatments are treated as fixed and the block effect as random.&lt;/p&gt;
 &lt;p&gt;$$Y_ij = \mu + \alpha_i + \beta_j + \epsilon_{ij}$$&lt;/p&gt;
 &lt;p&gt;$Y_ij$ is the independent variable&lt;br&gt;
@@ -855,9 +855,9 @@ run;
     
     <item>
       <title>Modelling Spatial Trends</title>
-      <link>/tutorials/spatial-workshop/trend-modelling/</link>
+      <link>/events/workshops/spatial-workshop/trend-modelling/</link>
       <pubDate>Sun, 07 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/tutorials/spatial-workshop/trend-modelling/</guid>
+      <guid>/events/workshops/spatial-workshop/trend-modelling/</guid>
       <description>&lt;p&gt;The spatial models introduced in this workshop assume that spatial variation is localised and within a trial, plots located sufficiently far apart are independent of each other with no apparent spatial correlation. However, sometimes that is accurately describe a field trial. There can be experiment-wide gradients due to position on a slope, proximity to an influential environmental factor (e.g. a road), and so on. In these instances, those gradients should be modelled as a trend.&lt;/p&gt;
 &lt;h3 id=&#34;blocking&#34;&gt;Blocking&lt;/h3&gt;
 &lt;p&gt;Blocking is one example of modelling an experiment wide-trend:&lt;/p&gt;
@@ -991,9 +991,9 @@ run;
     
     <item>
       <title>Comparing Models</title>
-      <link>/tutorials/spatial-workshop/model-comparison/</link>
+      <link>/events/workshops/spatial-workshop/model-comparison/</link>
       <pubDate>Sun, 07 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/tutorials/spatial-workshop/model-comparison/</guid>
+      <guid>/events/workshops/spatial-workshop/model-comparison/</guid>
       <description>&lt;p&gt;Now that we have built these spatial models, how do we pick the right one? Unfortunately, there is no one model that works best in all circumstances. In addition, there is no single way for choosing the best model. Some approaches include:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Comparing model fitness (e.g. AIC, BIC, log likelihood). Although the methods are not nested, hence precluding a log likelihood ratio test, we can compare raw values for each fit statistic. Be careful doing this in R since linear modelling packages use different estimation procedures for maximum likelihood and REML estimation that are not comparable.&lt;/li&gt;
@@ -1110,9 +1110,9 @@ run;
     
     <item>
       <title>Augmented Designs</title>
-      <link>/tutorials/spatial-workshop/augmented/</link>
+      <link>/events/workshops/spatial-workshop/augmented/</link>
       <pubDate>Sun, 07 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/tutorials/spatial-workshop/augmented/</guid>
+      <guid>/events/workshops/spatial-workshop/augmented/</guid>
       <description>&lt;p&gt;The augmented experimental design is a special design where there is a large number of unreplicated plots interspersed with frequent checks that are replicated. This type of model is  useful when the number of treatments is very large and/or replication is either impossible or unfeasible. Often, the primary goal of the studies using this design is to rank or select genotypes.&lt;/p&gt;
 &lt;p&gt;Augmented models are analyzed in a fundamentally different method than RCBD models due to the large number of unreplicated observations. To adjust for the lack of replication, only a select set of treatments, usually of known performance, are replicated in the experiments. The error estimated from these replicated treatments is used in the analysis to evaluate the remaining genotypes.&lt;/p&gt;
 &lt;p&gt;There are multiple way to specify an augmented model depending on what the researcher wants to know.&lt;/p&gt;
@@ -1333,9 +1333,9 @@ run;
     
     <item>
       <title>Final thoughts</title>
-      <link>/tutorials/spatial-workshop/conclusion/</link>
+      <link>/events/workshops/spatial-workshop/conclusion/</link>
       <pubDate>Sun, 07 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>/tutorials/spatial-workshop/conclusion/</guid>
+      <guid>/events/workshops/spatial-workshop/conclusion/</guid>
       <description>&lt;p&gt;Spatial analysis can be challenging, but I think it is worth the effort to learn and implement in analysis of field trials. Incorporating spatial statistics into analysis of feel trials can be overwhelming at time. However, investigating spatial correlation in a field trial and controlling for it if necessary using &lt;em&gt;any&lt;/em&gt; of the methods developed for this is recommended over doing nothing.&lt;/p&gt;
 &lt;p&gt;There is no denying that work is needed to develop scripts that automate this process so researchers can routinely incorporate spatial covariance into field trial analysis. Many current R tools are unwieldy to use and have insufficient options to support variety trial analysis.&lt;/p&gt;
 &lt;p&gt;Until this situation is improved, it is probably wisest to focus on using spatial models that are well-supported at this time. Any of the options implemented in the &lt;strong&gt;nlme&lt;/strong&gt; package (or that work with that package) are decent choices with excellent support for extracting least-squares means, running ANOVA, and standard model diagnostics. Furthermore, &lt;strong&gt;nlme&lt;/strong&gt; supports generalized linear models. &lt;strong&gt;INLA&lt;/strong&gt; is established is supported by a large and growing user base, and &lt;strong&gt;breedR&lt;/strong&gt; is likewise well established.&lt;/p&gt;
@@ -3008,9 +3008,9 @@ renv::init()
     
     <item>
       <title>Routine Incorporation of Spatial Covariates into Analysis of Planned Field Experiments</title>
-      <link>/talks/spatial_seminar_20210409/</link>
+      <link>/events/talks/spatial_seminar_20210409/</link>
       <pubDate>Fri, 09 Apr 2021 15:30:00 +0000</pubDate>
-      <guid>/talks/spatial_seminar_20210409/</guid>
+      <guid>/events/talks/spatial_seminar_20210409/</guid>
       <description></description>
     </item>
     
@@ -3020,6 +3020,27 @@ renv::init()
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/admin/config.yml</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title>Tutorials</title>
+      <link>/tutorials/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/tutorials/</guid>
+      <description>&lt;h3 id=&#34;r&#34;&gt;R&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://imci-idaho.github.io/2022-03-01-WhatTheyForgot/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;What They Forgot to Teach You&lt;/a&gt; (about using R)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;sas&#34;&gt;SAS&lt;/h3&gt;
+&lt;p&gt;&amp;hellip;coming!&lt;/p&gt;
+&lt;h3 id=&#34;other-resources&#34;&gt;Other Resources&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://idahoagstats.github.io/guide-to-field-trial-spatial-analysis/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Spatial Analysis for Agricultural Field Experiments&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://rstats4ag.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Rstats4Ag&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://link.springer.com/content/pdf/10.1007%2F978-3-030-89010-0.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Multivariate Statistical Machine Learning Methods for Genomic Prediction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://lindeloev.github.io/tests-as-linear/#1_the_simplicity_underlying_common_tests&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Basic introduction to linear models&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
   </channel>

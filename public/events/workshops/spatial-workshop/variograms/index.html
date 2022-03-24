@@ -1,0 +1,1359 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.0.0-beta.3 for Hugo" />
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Statistical Programs" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="The empirical variogram is a visual tool for quantifying spatial covariance. It uses semivariance ($\gamma$), which is a measure of covariance between points or units ($i$ and $j$) as a function of distance ($h$):" />
+
+  
+  <link rel="alternate" hreflang="en-us" href="/events/workshops/spatial-workshop/variograms/" />
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    <meta name="theme-color" content="#EF525B" />
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+    
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cutive+Mono%7CLora:400,700%7CRoboto:400,700&display=swap">
+      
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.25a33462bf87e81185791bb5ed234bad.css" />
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/index.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_32x32_fill_lanczos_center_2.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_180x180_fill_lanczos_center_2.png" />
+
+  <link rel="canonical" href="/events/workshops/spatial-workshop/variograms/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary" />
+  
+  <meta property="og:site_name" content="Idaho Ag Stats" />
+  <meta property="og:url" content="/events/workshops/spatial-workshop/variograms/" />
+  <meta property="og:title" content="Empirical Variograms | Idaho Ag Stats" />
+  <meta property="og:description" content="The empirical variogram is a visual tool for quantifying spatial covariance. It uses semivariance ($\gamma$), which is a measure of covariance between points or units ($i$ and $j$) as a function of distance ($h$):" /><meta property="og:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" />
+    <meta property="twitter:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2021-11-07T00:00:00&#43;00:00"
+      />
+    
+    <meta property="article:modified_time" content="2021-11-07T00:00:00&#43;00:00">
+  
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>Empirical Variograms | Idaho Ag Stats</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="a0e4217f5d6273e1edb47a4a4044c93d" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.eca9bbc7a71accd5ebd9eee0ff004132.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container-xl">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Idaho Ag Stats</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Idaho Ag Stats</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/post"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"><span>Events</span><span class="caret"></span>
+          </a>
+          <div class="dropdown-menu">
+            
+              <a class="dropdown-item" href="/events/talks"><span>Talks</span></a>
+            
+              <a class="dropdown-item" href="/events/workshops"><span>Workshops</span></a>
+            
+          </div>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/tutorials"><span>Tutorials</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+          
+          <li class="nav-item d-none d-lg-inline-flex">
+            <a class="nav-link" href="/"  aria-label="">
+              <i class="fas fa-" aria-hidden="true"></i>
+            </a>
+          </li>
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    
+
+
+
+
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      <form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-md-3 w-100" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <div class="d-flex">
+      <span class="d-md-none pl-1 flex-grow-1 text-left overflow-hidden">
+        
+          Spatial Statistics in Field Trials
+        
+      </span>
+      <span><i class="fas fa-chevron-down"></i></span>
+    </div>
+  </button>
+
+  
+  <button class="form-control sidebar-search js-search d-none d-md-flex">
+    <i class="fas fa-search pr-2"></i>
+    <span class="sidebar-search-text">Search...</span>
+    <span class="sidebar-search-shortcut">/</span>
+  </button>
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+  
+  
+  
+  
+  
+
+  
+  
+    
+
+    
+      
+
+      <ul class="nav docs-sidenav">
+        <li><a href="/events/"><i class="fas fa-arrow-left pr-1"></i>Events</a></li>
+      </ul>
+
+      
+      
+        
+          
+        
+      
+
+
+  
+    
+    
+    
+    
+      
+    
+    
+
+    
+      <div class="docs-toc-item">
+        <a class="docs-toc-link " href="/events/workshops/">Workshops</a>
+    
+      
+        <ul class="nav docs-sidenav">
+      
+
+
+  
+    
+    
+    
+    
+      
+    
+    
+
+    
+      <div class="docs-toc-item">
+        <a class="docs-toc-link " href="/events/workshops/what-they-forgot/">What They Forgot to Teach You About R</a>
+    
+
+    
+      </div>
+    
+
+
+
+  
+    
+    
+    
+    
+      
+    
+    
+
+    
+      <div class="docs-toc-item">
+        <a class="docs-toc-link " href="/events/workshops/spatial-workshop/">Spatial Statistics in Field Trials</a>
+    
+      
+        <ul class="nav docs-sidenav">
+      
+
+
+  <li class=""><a href="/events/workshops/spatial-workshop/prep-work/">Computational Set-up</a></li>
+
+
+
+  <li class=""><a href="/events/workshops/spatial-workshop/why-spatial/">Why Care about Spatial Variation?</a></li>
+
+
+
+  <li class=""><a href="/events/workshops/spatial-workshop/diagnosis/">Diagnosing Spatial Autocorrelation</a></li>
+
+
+
+  <li class="active"><a href="/events/workshops/spatial-workshop/variograms/">Empirical Variograms</a></li>
+
+
+
+  <li class=""><a href="/events/workshops/spatial-workshop/correlated-error-models/">Linear Models with Correlated Errors</a></li>
+
+
+
+  <li class=""><a href="/events/workshops/spatial-workshop/trend-modelling/">Modelling Spatial Trends</a></li>
+
+
+
+  <li class=""><a href="/events/workshops/spatial-workshop/model-comparison/">Comparing Models</a></li>
+
+
+
+  <li class=""><a href="/events/workshops/spatial-workshop/augmented/">Augmented Designs</a></li>
+
+
+
+  <li class=""><a href="/events/workshops/spatial-workshop/conclusion/">Final thoughts</a></li>
+
+      
+        </ul>
+      
+    
+
+    
+      </div>
+    
+
+      
+        </ul>
+      
+    
+
+    
+      </div>
+    
+
+    
+  
+</nav>
+
+    </div>
+
+    
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#correlated-error-models">Correlated Error Models</a></li>
+        <li><a href="#variogram-fitting">Variogram fitting</a></li>
+        <li><a href="#code-for-this-section">Code for this section</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article">
+
+        <div class="docs-article-container">
+          
+            
+  <nav class="d-none d-md-flex" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      
+  
+  
+  
+  
+
+  <li class="breadcrumb-item">
+    <a href="/">
+      
+        Home
+      
+    </a>
+  </li>
+
+
+  <li class="breadcrumb-item">
+    <a href="/events/">
+      
+        Events
+      
+    </a>
+  </li>
+
+
+  <li class="breadcrumb-item">
+    <a href="/events/workshops/">
+      
+        Workshops
+      
+    </a>
+  </li>
+
+
+  <li class="breadcrumb-item">
+    <a href="/events/workshops/spatial-workshop/">
+      
+        Spatial Statistics in Field Trials
+      
+    </a>
+  </li>
+
+
+      <li class="breadcrumb-item active" aria-current="page">
+        Empirical Variograms
+      </li>
+    </ol>
+  </nav>
+
+
+          
+
+          <h1>Empirical Variograms</h1>
+
+          <div class="article-style">
+            <p>The empirical variogram is a visual tool for quantifying spatial covariance. It uses semivariance ($\gamma$), which is a measure of covariance between points or units ($i$ and $j$) as a function of distance ($h$):</p>
+<p>$$\gamma(h) = \frac{1}{2|N(h)|}\sum_{N(h)}(x_i - x_j)^2$$</p>
+<p>Semivariances are binned for distance intervals. The average values for semivariance and distance interval can be fit to mathematical models designed to explain how semivariance changes over distance.</p>
+<p>Three important concepts of an empirical variogram are <em>nugget</em>, <em>sill</em> and  <em>range</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  id="figure-example-empirical-variogram">
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img alt="Example Empirical Variogram" srcset="
+               /media/Sadoti2014_spherical_huf033197c365a34c0f3cd93f8cc2a46a3_30850_84c00fa9c50ea6a6c12ad9bfe7b7fc54.jpg 400w,
+               /media/Sadoti2014_spherical_huf033197c365a34c0f3cd93f8cc2a46a3_30850_264947b8bbb5022511399aab59b72492.jpg 760w,
+               /media/Sadoti2014_spherical_huf033197c365a34c0f3cd93f8cc2a46a3_30850_1200x1200_fit_q75_lanczos.jpg 1200w"
+               src="/media/Sadoti2014_spherical_huf033197c365a34c0f3cd93f8cc2a46a3_30850_84c00fa9c50ea6a6c12ad9bfe7b7fc54.jpg"
+               width="640"
+               height="434"
+               loading="lazy" data-zoomable /></div>
+  </div><figcaption>
+      Example Empirical Variogram
+    </figcaption></figure>
+<ul>
+<li>range = distance up to which is there is spatial correlation</li>
+<li>sill = uncorrelated variance of the variable of interest</li>
+<li>nugget = measurement error, or short-distance spatial variance and other unaccounted for variance</li>
+</ul>
+<p><strong>2 other concepts:</strong></p>
+<ul>
+<li>partial sill = sill - nugget</li>
+<li>nugget effect = the nugget/sill ratio, interpreted opposite of $r^2$ (the closer it is to 1, the less the amount of spatial autocorrelation)</li>
+</ul>
+<h3 id="correlated-error-models">Correlated Error Models</h3>
+<p>Many equations exist for modelling semivariance patterns. A deep knowledge of these is not required to fit an empirical variogram to a model. Here are a few popular examples.</p>
+<p><strong>Exponential</strong></p>
+<p>$$ \gamma (h) = \begin{cases}0 &amp; \text{if }h=0 \\<br>
+C_0+C_1 \left [ 1-e^{-(\frac{h}{r}) } \right] &amp; \text{if } h&gt;0 \end{cases}$$</p>
+<p>where</p>
+<p>$$ C_0 = nugget $$
+$$ C_1 = partial : sill $$
+$$ r = range $$</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  id="figure-theoretical-exponential-variogram">
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img alt="Theoretical Exponential Variogram" srcset="
+               /media/exponential_hu386e53d67d764d7444b0b387b4e063d4_9112_ddf7cdfd8b98e26c9d3054149e89356a.png 400w,
+               /media/exponential_hu386e53d67d764d7444b0b387b4e063d4_9112_a87e02bb556b883dd58f6f07653f1b3d.png 760w,
+               /media/exponential_hu386e53d67d764d7444b0b387b4e063d4_9112_1200x1200_fit_lanczos_2.png 1200w"
+               src="/media/exponential_hu386e53d67d764d7444b0b387b4e063d4_9112_ddf7cdfd8b98e26c9d3054149e89356a.png"
+               width="760"
+               height="570"
+               loading="lazy" data-zoomable /></div>
+  </div><figcaption>
+      Theoretical Exponential Variogram
+    </figcaption></figure>
+<p><strong>Gaussian</strong></p>
+<p>(a squared version of the exponential model)</p>
+<p>$$ \gamma (h) = \begin{cases}0 &amp; \text{if }h=0, \\<br>
+C_0+C_1 \left [ 1-e^{-(\frac{h}{r})^2} \right] &amp; \text{if } h&gt;0 \end{cases}$$</p>
+<p>where</p>
+<p>$$ C_0 = nugget $$
+$$ C_1 = partial : sill $$
+$$ r = range $$</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  id="figure-theoretical-gaussian-variogram">
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img alt="Theoretical Gaussian Variogram" srcset="
+               /media/gaussian_hu2f658028d7284d4383fb0ced7f818ca1_9293_cff44df779d4cf946b5347a882e571f0.png 400w,
+               /media/gaussian_hu2f658028d7284d4383fb0ced7f818ca1_9293_0aa29f0aef9676f3097de237b30e8d5b.png 760w,
+               /media/gaussian_hu2f658028d7284d4383fb0ced7f818ca1_9293_1200x1200_fit_lanczos_2.png 1200w"
+               src="/media/gaussian_hu2f658028d7284d4383fb0ced7f818ca1_9293_cff44df779d4cf946b5347a882e571f0.png"
+               width="760"
+               height="570"
+               loading="lazy" data-zoomable /></div>
+  </div><figcaption>
+      Theoretical Gaussian Variogram
+    </figcaption></figure>
+<p><strong>Matérn</strong></p>
+<p><em>&lt;/An extremely complicated mathematical model/&gt;</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  id="figure-empirical-matérn-variogram">
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img alt="Empirical Matérn Variogram" srcset="
+               /media/matern_example_hu3509d66db1bd03bfa15b6cd033f73cb0_11816_469234f2912ae9c7d5d274e0e93e1e8b.png 400w,
+               /media/matern_example_hu3509d66db1bd03bfa15b6cd033f73cb0_11816_9fb3a5401309369250e4aee537db6ab2.png 760w,
+               /media/matern_example_hu3509d66db1bd03bfa15b6cd033f73cb0_11816_1200x1200_fit_lanczos_2.png 1200w"
+               src="/media/matern_example_hu3509d66db1bd03bfa15b6cd033f73cb0_11816_469234f2912ae9c7d5d274e0e93e1e8b.png"
+               width="760"
+               height="543"
+               loading="lazy" data-zoomable /></div>
+  </div><figcaption>
+      Empirical Matérn Variogram
+    </figcaption></figure>
+<p>There are many more models: Cauchy, logistic, spherical, sine, &hellip;.</p>
+<div class="alert alert-note">
+  <div>
+    For more information on these models, see this workshop&rsquo;s accompanying <a href="https://idahoagstats.github.io/guide-to-field-trial-spatial-analysis/background.html">online book</a> on this topic and additional <a href="http://documentation.sas.com/doc/en/pgmsascdc/9.4_3.4/statug/statug_variogram_details02.htm">SAS resources</a>.
+  </div>
+</div>
+<h3 id="variogram-fitting">Variogram fitting</h3>
+<p>Picking the right model is done both by comparing the sum of squares of error for different models and by</p>
+<p><strong>Not all variables have spatial autocorrelation</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img alt="" srcset="
+               /media/bad_variogram_hued4982af248a0925e63ca33cf80a5a32_29378_fc15314aec043527ef960b706ff65911.png 400w,
+               /media/bad_variogram_hued4982af248a0925e63ca33cf80a5a32_29378_278189afe3dd801b3e5a39d434aa0f53.png 760w,
+               /media/bad_variogram_hued4982af248a0925e63ca33cf80a5a32_29378_1200x1200_fit_lanczos_2.png 1200w"
+               src="/media/bad_variogram_hued4982af248a0925e63ca33cf80a5a32_29378_fc15314aec043527ef960b706ff65911.png"
+               width="760"
+               height="760"
+               loading="lazy" data-zoomable /></div>
+  </div></figure>
+<p><strong>Not all fitted variogram models are worthy</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  id="figure-variogram-gone-bad">
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img alt="Variogram gone bad" srcset="
+               /media/bad_variogram2_hubb2acf3376379e20deaeda13cbc7af2d_140991_528362d3ba3fefa9f526ab216ad0b8a3.png 400w,
+               /media/bad_variogram2_hubb2acf3376379e20deaeda13cbc7af2d_140991_963c2ba2c995fb232ec6b036ac661d9b.png 760w,
+               /media/bad_variogram2_hubb2acf3376379e20deaeda13cbc7af2d_140991_1200x1200_fit_lanczos_2.png 1200w"
+               src="/media/bad_variogram2_hubb2acf3376379e20deaeda13cbc7af2d_140991_528362d3ba3fefa9f526ab216ad0b8a3.png"
+               width="760"
+               height="760"
+               loading="lazy" data-zoomable /></div>
+  </div><figcaption>
+      Variogram gone bad
+    </figcaption></figure>
+<h3 id="code-for-this-section">Code for this section</h3>
+<p><em>The following scripts build upon work done in previous section(s).</em></p>
+<details class="spoiler "  id="spoiler-7">
+  <summary>R</summary>
+  <p><pre><code># load libraries
+library(gstat); library(spaMM)
+
+# set up spatial object
+Nin_spatial &lt;- Nin_na
+coordinates(Nin_spatial) &lt;- ~ col.width + row.length # add attribte
+class(Nin_spatial)
+
+# establish max distance for variogram estimation
+max_dist = 0.6*max(dist(coordinates(Nin_spatial)))
+
+# calculate empirical variogram
+resid_var1 &lt;- gstat::variogram(yield ~ rep + gen, 
+                        cutoff = max_dist,
+                        width = max_dist/15, # 15 is the number of bins
+                        data = Nin_spatial)
+plot(resid_var1)  # empirical variogram
+
+#Note: To fit a large number of models, the function 'autofitVariogram()' from the package automap can be used (is it calling gstat::variogram)
+
+# starting value for the nugget
+nugget_start &lt;- min(resid_var1$gamma) 
+
+# initialise the model (this does not do much)
+Nin_vgm_exp &lt;- vgm(model = &quot;Exp&quot;, nugget = nugget_start) # exponential
+Nin_vgm_gau &lt;- vgm(model = &quot;Gau&quot;, nugget = nugget_start) # Gaussian
+Nin_vgm_mat &lt;- vgm(model = &quot;Mat&quot;, nugget = nugget_start) # Matern
+
+# actually do some fitting! 
+Nin_variofit_exp &lt;- fit.variogram(resid_var1, Nin_vgm_exp)
+Nin_variofit_gau &lt;- fit.variogram(resid_var1, Nin_vgm_gau)
+Nin_variofit_mat &lt;- fit.variogram(resid_var1, Nin_vgm_mat, fit.kappa = T)
+
+plot(resid_var1, Nin_variofit_exp, main = &quot;Exponential model&quot;)
+plot(resid_var1, Nin_variofit_gau, main = &quot;Gaussian model&quot;)
+plot(resid_var1, Nin_variofit_mat, main = &quot;Matern model&quot;) 
+
+attr(Nin_variofit_exp, &quot;SSErr&quot;)
+attr(Nin_variofit_gau, &quot;SSErr&quot;)
+attr(Nin_variofit_mat, &quot;SSErr&quot;)
+
+# parameters:
+Nin_variofit_gau
+
+nugget &lt;- Nin_variofit_gau$psill[1] # measurement error (other random error)
+range &lt;- Nin_variofit_gau$range[2] # distance to establish independence between data points
+sill &lt;- sum(Nin_variofit_gau$psill) # maximum semivariance
+</code></pre>
+</p>
+</details>
+<details class="spoiler "  id="spoiler-8">
+  <summary>SAS</summary>
+  <p><pre><code># calculate semivariance and compute empirical variogram
+proc variogram data=residuals plots(only)=(semivar);
+   coordinates xc=Col yc=Row;
+   compute lagd=1.2 maxlags=30;
+  var resid;
+run;
+
+# fit models to the empirical variogram
+proc variogram data=residuals plots(only)=(fitplot);
+   coordinates xc=Col yc=Row;
+   compute lagd=1.2 maxlags=30;
+   model form=auto(mlist=(gau, exp, pow, sph) nest=1);
+  var resid;
+run;
+</code></pre>
+</p>
+</details>
+
+          </div>
+
+          
+
+
+
+          
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/events/workshops/spatial-workshop/diagnosis/" rel="next">Diagnosing Spatial Autocorrelation</a>
+  </div>
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/events/workshops/spatial-workshop/correlated-error-models/" rel="prev">Linear Models with Correlated Errors</a>
+  </div>
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          <p>Last updated on Nov 7, 2021</p>
+
+          
+
+
+
+
+
+          
+
+
+
+
+          
+
+
+  
+  
+
+
+
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    Copyright @ 2022 by the <a href="https://www.uidaho.edu/cals/statistical-programs">University of Idaho Statistical Programs</a>. Built with <a href="https://wowchemy.com/">Wowchemy</a>, a free open-source web builder.
+  </p>
+
+  
+  
+
+
+
+
+
+
+
+</footer>
+
+
+    </main>
+  </div>
+</div>
+
+  </div>
+
+  <div class="page-footer">
+    
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.4/mermaid.min.js" integrity="sha512-as1BF4+iHZ3BVO6LLDQ7zrbvTXM+c/1iZ1qII/c3c4L8Rn5tHLpFUtpaEtBNS92f+xGsCzsD7b62XP3XYap6oA==" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/python.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/latex.min.js"></script>
+        
+      
+
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.2/anchor.min.js" integrity="sha512-I7w3ZdSFzw5j3jU3ZkNikBNeIrl3i+hEuEdwNmqUJvwNcaBUNcijnP2gd9DtGlgVYDplfjGoD8vTNsID+lCjqg==" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    <script src="/js/_vendor/bootstrap.bundle.min.f81d0a1705048649befc8b595e455a94.js"></script>
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.e20609e6ad3f7fce339ee2e74f13682b.js"></script>
+
+    
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+
+
+</body>
+</html>
