@@ -9,8 +9,7 @@ output:
     toc_collapsed: true
     toc_depth: 3
     number_sections: true
-    css: C:\Users\bprice\Dropbox\CLASS\sas.default.css
-#    css: C:\Users\Lynn\Dropbox\CLASS\sas.default.css
+    css: .\sas.default.css
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
