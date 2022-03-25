@@ -1,7 +1,7 @@
 ---
 title: "SAS Introduction and the Data Step"
 author: "Statistical Programs, University of Idaho"
-date: "5/5/2021"
+date: "2022-03-25"
 output: 
   html_document:
     toc: true
@@ -24,12 +24,12 @@ saspath <- "C:/Program Files/SASHome/SASFoundation/9.4/sas.exe"
 sasopts <- "-nosplash -ls 200"
 ```
 
-## Introduction
-This document provides a basic introduction to the SAS system and the handling of data through the **Data Step**. No previous SAS experience is assumed. Users will need to have a licensed SAS Base product or the free [SAS University version](https://www.sas.com/en_us/software/university-edition.html) installed to run the examples. Further information may also be found through the [SAS Forums](https://communities.sas.com/) and [SAS Blog](https://blogs.sas.com/content/) posts. A useful introductory text is [The Little SAS Book: A Primer](https://www.sas.com/store/books/categories/getting-started/the-little-sas-book-a-primer-sixth-edition/prodBK_73044_en.html).<br>
+# Introduction
+This document provides a basic introduction to the SAS system and the handling of data through the **Data Step**. No previous SAS experience is assumed. Users will need to have a licensed SAS Base product or the free [SAS University version](https://www.sas.com/en_us/software/university-edition.html){target="_blank"} installed to run the examples. Further information may also be found through the [SAS Forums](https://communities.sas.com/){target="_blank"} and [SAS Blog](https://blogs.sas.com/content/){target="_blank"} posts. A useful introductory text is [The Little SAS Book: A Primer](https://www.sas.com/store/books/categories/getting-started/the-little-sas-book-a-primer-sixth-edition/prodBK_73044_en.html){target="_blank"}.<br>
 
-SAS is a system of data analytic tools encompassing data management, statistical analysis, graphics, reporting, and publication. SAS can be run on many different operating systems and through various user interfaces. This document will focus on running SAS in a command line framework in a Windows environment, although the basic SAS information here will translate across operating systems and interfaces. For users of Apple Mac systems, SAS can be run through either the SAS University installation mentioned above, or through a Windows SAS version installed on a virtual OS package such as [Parallels Desktop](https://www.parallels.com/pd/general/?gclid=CjwKCAjwhMmEBhBwEiwAXwFoEQrFANzM_g5KsbCx4QBlZXpSZoNrE6IwoTbXUFtbO09VrkawcpjephoCvyEQAvD_BwE) (This requires a copy of Windows as well). This introduction does NOT cover SAS JMP, which is a separate point and click product for similar SAS analytical tools.<br>
+SAS is a system of data analytic tools encompassing data management, statistical analysis, graphics, reporting, and publication. SAS can be run on many different operating systems and through various user interfaces. This document will focus on running SAS in a command line framework in a Windows environment, although the basic SAS information here will translate across operating systems and interfaces. For users of Apple Mac systems, SAS can be run through either the SAS University installation mentioned above, or through a Windows SAS version installed on a virtual OS package such as [Parallels Desktop](https://www.parallels.com/pd/general/?gclid=CjwKCAjwhMmEBhBwEiwAXwFoEQrFANzM_g5KsbCx4QBlZXpSZoNrE6IwoTbXUFtbO09VrkawcpjephoCvyEQAvD_BwE){target="_blank"} (This requires a copy of Windows as well). This introduction does NOT cover SAS JMP, which is a separate point and click product for similar SAS analytical tools.<br>
 
-## The SAS Windows Environment
+# The SAS Windows Environment
 
 When starting a SAS session, the user will be presented with several windows. In the default configuration, two overlapping windows on the left hand side are called *Results* and *Explorer*. In the demonstrations below, these windows are closed for better clarity and they will accessed separately as needed. The remaining windows represent the three basic components of a SAS session: An Editor, a Log window, and a Listing or Output window. The Editor is where SAS commands (programs) will be written and run. The Log window will provide a history of each program as it runs. This is useful for identifying errors, warnings, and general information about the results of the program being run. The Output window will provide a text version of any printed output from the program, such as analysis results, data printouts, etc. In more recent versions of SAS, this window has become somewhat redundant as a newer output presentation format is now available. These newer and cleaner looking outputs will automatically open up in a new window called *Results Viewer* when a program is run. By default, these results are produced in HTML, which can be viewed in the default SAS browser or any Web browser set by the user.<br> 
 
@@ -44,14 +44,14 @@ These changes, however, will only last the current SAS session. If we want them 
 
 <img src="./images/Preferences.png" alt="Preference choices" width="500" style="border:3px solid black"/><br><br>
 
-## SAS Structure
+# SAS Structure
 
 A SAS program consists of basically two types of components: **Data Steps** and Procedures or **PROCS**. Procedures are pre-written routines for specific tasks, such as statistical analyses, graphics, importing and exporting files, etc. The **Data Step** is designed to handle and manipulate data. In a Data Step, we use mathematical operators, functions, logical statements, and other constructs to compute or define new variables, convert variable units, change data structures, or filter and subset a larger data set. Data Steps and PROCS are written in "Blocks" of code. Blocks begin with either of the *keywords* **DATA** or **PROC** and they end with a special keyword **RUN**. Within each Block are SAS *Statements* which are usually specific to a PROC or Data Step. Statements in SAS also begin with keywords and always end with a semicolon, **;**. What the keywords are and how to write them is specific to each PROC or the general rules for the DATA Step. As with many written languages, statements can carry across multiple lines on the screen, or there can be multiple statements on a single line.  All SAS looks for is a recognized *keyword* and an ending *semicolon*. The Blocks can contain as many statements as necessary and there can be as many DATA and PROC blocks as we need to accomplish our tasks in SAS. A SAS program then consists of one or more Blocks, written in any order required to carry out our analyses. When SAS executes a program, it starts at the top of the program, reads and carries out the instructions in the first Block. It then moves sequentially down to the next Block, etc., until it reaches the end of the program.<br><br>
 
 To run a SAS program, there are several options. The quickest is to use the run icon (a small running figure in the top menu bar). We can also use the *F8* function key, or we can select submit program from the *Run* menu bar. Note that when running SAS code, you can use the mouse to select a portion of code before using one of these options. This will run *only* the selected portion of code. Make sure to select all relevant portions of the code (including semicolons), however, or SAS will only partially run the code.<br><br>
 
 <div class="infobox">
-##### Note: SAS Legacy
+#### Note: SAS Legacy
 
 As an analytical software package, SAS has been around for many years. It predates the personal computer, many storage media types, and, of course, the internet. While SAS has been updated many times, some legacy terminology remains. In "The good old days", SAS programs (and others such as Fortran) were typed into a special machine called a *Card Punch*. This machine physically translated the characters of the program to holes in an IBM punch card. Each card held one or more SAS statements, or at times a statement could take several cards. These were carefully aligned in order and put in a box or wrapped with a rubber band. The box was then typically carried to a central mainframe computer ("The computer center") and the user *Submitted* the cards to an operator who then used a *Card Reader* to put the program into the computer and *Run* it. Users would then pick up the output *Listing* at a later time. Some of this legacy has been retained through subsequent software updates in the terminolgy and language syntax such as *Cards*, *Submit*, *Run*, and *Listing*.<br>
 
@@ -62,20 +62,20 @@ As an analytical software package, SAS has been around for many years. It predat
 Source: https://en.wikipedia.org/wiki/Punched_card<br>
 </div><br>
 
-## Programming Habits
+# Programming Habits
 
-### Program Format
+## Program Format
 
 It is a good idea to use consistant structured formatting when writing programs (SAS or otherwise). While most computer software packages are indifferent to indentation, spacing, line breaks, etc., using these features will make your programs easier for people to read and understand. The 'Block' nature of SAS lends itself to this type of formating very well. Blank lines between blocks of code also improve readability and will be ignored by SAS. The code below illustrates two examples:<br>
 
-#### BAD<br>
+### BAD<br>
 
 ```{r Example1, engine="sashtml", engine.path=saspath, include=TRUE, engine.opts=sasopts, comment=""}
 data new; set sashelp.class; proc sort; by height;run;
 ```
 <br><br>
 
-#### BETTER<br>
+### BETTER<br>
 
 ```{r Example2, engine="sashtml", engine.path=saspath, include=TRUE, engine.opts=sasopts, comment=""}
 data new;
@@ -91,7 +91,7 @@ run;
 Let us ignore for a moment what exactly these codes do, but note that both sets of code will produce identical results. Remember that SAS is simply reading from keyword to semicolon, repeatedly, until it runs out of code. It does not interpret any formatting or lack of it. In the first example, all the commands are written on a single line, while the second uses line breaks, indentation, empty lines, and RUN statements to delineate Blocks. For most people, the second example is easier to read and follow. It will also be easier to interpret and debug (find & fix errors) if required. SAS makes much of this easy for the user by automatically indenting lines for you and highlighting keywords in color in its Editor. The exact type of formatting you use, however, is up to you, but you are strongly encouraged to use some type of formatting that makes your code easier to read.
 <br><br>
 
-### Commenting and Documentation
+## Commenting and Documentation
 
 Another important aspect of programming is documenting and commenting your code. Doing so helps others (and yourself at a future date) understand your workflow in data management and analysis. This is vital for repeatability of analyses. SAS has some abilities for this through the use of special symbols to add comment lines to a program which will tell someone reading it what the programmer had in mind when they wrote the code. The special symbols tell SAS to skip these lines since they are only for us. The format to use these is: \/\* *comment written here* \*\/. Any text written between the \/\* and \*\/ will be ignored. To accomodate longer descriptive text, the comment sections can encompass multiple lines, if needed.
 <br><br>
@@ -116,34 +116,38 @@ run;
 
 ```
 
-For more information on documenting codes and scripts, recording data workflows, and repeatability in science, see [here](https://agstats.io/post/reproducible-r/).
+For more information on documenting codes and scripts, recording data workflows, and repeatability in science, see [here](https://agstats.io/post/reproducible-r/){target="_blank"}.
 <br><br>
 
-## Getting Data into SAS
+# Getting Data into SAS
 
 When data come into SAS, they are converted into a binary SAS specific format called a SAS **Data Set**. Data Sets have two part names separated by a period. The first part of the name is referred to as the *Library*. The second name is called the *Member*. A Library is simply a reference to where the data is stored on the computer. By default, this is assumed to be the memory of the computer and is referred to as the **Work** library. If you omit the fisrt part of the name, the data will be stored in the Work library. Data stored here are only persistent during the SAS session. If you restart SAS, you will need to move the data into SAS again, in order to use it. To keep data in a SAS format, we can use a *Permanent SAS Library* where we define a location on the computer to store SAS data. This is done either through the menu system, or by writing a *LIBNAME* statement into the program. Typically, permanent SAS Data Sets are not necessary as it is easy and quick enough to read the required data in once each session. Permanent Data Sets are more common when the data in question is very large and takes a long time to read into SAS. It is also advisable to only have one source file for data, not multiple copies and formats. For these reasons we will only utilize the temporary *Work* library here.<br><br>
 
 The second part of the name, the *Member* of the library, is how you will reference the data in SAS. The name is most useful if it reflects the content of the data. For example, a member name: Finch_1835 gives us a clue that the data refers to finches collected in 1835. The full name would then be: Work.Finch_1835, although we can also leave off the *Library* name, i.e. Finch_1835, because *Work* is the default library.<br><br>
 
-The *Member* name could be expanded to Darwin_finch_1835_beaks_length_depth. While this is more informative, it is also more cumbersome to write out and prone to mistakes. It is best to find a medium between a short terse name and and overly long one. Best practices, however, also include documenting what the data are using comments, as outlined above, as well as good repeatable data practices such as meta files, Read.me files, etc. For more on these, please see [here](https://agstats.io/post/reproducible-r/).<br><br>
+The *Member* name could be expanded to Darwin_finch_1835_beaks_length_depth. While this is more informative, it is also more cumbersome to write out and prone to mistakes. It is best to find a medium between a short terse name and and overly long one. Best practices, however, also include documenting what the data are using comments, as outlined above, as well as good repeatable data practices such as meta files, Read.me files, etc. For more on these, please see [here](https://agstats.io/post/reproducible-r/){target="_blank"}.<r><br>
 
 
 <div class="infobox">
-##### Note: SAS Naming Conventions
+#### Note: SAS Naming Conventions
 
 There are some basic rules for naming SAS Data Sets, which also apply to variables within the data sets. SAS names must be alpha-numeric characters, that is, letters and numbers. We cannot use characters such as periods, spaces, parentheses, commas, etc.  The only non-standard character allowed is the underscore, '_'. Names must also begin with a letter, not a number. Hence, **Finch_1835** is allowed, but **1835_Finch** is not. <br>
 
 </div><br>
 
-### Data Sources: Internal and External
+## Data Sources: Internal and External
 
 Data to be read into SAS can be either *Internal* as part of the SAS program, or *External* as an independent file. While *Internal* data is simple to use, it will not be discussed here. Good data practices require data to be kept as a single source. Any corrections or modifications to the data should be carried out and documented through programs or scripts that start with this single data source. By incorporating data into SAS or other scripts, we create multiple copies of the data. This makes corrections and documenting the data difficult or impossible. The reader is, therefore, strongly discouraged from using *Internal* data.<br><br>
 
-### External Data and the Data Step
+## External Data and the Data Step
 
-The preferred means of accessing data is reading external files into SAS. SAS is extremely flexible in its ability to read various file types. Files such as text formats, common databases, and spreadssheets such as Excel are all accessible. It is even possible to define custom file formats for SAS to read, although that is beyond the scope of this tutorial. The files may consist of data that was entered manually or was created through other software or equipment, such as weather stations, data loggers, or laboratory hardware. Although there are exceptions, the files themselves are typically arranged with one observation (record) of data per line of the file. Data values (factors and variables of interest) within each line are separated or delimited by special characters. Common delimiters are spaces, tabs, and commas (Comma Separated Values; CSV). Space delimited files are the default for SAS. For this format, the data must have a *rectangular* structure. That is, all data positions, in all rows of the file, must have a value. This means that, if there is missing data, there must be place holder for that position in the file. SAS actually has many placeholder designations for missing data, each distinguishing between various reasons that a data point may be missing (e.g. data is out of range, subject didn't answer question, data record is lost, etc.). The simplest form, however, is a single period in the missing data position. Note that this differs from other software like R where missing data are recorded as the characters *NA*. The example below illustrates a small space delimited data file for finch data having 9 lines and 4 variables per line.<br><br>
+The preferred means of accessing data is reading external files into SAS. SAS is extremely flexible in its ability to read various file types. Files such as text formats, common databases, and spreadssheets such as Excel are all accessible. It is even possible to define custom file formats for SAS to read, although that is beyond the scope of this tutorial. The files may consist of data that was entered manually or was created through other software or equipment, such as weather stations, data loggers, or laboratory hardware. Although there are exceptions, the files themselves are typically arranged with one observation (record) of data per line of the file. Data values (factors and variables of interest) within each line are separated or delimited by special characters. Common delimiters are spaces, tabs, and commas (Comma Separated Values; CSV). Space delimited files are the default for SAS. For this format, the data must have a *rectangular* structure. That is, all data positions, in all rows of the file, must have a value. This means that, if there is missing data, there must be place holder for that position in the file. SAS actually has many placeholder designations for missing data, each distinguishing between various reasons that a data point may be missing (e.g. data is out of range, subject didn't answer question, data record is lost, etc.). The simplest form, however, is a single period in the missing data position. Note that this differs from other software like R where missing data are recorded as the characters *NA*. This case is covered below. 
 
-#### Example: Space delimited data file
+
+
+The example below illustrates a small space delimited data file for finch data having 9 lines and 4 variables per line.<br><br>
+
+### Example: Space delimited data file
 <div class="textbox">
 
 Band 	species 	Beak_length 	Beak_depth<br>
@@ -179,15 +183,33 @@ run;
 
 
 
-SAS uses the keyword *infile* to designate where the external data file is located. The file location (path) is given between single quotes followed by any desired options. In this case, the option *firstobs = 2* is used, forcing SAS to skip the first line of the file and start reading data on line 2. A similar option, *obs* = \<*number*\>, can be used in conjunction with *firstobs* option to read a fixed number of observations starting at the *firstobs* position from any portion of a file. For example, in the file above, the options *firstobs = 2 Obs = 3* would cause SAS to read only the first three lines of the data, starting with line 2 and proceeding through line 4. Further options related to reading only specified columns of data, long data lines, etc, are also available and information on these may be found in the SAS help system or the relevant [SAS online manuals](https://support.sas.com/en/documentation.html).<br><br>
+SAS uses the keyword *infile* to designate where the external data file is located. The file location (path) is given between single quotes followed by any desired options. In this case, the option *firstobs = 2* is used, forcing SAS to skip the first line of the file and start reading data on line 2. A similar option, *obs* = \<*number*\>, can be used in conjunction with *firstobs* option to read a fixed number of observations starting at the *firstobs* position from any portion of a file. For example, in the file above, the options *firstobs = 2 Obs = 3* would cause SAS to read only the first three lines of the data, starting with line 2 and proceeding through line 4. Further options related to reading only specified columns of data, long data lines, etc, are also available and information on these may be found in the SAS help system or the relevant [SAS online manuals](https://support.sas.com/en/documentation.html){target="_blank"}.<br><br>
 
-The *infile* statement is followed by an *input* statement. The keyword *input* provides a list of the data variables in the order they will appear in the data lines of the file. The variable names in the list should follow the SAS alpha-numeric naming conventions described above. In this example, there are 4 variables. Unlike the other 3 variables, Species is a non-numeric character value. For this type of data, SAS requires a dollar sign (\$) to follow the variable name. The other variables are not modified this way and will be assumed to have the default format, numeric. This input type is called *List* input, for obvious reasons. In most cases, *List* input will be sufficient, however, should you require them, other forms of the input statement such as Column or Formatted types are also available to specify exact positions in a data line or special data types such as dates, respectively.
+The *infile* statement is followed by an *input* statement. The keyword *input* provides a list of the data variables in the order they will appear in the data lines of the file. The variable names in the list should follow the SAS alpha-numeric naming conventions described above. In this example, there are 4 variables. Unlike the other 3 variables, Species is a non-numeric character value. For this type of data, SAS requires a dollar sign (\$) to follow the variable name. The other variables are not modified this way and will be assumed to have the default format, numeric. This input type is called *List* input, for obvious reasons. In most cases, *List* input will be sufficient, however, should you require them, other forms of the input statement such as Column or Formatted types are also available to specify exact positions in a data line or special data types such as dates, respectively.<br><br>
+
+An analogous example for a file that contains the value *NA* for the missing data in band 307 would be: <br><br>
+
+```{r Example4.1, engine="sashtml", engine.path=saspath, include=TRUE, engine.opts=sasopts, comment=""}
+
+proc format;
+invalue has_NA 'NA' = .;
+run;
+  
+data finch_1975;
+  infile '.\Data\Finch_1975_Partial.NA.txt' firstobs=2;
+  informat Beak_length has_NA.;
+  input Band Species$ length depth;
+run;
+
+```
+
+Here the procedure Proc Format is used to define NA as missing under the label "has_NA". In the data step, an *informat* statement is then used to call this definition for Beak_length.<br>
 
 
-#### Non-space Delimiters
+### Non-space Delimiters
 The space delimted file is simple to set up, but it can cause issues in practice when the data values themselves contain spaces. For example, the Species name above may be recorded as *G. fortis*, indicating the genus Geospiza. If we use the default space delimited input above for this, SAS will try to read 5 data values per line instead of 4 and get out of alignment in the input sequence. Species will be set to *G.*, *length* to the value *fortis* and the length value will end up under *depth*. While this situation can be corrected by carefully aligning data values across lines and using *Formatted* input, an easier solution may be to change the delimiter character to something other than a space. A common non-space delimiter is the comma. Many software and digital equipment output files use comma separated values (CSV). In order to use these files in SAS, we add a new option, *delimiter*, to the *infile* statement. The delimiter option for a comma is intuitively given as *Delimiter = ‘,’*. SAS can also specify multiple characters as delimiters, such as *delimiter = ‘,;’* which would treat either a comma or semicolon as a separator of data values. <br><br>
 
-#### Example: Comma delimited data file and SAS code
+### Example: Comma delimited data file and SAS code
 <div class="textbox">
 
 Band 	species 	Beak_length 	Beak_depth<br>
@@ -215,12 +237,12 @@ run;
 <br><br>
 
 <div class="infobox">
-##### Note: Non-standard delimiter characters
+#### Note: Non-standard delimiter characters
 
 Sometimes data files will have non-standard delimiter characters that are not visibly obvious when typed. A common example of this is a *Tab*. These characters must be specified in a special manner called hexadecimal, which is simply a computer code for each keyboard character, including *Tabs*. The hexadecimal codes can be found in most programming texts or through an online search. For a *Tab*, the code is *09*. Thus, the correct option for reading *Tab* delimited files would be: *delimiter = ‘09'x*. Here the “x” at the end tells SAS to treat the number *09* as a hexadecimal value. Note that the single quotes are required around the number portion, but not the x. Although it is not necessary, other characters could be specified as hexadecimal as well, e.g. a comma would be *delimiter = ‘2C’x* or a semicolon, *delimiter = ‘3B’x* where the *2C* and *3B* are the hexadecimal codes for comma and semicolon, respectively.
 </div><br>
 
-### External Data and SAS Menu System
+## External Data and SAS Menu System
 
 An alternative to the *Data Step* for reading in external files is the SAS Menu System. This system handles all the details of importing data in the background while the user uses drop down menus to select the appropriate options. To start the import process, Select the *File -> Import Data* menu item. This starts a windowing dialog:<br><br>
 
@@ -246,7 +268,7 @@ Notice here that we did not tell SAS what the vaiable names were. SAS , by defau
 
 A closer examination of the drop down file import menu above shows listings for Excel file types. The usefulness of these options, however, is limited. Many SAS installations on our campus are for the 64 bit version, referring to the degree of numeric precision the software can handle. Most Excel installations, however, are 32 bit versions. These differences cause issues as there is an incompatibility between 64 bit SAS and 32 bit Excel and they will result in an error when using these drop down menu options. While we could either re-install consistent 32 or 64 bit versions of both programs, an easier soltuion is to use the last form of data input, *PROC  IMPORT*.<br><br>
 
-### External Data and PROC IMPORT
+## External Data and PROC IMPORT
 
 The *Proc Import* procedure is a specialized routine that can read many types of data files. In fact, the drop down menuing system above is actually using *Proc Import* behind the scenes to access data files, based on the user's selections. Because of its flexibility, and the ability to directly imbed data importation into SAS programs, this should be a preferred method of reading in data.<br><br>
 
@@ -287,7 +309,7 @@ Here, the *DBMS* type has been changed to CSV, the *Datafile* path points to the
 
 
 <div class="infobox">
-##### Note: Accessing open files in Excel
+#### Note: Accessing open files in Excel
 
 On most Windows machines, the default for opening, viewing, and using spreadsheets and CSV files is Excel. When Excel has a file open, it "locks" the file such that no other program can access it. For this reason, if you try to read an Excel or CSV file that is currently open in Excel, you will get the following error in the Log window stating the file does not exist:
 
@@ -298,7 +320,7 @@ The file, however, does exist, but SAS cannot see it because it is "Locked" from
 </div><br>
 
 
-## Getting data out of SAS
+# Getting data out of SAS
 
 While the primary focus above has been moving data into SAS, there are times when we would like to do the opposite and move data out of SAS for use elsewhere. As with virtually all windowing programs, it is possible to copy and paste data to, from, and between other software and SAS. Doing so, however, is *strongly discouraged* as it is not documentable and makes reproducible data management impossible. Alternatively, there are *Data Step* statements and *Menu* items for exporting data to files, or the most direct and documentable route for getting data out of SAS, another procedure *Proc Export*. The Export procedure is the corresponding converse to the Import procedure and, like its counterpart, can handle many different file types. In the programs below, SAS will export the finch data to an Excel file and to a CSV file, respectively.<br><br>
 
@@ -331,7 +353,7 @@ RUN;
 The Excel example is nearly identical to the Import code except we use a *Data=* option to pick up the SAS version of the finch data, and the *Datafile* option now becomes an *Outfile* option to specify the name and location of the new output file. Note that, unlike the *replace* option in the *Import* procedure, its use here *will* overwrite any existing file with that name, so be careful in naming output files. The CSV example adds two new options: *DBMS= dlm*, which stands for delimited file, and a *delimiter=','* statement that tells SAS that the delimiter should be a comma. The potential delimiter characters can be any of those referenced above in the Import section.<br><br>
 
 
-## The Data Control Vector (DCV)
+# The Data Control Vector (DCV)
 
 To better understand how SAS handles incoming data, it is useful to examine the step-by-step procedure that SAS uses when processing data. This can be
 done using a conceptual structure called the Data Control Vector, or DCV. Essentially, the DCV can be thought of as a list or series of bins representing all the variables defined or used within a *DATA Step*. SAS starts the process by setting up the DCV, and then, line-by-line, modifying the components of the DCV according to the *DATA Step* statements. The process can be broken down into seven steps:<br><br>
@@ -391,14 +413,14 @@ The second step is to set all variable values to missing. This is an important c
 When SAS then picks up the second line of data the DCV is filled with the available data, however, COUNT2 is missing. At the computational step, 5, SAS attempts to compute ( . - 9 = ?), that is, a missing value minus 9. This is not defined, therefore, SAS essentially does nothing. Because the variables TOTAL and AVERAGE were initially set to a missing values, they remain unchanged. The default value for any SAS variable is missing. Hence, the full rectangular data structure is maintained in the final SAS data set.<br><br>
 
 
-## Working with Data in SAS
+# Working with Data in SAS
 
 It is often the case where you will need to create a new SAS data set from data you have already read into SAS. This may involve calculating new variables, such as data transformations, changes in measurement units, creation of sums, differences, ratios, etc. It could also require the aggregation of two or more data sets together to form a new larger data set. To do these things, SAS employs two *Data* step statements, *SET* and *MERGE*, which allow manipulation of previously defined data.<br><br>
 
 
-### Putting Data Sets together in SAS
+## Putting Data Sets together in SAS
 
-#### SET Statement
+### SET Statement
 
 The SET statement serves two purposes in a *DATA* step. The first is to modify an existing SAS data set, e.g. transform variables, compute new ones, etc. Two versions of this are demonstrated below.<br><br>
 
@@ -486,7 +508,7 @@ RUN;
 
 Variables of the same name will be aligned in the new data set, while those with different names will not. Due to the processing of the DCV, variables which occur in one data set, but not in the other, will be filled in with missing values. This type of SET statement could be used with any number of data sets. In fact, the first type of SET statement using just a single data set is only a special case of this example.<br><br>
 
-#### MERGE Statement
+### MERGE Statement
 
 Another means of joining data sets is the *MERGE* statement. The effect of a *MERGE*, however, is to join the data sets together side-by-side. Merging data sets can be very useful, however, care must be taken when doing so. For example, using the two data sets shown above, a MERGE can be performed as shown below:<br><br>
 
@@ -566,11 +588,11 @@ RUN;
 ```
 <BR>    
 
-### SAS Operators and Functions
+## SAS Operators and Functions
 
 User defined computations in the *DATA* step can be carried out utilizing any number of predefined operators and functions available in SAS. These may be simple arithmatic or algebraic forms (*Operators*), such as those illustrated in the examples above, or may involve more complex calculations (*Functions*). 
 
-#### Operators
+### Operators
 
 Simple arithmatic computations are based on a special class of SAS functions known as *operators*. Operators are symbolized by the familiar single characters: ‘+’, ‘-‘, ‘\*’,‘/’, and ‘=’. That is addition, subtraction, multiplication, division, and equals. While the flow or order of the calculations is implicitly controlled by the type of operator, parentheses, i.e. ‘(‘ and ‘)’, may be used force the computation order. For example, the *DATA* step shown in here has two similar calculations. They differ, however, in the use of parentheses.<br><br>
 
@@ -590,7 +612,7 @@ Because of the parentheses, the first computation will add COUNT1 and COUNT2 pri
 
 While this is a good solution for SAS, it is not necessarily the result a user would want. In the case of an average, for example, it might be desirable to compute the average based on non-missing values. To achieve this, a more sophisticated approach is required that relies on predefined *Functions*, not *Operators*.<br><br>
 
-#### Functions
+### Functions
 
 SAS functions are predefined sets of calculations. Common examples are functions for summary statistics such as the average above, as well as others including the variance, standard deviation, number of observations , etc. For example, one could calculate the average of the COUNT1 and COUNT2 variables using:<br><br>
 
@@ -655,11 +677,11 @@ which return the Julian date, year, month of year, and day of month values, resp
 
 returns JULIAN = 1. Similar functions also exist for dealing with time values. <br><br>
 
-### Conditional Data Filtering
+## Conditional Data Filtering
 
 The *DATA* step is often useful for filtering observations within a data set. This occurs either by removing unwanted data directly or, alternatively, keeping only the desired portion of the data. SAS accomplishes these filtering tasks with conditional statements and a special class of logic-based operators.<br><br>
 
-#### IF - THEN
+### IF - THEN
 
 The simplest form of a conditional statement uses only the *IF* clause. The first *DATA* step in the example below illustrates this form. After reading in the data, the *IF* statement gives a condition, i.e. if SOIL equals the value ‘A’. This tells SAS to *keep* only the data satisfying the condition and is called a *subsetting IF with retention*. Note that, in this example (and all conditional statements), the equals symbol is a comparison operator, not the assignment operator seen earlier. The result of this *DATA* step is a SAS data set containing two observations, those corresponding to records where the variable SOIL = ‘A’. An equivalent data set can be created with the second *DATA* step shown. In this example, the conditional *IF* statement is used in conjunction with a *THEN* clause specifying that SAS should delete observations where SOIL = ‘B’. This is known as a *subsetting IF with deletion* and is logically the same as the first example (they lead to the same result). If SOIL contained more than two levels, however, they would differ in their results. Therefore, care should be used when deciding which form is best for a given situation.<br><br>
 
@@ -698,7 +720,7 @@ RUN;
 ```
 <br>
 
-#### ELSE
+### ELSE
 
 The last conditional clause, *ELSE*, is useful when testing the same variable for multiple values. The example shown here illustrates this by testing for various values of the variable TRT. As the two *DATA* steps show, the *ELSE* clause is not strictly required here. The *IF* statements in the first *DATA* step would operate equivalently to the second. The difference, however, would be seen in the execution time of the program. For the first *DATA* step, when TRT equals 1, SAS will create the variable NEW as instructed. SAS will then go on to test whether TRT is equal to 2 or is TRT equal to 3 or is TRT equal to 4, and so forth. This is redundant, however, since it had been established previously that TRT was equal to 1. The *ELSE* clause in the second *DATA* step essentially gives SAS permission to skip those subsequent tests if the condition for TRT has already been met. This saves execution time which, on a large data set, could be substantial. Note also that, in this case, the data is being filtered so that it may be modified (create the variable “NEW”), not subsetted. <br><br>
 
@@ -727,7 +749,7 @@ RUN;
 ```
 <br>
 
-#### DO - END
+### DO - END
 
 In the examples shown above, the *IF* statement tests a condition and, in most cases, is followed by a *THEN* clause which specifies an action to be taken. In the last example here, the code is written in a similar manner to those given earlier, however, in this case we would like to carry out three actions when the test, TRT = 2, is true:<br>
 
@@ -771,11 +793,11 @@ run;
 ```
 <br>
 
-### Iterative Computations and ARRAY Statements
+## Iterative Computations and ARRAY Statements
 
 Iterative computation is useful for simple repetitive computations, but may be used for more complex tasks such as data restructuring and accumulation.
 
-#### Iterative computations
+### Iterative computations
 
 The *DO-END* structure shown earlier is also useful in a specialized type of program that iterates or repeats itself multiple times. In the example that follows, the goal is to generate 10 random numbers and print them using SAS.<br><br>
 
@@ -799,7 +821,7 @@ run;
 
 The *DATA* step shown employs the *DO-END* group with an expansion of the *DO* clause: “*DO INDEX = 1 TO 10;*". This essentially says “Create a variable called INDEX and incrementally change it from 1, to 2, to 3, etc, up to 10. At each iteration, carry out the computations between the *DO* and *END* statements”. Note that this *DATA* step is different from any shown thus far in that it does not utilize any form of the *INFILE*, *INPUT*, *SET*, or *MERGE* statements. It is creating data “on the fly”. The statements between *DO* and *END* generate the random numbers. The first statement uses the SAS function *RANUNI()*, which creates uniform random values between 0 and 1. The argument for this function is called a “seed” and provides a starting place for the random number algorithm. If you run the program repeatedly using the same seed value, you will generate the same list of random values over and over. The seed value 0, however, is special as it uses the computer’s clock time as a seed, thereby generating a unique list of random numbers each time the program is run. The second statement, *OUTPUT*, forces SAS to store the random numbers in the resulting data set RANDNUM once per iteration. If this was left out, the program would internally run through 10 random numbers, but only output or store the last one, when it exited the *DO-END* loop. Writing an *OUTPUT* statement is referred to as Explicit Output, i.e. you tell SAS when to output the data from the DCV to the data set. Otherwise, SAS will only output the data once when it reaches the end of the *DATA* step (Implicit Output).<br><br>
 
-#### Data restructuring and ARRAY statements:
+### Data restructuring and ARRAY statements:
 
 Rearrangement or restructuring of data is a common problem in data analysis. For example, in SAS, you may find that certain statistical procedures require a specified data layout or format prior to analysis. As an illustration, The data below gives an example data set from a repeated measures study. In this type of study, an animal, plant, plot or other experimental unit is measured through time.<br><br>
 
