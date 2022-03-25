@@ -5,7 +5,7 @@
 
 title: Idaho Ag Stats # Website name
 baseurl: '' # Website URL
-copyright: 'Copyright @ {year} by the [University of Idaho Statistical Programs](https://www.uidaho.edu/cals/statistical-programs). Built with [Wowchemy](https://wowchemy.com/), a free open-source web builder.' 
+copyright: 'Copyright @ {year} by the [University of Idaho Statistical Programs](https://www.uidaho.edu/cals/statistical-programs). <br> Built with [Wowchemy](https://wowchemy.com/), a free open-source web builder.' 
     # Footer text, e.g. '© {year} Me'
 
 ############################

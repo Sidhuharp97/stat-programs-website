@@ -3032,7 +3032,9 @@ renv::init()
 &lt;li&gt;&lt;a href=&#34;https://imci-idaho.github.io/2022-03-01-WhatTheyForgot/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;What They Forgot to Teach You&lt;/a&gt; (about using R)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;sas&#34;&gt;SAS&lt;/h3&gt;
-&lt;p&gt;&amp;hellip;coming!&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../tutorials/sas-data-step.html&#34;&gt;Data import and manipulation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;other-resources&#34;&gt;Other Resources&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://idahoagstats.github.io/guide-to-field-trial-spatial-analysis/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Spatial Analysis for Agricultural Field Experiments&lt;/a&gt;&lt;/li&gt;

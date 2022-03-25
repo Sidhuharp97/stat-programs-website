@@ -12,7 +12,7 @@ type: page
 
 ### SAS
 
-...coming! 
+* [Data import and manipulation](../tutorials/sas-data-step.html)
 
 ### Other Resources
 
