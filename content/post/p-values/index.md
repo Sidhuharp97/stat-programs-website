@@ -1,6 +1,7 @@
 ---
+title: Guide to Interpreting P-values
 authors:
-- jpiaskowski
+- bprice
 categories:
 - p-values
 - statistics
@@ -19,7 +20,6 @@ summary: "Some instructions for R installation and your R setup to support repro
 tags:
 - R
 - reproducible research
-title: Getting R Set Up
 ---
 
 
