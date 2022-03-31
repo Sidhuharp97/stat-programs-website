@@ -12,7 +12,8 @@ type: page
 
 ### SAS
 
-* [Data import and manipulation](../tutorials/sas-data-step.html)
+* [Data Import and Manipulation](../tutorials/sas-data-step.html)
+* [Linear Regression](../tutorials/sas-proc-reg.html)
 
 ### Other Resources
 
