@@ -3,7 +3,9 @@ widget: hero
 headless: true
 weight: 10
 title: Uidaho [[Agricultural]] Statistical Programs
-hero_media: hero.png
+hero_media: old_hero.png
+
+
 
 # cta:
 #   label: '**Get Started**'
