@@ -1,0 +1,145 @@
+
+title: Finding Help for R Programming Problems
+authors:
+- jpiaskowski
+date: "2022-04-15T00:00:00Z"
+draft: true
+featured: false
+image:
+  caption: 'Ghostbusters to the rescue.'
+  focal_point: ""
+  placement: 2
+  preview_only: false
+lastmod: "2021-04-15T00:00:00Z"
+projects: [Reproducible Research]
+subtitle: "How to find the help you need to solve your R progamming problem."
+summary: "How to find the help you need to solve your R progamming problem."
+categories:
+- R
+tags:
+- R
+- reproducible research
+
+
+## What do you do when you need to solve a problem in R? 
+
+It does not need to to be stated (although I'm doing it anyways) that you are likely to encounter errors programming in R and resolving those coding errors can be challenging. 
+
+For most everyone, goggling an error message is the first step (please let me know if this is not your first response!). This is not a bad choice as it often leads you to people who have already encountered the error and solved it. But, it can also lead you to a labyrinth of different, possible conflicting, possibly incomprehensible solutions. Additionally, it is not always the most time efficient method to solve a coding problem. 
+
+## Some Alternatives: 
+
+### Check the documentation!
+
+How do we do this?
+
+```{r eval=FALSE}
+?par
+??plot
+```
+
+
+(*Remember, you can spend 2 hours searching the web in order to save 15 minutes of reading the documentation).*
+
+### No really, read the docs
+
+This helps! There are two main aspects of documentation:   
+
+1. Function reference (what was just discussed)
+1. Vignettes
+
+[CRAN](https://cran.r-project.org/web/packages/available_packages_by_name.html) can be a good place to start. 
+
+[tidyr example](https://CRAN.R-project.org/package=tidyr)
+
+[special box]
+Sometimes, you will discover there are multiple options and possibly different help files associated with a function name (just run `methods("mean")` or `methods(anova)` to see what I mean). 
+
+These are functions that act differently depending on the R object type they are called to interact with (e.g. `mean(some_dates)` will behave differently than `mean(some_numbers)`). Which leads to the next point: all R objects have a class assigned to them. You can check this with `class()`. 
+
+```{r}
+y <- rnorm(20); x <- y + rnorm(20) 
+m <- lm(y ~ x)
+class(y)
+class(m)
+```
+
+Understanding this difference between functions will help you understand which documentation files will help you solve your problem.  
+
+More importantly, once you know the object class, you can search for methods that exist for that class. 
+
+```{r}
+methods(class = "lm")
+```
+From this, we can see a special `plot()` option exists (that provides several diagnostic plots), functions for extracting residuals (`rstudent()`, `residuals()`), a version of `anova()` written for object type "lm", and much much more. 
+
+### Read your error messages
+
+*They are often telling you something important.*
+
+```{r, echo=FALSE, out.width="80%", fig.cap="Informative error message I ignored"}
+knitr::include_graphics('images/tweet_ignored_error.png')
+```
+
+Still, error messages can be confusing
+
+![confused man meme at R error](images/r_function_error.jpg)
+
+Over time, these messages will become comprehensible. It's still the same messages, but your R knowledge will help you understand them. But, becoming fluent in "R error messages" implies reading them and trying to understand them. 
+
+
+### Specific places to ask for help
+
+* [RStudio Community](https://community.rstudio.com/)  
+<br>  
+![rstudio community screenshot](images/rstudio_community.png)
+
+
+* [R4DS community](https://www.rfordatasci.com/)  
+<br>   
+![R for DS community screenshot](images/r4ds_screenshot.png)  
+
+
+* [Stack overflow](https://stackoverflow.com/)  
+<br>  
+![stack overflow screen shot](images/stackoverflow_screenshot.png)
+
+
+### Consider reading the source code
+
+![read the source, luke](images/luke_source_code.jpeg)
+
+*(this will help improve your coding, too)*
+
+** How to find source code: **
+
+* Type the function name in the console without parentheses: 
+```{r eval=FALSE}
+lm
+```
+*[suppressed output because it is long]*
+<br><br>
+
+* Sometimes this is not informative   
+```{r}
+c
+subset
+`[`
+```
+
+
+* Use 'lookup' to find what you need
+
+*(Prior to 'lookup', finding source code for R functions was a real [bugger](https://github.com/jennybc/access-r-source#readme)*
+
+**lookup** checks CRAN, Bioconductor and GitHub!
+
+Please note that this 'lookup' is NOT the same same package called "lookup" found on CRAN. They have zero overlapping functionality. 
+
+```{r eval=FALSE}
+remotes::install_github("jimhester/lookup")
+lookup::lookup(`[`)
+```
+
+
+
