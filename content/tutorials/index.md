@@ -14,6 +14,7 @@ type: page
 
 * [Data Import and Manipulation](../tutorials/sas-data-step.html)
 * [Linear Regression](../tutorials/sas-proc-reg.html)
+* [Mixed Models](../tutorials/sas-proc-mixed.html)
 
 ### Other Resources
 
