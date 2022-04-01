@@ -1,0 +1,240 @@
+---
+title: "Mixed Model ANOVA in SAS"
+author: "Statistical Programs, University of Idaho"
+date: "31/3/2022"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    toc_collapsed: true
+    toc_depth: 3
+    number_sections: true
+    css: .\sas.default.css
+bibliography: references.bib  
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r include=FALSE}
+require(SASmarkdown)
+
+saspath <- "C:/Program Files/SASHome/SASFoundation/9.4/sas.exe"
+
+sasopts <- "-nosplash -ls 200"
+```
+
+# Introduction
+
+  This tutorial will cover Analysis of Variance using mixed model methodology in SAS. Analysis of Variance (ANOVA) is a class of linear models where all the factors entering the model (on the “righthand side”) are discrete and categorial. These factors typically represent levels of an applied treatment, replication, or other qualitative information such as location, year, or trial number. 
+
+  The “mixed model” terminology refers to how the factors are interpreted and estimated as either “Fixed” or “Random” effects. A fixed model effect is a factor that we are interested in and is repeatable. For example, levels of a treatment, say a dose of drug or concentration of herbicide, might picked because they are of interest and, when applied at any time or location, will be considered to be the same. A random model effect is one that is not constant or is considered arbitrary, such as the coding for replication, or choice of locations or subjects. There are no steadfast rules about what must be fixed or random, and the assumptions on which to use will often depend on the research objectives and the desired domain of inference. As an example, we typically consider treatments to be fixed effects. This is because we want to make inferences about those specific treatments and they were not chosen to be a random sample of all possible treatments. In contrast, replications are usually considered random effects. That is, we have no real interest in making specific inferences about “Rep 1” vs “Rep 2”. The replications were chosen only to provide better representation of the fixed effect treatments. Factors such as year or location, however, can often be more nebulous. Locations, for example, may have been chosen because we are truly interested in those specific locations (fixed effect) or alternatively, they may have been chosen only as representative of all possible locations (random effect).
+
+  What difference does it make? In a mixed model, fixed effects will be estimated as means, while random effects will be estimated as variances or “variance components”. Hence, as model output, we will often get means and mean inferences for fixed treatment effects, and variance estimates for random effects such as replication.
+
+  The application of mixed model methodology is relatively recent in statistical history. Hence, many software packages, including SAS and R, still have older legacy routines that fit only fixed effects, i.e. Proc ANOVA and Proc GLM in SAS. It is recommended, however, that researchers use mixed models when feasible as they more accurately represent the models under consideration, and they provide more flexibility in estimation. It should be also noted that many publication outlets, granting agencies, and reviewers will now require the use of mixed modeling approaches for statistical analysis. For more detailed information on mixed models in SAS, the readers are referred to @Claassen2018.
+
+
+# Data used in examples
+  
+The data used in the examples below are a hypothetical variety and fertilizer trial measuring “yield” over five sampling times. Specifically, there are two varieties (Var1 and Var2) evaluated under 3 fertilizer levels (1, 2, 3) in a 2x3 factorial treatment design. Each combination of variety and fertilizer is replicated 4 times. The response to analyze is yield. There is no explicit indication of the experimental design as this data could fit many scenarios which will be demonstrated below.
+A CSV file for this data can be found [here](./Data/yield.csv) and example code to read in and print a section of the data is below. For more information on reading data into SAS, please see the tutorial on the SAS [Data Step](https://agstats.io/tutorials/){target="_blank"}.
+
+```{r Example1, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
+
+proc import out= work.yield
+	datafile= ".\data\Yield.csv"
+	dbms=csv replace;
+run;
+	
+proc print data=Yield(obs=12);
+run;
+```
+  
+# Estimation and Analysis
+  
+  There are multiple procedures in SAS that can estimate mixed models. This tutorial will focus on the most common procedure, **Proc Mixed**. This procedure makes a strong assumption of normally distributed continuous response data. If you are dealing with non-normal, discrete, or skewed data, you may want to consider an alternative procedure for generalized mixed models, such as [Proc Glimmix](http://google.com){target="_blank"}.
+
+## Required Statements:
+Proc Mixed has three statement types that must be specified for ANOVA. The first is the **CLASS** statement which is used to define variables which represent factor groupings or classifications. Examples would be treatment and replication ID numbers or letters. Since the values of these variables represent the levels of an effect, SAS will accept either numeric or alphabetic data in the CLASS statement. Note: Data do not have to be sorted according to the CLASS variables. 
+
+The second required statement is **MODEL**. The model statement specifies the response variable and and how the independent fixed effect factors of the **CLASS** statement enter the model. The general form is: 
+
+*MODEL Response = Fixed factors;*, 
+
+where Fixed factors is a list of all or some of the variables given in the **CLASS** statement. Proc Mixed also provides the ability to easily state interaction as well as nested terms in the **MODEL** statement. Interaction effects represent combinations of factors and can be specified by using the \* symbol between two or more terms, for example: A\*B. This notation can become cumbersome if many interactions are present so a shorthand version exists. The vertical bar between effects signifies all possible interactions. An example would be: A|B|C which produces the effects A, B, A\*B, C, A\*C, B\*C, and A\*B\*C, in that order. Nesting occurs when one effect exists completely within another effect either in time or space. These effects are denoted with parentheses such as B(A) which is read as 'Factor B within factor A'. The \*, |, and () can be used alone or in combination to specify the exact model required. In a Proc Mixed call, only *one* **MODEL** statement can be given.
+
+The last required statement for a mixed model is the **Random** statement. This statement tells SAS what factors to treat as random effects. These factors *must* be listed in the **CLASS** statement along with the fixed effects. As with fixed effects, random factors can also be specified as interaction or nested terms in the same manner as the **MODEL** statement. Unlike the **MODEL** statement, multiple **RANDOM** statements can be used within one Proc Mixed call.
+
+There are two methods of specifying **RANDOM** statements: Direct and Indirect. Each method can achieve the same goal, but the method of estimation for the random effects may differ between the two. In some cases where SAS is having trouble estimating the model, the indirect method may help. Examples of each are generally shown as:
+
+**Direct Form**
+
+*Random replication;* 
+
+**Indirect Form**
+
+*Random intercept/subject=replication;*
+
+In the indirect form, **intercept** and **subject** are key words that must be used. Here, **subject** specifies the basic experimental or observational unit that the variance components will be computed from. If multiple random effects are necessary and the indirect form is used, then a **RANDOM** statement must be specified for each random effect. Alternatively, in the direct form, multiple random effects can be listed in a single **RANDOM** statement. 
+
+Both the direct and indirect forms can also specify options. Most commonly, these options relate to how the variance-covariance model matrix should be set up using a **Type=** option. By default, Proc Mixed assumes a "variance component" structure where a single variance is estimated for each random effect. This can also be specified with a **Type=VC** option. Other available types allow for the estimation of additional covariances between observations or subjects. The choice of a covariance structure is dependent on the experimental set up and SAS provides for many different types. In using them, however, care should be taken to use the simplest structure possible while maintaining good representation and estimation of the data. Specifying a variance-covariance structure that is too complex will inevitably lead to estimation problems.
+
+## Additional Statements and Options
+
+**REPEATED**: One of the flexabilities of mixed models is their ability to incorporate correlation structure. Repeated measures designs are an example of this and are accommodated into Proc Mixed through the **REPEATED** statement. The syntax and options are similar to the **RANDOM** statement above. The random effect variable in this case may be optional in some cases, however, specifying the effect can avoid problems when missing values are present. As with the **RANDOM** statement, the **SUBJECT** and **TYPE** options may be used to specify the basic unit at which the repeated effect occurs, e.g. individual plots, animals, etc., as well as the correlation structure associated with them. The correlation structures available are numerous and cover both time as well as spatial effects. Typical examples of correlational structures for time effects would be *UN* for unstructured, *CS* for compound symmetry, and *AR(1)* for autoregressive correlations. Spatial correlation can also be specified for most common semivariogram models such as *SP(POW)*, *SP(GAUS)*, and *SP(EXP)* for power, Gaussian, and exponential models, respectively. As before, care should be taken when specifying correlational structures with large numbers of components to avoid computational problems in estimation.
+
+**LSMEANS**: Although Proc Mixed estimates models utilizing the technique of Maximum Likelihood, SAS has retained the nomenclature LSMEANS or Least Squares Means for estimating means for fixed effects. SAS provides for comparison of LSMEANS by the **DIFF** or **PDIFF** options which produce a table of all possible pair-wise comparisons and their associated t-tests. It is important to remember that the probabilities associated with these comparisons are applicable to a limited number of preplanned tests only. If a multiple comparison adjustment to these tests is needed, the **Adjust=** option can be used with any of several adjustment types such as *Tukeys*, *Bonferroni*, etc. The default is equivalent to Fishers LSD. In addition to the mean estimates, standard errors will also be produced for each mean. **LSMEANS** can also be used for interaction and nested effects, when applicable. Note, however, that **LSMEANS** can only be estimated for fixed effects listed in the **CLASS** statement.
+
+**CONTRAST**: Single degree of freedom contrasts which test specific hypotheses of interest are an alternative to pair-wise comparisons. SAS provides for these with the **CONTRAST** statement. A single df contrast has the general form of: 
+
+CONTRAST 'any label' Factor name {coefficients}; 
+
+The label portion allows you to give a name to the hypothesis being tested so it can be identified in the output. The Factor name identifies what fixed effect the contrast is working on and the coefficients specify the contrast itself. An example might be: 
+
+CONTRAST ' Trts vs Ctrl' A 2 -1 -1;
+
+Here the average of the **LSMEANS** for the last 2 levels of fixed effect A are contrasted to the first level. Some contrasts test more than one hypothesis at a time (multiple DF contrasts) and these are separated by a comma in the **CONTRAST** statement. For example: 
+
+CONTRAST 'Testit' A 2 -1 -1 , A 0 1 -1;
+
+would be a 2 degree of freedom contrast that jointly tests the average of levels 2 and 3 to level 1 of factor A, simultaneously with a comparison of level 2 to level 3 of factor A.
+
+**ODS**: ODS is an abbreviation for Output Delivery System. In SAS, the ODS is very generalized and has many functions. In this case, **ODS** will allow us to output and save to a SAS data set many of the internal statistical values involved with ANOVA. Most commonly, this will be model estimates, and specifically for ANOVA, **LSMEANS**. This gives the user the ability to manipulate, plot, or output from SAS the estimated means. The general format for this would be:
+
+ODS output LSMeans=\<name\>;
+
+Here, "LSMeans" is a keyword indicating the statistic we want to save. Note the spelling and capitalization as it must be written exactly in this form. The *\<name\>* portion is what you want to call the data set containing the means. This data set will have predefined variables indicating the fixed effect, it's level, the mean value (Estimate), its standard error (StdErr), and the df, t-value and p-value for testing whether the mean is equal to zero. If confidence limits (CL) were requested with the LSMeans, then they will be output as well as "Lower" and "Upper". When multiple fixed effects are listed in the LSMEANS statement, then all the means for all listed effects will be present in the saved data set. Note: To use the **ODS** output statement, the requested statistics, such as LSmeans, must be used as part of the Proc Mixed call.
+
+# Examples and Demonstration
+
+  In what follows, several experimental designs and options for ANOVA will be shown using the hypothetical data described above. For further details on these and other potential designs and models, the reader is referred to @Claassen2018.
+  
+## Completely Random Design (CRD)
+
+  In a CRD design, all treatments and their replicates are randomized without regard to grouping or structure. In this most basic design, Proc Mixed will *not* require a **RANDOM** statement, as the residual error will be the only random effect, and this is assumed by default in SAS.
+  
+```{r Example2, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
+
+PROC MIXED Data=Yield;
+  WHERE Sample_Time = 1;
+	CLASS Variety Fertilizer;
+	MODEL YIELD = Variety Fertilizer Variety*Fertilizer ;
+	LSMEANS Variety Fertilizer Variety*Fertilizer /cl;
+run;
+```  
+  
+  Because the data contains five sampling times (Sample_Time), and we are not considering the repeated measures nature of the data yet, a **WHERE** statement has been used and the analysis has been limited to the first Sample_Time. The initial portion of the output indicates the levels of the CLASS statement variables. Whenever Proc Mixed is first run, users should carefully check this to make sure it is correct. It is easy to overlook data entry errors when coding classification variables. In this example, things appear correct with Variety having two levels (VAR1 and VAR2) and Fertilizer having three levels (1, 2, and 3). Users should also check the number of observations used. Here, in the first sample time, there are 4 replications, 2 varieties, and 3 fertilizer levels, or 4x2x3 = 24 observations.
+  
+  The section labeled "Covariance Parameter Estimates" gives the estimates for the random effects, which in this case is simply the residual variance. This statstic is analogous to the Mean Squared Error (MSE) found in traditional least squares anova. The next output table "Fit Statistics" which are useful for comparison of multiple model forms.
+    
+  Last are the "Type 3 Tests of Fixed Effects" and the output from the **LSMEANS** statement. In the Type 3 Tests section, it would appear from the p-values that Fertilizer has some effect on yield (small p-value), while Variety and the interaction do not (larger p-values). For more information and cautions on using and interpreting p-values and test statistics, see the blog post [here](http:\\google.com){target="_blank"}. The means table shows the estimated means, standard errors and associated 95% confidence intervals. Note the tests and p-values here **only** relate to whether these means are different from zero. They **do not** relate to any comparisons of means because we did not use the **DIFF** or **PDIFF** options in the **LSMEANS** statement.
+  
+## Randomized Complete Block (RCB)
+
+  The randomized complete block design is undoubtedly the most common design in randomized experiments. Unlike the CRD, it allows for isolation of extraneous variation unrelated to treatment effects through blocking. In the RCB design, a block is a full set of all treatments, usually aggregated together either physically, spatially, or temporally.  Treatments are randomly distributed within each block. Replication then occurs as multiple blocks, that is, multiple contiguous, complete sets of treatments. Treatments *may* appear more than once within a block as well, a process referred to as sub-replication, however, that is beyond this discussion. For more information on the uses and advantages of blocking, please see the discussion  located [here](http://google.com){target="_blank"}.
+  
+  The following example re-envisions the yield data as a RCB design. Here "Rep" acts as blocks and a **RANDOM** statement is used to indicate it as a random effect. A new option of the Proc Mixed call, *plots=(studentpanel)*, is used to produce residual diagnostics. This example also uses the **PDIFF** option to compare means, as well as **CONTRAST** statement to test for linear and quadratic trends in fertilizer rates. Lastly, an **ODS** statement is used to output the estimated means and plot the interaction using Proc Sgplot.
+  
+```{r Example3, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
+
+PROC MIXED plots=(studentpanel) DATA=YIELD;
+	WHERE SAMPLE_TIME=1;
+	CLASS Variety Fertilizer Rep Sample_Time;
+	MODEL YIELD = Variety Fertilizer Variety*Fertilizer ;
+	RANDOM Rep;
+	LSMEANS Variety Fertilizer Variety*Fertilizer /cl pdiff;
+	CONTRAST 'Linear trend' Fertilizer -1 0 1;
+	CONTRAST 'Quadratic trend' Fertilizer 1 -2 1;
+
+	ods output LSMeans=means;
+	
+run;
+
+
+PROC SGPLOT DATA=MEANS;
+	WHERE EFFECT='Variety*Fertilizer';
+	SERIES X=FERTILIZER Y=ESTIMATE/GROUP=VARIETY;
+	highlow x=FERTILIZER high=upper low=lower/GROUP=VARIETY type=line highcap=serif lowcap=serif;
+RUN;
+```  
+  
+  In the RCB output, the initial information is the same or similar to what was shown above. There is an additional variance component estimated for Rep in the table for *Covariance Parameter Estimates*. The Type 3 Tests of Fixed Effects has changed, with the denominator degrees of freedom for the F-test now being 15, reduced by 3 due to the specification of Rep (3 df) as a random effect. This 15 df is composed of all block or "Rep" interactions: Rep\*Variety=3x1 = 3, Rep\*Fertilizer=2x3 = 6, and Rep\*Variety\*Fertilizer = 3x1x2 = 6 ==> 3 + 6 + 6 = 15. 
+  
+  The **CONTRAST** statements evaluate linear and quadratic trends across the Fertilizer rates. The coefficients for trend analyses are specialized and called Orthogonal Polynomial Coefficients. These vary depending on how many levels of an effect there are and can be found for a various number of levels [here](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwjC4omgivH2AhUjHzQIHTPXBiIQFnoECAUQAQ&url=http%3A%2F%2Fusers.stat.ufl.edu%2F~winner%2Ftables%2Forthpol.pdf&usg=AOvVaw1AJ726gbVXTAO-m1aKV6hS){target="_blank"}. Note that such contrasts assume the levels of the effect are evenly spaced. For uneven spacing of levels, the coefficients must be computed individually (for more information see [here](https://blogs.sas.com/content/iml/2010/11/17/regression-coefficients-for-orthogonal-polynomials.html){target="_blank"}). In this case, a linear trend is indicated, but a quadratic trend is not.
+  
+  The table "Differences of Least Squares Means" results from the **PDIFF** option and is a table of all possible pair-wise comparisons of means for all effects listed in the **LSMEANS** statement. Columns indicate which levels are under consideration and what the comparison is. For example, under Fertilizer and _Fertilizer, we can see comparisons for 1 vs 2, 1 vs 3, and 2 vs 3. The "Estimate" and "Standard Error" columns are for the actual mean differences and the p-values relate to tests of mean equivalence. 
+  
+  The first set of plots are generated from the Proc Mixed option *plots=(studentpanel)*. This requests plots and diagnostics for studentized residuals. The residual vs Predicted plot shows randomly scattered points of reasonable magnitude (within [-3, +3]) with no trending or patterning. The histogram is reasonably symmetric and bell shaped matching a theoretical Normal distribution well, and the quantile plot shows data points very close to the diagonal line representing a Normal distribution. All these indicate the residuals match the normaility assumption of the ANOVA well and are not problematic.
+  
+  The last portion of the output are the plotted interaction means. Because the ODS data set "*means*" contains all effects in the **LSMEANS** statement, we must use the **WHERE** statement to select for only the interaction effect, Variety\*Fertilizer. This plot shows an increasing trend for each Variety and their associated confidence intervals. If an interaction was indicated (not the case here), it would imply that the lines were not parallel within the observed error. While these lines are not exactly parallel, the confidence intervals are wide enough that a statistical test implies no interaction is present.
+  
+## Split-Plot RCB
+
+  The term "Split" in a design name refers to a restriction in randomization. That is, an additional step of randomizing the treatments. In the example here, we will retain the blocked design structure, however, we now take two steps in randomizing the two factors, Variety and Fertilizer, when assigning the place in each block. For example we can first randomize varieties to the blocks, say splitting the block into two halves, one for each Variety. Then we take the second randomization step and randomize the placement of fertilizers within each Variety. This process is then repeated for each block with new randomizations. The first randomized factor, Variety, will be referred to as the "Main Plot", while the second randomized factor will be the "Sub-plot". We can induce this structure into the model with the addition of an additional random effect in the **RANDOM** statement that will be the interaction between block and the Main Plot factor. This subtracts more df from the denominator df of the F-test and gives different precision between Main Plots and Sub-plots. This differential precision between Main and Sub-plots is often cited as a rational for using split designs. In reality for field work, however, these designs were implemented to accommodate logistical constraints in applying treatments. For example, in the Variety data, it would not be practical to change varieties for every plot, as required by the CRD. We can, however, plant large swaths of each variety and then apply varying Fertilizer levels over the top of that. The bottom line is to choose the experimental design based on logistical concerns, not some academic exercise in potential precision of testing. 
+  
+  The example below is shown without output as it is similar in nature and interpretation to the RCB above. Note, however, that the **RANDOM** statement now contains a term for Rep\*Variety, signifying the split-plot design. In addition, the **LSMEANS** and **CONTRAST** statements will inherently incorporate this design change into their computations. this differs from previous SAS procedures such as Proc GLM where users had to specify correct error terms for each hypothisis in Split designs.
+  
+
+```
+PROC MIXED plots=(studentpanel) DATA=YIELD;
+    WHERE SAMPLE_TIME=1;
+    CLASS Variety Fertilizer Rep Sample_Time;
+    MODEL YIELD = Variety Fertilizer Variety*Fertilizer ;
+    RANDOM Rep Rep*Variety;
+    LSMEANS Variety Fertilizer Variety*Fertilizer /cl pdiff;
+    CONTRAST 'Linear trend' Fertilizer -1 0 1;
+    CONTRAST 'Quadratic trend' Fertilizer 1 -2 1;
+    ods output LSMeans=means;
+run;
+```
+
+## Split-Block RCB
+
+  As with the Split-plot design, the Split-block impliments another level of randomization. This time both Variety and Fertilizer levels will be separately randomized within each block. The easiest way to conceptualize this is to think of each block as rows and columns. In the block we first randomize two "rows", one for each variety. We then randomize three columns for three fertilizer levels across the variety rows. Thus, each intersection of row-column represents a combination of Variety and Fertilizer. Again, the rationale here should be logistics. With some treatment types, it is easier to apply them in this manner. For example, flood irrigation treatments are practically impossible to randomize from plot-to-plot. They can, however, be randomized by row or column. Additional treatments, such as herbicdes could then be applied across/perpedicular to the irrigation treatments.
+  
+  The code below adds an additional term to the **RANDOM** statement (Rep\*Fertilizer), further dividing the denominator degrees of freedom. Similar to the Split-plot analysis, Proc Mixed will inherently account for this change in df in all relevant tests and estimations.
+  
+```
+PROC MIXED plots=(studentpanel) DATA=YIELD;
+    WHERE SAMPLE_TIME=1;
+    CLASS Variety Fertilizer Rep Sample_Time;
+    MODEL YIELD = Variety Fertilizer Variety*Fertilizer ;
+    RANDOM Rep Rep*Variety Rep*Fertilizer;
+    LSMEANS Variety Fertilizer Variety*Fertilizer /cl pdiff;
+    CONTRAST 'Linear trend' Fertilizer -1 0 1;
+    CONTRAST 'Quadratic trend' Fertilizer 1 -2 1;
+    ods output LSMeans=means;
+run;
+```
+## Repeated Measures RCB
+
+  Thus far, we have ignored the five sampling times in the data. In order to incorporate sampling time into the model, however, we need to consider its characteristics. In particular, time is a sequential quantity. that is time 1 must come before time 2 and that before time 3, etc. We cannot randomize time. Spatially arranged data can also exhibit a similar type of correlation (blocking described above is one rudimentary means of accounting for spatial correlation). Because of this lack of randomization, when we measure a response on the same subject over time, the observations through time can be correlated. One of the base assumptions of linear modeling is that the residuals or errors are independently distributed. Correlated observations, however, violate this assumption. Fortunately, mixed modeling methods give us a mechanism for dealing with this and can generate independent, uncorrelated errors when properly used. This is done by modeling the correlation(s) within the variance-covariance matrix. Proc Mixed impliments this through the **REPEATED** statement where the repeated factor, such as Sample_Time, is given, as well as the correlation model or type to use.  Common structure types are Compound Symmetry,CS, where equal correlation is assumed between time points, or Autoregressive Correlation, AR(1) where adjacent time points have the highest correlation they become less correlated the further apart in time they become. Many other correlation types exist as well and which to utilize can be problem dependent.
+  
+  The code below illustrates the repeated measures analysis. We are now using the full data set with all times, so the **WHERE** statement has been removed. The repeated factor is Sample_Time, which must be listed in the **CLASS** statement. The subject option tells SAS what base experimental unit is measured each time (Rep\*variety\*Fertilizer) and the autoregressive AR(1) structure has been specified. The resulting output can then be considered to be "adjusted" for time correlation effects.
+  
+```
+PROC MIXED plots=(studentpanel) DATA=YIELD;
+	CLASS Variety Fertilizer Rep Sample_Time;
+	MODEL YIELD = Variety Fertilizer Variety*Fertilizer ;
+	RANDOM Rep;
+	REPEATED Sample_Time / SUBJECT=Rep*Variety*Fertilizer TYPE=ar(1);
+	LSMEANS Variety Fertilizer Variety*Fertilizer /cl pdiff;
+	CONTRAST 'Linear trend' Fertilizer -1 0 1;
+	CONTRAST 'Quadratic trend' Fertilizer 1 -2 1;
+
+	ods output LSMeans=means;
+	
+run;
+```
+
+  
+# References:  
+  
+
+
+ 
+  
+
