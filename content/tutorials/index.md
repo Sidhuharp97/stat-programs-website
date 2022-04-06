@@ -12,10 +12,10 @@ type: page
 
 ### SAS
 
-* [Data Import and Manipulation](../tutorials/sas-data-step.html)
-* [Linear Regression](../tutorials/sas-proc-reg.html)
-* [Mixed Model ANOVA](../tutorials/sas-proc-mixed.html)
-* [Mixed Model ANCOVA and Dummy Variable Regression](../tutorials/sas-ANCOVA.html)
+* <a href="../tutorials/sas-data-step.html" target="_blank">Data Import and Manipulation</a>
+* <a href="../tutorials/sas-proc-reg.html" target="_blank">Linear Regression</a>
+* <a href="../tutorials/sas-proc-mixed.html" target="_blank">Mixed Model ANOVA</a>
+* <a href="../tutorials/sas-ANCOVA.html" target="_blank">Mixed Model ANCOVA and Dummy Variable Regression</a>
 
 ### Other Resources
 
