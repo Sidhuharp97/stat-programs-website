@@ -15,7 +15,7 @@ type: page
 * [Data Import and Manipulation](../tutorials/sas-data-step.html)
 * [Linear Regression](../tutorials/sas-proc-reg.html)
 * [Mixed Model ANOVA](../tutorials/sas-proc-mixed.html)
-* [Mixed Model ANCOVA and DVR](../tutorials/sas-ANCOVA.html)
+* [Mixed Model ANCOVA and Dummy Variable Regression](../tutorials/sas-ANCOVA.html)
 
 ### Other Resources
 
