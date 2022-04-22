@@ -16,6 +16,7 @@ type: page
 * <a href="../tutorials/sas-proc-reg.html" target="_blank">Linear Regression</a>
 * <a href="../tutorials/sas-proc-mixed.html" target="_blank">Mixed Model ANOVA</a>
 * <a href="../tutorials/sas-ANCOVA.html" target="_blank">Mixed Model ANCOVA and Dummy Variable Regression</a>
+* <a href="../tutorials/sas-proc-glimmix.html" target="_blank">Generalized Mixed Model ANOVA</a>
 
 ### Other Resources
 
