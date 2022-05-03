@@ -1,0 +1,364 @@
+---
+title: "Power and Sample Size in SAS"
+author: "Statistical Programs, University of Idaho"
+date: "3/May/2022"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    toc_collapsed: true
+    toc_depth: 3
+    number_sections: true
+    css: .\sas.default.css
+bibliography: references.bib  
+link-citations: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r include=FALSE}
+require(SASmarkdown)
+
+saspath <- "C:/Program Files/SASHome/SASFoundation/9.4/sas.exe"
+
+sasopts <- "-nosplash -ls 200  "
+```
+
+# Introduction
+  Estimation of sample size and statistical power rely on several components related to researcher’s  objectives, the experimental design, the topic being studied, as well as the sampling methods used and the data being collected. Some of the statistical terms used in the process of estimation are described below.
+  
+  
+1) **n - Sample Size**: This value is either estimated or specified by the researcher, as in the case of power estimation. It may be represented as either the size per treatment group, or the total sample size, depending on the estimation procedure used.
+
+
+2) $\sigma^2$\ - **Variance**: This is a fixed value of variability for the data. The value used here may come from existing data, literature review, or simply the researcher’s best approximation. It is often expressed as a data standard deviation, $s$, the square root of the mean squared error, $\sqrt{MSE}$\, or an estimated variance component from a mixed model.
+
+
+3) $\delta$\ - **Estimate of Precision**: This is also a fixed value, set by the researcher, representing the degree of precision to be expected from the experimental estimates or the desired effect size to detect. It might be derived, for example, from the half width of a confidence interval, the expected or observed difference between treatment estimates, or a relative value such as a percentage of the estimate.
+
+
+4) $\alpha$\ - **Significance Level**: The fixed level of significance for hypothesis testing, or conversely, (1- $\alpha$\), the level of confidence coefficient desired. As defined by R. A. Fisher, $\alpha$\ is the probability of falsely rejecting the null hypothesis of no treatment effects (Type I error or false positive).
+
+
+5) $\beta$\ - **Type II Error Rate**: Introduced into the statistical testing paradigm by statisticians Neyman and Pearson, $\beta$\ represents the probability of a false negative result. The converse probability, (1 – $\beta$\), is the statistical power or the probability of correctly identifying a true rejection of the null hypothesis. Unlike the other components above, $\beta$\ is entirely dependent on the hypothesis being proposed. That is, the statistical power of any experiment will change depending on the hypothesis being tested. In sample size estimation, (1 - $\beta$\) is specified by the researcher, while in power analysis, it is estimated from the other components and a fixed sample size.
+
+
+In summary, $\delta$\, $\alpha$\, and $\sigma$\ are quantities predetermined by the researcher through known data, subject matter expertise, and expected outcomes. The sample size, **n**, and statistical power, (1 - $\beta$\), are quantities to be estimated with the following restrictions: **n** can be estimated when $\beta$\ is specified, or conversely, (1 - $\beta$\) can be estimated if **n** is given.
+
+
+# Basic Sample Size and Power Estimation
+
+ The SAS procedure **Proc Power** is designed to handle many different types of sample size and power computations.  While this procedure can deal with more advanced designs such as ANOVA, linear regression and logistic regression, these techniques are now handled better through other procedures to be covered in following sections.  In this tutorial, **Proc Power** will be used to address two types of problems: Estimation related to a single mean or proportion, and estimation/comparison of two independent means or proportions.
+
+## Single means
+
+The *Power* procedure is called using standard SAS format with the **Proc Power** statement. In the example below for the case of a single mean, the statement **ONESAMPLEMEANS** is used with several options specifying the components outlined above.  The first is the *mean=* option, giving the value anticipated for the mean estimate.  The *nullmean=* option provides information relating to $\delta$\, the precision component.
+Several precision values can be specified at once in order to simultaneously generate several corresponding sample size or power estimates.  In the example below, the option is called with the mean value set to 20, which will be evaluated with several precision values: 5, 10, 15 and 20. Note, however, the precisions are specified as the mean + $\delta$\ in the *nullmean=* option, e.g. 25, 30, 35, and 40.  
+
+The variability component, $\sigma$\, is given with the *std=* option at a value of 5 and the desired statistical power, 1 – $\beta$\, is fixed to 0.95.  In this example, we are computing the estimated sample size, hence the option *ntotal=* is set to a missing value (a single period). This tells SAS that the sample size, *n*, is to be estimated. Alternatively, if we were computing estimated power, the *ntotal=* statement should be set to a predetermined value, while the *power=* option would be given a missing value, thereby informing SAS we want to estimate power. By default, $\alpha$\ is set to 0.05, but could be specified with an *alpha=* option.
+
+```{r Example1, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
+
+proc power;
+	ONESAMPLEMEANS 
+		mean=20
+		nullmean=25, 30, 35, 40
+		std=5
+		ntotal=.
+		power=.95;
+run;
+
+
+```
+
+The output shows that, at the highest level of precision, $\delta=5$\, it is estimated to take at least 16 observations to reach 95% statistical power, while a larger precision of $\delta=20$\ would require only 4 observations. The *Actual Power* is an estimate of (1 - $\beta$\) for each sample size. As a general rule, the smaller the desired precision is, the larger the sample size will need to be.
+
+## Single proportions
+
+Tests for proportions can be run in a similar manner using the **ONESAMPLEFREQ** statement and corresponding *proportion =* and *nullproportion=* options to specify the expected proportion and precision(s), respectively. 
+
+In the example below, we now want to estimate power given a sample size. It is possible here to specify several sample sizes. In addition, we also specify several precision values in the *nullproportion=* option using range notation, i.e. \<lower value\> *to* \<upper value\> *by* \<increment\>. This notation is a shorthand syntax so we don't have to type out each value separately. The expected proportion in this example is set to 0.31 or 12/39. The *sides=1* option specifies a one-sided hypothesis test. That is, we are only interested in values greater than 0.31.
+
+Because we are requesting multiple power estimates with all these settings, it is often easier to review the results graphically in a *Power Curve*. The *ODS* statement and code following **Proc Power** will set up this plot. 
+
+
+```{r Example2, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
+
+	proc power;
+		onesamplefreq
+		proportion=0.31
+		nullproportion = 0.01 to 0.3 by 0.01
+		ntotal = 20, 30, 50
+		sides=1
+		power=.;
+		ods output Output=power;
+	run;
+
+	proc sort data=power;
+		by nullproportion NTotal ;
+	run;
+
+	proc transpose data=power out=power;
+		var power;
+		id NTotal;
+		by nullproportion;
+	run;
+
+	data power;
+		set power;
+		delta = 12/39 - nullproportion;
+	run;
+
+	proc sgplot;
+		series x=delta y = _20/name='twenty' legendlabel="N=20";
+		series x=delta y = _30/ legendlabel="N=30";
+		series x=delta y = _50/ legendlabel="N=50";
+		refline 0.8 /axis=Y lineattrs=(pattern=shortdash color=black);
+		xaxis label='Detectable difference at 95% confidence' LABELATTRS=(Family=Arial Size=1 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+		yaxis label='Power' min=0 LABELATTRS=( Family=Arial Size=15 Weight=Bold) 				                          VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+	run;
+```
+
+As can be seen, the tabular output from all these options can be verbose. The *Power Curve* plot, however, summarizes things neatly. We can see that with a sample size of n=50, we reach 80% power with a precision of about $\delta=0.15$\, while similar power for n=20 will only give a precision of about $\delta=0.25$\.
+
+## Comparison of Two means or proportions
+
+As in the single estimate case, there are different statements for comparing two means or proportions: **TWOSAMPLEMEANS** and **TWOSAMPLEFREQ**, respectively.
+
+Options in these statements now provide information on pairs or groups. For the example below, the *groupmeans=* option specifies the means for two samples. They are separated by the vertical line character ” | “.  Here, one mean is set to 20, while the second mean is evaluated at four values: 25, 30, 35, and 40.  While this is similar to the one sample case above, we are now estimating the sample size for the difference of two means, rather than the sample size for estimating one mean at varying precision values.  That is, the sample size will be evaluated for four tests: 20 vs 25, 20 vs 30, 20 vs 35, and 20 vs 40.  The precision component, $\delta$\, in the two sample problem is now represented as the difference between the two estimated quantities (effect size).  Similar to the means, the variability must also now be specified for two groups using the *groupstds=* option.  In this case, they are set to 5 and 7.  The *test=diff_satt* tells SAS that the hypothesis to be tested is the difference of the two means and that the standard deviations of each group could be different. The sample size can be specified using either the *ntotal=* or *npergroup=* option.  The *power=* option is specified as before.
+
+```{r Example3, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
+
+proc power;
+	twosamplemeans 
+		groupmeans=20|25 30 35 40
+		groupstds=5|7
+		Test=DIFF_SATT
+		npergroup=.
+		power=.95;
+run;
+
+```
+
+The effect of precision can easily be seen here. For a high precision of $\delta = 5$, or $\mu_1 = 20$ and $\mu_2 = 25$, we need 40 observations per group, while a precision of $\delta = 20$ requires only 5 observations per group.
+
+# Advanced Sample Size and Power Estimation
+
+In this section, power and sample size issues are addressed for more sophisticated experimental designs and analyses.  The examples below will deal with situations involving analysis of variance, although the similar examples can typically be adapted to cases for linear and multiple regressions as well.
+
+## Evaluating Existing Data
+
+At times, we wish to examine the statistical power for an experiment that has already been carried out. In this first example, the randomized complete block (RCB) experimental design is considered using data previously shown in the Proc Mixed tutorial 
+[here](https://agstats.io/tutorials/sas-proc-mixed.html#42_Randomized_Complete_Block_(RCB)){target="_blank"}.  
+
+These data describe a variety (2 levels) and fertilizer (3 levels) study with 4 blocks measuring yield.  We will take the estimated means from this analysis:
+
+Variety | Fertilizer | Yield LSMean | 
+|---|---|---|---|
+VAR1 | 1 | 1.85871031 | 
+VAR1 | 2 | 3.12521718 | 
+VAR1 | 3 | 3.92756253 | 
+VAR2 | 1 | 0.86258303 | 
+VAR2 | 2 | 2.94528678 | 
+VAR2 | 3 | 3.17151761 | 
+
+as well as the estimated variance, $s^2 = 0.6077$ to compute power for this data under various sample size scenarios. Because of the factorial treatment design (2 varieties x 3 fertilizers), there will be multiple hypotheses to compute power for: Variety, Fertilizer, and the interaction Variety\*Fertilizer. In addition, we will add contrasts that compare specific levels of the significant effect, Fertilizer. The SAS procedure for these power calculations is *Proc GLMPower*.  This procedure is based on a fixed linear model, not a mixed linear model, however, it can still provide some information on sample sizes and power. Specific procedures for mixed model estimation are given in subsequent sections. 
+
+We begin the analysis by entering the estimated means into a data set. The GLMPower procedure is then called.
+
+The *Class*, *Model* and *Contrast* statements are similar to those that would be used in Proc Mixed.  The *Power* statement specifies necessary information for power calculations.  For example, the *stddev* is given as the square root of the residual variance: $\sqrt{0.6077} = 0.7795$.  There were originally 2x3 = 6 treatment combinations at 4 blocks each giving a total sample size of *ntotal = 24*.  The power is set to missing in order to solve for that component.  The probability of Type I error rate, $\alpha$, is assumed to be 0.05 and the precision, $\delta$, is determined from the means in the data set.  The plot statement produces a power plot of all the specified hypotheses. The statistical power is displayed on the Y axis and sample size, $n$, on the X axis.  The X axis has been specified to vary from $n = 24$ to $n = 275$.
+
+```{r Example4, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
+
+data yield_means;
+	input var$ fert yield;
+	cards;
+VAR1 1 1.8587103
+VAR1 2 3.1252172
+VAR1 3 3.9275625
+VAR2 1 0.8625830
+VAR2 2 2.9452868
+VAR2 3 .1715176
+;
+run;
+
+proc glmpower data=yield_means;
+      class var fert;
+      model yield = var fert var*fert;
+			contrast 'Fert 1 vs 3' fert 1 0 -1;
+			contrast 'Fert 2 vs 3' fert 0 1 -1;
+
+      power
+         stddev      = 0.7795
+         ntotal      = 24
+         power       = .;
+      plot x=n min=24 max=275;
+title1 'GLMPower Example';
+run;
+```		         
+
+The table indicates that there are limited powers for the Variety and Variety\*Fertilizer interaction hypotheses ($0.482$ and $0.131$, respectively).  The Fertilizer effect, however, has very high power $(0.999)$.  Comparison of Fertilizer means shows that there is high power for Fertilizer 1 vs Fertilizer 3 $(0.999)$ and limited power for Fertilizer 2 vs Fertilizer 3 $(0.239)$.
+
+Examining these hypotheses across sample sizes in the corresponding plot shows flat lines for the overall Fertilizer effect and the contrast of Fertilizer 1 vs Fertilizer 3 (top of the figure).  These hypotheses have very high power (ability to detect true differences) at all sample sizes.  The Variety effect (solid line) has low power at $n = 24  (0.482)$ and does not obtain reasonable power until $n ≥ 50$, that is, at least 8 blocks.  The last two hypotheses, the Variety\*Fertilizer interaction and the Fertilizer 2 vs Fertilizer 3 contrast, do not have good power with less than $n = 150$ or 26 blocks.  Hence, we can conclude that this experiment only had good power for large differences in the fertilizer effect and that very large sample sizes would have been required in order to detect other effects.
+
+## Mixed Models 
+
+In most experimental settings, it is often more appropriate to specify a mixed model possibly with a non-normal response in order to fully account for the underlying data structure. For example, while the normality and independence assumptions used in the RCB demonstration shown above were appropriate, the effect of blocks would be better represented as a random effect.  In such cases, another means of assessing statistical power is required.  The RCB example can be reanalyzed in a mixed model format using the following PROC GLIMMIX code:
+
+```
+	proc glimmix data=yield1;
+		class block var fert;
+		model yield = var fert var*fert/dist=normal;
+		random block;
+	run;
+```
+where, block is now assumed to be a random effect (for more information on generalized linear mixed models, please refer to the GLMMIX [tutorial](https://agstats.io/tutorials/sas-proc-glimmix.html){target="_blank"}.
+
+In this analysis, the estimates for the means and residual variance are the same as given above. We also have a variance component estimate for block of 0.5457. This information can then be used to estimate statistical power from a technique outlined by @Stroup1999 that utilizes the theoretical relationship between the F statistic, degrees of freedom, and a value called the non-centrality parameter (NC). The steps to do this are given below.
+
+The analysis means are put into a dataset as before with the addition of *Do loop* to create a block variable with values 1, 2, 3, and 4.  This essentially just repeats the means once for each block 4 times.
+
+*Proc Glimmix* is called as above with the addition of an option *noprofile*. Two additional statements are also present. The parms statement lists the values for the random effects (Blocks and the residual error, in that order).  The *hold=1,2* option requests that parameters 1 and 2 be held constant, telling SAS to just use these values and not to estimate them for the data.  The *ODS* statement outputs the test statistics to a data set “results” for further computations.  Those computations are listed in the data step that followsand involves the theoretical relationship between the F statistic, degrees of freedom, and the non-centrality parameter (NC) mentioned earlier. For the user, all that needs to be specified in this data step is the value for alpha. Lastly, the computed power data set is printed.
+
+```{r Example5, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
+
+data rcb_means;
+	input var$ fert yield;
+	do block = 1 to 4;
+		output;
+	end;
+	cards;
+VAR1 1 1.8587103   
+VAR1 2 3.1252172   
+VAR1 3 3.9275625   
+VAR2 1 0.8625830   
+VAR2 2 2.9452868   
+VAR2 3 3.1715176   
+run;
+
+proc glimmix data=rcb_means noprofile;
+	class block var fert;
+	model yield= var fert var*fert/dist=normal;
+	random block;
+	parms (0.5457) (0.6077)/hold=1,2;
+	ods output tests3=results;
+run;
+
+data power;
+	set results;
+	alpha = 0.05;
+	nc = numdf*fvalue;
+	fcrit = finv(1 - alpha, numdf, dendf, 0);
+	power = 1 - probf(fcrit, numdf, dendf, nc);
+run;
+
+proc print;
+run;
+
+```		         
+
+The power estimates are very similar to those seen previously, but differ slightly due to differences in the estimation procedure and the addition of a random effect for blocks.
+
+## Mixed Models with Non-normal Responses
+
+The real value of a procedure such as *Proc Glimmix*, however, is its ability to handle non-normal responses.  The following example is, again, a RCB design with two treatments (0 and 1) and 8 blocks. The response in this case, however, is binomial, measuring a positive or negative result.  Each treatment was recorded 100 times per block.  An analysis of variance assuming a generalized linear mixed model for a binomial response and a logit link function was carried out for these data and can be seen in the *Proc Glimmix* tutorial [here](https://agstats.io/tutorials/sas-proc-glimmix.html#41_Binomial_Data){target="_blank"}.
+
+As was shown above, we start by using the estimated means (inverse link values) and the random effects estimates for block and block\*treatment. The means are put into a dataset and this time, the number of blocks is allowed to range from 2 to 16. Within each block we fix the total number of binomial trials, N, in each treatment and block to 200 and compute an expected number of counts, Y, as this total x the estimated mean proportion. The subsequent power computation is then carried out and results are printed and plotted.
+
+```
+data intro_binomial;
+	input Treatment P;
+	N = 200;
+	Y = N*P;
+	do B = 2 to 16;
+	do block = 1 to B;
+		output;
+	end;
+	end;
+	cards;
+	0 0.9276
+	1 0.7807
+	;
+run;
+
+proc sort;
+	by B;
+
+proc glimmix data=intro_binomial noprofile;
+	class block Treatment;
+	model Y/N= Treatment;
+	random block block*Treatment;
+	parms (0.5201) (0.8335)/hold=1,2;
+	ods output tests3=results;
+	by B;
+run;
+```
+
+```{r Example6a, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=FALSE, engine.opts=sasopts, comment="", error=TRUE}
+
+data intro_binomial;
+	input Treatment P;
+	N = 200;
+	Y = N*P;
+	do B = 2 to 16;
+	do block = 1 to B;
+		output;
+	end;
+	end;
+	cards;
+	0 0.9276
+	1 0.7807
+	;
+run;
+
+proc sort;
+	by B;
+
+proc glimmix data=intro_binomial noprofile;
+	class block Treatment;
+	model Y/N= Treatment;
+	random block block*Treatment;
+	parms (0.5201) (0.8335)/hold=1,2;
+	ods output tests3=results;
+	by B;
+run;
+```
+
+```{r Example6b, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
+
+data power;
+	set results;
+	alpha = 0.05;
+	nc = numdf*fvalue;
+	fcrit = finv(1 - alpha, numdf, dendf, 0);
+	power = 1 - probf(fcrit, numdf, dendf, nc);
+run;
+
+proc print;
+run;
+
+proc sgplot;
+	scatter x=b y=power;
+	series x=b y=power;
+	refline .80/axis=y;
+	xaxis label='Number of blocks' LABELATTRS=(Family=Arial Size=13 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+	yaxis label='Power' min=0 LABELATTRS=(Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+run;
+	
+```
+
+This shows that the number of blocks needs to be 11 or more to reach a statistical power for the treatment effect of at least 0.80.  
+
+This technique can be useful when dealing with non-normal data, or situations where there are complex model and covariance structures. The user will, however, need to have some estimates or likely values for all means and variance components.
+
+
+# References:  
+  
+
+
+ 
+  
+
