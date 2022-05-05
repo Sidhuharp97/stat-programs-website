@@ -41,8 +41,7 @@ Package and function documentation can be very helpful. There are two main aspec
 
 You find function documentation via the R console: 
 
-
-```r
+```{r eval=FALSE}
 ?par  # does an exact search on "par"
 ??plot  # does a fuzzy match on "plot"
 ```
@@ -53,44 +52,19 @@ Sometimes, you will discover there are multiple options and possibly different h
 
 These are functions that act differently depending on the R object type they are called to interact with (e.g. `mean(some_dates)` will behave differently than `mean(some_numbers)`). Which leads to the next point: all R objects have a class assigned to them. You can check this with `class()`. 
 
-
-```r
+```{r}
 y <- rnorm(20); x <- y + rnorm(20) 
 m <- lm(y ~ x)
 class(y)
-```
-
-```
-## [1] "numeric"
-```
-
-```r
 class(m)
-```
-
-```
-## [1] "lm"
 ```
 
 Understanding this difference between functions will help you understand which documentation files will help you solve your problem.  
 
 More importantly, once you know the object class, you can search for methods that exist for that class. 
 
-
-```r
+```{r}
 methods(class = "lm")
-```
-
-```
-##  [1] add1           alias          anova          case.names     coerce        
-##  [6] confint        cooks.distance deviance       dfbeta         dfbetas       
-## [11] drop1          dummy.coef     effects        extractAIC     family        
-## [16] formula        hatvalues      influence      initialize     kappa         
-## [21] labels         logLik         model.frame    model.matrix   nobs          
-## [26] plot           predict        print          proj           qr            
-## [31] residuals      rstandard      rstudent       show           simulate      
-## [36] slotsFromS3    summary        variable.names vcov          
-## see '?methods' for accessing help and source code
 ```
 
 From this, we can see a special `plot()` option exists (that provides several diagnostic plots), functions for extracting residuals (`rstudent()`, `residuals()`), a version of `anova()` written for object type "lm", and much much more. 
@@ -105,7 +79,9 @@ It is telling us we are trying to subset (extract) information from a 'closure' 
 
 However, error messages can also be trying to tell you something important. Here's a recent experience of mine: 
 
-<img src="tweet_ignored_error.png" width="80%" />
+```{r, echo=FALSE, out.width="80%"}
+knitr::include_graphics('tweet_ignored_error.png')
+```
 
 Over time, these messages will become comprehensible. It's still the same messages, but your R knowledge will help you understand them. But, becoming fluent in R error messages implies *reading them and trying to understand them*. 
 
@@ -134,73 +110,20 @@ This is best for advanced users, but it can hep you resolve very specific questi
 ** How to find source code: **
 
 * Type the function name in the console without parentheses: 
-
-```r
+```{r}
 mean.default
 ```
 
-```
-## function (x, trim = 0, na.rm = FALSE, ...) 
-## {
-##     if (!is.numeric(x) && !is.complex(x) && !is.logical(x)) {
-##         warning("argument is not numeric or logical: returning NA")
-##         return(NA_real_)
-##     }
-##     if (na.rm) 
-##         x <- x[!is.na(x)]
-##     if (!is.numeric(trim) || length(trim) != 1L) 
-##         stop("'trim' must be numeric of length one")
-##     n <- length(x)
-##     if (trim > 0 && n) {
-##         if (is.complex(x)) 
-##             stop("trimmed means are not defined for complex data")
-##         if (anyNA(x)) 
-##             return(NA_real_)
-##         if (trim >= 0.5) 
-##             return(stats::median(x, na.rm = FALSE))
-##         lo <- floor(n * trim) + 1
-##         hi <- n + 1 - lo
-##         x <- sort.int(x, partial = unique(c(lo, hi)))[lo:hi]
-##     }
-##     .Internal(mean(x))
-## }
-## <bytecode: 0x7fa5749f17f8>
-## <environment: namespace:base>
-```
-
 * Sometimes this is not informative   
-
-```r
+```{r}
 c
-```
-
-```
-## function (...)  .Primitive("c")
-```
-
-```r
 subset
-```
-
-```
-## function (x, ...) 
-## UseMethod("subset")
-## <bytecode: 0x7fa573afcb48>
-## <environment: namespace:base>
-```
-
-```r
 `[`
-```
-
-```
-## .Primitive("[")
 ```
 
 * Use {the package {lookup} to find what you need
 
-
-```r
+```{r eval=FALSE}
 remotes::install_github("jimhester/lookup")
 lookup::lookup(`[`)
 ```
