@@ -26,9 +26,6 @@ social:
 - icon: github
   icon_pack: fab
   link: https://github.com/IdahoAgStats
-- icon: rss
-  icon_pack: fab
-  link: index.xml
 superuser: true
 title: Statistical Programs
 ---

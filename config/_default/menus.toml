@@ -29,16 +29,6 @@
   parent = "Events"
   url = "events/workshops"
   weight = 20
-  
-# [[main]]
-#   name = "Projects"
-#   url = "#projects"
-#   weight = 40
-
-# [[main]]
-#   name = "Publications"
-#   url = "#featured"
-#   weight = 50
 
 [[main]]
   name = "Tutorials"
@@ -50,6 +40,11 @@
   url = "#contact"
   weight = 70
   
+[[main]]
+  pre = "<i class='fa fa-rss'></i>"
+  url =  "index.xml"
+  target="_blank"
+  weight = 80
 
 # Link to a PDF of your resume/CV from the menu.
 # To enable, copy your resume/CV to `static/media/resume.pdf` and uncomment the lines below.
