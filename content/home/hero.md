@@ -3,7 +3,7 @@ widget: hero
 headless: true
 weight: 10
 title: Uidaho [[Agricultural]] Statistical Programs
-hero_media: old_hero.png
+hero_media: hero.png
 
 
 

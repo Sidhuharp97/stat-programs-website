@@ -1,0 +1,8 @@
+{{/* add rss capabilities */}}
+
+{{ range .AlternativeOutputFormats -}}
+    {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+{{ end -}}
+
+
+{{/* This partial is included in `themes/academic/layouts/partials/site_head.html`. */}}
