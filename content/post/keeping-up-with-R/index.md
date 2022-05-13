@@ -176,6 +176,7 @@ If you think that some package is missing from the list, please [email me](mailt
 [meteor]: https://CRAN.R-project.org/package=meteor
 [nlme]: https://CRAN.R-project.org/package=nlme
 [nlraa]: https://cran.r-project.org/package=nlraa
+[NutrienTrackeR]: https://CRAN.R-project.org/package=NutrienTrackeR
 [pedigreemm]: https://CRAN.R-project.org/package=pedigreemm
 [phenorice]: https://github.com/cropmodels/phenorice
 [phenoriceR]: https://github.com/lbusett/phenoriceR
