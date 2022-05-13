@@ -139,6 +139,7 @@ If you think that some package is missing from the list, please [email me](mailt
 [agroBioData]: https://github.com/OnofriAndreaPG/agriCensData
 [apsimx]: https://CRAN.R-project.org/package=apsimx 
 [aqp]: https://CRAN.R-project.org/package=aqp 
+[ASMap]: https://CRAN.R-project.org/package=ASMap
 [asremlPlus]: https://CRAN.R-project.org/package=asremlPlus 
 [bayesammi]: https://CRAN.R-project.org/package=bayesammi 
 [BGLR]: https://CRAN.R-project.org/package=BGLR
@@ -177,6 +178,7 @@ If you think that some package is missing from the list, please [email me](mailt
 [nlme]: https://CRAN.R-project.org/package=nlme
 [nlraa]: https://cran.r-project.org/package=nlraa
 [NutrienTrackeR]: https://CRAN.R-project.org/package=NutrienTrackeR
+[onemap]: https://CRAN.R-project.org/package=onemap
 [pedigreemm]: https://CRAN.R-project.org/package=pedigreemm
 [phenorice]: https://github.com/cropmodels/phenorice
 [phenoriceR]: https://github.com/lbusett/phenoriceR
