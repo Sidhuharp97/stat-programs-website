@@ -74,7 +74,7 @@ If you think that a package is missing from the list, please [open an issue](htt
   
 ### Animal science
 
-  [usdampr][] provides access to the USDA's Livestock Mandatory Reporting API. Many of the genetic packages described in this resource can also be applied to animal breeders.
+  [usdampr][] provides access to the USDA's Livestock Mandatory Reporting API. Many of the genetic packages described in this resource can also be applied to animal breeding and genetic applications.
     
 ### Breeding and genetics
 
