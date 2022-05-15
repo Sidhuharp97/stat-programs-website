@@ -19,9 +19,9 @@
   weight = 30
   
 [[main]]
-  name = "Talks"
+  name = "Presentations"
   parent = "Events"
-  url = "events/talks"
+  url = "events/presentations"
   weight = 10
   
 [[main]]
