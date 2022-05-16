@@ -90,7 +90,7 @@ If you think that a package is missing from the list, please [open an issue](htt
   
 #### General Genetic Prediction
   
-  Packages supporting genetic prediction from pedigree or genetic marker data include [sommer][], [rrBLUP][], [BGLR][], [lme4gs][], [lme4qtl][], [pedigreemm][], [qgtools][] and the licensed software [asreml](https://www.vsni.co.uk/software/asreml). Many of these packages have built-in functionality for data preparation steps including data imputation and calculation of the relationship matrices. [AGHmatrix][] provides extensive options for calculating pedigree and genomic (additive and dominance) relationship matrices and [statgenIBD][] can calculate IBD probabilities for biparental, three and four-way crosses. [breedR][] is a general purpose package for performing quantitative genetic analyses. For polyploids, [polyBreedR][] provides convenience functions to facilitate the use of genome-wide markers for breeding autotetraploid species, and its functionality also extends to diploids. 
+Packages supporting genetic prediction using mixed models augmented with pedigree or genetic marker data include [sommer][], [rrBLUP][], [BGLR][], [lme4gs][], [lme4qtl][], [pedigreemm][], [qgtools][], [cpgen][] and the licensed software [asreml](https://www.vsni.co.uk/software/asreml). Many of these packages have built-in functionality for data preparation steps including data imputation and calculation of the relationship matrices. [AGHmatrix][] provides extensive options for calculating pedigree and genomic (additive and dominance) relationship matrices and [statgenIBD][] can calculate IBD probabilities for biparental, three and four-way crosses. [breedR][] is a general purpose package for performing quantitative genetic analyses. For polyploids, [polyBreedR][] provides convenience functions to facilitate the use of genome-wide markers for breeding autotetraploid species, and its functionality also extends to diploids. 
   
 ### Crop Modelling
 
@@ -111,7 +111,7 @@ If you think that a package is missing from the list, please [open an issue](htt
 
 ### Plant pathology
 
-  [epifitter][] provides functions for analysis and visualization of plant disease progress curve data. [epiphy][] is a toolbox for analyzing plant disease epidemics. It provides a common framework for plant disease intensity data recorded over time and/or space. [hagis][] provides functions for analysis of plant pathogen pathotype survey data. Functions provided calculate distribution of susceptibilities, distribution of complexities with statistics, pathotype frequency distribution, as well as diversity indices for pathotypes. [poppr][] is for for genetic analysis of populations with mixed clonal/sexual reproductive strategies. Provides population genetic analysis tools for hierarchical analysis of partially clonal populations.
+  [epifitter][] provides functions for analysis and visualization of plant disease progress curve data. [epiphy][] is a toolbox for analyzing plant disease epidemics. It provides a common framework for plant disease intensity data recorded over time and/or space. [hagis][] provides functions for analysis of plant pathogen pathotype survey data. Functions provided calculate distribution of susceptibilities, distribution of complexities with statistics, pathotype frequency distribution, as well as diversity indices for pathotypes. Populatios with mixed clonal/sexual reproductive strategies can be analyzed with [poppr][], which has population genetic analysis tools for hierarchical analysis of partially clonal populations. [ascotraceR][] can simulate an Asochyta blight infection in a chickpea field following the model developed by Diggle et al ([2002](https://doi.org/10.1094%2FPHYTO.2002.92.10.1110)). 
   
 ### Rural Sociology
 
@@ -134,12 +134,14 @@ If you think that a package is missing from the list, please [open an issue](htt
 [agroBioData]: https://github.com/OnofriAndreaPG/agriCensData
 [apsimx]: https://CRAN.R-project.org/package=apsimx 
 [aqp]: https://CRAN.R-project.org/package=aqp 
+[ascoTraceR]: https://github.com/IhsanKhaliq/ascotraceR
 [ASMap]: https://CRAN.R-project.org/package=ASMap
 [asremlPlus]: https://CRAN.R-project.org/package=asremlPlus 
 [bayesammi]: https://CRAN.R-project.org/package=bayesammi 
 [BGLR]: https://CRAN.R-project.org/package=BGLR
 [breedR]: https://github.com/famuvie/breedR
 [cdlTools]:  https://CRAN.R-project.org/package=cdlTools
+[cpgen]: https://github.com/cheuerde/cpgen
 [CropScapeR]: https://CRAN.R-project.org/package=CropScapeR 
 [desplot]: https://CRAN.R-project.org/package=desplot 
 [diaQTL]: https://github.com/jendelman/diaQTL
