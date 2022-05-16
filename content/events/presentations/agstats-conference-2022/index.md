@@ -30,6 +30,8 @@ url_video: ""
 abstract: "The language ‘R’ has become quite popular for analysis among agriculture researchers. R is powerful and agile language that is constantly undergoing improvements. As an open-source language, its utility is constantly expanded upon by user-contributed packages and additional developer resources. These include whole software packages like Rstudio, as well as tutorials, and cheatsheets. Keeping up with changes and advancements in this dynamic ecosystem is difficult. We have sought to provide resources for R users in agricultural research. We have established a central website to gather all related information, www.agstats.io that includes workshops, tutorials and short instructional blog posts. We also have built an accompanying “R Universe” repository, https://idahoagstats.r-universe.dev intended to serve as a guide to existing R packages serving different facets of agricultural research. Our goal is to help agricultural researchers fully utilize the array of available R resources to reach their goals." 
 ---
 
+Poster presented at the [2022 Conference on Applied Statistics in Agriculture and Natural Resources](https://caas.usu.edu/agstats2022/) held in Logan, Utah. 
+
 This is a part of an effort to establish a CRAN task view for agricultural research. Feel free to contribute to this at our [GitHub repository](https://github.com/IdahoAgStats/ctv-agriculture). You can find a prose version of this poster [here](/post/keeping-up-with-r/). 
 
 
