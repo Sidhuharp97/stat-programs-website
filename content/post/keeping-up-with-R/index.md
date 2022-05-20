@@ -19,6 +19,8 @@ tags:
 - agriculture
 ---
 
+**This information is also available as [one-pager](/agstats_2022_poster.pdf).** 
+
  
 Finding the R packages that support your work can be challenging. Keeping up with the ongoing changes that occur in the R package ecosystem can be even harder. There are tools out there to ease this burden: 
   * [CRAN Task Views](https://cran.r-project.org/web/views/) These topic-specific resources are intended as a general guide to R packages relevant to a topic. They are not exhaustive lists of every possible package. There is not an agricultural CRAN task view....yet (hence this blog post). 
