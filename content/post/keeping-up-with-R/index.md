@@ -5,9 +5,9 @@ authors:
 categories: 
 - R
 draft: false
-date: "2022-05-13T00:00:00Z"
+date: "2022-05-20T00:00:00Z"
 image:
-  caption: "Map of Australia as R package hex stickers; image credit: [Michell O'Hara](https://www.mitchelloharawild.com/blog/user-2018-feature-wall/)"
+  caption: "Map of Australia as R package hex stickers; image credit: [Michell O'Hara-Wild](https://www.mitchelloharawild.com/blog/user-2018-feature-wall/)"
   focal_point: ""
 lastMod: "2022-05-13T00:00:00Z"
 projects: 
@@ -24,11 +24,11 @@ Finding the R packages that support your work can be challenging. Keeping up wit
   * [R Open Science](https://ropensci.org/) is running a new tool, [R Universe](https://r-universe.dev/search/) to provide organization-specific resources for package discovery and exploration. Idaho Ag Stats is running an [ag stats universe](https://idahoagstats.r-universe.dev/ui#packages) for the packages described in this post. 
   * [R weekly](https://rweekly.org/) provides weekly curated summaries by rotating curators on major developments in R. They have an RSS feed, too! 
 
-Below is a compiled list of know R resources supporting agricultural research. Agriculture encompasses a broad breadth of disciplines. Many, many package in base R and contributed packages are useful to agricultural researchers. For that reason, this is not exhaustive list. It is intended to cover major packages that in most cases, have been developed to support agricultural research and analytical needs. 
+Below is a list of known R resources supporting agricultural research. Agriculture encompasses a broad breadth of disciplines. Many, many package in base R and contributed packages are useful to agricultural researchers. For that reason, this is not an exhaustive list. It is intended to cover major packages that in most cases, have been developed to support agricultural research and analytical needs. 
 
 Note that some of these packages are on CRAN and others are on GitHub, Bioconductor, or R-forge. 
 
-If you think that a package is missing from the list, please [open an issue](https://github.com/IdahoAgStats/ctv-agriculture/issues) on the GitHub repo for this topic.  
+If you think that a package is missing from the list, please [open an issue](https://github.com/IdahoAgStats/ctv-agriculture/issues) on the GitHub repo for this topic. This is a community-sourced project, and participation from the agricultural research community (and adjacent folks) is welcomed. 
 
 ## Core Packages with general applications
 
@@ -76,9 +76,11 @@ If you think that a package is missing from the list, please [open an issue](htt
 
   [usdampr][] provides access to the USDA's Livestock Mandatory Reporting API. Many of the genetic packages described in this resource can also be applied to animal breeding and genetic applications.
     
-### Breeding and genetics
+### Breeding and quantitative genetics 
 
-  See the [Phylogenetics CRAN task view](https://cran.r-project.org/web/views/Phylogenetics.html) describing R packages for taxonomy, community ecology (including microbiome work) and of course, phylogenetics. In addition, the R package repository [Bionconductor](https://www.bioconductor.org/) provides bioinformatics tools for the processing of high-throughput genomic data. [lmDiallel] provides service functions for analysing data sets obtained from diallel experiments, as described in [Onofri 2020](https://doi.org/10.1007%2Fs00122-020-03716-8). [plantbreeding][] (available on R-forge: `install.packages("plantbreeding", repos="http://R-Forge.R-project.org")`) provides many convenience functions for working with populations and designs common in plant breeding including dialleles, line testers, augmented trials, the Carolina design, and more. [st4gi][] provides several general functions for genetic improvement of crops. 
+  For genetics-related packages outside this scope, see the [Phylogenetics CRAN task view](https://cran.r-project.org/web/views/Phylogenetics.html) describing R packages for taxonomy, community ecology (including microbiome work) and of course, phylogenetics. In addition, the R package repository [Bionconductor](https://www.bioconductor.org/) provides bioinformatics tools for the processing of high-throughput genomic data. [lmDiallel] provides service functions for analysing data sets obtained from diallel experiments, as described in [Onofri 2020](https://doi.org/10.1007%2Fs00122-020-03716-8). 
+  
+  [plantbreeding][] (available on R-forge: `install.packages("plantbreeding", repos="http://R-Forge.R-project.org")`) provides many convenience functions for working with populations and designs common in plant breeding including dialleles, line testers, augmented trials, the Carolina design, and more. [st4gi][] provides several general functions for genetic improvement of crops. 
   
 #### Linkage mapping & QTL analysis
   
@@ -86,13 +88,14 @@ If you think that a package is missing from the list, please [open an issue](htt
   
 #### GWAS
   
-  Genome-wide association study analysis can be conducted with [statgenGWAS][]. GWAS models across very large number of SNPs or observations can be estimated with [rMVP][] and [megaLMM][]. Functions for autotetraploids are provided by [GWASpoly][], and these functions also work in diploid species. [StageWise][] provides functions to conduct a 2-stage GWAS when the underlying phenotypic data are from multiple field trials. 
+  Genome-wide association study analysis can be conducted with [statgenGWAS][]. GWAS models across very large number of SNPs or observations can be estimated with [rMVP][] and [megaLMM][]. Functions for autotetraploids are provided by [GWASpoly][], and these functions also work in diploid species. [StageWise][] provides functions to conduct a 2-stage GWAS when the underlying phenotypic data are from multiple field trials. Variable selection for ultr-large dimensional GWAS data sets can be done with [bravo][], which implements a Bayesian algorith, selection
+of variables with embedded screening [SVEN](https://arxiv.org/abs/2006.07561). 
   
-#### General Genetic Prediction
+#### Genomic Prediction
   
 Packages supporting genetic prediction using mixed models augmented with pedigree or genetic marker data include [sommer][], [rrBLUP][], [BGLR][], [lme4gs][], [lme4qtl][], [pedigreemm][], [qgtools][], [cpgen][] and the licensed software [asreml](https://www.vsni.co.uk/software/asreml). Many of these packages have built-in functionality for data preparation steps including data imputation and calculation of the relationship matrices. [AGHmatrix][] provides extensive options for calculating pedigree and genomic (additive and dominance) relationship matrices and [statgenIBD][] can calculate IBD probabilities for biparental, three and four-way crosses. [breedR][] is a general purpose package for performing quantitative genetic analyses. For polyploids, [polyBreedR][] provides convenience functions to facilitate the use of genome-wide markers for breeding autotetraploid species, and its functionality also extends to diploids. 
   
-### Crop Modelling
+### Crop Modelling 
 
   The [apsimx][] package has functions to read, inspect, edit and run files for APSIM "Next Generation" (json) and APSIM "Classic" (xml). Files with an `.apsim` extension correspond to APSIM Classic, the files with an `.apsimx` extension correspond to APSIM Next Generation. [rapsimng][] works with Next Generation APSIM files. [DSSAT][] provides a comprehensive R interface to the Decision Support System for Agrotechnology Transfer Cropping Systems model (DSSAT-CSM) documented by [Jones et al (2003)](https://doi.org/10.1016/S1161-0301(02)00107-7). This package provides cross-platform functions to read and write input files, run DSSAT-CSM, and read output files.
   
@@ -139,6 +142,7 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
 [asremlPlus]: https://CRAN.R-project.org/package=asremlPlus 
 [bayesammi]: https://CRAN.R-project.org/package=bayesammi 
 [BGLR]: https://CRAN.R-project.org/package=BGLR
+[bravo]: https://CRAN.R-project.org/package=bravo
 [breedR]: https://github.com/famuvie/breedR
 [cdlTools]:  https://CRAN.R-project.org/package=cdlTools
 [cpgen]: https://github.com/cheuerde/cpgen
