@@ -5,17 +5,18 @@ authors:
 categories: 
 - R
 draft: false
-date: "2022-05-20T00:00:00Z"
+date: "2022-05-13T00:00:00Z"
 image:
-  caption: "Map of Australia as R package hex stickers; image credit: [Michell O'Hara-Wild](https://www.mitchelloharawild.com/blog/user-2018-feature-wall/)"
+  caption: "Map of Australia as R package hex stickers; image credit: [Mitchell O'Hara-Wild](https://www.mitchelloharawild.com/blog/user-2018-feature-wall/)"
   focal_point: ""
-lastMod: "2022-05-13T00:00:00Z"
+lastMod: "2022-05-20T00:00:00Z"
 projects: 
 subtitle: Finding the R packages that support your research
 summary: 
 tags: 
 - R
 - CRAN
+- agriculture
 ---
 
  
@@ -38,9 +39,9 @@ If you think that a package is missing from the list, please [open an issue](htt
   
   [FAOSTAT][] and [faobulk][] can be used to access data from the [FAOSTAT Database](https://www.fao.org/faostat/en/#home) of the Food and Agricultural Organization (FAO) of the United Nations. 
   
-  [FedData][] provides access to geospatial data from The Soil Survey Geographic ([SSURGO](https://www.nrcs.usda.gov/wps/portal/nrcs/detail/soils/survey/?cid=nrcs142p2_053627)) database, the Global Historical Climatology Network ([GHCN](https://www.ncei.noaa.gov/products/land-based-station/global-historical-climatology-network-daily)), the Daymet gridded estimates of daily weather parameters for North America, the [International Tree Ring Data Bank](https://catalog.data.gov/dataset/international-tree-ring-data-bank-itrdb), and the [National Land Cover Database](https://www.usgs.gov/centers/eros/science/national-land-cover-database#overview). The NOAA database API can be acccessed with [rnoaa][].
+  [FedData][] provides access to geospatial data from The Soil Survey Geographic ([SSURGO](https://www.nrcs.usda.gov/wps/portal/nrcs/detail/soils/survey/?cid=nrcs142p2_053627)) database, the Global Historical Climatology Network ([GHCN](https://www.ncei.noaa.gov/products/land-based-station/global-historical-climatology-network-daily)), the Daymet gridded estimates of daily weather parameters for North America, the [International Tree Ring Data Bank](https://catalog.data.gov/dataset/international-tree-ring-data-bank-itrdb), and the [National Land Cover Database](https://www.usgs.gov/centers/eros/science/national-land-cover-database#overview). The NOAA database API can be accessed with [rnoaa][].
   
-### Data sets
+### Agricultural data sets
   
   [Agridat][] consists of a very large collection of agricultural data sets and example analyses; the package contains a vignette detailing additional data sets and extensive resources to support agricultural analysis. [agriTutorial][] provides a collection of agricultural data sets and analysis with particular attention to crop experiments. On GitHub, the repository [agroBioData][] houses a collection of data sets supporting agriculture and applied biology (note that this is a collection of CSV files, not a package). The [soybean nested associated mapping population data set](https://pubmed.ncbi.nlm.nih.gov/28724064/) can be accessed via [SoyNAM][].  [simplePhenotypes][] can be used for simulating pleiotropic, linked and epistatic phenotypes. USGS county data on fertilizer sales can be explored with [ggfertilizer][]. The FAOSTAT data set collection on the Food and Agriculture Biomass Input–Output model (FABIO) is available through [fabio][] and described more in detail in [Bruckner 2019](https://pubs.acs.org/doi/10.1021/acs.est.9b03554). The R-forge subversion repository ['cropcc'](https://r-forge.r-project.org/scm/viewvc.php/pkg/?root=cropcc) hosts several R packages with climate change/cropping data set. Additionally, many  of the agriculture-focused packages listed in this guide also include data sets to illustrate their functionality (e.g. [BGLR][], [agricolae][], [FW][]).
  
@@ -62,11 +63,7 @@ If you think that a package is missing from the list, please [open an issue](htt
   
 #### General analysis
   
-  The package [agricolae][] contains functions for analyzing many common designs in agriculture trials such as split plot, lattice, Latin square and some additional functions such AMMI and AUDPC calculations. [statgenSTA][] has functions for single trial analysis with and without spatial components. The proprietary software [asreml](https://www.vsni.co.uk/software/asreml) provides an R version of their mixed model fitting functions for field trial analysis (note this is not open source and also requires an annual license). CRAN also contains an add-on package [asremlPlus][] that provides several accessory functions to asreml. [INLA][] provides tools for Bayesian inference of latent Gaussian models. It was developed specifically for agriculture and contains functions for modelling spatial variation in field experiments. [SpATS][] can be used to adjust for field spatial variation using [p-splines](http://dx.doi.org/10.1002/bimj.202100212). 
-  
-#### Genotype-by-environment interactions
-  
-  [statgenGxE][] has several functions for handling various analytical approaches for addressing genotype-by-environment interactions. [IBCF.MTME][] implements item-based collaborative filtering for multi-trait and multi-environment trials following [Montesinos-López 2018](https://pubmed.ncbi.nlm.nih.gov/29097376/). The package [gge][] is useful for producing GGE biplots, while [bayesammi][] can conduct Bayesian estimation of additive main effects multiplicative interaction model. [EnvRtype][] can be used for assembling climate data, data set preparation and environmental classification. [FW][] implements Finlay-Wilkinson regression using a Gibbs sampler. 
+  The package [agricolae][] contains functions for analyzing many common designs in agriculture trials such as split plot, lattice, Latin square and some additional functions such AMMI and AUDPC calculations. [statgenSTA][] has functions for single trial analysis with and without spatial components. The proprietary software [asreml](https://www.vsni.co.uk/software/asreml) provides an R version of their mixed model fitting functions for field trial analysis (note this is not open source and also requires an annual paid license). CRAN also contains an add-on package [asremlPlus][] that provides several accessory functions to asreml. [INLA][] provides tools for Bayesian inference of latent Gaussian models. It was developed specifically for agriculture and contains functions for modelling spatial variation in field experiments. [SpATS][] can be used to adjust for field spatial variation using [p-splines](http://dx.doi.org/10.1002/bimj.202100212). 
   
 #### High throughput phenotyping (HTP)
   
@@ -78,18 +75,17 @@ If you think that a package is missing from the list, please [open an issue](htt
     
 ### Breeding and quantitative genetics 
 
-  For genetics-related packages outside this scope, see the [Phylogenetics CRAN task view](https://cran.r-project.org/web/views/Phylogenetics.html) describing R packages for taxonomy, community ecology (including microbiome work) and of course, phylogenetics. In addition, the R package repository [Bionconductor](https://www.bioconductor.org/) provides bioinformatics tools for the processing of high-throughput genomic data. [lmDiallel] provides service functions for analysing data sets obtained from diallel experiments, as described in [Onofri 2020](https://doi.org/10.1007%2Fs00122-020-03716-8). 
+  For genetics-related packages outside this scope, see the [Phylogenetics CRAN task view](https://cran.r-project.org/web/views/Phylogenetics.html) describing R packages for taxonomy, community ecology (including microbiome work) and of course, phylogenetics. In addition, the R package repository [Bionconductor](https://www.bioconductor.org/) provides bioinformatics tools for the processing of high-throughput genomic data. [lmDiallel][] provides service functions for analysing data sets obtained from diallel experiments, as described in [Onofri (2020)](https://doi.org/10.1007%2Fs00122-020-03716-8). 
   
   [plantbreeding][] (available on R-forge: `install.packages("plantbreeding", repos="http://R-Forge.R-project.org")`) provides many convenience functions for working with populations and designs common in plant breeding including dialleles, line testers, augmented trials, the Carolina design, and more. [st4gi][] provides several general functions for genetic improvement of crops. 
   
 #### Linkage mapping & QTL analysis
   
-  There are two notable and long-standing packages: (1) [onemap][], providing MapMaker/EXP like performance and extended functionality, and (2) [qtl][] providing standard functionality for qtl mapping and  accessory functions for simulating crosses. [ASMap][] is for fast linkage mapping with the algorithm 'MSTmap'. [MapRtools][] is provides miscellaneous functions for linkage mapping and exploration. A existing linkage map can be visualized with [LinkageMapView][]. For polyploids, the packages [mappoly][] and [polymapR][] can be used for linkage mapping and the packages [qtlpoly][] and [polyqtlR][] can be used for qtl estimation. [diaQTL][] is for QTL and haplotype analysis of diallel populations (diploid and autotetraploid). [statgenMPP][] can conduct QTL mapping in multi-parent populations.  
+  There are two notable and long-standing packages: (1) [onemap][], providing MapMaker/EXP like performance and extended functionality, and (2) [qtl][] providing standard functionality for qtl mapping and accessory functions for simulating crosses. [ASMap][] is for fast linkage mapping with the algorithm 'MSTmap'. [MapRtools][] is provides miscellaneous functions for linkage mapping and exploration. A existing linkage map can be visualized with [LinkageMapView][]. For polyploids, the packages [mappoly][] and [polymapR][] can be used for linkage mapping and the packages [qtlpoly][] and [polyqtlR][] can be used for qtl estimation. [diaQTL][] is for QTL and haplotype analysis of diallel populations (diploid and autotetraploid). [statgenMPP][] can conduct QTL mapping in multi-parent populations.  
   
 #### GWAS
   
-  Genome-wide association study analysis can be conducted with [statgenGWAS][]. GWAS models across very large number of SNPs or observations can be estimated with [rMVP][] and [megaLMM][]. Functions for autotetraploids are provided by [GWASpoly][], and these functions also work in diploid species. [StageWise][] provides functions to conduct a 2-stage GWAS when the underlying phenotypic data are from multiple field trials. Variable selection for ultr-large dimensional GWAS data sets can be done with [bravo][], which implements a Bayesian algorith, selection
-of variables with embedded screening [SVEN](https://arxiv.org/abs/2006.07561). 
+  Analysis of genome-wide association studies (GWAS) can be conducted with [statgenGWAS][]. GWAS models for very large number of SNPs or observations can be estimated with [rMVP][] and [megaLMM][], respectively. GWAS functionality for autotetraploids are provided by [GWASpoly][], and these functions also work in diploid species. [StageWise][] provides functions to conduct a 2-stage GWAS when the underlying phenotypic data are from multiple field trials. Variable selection for ultra-large dimensional GWAS data sets can be done with [bravo][], which implements a Bayesian algorithm, selection of variables with embedded screening,  [SVEN](https://arxiv.org/abs/2006.07561). 
   
 #### Genomic Prediction
   
@@ -97,7 +93,7 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
   
 ### Crop Modelling 
 
-  The [apsimx][] package has functions to read, inspect, edit and run files for APSIM "Next Generation" (json) and APSIM "Classic" (xml). Files with an `.apsim` extension correspond to APSIM Classic, the files with an `.apsimx` extension correspond to APSIM Next Generation. [rapsimng][] works with Next Generation APSIM files. [DSSAT][] provides a comprehensive R interface to the Decision Support System for Agrotechnology Transfer Cropping Systems model (DSSAT-CSM) documented by [Jones et al (2003)](https://doi.org/10.1016/S1161-0301(02)00107-7). This package provides cross-platform functions to read and write input files, run DSSAT-CSM, and read output files.
+  The [apsimx][] package has functions to read, inspect, edit and run files for APSIM "Next Generation" (json) and APSIM "Classic" (xml). Files with an `.apsim` extension correspond to APSIM Classic, the files with an `.apsimx` extension correspond to APSIM Next Generation. [rapsimng][] works with Next Generation APSIM files. [DSSAT][] provides a comprehensive R interface to the Decision Support System for Agrotechnology Transfer Cropping Systems model (DSSAT-CSM) documented by [Jones (2003)](https://doi.org/10.1016/S1161-0301(02)00107-7). This package provides cross-platform functions to read and write input files, run DSSAT-CSM, and read output files.
   
   [Meteor][] provides a set of functions for weather and climate data manipulation to support crop and crop disease modeling.
   
@@ -106,25 +102,29 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
 
 ### Entomology
 
-  [hnp][] Generates half-normal plots with simulation envelopes using different diagnostics from a range of different fitted models. A few example datasets are included. The package [agriCensData][] provides functions for dealing with censored data. In addition, the [survival CRAN Task View](https://cran.microsoft.com/snapshot/2022-03-27/web/views/Survival.html) list CRAN resources for working with censored data. 
+  [hnp][] Generates half-normal plots with simulation envelopes using different diagnostics from a range of different fitted models. A few example data sets are included. The package [agriCensData][] provides functions for dealing with censored data. In addition, the [survival CRAN Task View](https://cran.microsoft.com/snapshot/2022-03-27/web/views/Survival.html) list CRAN resources for working with censored data. 
     
 ### Food science
 
   For packages supporting sensory studies, see the [Psychometrics CRAN task view](https://cran.r-project.org/web/views/Psychometrics.html). [NutrienTrackeR][] provides convenience functions for calculating nutrient content (macronutrients and micronutrients) of foods using food composition data from several reference databases, including: 'USDA' (United States), 'CIQUAL' (France), 'BEDCA' (Spain) and 'CNF' (Canada). 
+  
+### Genotype-by-environment interactions
+  
+  [statgenGxE][] has several functions for handling various analytical approaches for addressing genotype-by-environment interactions. [IBCF.MTME][] implements item-based collaborative filtering for multi-trait and multi-environment trials following [Montesinos-López 2018](https://pubmed.ncbi.nlm.nih.gov/29097376/). The package [gge][] is useful for producing GGE biplots, while [bayesammi][] can conduct Bayesian estimation of additive main effects multiplicative interaction model. [EnvRtype][] can be used for assembling climate data, data set preparation and environmental classification. [FW][] implements Finlay-Wilkinson regression using a Gibbs sampler. 
 
 ### Plant pathology
 
-  [epifitter][] provides functions for analysis and visualization of plant disease progress curve data. [epiphy][] is a toolbox for analyzing plant disease epidemics. It provides a common framework for plant disease intensity data recorded over time and/or space. [hagis][] provides functions for analysis of plant pathogen pathotype survey data. Functions provided calculate distribution of susceptibilities, distribution of complexities with statistics, pathotype frequency distribution, as well as diversity indices for pathotypes. Populatios with mixed clonal/sexual reproductive strategies can be analyzed with [poppr][], which has population genetic analysis tools for hierarchical analysis of partially clonal populations. [ascotraceR][] can simulate an Asochyta blight infection in a chickpea field following the model developed by Diggle et al ([2002](https://doi.org/10.1094%2FPHYTO.2002.92.10.1110)). 
+  [epifitter][] provides functions for analysis and visualization of plant disease progress curve data. [epiphy][] is a toolbox for analyzing plant disease epidemics. It provides a common framework for plant disease intensity data recorded over time and/or space. [hagis][] provides functions for analysis of plant pathogen pathotype survey data. Functions provided calculate distribution of susceptibilities, distribution of complexities with statistics, pathotype frequency distribution, as well as diversity indices for pathotypes. Populatios with mixed clonal/sexual reproductive strategies can be analyzed with [poppr][], which has population genetic analysis tools for hierarchical analysis of partially clonal populations. [ascotraceR][] can simulate an Asochyta blight infection in a chickpea field following the model developed by [Diggle (2022)](https://doi.org/10.1094%2FPHYTO.2002.92.10.1110)). 
   
-### Rural Sociology
+### Rural sociology
 
   See the CRAN task view for [Psychometrics](https://cran.r-project.org/web/views/Psychometrics.html) and [SocialScience](https://cran.r-project.org/web/views/SocialSciences.html). Both the ['Survival' CRAN task view](https://cran.microsoft.com/snapshot/2022-03-27/web/views/Survival.html) and the [agriCensData][] package provide tools for working with interval and censored data. 
 
-### Soil Science
+### Soil science
   
   [sharpshootR][] contains a compendium of utility functions supporting soils survey work including data management, summary, visualizations and conversions.For soil pedology, [aqp](https://github.com/ncss-tech/aqp/) provides a general toolkit for soil scientists: specialized data structures, soil profile summary, visualization, color conversion, and more. Most USDA-NRCS soils related databases and APIs can be accessed with [soilDB](https://github.com/ncss-tech/soilDB/). [SoilTaxonomy][] provides functions for parsing soil taxonomic terms. The ["Spatial"](https://CRAN.R-project.org/view=Spatial) and ["Spatio-Temporal"](https://CRAN.R-project.org/view=SpatioTemporal) CRAN task views provide extensive resources in spatial statistics. [fertplan][] provides fertilizer recommendations based on soil test results (note this packages is optimized for horticultural crop production in Italy).
 
-### Weed Science
+### Weed science
 
   The package [drc][] offers versatile model fitting and after-fitting functions for dose-response curves. [PROSPER][] is a package for simulating weed population dynamics at the individual and population level under a range of conditions including herbicide resistance and herbicide pressure. For ecological studies and analytical applications, the [CRAN task view for Environmetrics](https://cran.r-project.org/web/views/Environmetrics.html) provides a list of existing R resources in this topic. 
 
