@@ -1,0 +1,71 @@
+---
+title: "ggplot Function Example"
+author: "J. Piaskowski"
+date: "`r format(Sys.Date(), '%b %m, %Y')`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Simulate Data
+
+```{r}
+mydata <- expand.grid(1:3, 1:3)
+colnames(mydata) <- c("row", "range")
+mydata$myvar <- rnorm(9)
+mydata$plot <- LETTERS[1:nrow(mydata)]
+
+mydata
+```
+
+
+### Example plots illustrating `geom_tile` options
+
+```{r message=FALSE, warning=FALSE}
+library(ggplot2)
+```
+
+Plot of the layout with some color added and each rectangle labelled: 
+```{r}
+ggplot(mydata, aes(x = row, y = range)) +
+  geom_tile(fill = "khaki", color = "green4", lwd = 2) +
+  geom_text(aes(label =plot)) + 
+  theme_minimal()
+```
+
+Chloropleth plot for "myvar" (a random variable in this example): 
+```{r}
+ggplot(mydata, aes(x = row, y = range)) +
+  geom_tile(aes(fill = myvar), color = "white", lwd = 1.5) +
+  theme_minimal(base_size = 14)
+
+```
+
+
+### Example Function
+
+```{r}
+# df is the data.frame with these variables
+# X can be row or range
+# Y can be row or range (make it different from X)
+# fill_var is the variable used for generating the chloropleth
+
+gg_chloro_func <- function(df, X, Y, fill_var) {
+  X <- enquo(X)
+  Y <- enquo(Y)
+  fill_var <- enquo(fill_var)
+  
+  ggplot(df, aes(x = !!X, y = !!Y)) +
+  geom_tile(aes(fill = !!fill_var), color = "white") +
+  labs(title = expr(df), subtitle = substitute(fill_var)) +
+  theme_minimal()
+}
+```
+
+
+```{r}
+gg_chloro_func(mydata, row, range, myvar)
+```
+
