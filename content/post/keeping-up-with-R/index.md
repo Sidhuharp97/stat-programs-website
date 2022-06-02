@@ -9,7 +9,7 @@ date: "2022-05-13T00:00:00Z"
 image:
   caption: "Map of Australia as R package hex stickers; image credit: [Mitchell O'Hara-Wild](https://www.mitchelloharawild.com/blog/user-2018-feature-wall/)"
   focal_point: ""
-lastMod: "2022-05-20T00:00:00Z"
+lastMod: "2022-06-02T00:00:00Z"
 projects: 
 subtitle: Finding the R packages that support your research
 summary: 
@@ -41,7 +41,7 @@ If you think that a package is missing from the list, please [open an issue](htt
   
   [FAOSTAT][] and [faobulk][] can be used to access data from the [FAOSTAT Database](https://www.fao.org/faostat/en/#home) of the Food and Agricultural Organization (FAO) of the United Nations. 
   
-  [FedData][] provides access to geospatial data from The Soil Survey Geographic ([SSURGO](https://www.nrcs.usda.gov/wps/portal/nrcs/detail/soils/survey/?cid=nrcs142p2_053627)) database, the Global Historical Climatology Network ([GHCN](https://www.ncei.noaa.gov/products/land-based-station/global-historical-climatology-network-daily)), the Daymet gridded estimates of daily weather parameters for North America, the [International Tree Ring Data Bank](https://catalog.data.gov/dataset/international-tree-ring-data-bank-itrdb), and the [National Land Cover Database](https://www.usgs.gov/centers/eros/science/national-land-cover-database#overview). The NOAA database API can be accessed with [rnoaa][].
+  [FedData][] provides access to geospatial data from The Soil Survey Geographic ([SSURGO](https://www.nrcs.usda.gov/wps/portal/nrcs/detail/soils/survey/?cid=nrcs142p2_053627)) database, the Global Historical Climatology Network ([GHCN](https://www.ncei.noaa.gov/products/land-based-station/global-historical-climatology-network-daily)), the Daymet gridded estimates of daily weather parameters for North America, the [International Tree Ring Data Bank](https://catalog.data.gov/dataset/international-tree-ring-data-bank-itrdb), and the [National Land Cover Database](https://www.usgs.gov/centers/eros/science/national-land-cover-database#overview). SSURGO data can also be accessed and processed with [XPolaris][]. 
   
 ### Agricultural data sets
   
@@ -49,7 +49,9 @@ If you think that a package is missing from the list, please [open an issue](htt
  
 ### General analytical packages supporting agricultural research
   
-  The package [nlraa][] provides nonlinear regression fucntions specifically for agricultural applications. [agriCensData][] is a flexible package for working with censored data (e.g. time to flowering, instrumentation values below the detection limit, disease scoring). The R suite of linear and non-linear modelling packages, [nlme][], [lme4][], and [MCMCglmm][] are useful for analysing a wide array of studies. The accessory package [emmeans][] works with those packages (and more) to calculated the estimated marginal means for the independent variables. The CRAN task view on [MissingData](https://cran.r-project.org/web/views/MissingData.html) is helpful for understanding how to impute for missing data. See the [Meta-analysis CRAN task view](https://cran.r-project.org/web/views/MetaAnalysis.html) for packages supporting meta-analyses.   
+  The package [nlraa][] provides nonlinear regression functions specifically for agricultural applications. [agriCensData][] is a flexible package for working with censored data (e.g. time to flowering, instrumentation values below the detection limit, disease scoring). [ALUES][] implements methodology developed by the FAO and the International Rice Research Institute for evaluating land suitability for different crop production. 
+  
+  Additionally, The R suite of linear and non-linear modelling packages, [nlme][], [lme4][], and [MCMCglmm][] are useful for analysing a wide array of studies. The accessory package [emmeans][] works with those packages (and more) to calculated the estimated marginal means for the independent variables. The CRAN task view on [MissingData](https://cran.r-project.org/web/views/MissingData.html) is helpful for understanding how to impute for missing data. See the [Meta-analysis CRAN task view](https://cran.r-project.org/web/views/MetaAnalysis.html) for packages supporting meta-analyses.   
 
 ## Discipline-specific packages
 
@@ -65,7 +67,8 @@ If you think that a package is missing from the list, please [open an issue](htt
   
 #### General analysis
   
-  The package [agricolae][] contains functions for analyzing many common designs in agriculture trials such as split plot, lattice, Latin square and some additional functions such AMMI and AUDPC calculations. [statgenSTA][] has functions for single trial analysis with and without spatial components. The proprietary software [asreml](https://www.vsni.co.uk/software/asreml) provides an R version of their mixed model fitting functions for field trial analysis (note this is not open source and also requires an annual paid license). CRAN also contains an add-on package [asremlPlus][] that provides several accessory functions to asreml. [INLA][] provides tools for Bayesian inference of latent Gaussian models. It was developed specifically for agriculture and contains functions for modelling spatial variation in field experiments. [SpATS][] can be used to adjust for field spatial variation using [p-splines](http://dx.doi.org/10.1002/bimj.202100212). 
+  The package [agricolae][] contains functions for analyzing many common designs in agriculture trials such as split plot, lattice, Latin square and some additional functions such AMMI and AUDPC calculations. [statgenSTA][] has functions for single trial analysis with and without spatial components. The proprietary software [asreml](https://www.vsni.co.uk/software/asreml) provides an R version of their mixed model fitting functions for field trial analysis (note this is not open source and also requires an annual paid license). CRAN also contains an add-on package [asremlPlus][] that provides several accessory functions to asreml. [INLA][] provides tools for Bayesian inference of latent Gaussian models. It contains functions for modelling spatial variation, such as field experiments or farm locations. [SpATS][] can be used to adjust for field spatial variation using [p-splines](http://dx.doi.org/10.1002/bimj.202100212). A localised method of spatial adjustment for unreplicated trials, moving grid adjustment, is implemented with the [mvngGrAd][]. 
+  
   
 #### High throughput phenotyping (HTP)
   
@@ -79,7 +82,7 @@ If you think that a package is missing from the list, please [open an issue](htt
 
   For genetics-related packages outside this scope, see the [Phylogenetics CRAN task view](https://cran.r-project.org/web/views/Phylogenetics.html) describing R packages for taxonomy, community ecology (including microbiome work) and of course, phylogenetics. In addition, the R package repository [Bionconductor](https://www.bioconductor.org/) provides bioinformatics tools for the processing of high-throughput genomic data. [lmDiallel][] provides service functions for analysing data sets obtained from diallel experiments, as described in [Onofri (2020)](https://doi.org/10.1007%2Fs00122-020-03716-8). 
   
-  [plantbreeding][] (available on R-forge: `install.packages("plantbreeding", repos="http://R-Forge.R-project.org")`) provides many convenience functions for working with populations and designs common in plant breeding including dialleles, line testers, augmented trials, the Carolina design, and more. [st4gi][] provides several general functions for genetic improvement of crops. 
+  [plantbreeding][] (available on R-forge: `install.packages("plantbreeding", repos="http://R-Forge.R-project.org")`) provides many convenience functions for working with populations and designs common in plant breeding including dialleles, line testers, augmented trials, the Carolina design, and more. [st4gi][] provides several general functions for genetic improvement of crops. [AlphaSimR][] is an implementation of the [AlphaSim algorithm](doi:10.3835/plantgenome2016.02.0013) in R, providing functions for stochastic modelling of processes common to breeding programs such as selection and crossing. 
   
 #### Linkage mapping & QTL analysis
   
@@ -99,7 +102,7 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
   
   [Meteor][] provides a set of functions for weather and climate data manipulation to support crop and crop disease modeling.
   
-  [phenorice][] is an R implementation of the [phenorice model](http://dx.doi.org/10.1016/j.rse.2017.03.029) for remote sensing of rice crop production. [phenoriceR][] provides helper functions for processing data from the phenorice model. [Recocrop][] estimates environmental suitability for plants using a limiting factor approach for plant growth following [Hackett 1991](https://doi:10.1007/BF00045728). [Rquefts][] provides an implementation of the QUEFTS (Quantitative Evaluation of the Native Fertility of Tropical Soils) model ([Janssen 1990](https://doi.org/10.1016%2F0016-7061%2890%2990021-Z)). [Rwofost][] is an implementation of the WOFOST ("World Food Studies") crop growth model([De Wit 2019](https://doi.org/10.1016%2Fj.agsy.2018.06.018)).
+  [phenorice][] is an R implementation of the [phenorice model](http://dx.doi.org/10.1016/j.rse.2017.03.029) for remote sensing of rice crop production. [phenoriceR][] provides helper functions for processing data from the phenorice model. [Recocrop][] estimates environmental suitability for plants using a limiting factor approach for plant growth following [Hackett 1991](https://doi:10.1007/BF00045728). [Rquefts][] provides an implementation of the QUEFTS (Quantitative Evaluation of the Native Fertility of Tropical Soils) model ([Janssen 1990](https://doi.org/10.1016%2F0016-7061%2890%2990021-Z)). [Rwofost][] is an implementation of the WOFOST ("World Food Studies") crop growth model([De Wit 2019](https://doi.org/10.1016%2Fj.agsy.2018.06.018)). [metrica][] has many convenience functions for comparing model predictions with ground truth data. 
   
 
 ### Entomology
@@ -116,7 +119,7 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
 
 ### Plant pathology
 
-  [epifitter][] provides functions for analysis and visualization of plant disease progress curve data. [epiphy][] is a toolbox for analyzing plant disease epidemics. It provides a common framework for plant disease intensity data recorded over time and/or space. [hagis][] provides functions for analysis of plant pathogen pathotype survey data. Functions provided calculate distribution of susceptibilities, distribution of complexities with statistics, pathotype frequency distribution, as well as diversity indices for pathotypes. Populatios with mixed clonal/sexual reproductive strategies can be analyzed with [poppr][], which has population genetic analysis tools for hierarchical analysis of partially clonal populations. [ascotraceR][] can simulate an Asochyta blight infection in a chickpea field following the model developed by [Diggle (2022)](https://doi.org/10.1094%2FPHYTO.2002.92.10.1110)). 
+  [epifitter][] provides functions for analysis and visualization of plant disease progress curve data. [epiphy][] is a toolbox for analyzing plant disease epidemics. It provides a common framework for plant disease intensity data recorded over time and/or space. [hagis][] has functions for analysis of plant pathogen pathotype survey data. Functions provided calculate distribution of susceptibilities, distribution of complexities with statistics, pathotype frequency distribution, as well as diversity indices for pathotypes. Populations with mixed clonal/sexual reproductive strategies can be analyzed with [poppr][], which has population genetic analysis tools for hierarchical analysis of partially clonal populations. [ascotraceR][] can simulate an Asochyta blight infection in a chickpea field following the model developed by [Diggle (2022)](https://doi.org/10.1094%2FPHYTO.2002.92.10.1110)). Stochastic disease modelling of plant pathogens incorporating spatial and genetic information can be done with [landsepi][]. 
   
 ### Rural sociology
 
@@ -124,7 +127,7 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
 
 ### Soil science
   
-  [sharpshootR][] contains a compendium of utility functions supporting soils survey work including data management, summary, visualizations and conversions.For soil pedology, [aqp](https://github.com/ncss-tech/aqp/) provides a general toolkit for soil scientists: specialized data structures, soil profile summary, visualization, color conversion, and more. Most USDA-NRCS soils related databases and APIs can be accessed with [soilDB](https://github.com/ncss-tech/soilDB/). [SoilTaxonomy][] provides functions for parsing soil taxonomic terms. The ["Spatial"](https://CRAN.R-project.org/view=Spatial) and ["Spatio-Temporal"](https://CRAN.R-project.org/view=SpatioTemporal) CRAN task views provide extensive resources in spatial statistics. [fertplan][] provides fertilizer recommendations based on soil test results (note this packages is optimized for horticultural crop production in Italy).
+  [sharpshootR][] contains a compendium of utility functions supporting soils survey work including data management, summary, visualizations and conversions.For soil pedology, [aqp](https://github.com/ncss-tech/aqp/) provides a general toolkit for soil scientists: specialized data structures, soil profile summary, visualization, color conversion, and more. Most USDA-NRCS soils related databases and APIs can be accessed with [soilDB](https://github.com/ncss-tech/soilDB/). [SoilTaxonomy][] provides functions for parsing soil taxonomic terms. The ["Spatial"](https://CRAN.R-project.org/view=Spatial) and ["Spatio-Temporal"](https://CRAN.R-project.org/view=SpatioTemporal) CRAN task views provide extensive resources in spatial statistics. [fertplan][] provides fertilizer recommendations based on soil test results (note this packages is optimized for horticultural crop production in Italy). [soiltestcorr][] has functions for conducting correlation analysis between soil test values and crop yield data. 
 
 ### Weed science
 
@@ -137,6 +140,9 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
 [agridat]: https://CRAN.R-project.org/package=agridat 
 [agriTutorial]: https://CRAN.R-project.org/package=agriTutorial
 [agroBioData]: https://github.com/OnofriAndreaPG/agriCensData
+[AgroReg]: https://cran.r-project.org/package=AgroReg
+[AlphaSimR]: https://cran.r-project.org/package=AlphaSimR
+[ALUES]: https://cran.r-project.org/package=ALUES
 [apsimx]: https://CRAN.R-project.org/package=apsimx 
 [aqp]: https://CRAN.R-project.org/package=aqp 
 [ascoTraceR]: https://github.com/IhsanKhaliq/ascotraceR
@@ -170,6 +176,7 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
 [hnp]: https://cran.r-project.org/package=hnp 
 [IBCF.MTME]: https://CRAN.R-project.org/package=IBCF.MTME
 [INLA]: https://github.com/inbo/INLA
+[landsepi]: https://cran.r-project.org/package=landsepi   
 [LinkageMapView]: https://CRAN.R-project.org/package=LinkageMapView 
 [lmDiallel]:  https://CRAN.R-project.org/package=lmDiallel 
 [lme4]: https://CRAN.R-project.org/package=lme4
@@ -180,6 +187,8 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
 [MCMCglmm]: https://CRAN.R-project.org/package=MCMCglmm
 [MegaLMM]: https://github.com/deruncie/MegaLMM/
 [meteor]: https://CRAN.R-project.org/package=meteor
+[metrica]: https://CRAN.R-project.org/package=metrica
+[mvngGrAd]: https://cran.r-project.org/package=mvngGrAd
 [nlme]: https://CRAN.R-project.org/package=nlme
 [nlraa]: https://cran.r-project.org/package=nlraa
 [NutrienTrackeR]: https://CRAN.R-project.org/package=NutrienTrackeR
@@ -211,6 +220,7 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
 [sommer]: https://CRAN.R-project.org/package=sommer
 [soilDB]: https://CRAN.R-project.org/package=soilDB
 [SoilTaxonomy]: https://CRAN.R-project.org/package=SoilTaxonomy
+[soiltestcorr]: https://CRAN.R-project.org/package=soiltestcorr
 [SoyNAM]: https://CRAN.R-project.org/package=SoyNAM 
 [SpATS]: https://CRAN.R-project.org/package=SpATS
 [st4gi]: https://github.com/reyzaguirre/st4gi
@@ -223,3 +233,5 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
 [statgenSTA]: https://CRAN.R-project.org/package=statgenSTA
 [tidyUSDA]: https://CRAN.R-project.org/package=tidyUSDA
 [usdampr]: https://CRAN.R-project.org/package=usdampr
+[Xpolaris]: https://github.com/lhmrosso/XPolaris
+
