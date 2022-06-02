@@ -9,7 +9,7 @@ date: "2022-06-01T00:00:00Z"
 image:
   caption: "Image from <b>How to Keep Your Volkswagen Alive</b> by John Muir and Gregg Tosh"
   focal_point: ""
-lastMod: "2022-05-20T00:00:00Z"
+lastMod: "2022-06-01T00:00:00Z"
 projects: 
 subtitle: Free tutorials to help you learn R
 summary: 
