@@ -9,7 +9,7 @@ date: "2022-05-13T00:00:00Z"
 image:
   caption: "Map of Australia as R package hex stickers; image credit: [Mitchell O'Hara-Wild](https://www.mitchelloharawild.com/blog/user-2018-feature-wall/)"
   focal_point: ""
-lastMod: "2022-06-02T00:00:00Z"
+lastMod: "2022-06-09T00:00:00Z"
 projects: 
 subtitle: Finding the R packages that support your research
 summary: 
@@ -33,7 +33,7 @@ Note that some of these packages are on CRAN and others are on GitHub, Bioconduc
 
 If you think that a package is missing from the list, please [open an issue](https://github.com/IdahoAgStats/ctv-agriculture/issues) on the GitHub repo for this topic. This is a community-sourced project, and participation from the agricultural research community (and adjacent folks) is welcomed. 
 
-## Core Packages with general applications
+## Packages with general applications
 
 ### Agricultural and landuse databases 
   
@@ -41,7 +41,7 @@ If you think that a package is missing from the list, please [open an issue](htt
   
   [FAOSTAT][] and [faobulk][] can be used to access data from the [FAOSTAT Database](https://www.fao.org/faostat/en/#home) of the Food and Agricultural Organization (FAO) of the United Nations. 
   
-  [FedData][] provides access to geospatial data from The Soil Survey Geographic ([SSURGO](https://www.nrcs.usda.gov/wps/portal/nrcs/detail/soils/survey/?cid=nrcs142p2_053627)) database, the Global Historical Climatology Network ([GHCN](https://www.ncei.noaa.gov/products/land-based-station/global-historical-climatology-network-daily)), the Daymet gridded estimates of daily weather parameters for North America, the [International Tree Ring Data Bank](https://catalog.data.gov/dataset/international-tree-ring-data-bank-itrdb), and the [National Land Cover Database](https://www.usgs.gov/centers/eros/science/national-land-cover-database#overview). SSURGO data can also be accessed and processed with [XPolaris][]. 
+  [FedData][] provides access to geospatial data from The Soil Survey Geographic ([SSURGO](https://www.nrcs.usda.gov/wps/portal/nrcs/detail/soils/survey/?cid=nrcs142p2_053627)) database, the Global Historical Climatology Network ([GHCN](https://www.ncei.noaa.gov/products/land-based-station/global-historical-climatology-network-daily)), the Daymet gridded estimates of daily weather parameters for North America, the [International Tree Ring Data Bank](https://catalog.data.gov/dataset/international-tree-ring-data-bank-itrdb), and the [National Land Cover Database](https://www.usgs.gov/centers/eros/science/national-land-cover-database#overview). SSURGO data can also be accessed and processed with [XPolaris][]. Most USDA-NRCS soils related databases and APIs can be accessed with [soilDB][]. [SISINTAR][] provides access to SiSINTA (Sistema de información de Suelos del INTA), a soil profile database for Argentina, and functions for processing the data.
   
 ### Agricultural data sets
   
@@ -58,6 +58,10 @@ If you think that a package is missing from the list, please [open an issue](htt
 ### Agricultural economics
 
   The task views for [Econometrics](https://cran.rstudio.com/web/views/Econometrics.html), [Empirical Finance](https://cran.r-project.org/web/views/Finance.html), and [TimeSeries](https://cran.r-project.org/web/views/TimeSeries.html) provide information on packages and tools relevant to agriculture economics.
+
+### Agrometerology
+
+  [Meteor][] provides a set of functions for weather and climate data manipulation to support crop and crop disease modeling. The [agromet][] package includes a series of functions to calculate climatic and hydrological indices and statistics from tidy data.  United States weather data from NOAA can be accessed with [rnoaa][]. Historic U.S. climate data from the [PRISM Climate Group](https://www.prism.oregonstate.edu/) can be accessed with [prism][]. 
 
 ### Agronomic trials
 
@@ -82,7 +86,7 @@ If you think that a package is missing from the list, please [open an issue](htt
 
   For genetics-related packages outside this scope, see the [Phylogenetics CRAN task view](https://cran.r-project.org/web/views/Phylogenetics.html) describing R packages for taxonomy, community ecology (including microbiome work) and of course, phylogenetics. In addition, the R package repository [Bionconductor](https://www.bioconductor.org/) provides bioinformatics tools for the processing of high-throughput genomic data. [lmDiallel][] provides service functions for analysing data sets obtained from diallel experiments, as described in [Onofri (2020)](https://doi.org/10.1007%2Fs00122-020-03716-8). 
   
-  [plantbreeding][] (available on R-forge: `install.packages("plantbreeding", repos="http://R-Forge.R-project.org")`) provides many convenience functions for working with populations and designs common in plant breeding including dialleles, line testers, augmented trials, the Carolina design, and more. [st4gi][] provides several general functions for genetic improvement of crops. [AlphaSimR][] is an implementation of the [AlphaSim algorithm](doi:10.3835/plantgenome2016.02.0013) in R, providing functions for stochastic modelling of processes common to breeding programs such as selection and crossing. 
+  [plantbreeding][] (available on R-forge: `install.packages("plantbreeding", repos="http://R-Forge.R-project.org")`) provides many convenience functions for working with populations and designs common in plant breeding including dialleles, line testers, augmented trials, the Carolina design, and more. [st4gi][] provides several general functions for genetic improvement of crops. [AlphaSimR][] is an implementation of the [AlphaSim algorithm](doi:10.3835/plantgenome2016.02.0013) in R, providing functions for stochastic modelling of processes common to breeding programs such as selection and crossing. [MoBPS][] has a suite of functions for simulating genetic gain and economic costs in a plant breeding program. 
   
 #### Linkage mapping & QTL analysis
   
@@ -99,8 +103,6 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
 ### Crop Modelling 
 
   The [apsimx][] package has functions to read, inspect, edit and run files for APSIM "Next Generation" (json) and APSIM "Classic" (xml). Files with an `.apsim` extension correspond to APSIM Classic, the files with an `.apsimx` extension correspond to APSIM Next Generation. [rapsimng][] works with Next Generation APSIM files. [DSSAT][] provides a comprehensive R interface to the Decision Support System for Agrotechnology Transfer Cropping Systems model (DSSAT-CSM) documented by [Jones (2003)](https://doi.org/10.1016/S1161-0301(02)00107-7). This package provides cross-platform functions to read and write input files, run DSSAT-CSM, and read output files.
-  
-  [Meteor][] provides a set of functions for weather and climate data manipulation to support crop and crop disease modeling.
   
   [phenorice][] is an R implementation of the [phenorice model](http://dx.doi.org/10.1016/j.rse.2017.03.029) for remote sensing of rice crop production. [phenoriceR][] provides helper functions for processing data from the phenorice model. [Recocrop][] estimates environmental suitability for plants using a limiting factor approach for plant growth following [Hackett 1991](https://doi:10.1007/BF00045728). [Rquefts][] provides an implementation of the QUEFTS (Quantitative Evaluation of the Native Fertility of Tropical Soils) model ([Janssen 1990](https://doi.org/10.1016%2F0016-7061%2890%2990021-Z)). [Rwofost][] is an implementation of the WOFOST ("World Food Studies") crop growth model([De Wit 2019](https://doi.org/10.1016%2Fj.agsy.2018.06.018)). [metrica][] has many convenience functions for comparing model predictions with ground truth data. 
   
@@ -127,7 +129,7 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
 
 ### Soil science
   
-  [sharpshootR][] contains a compendium of utility functions supporting soils survey work including data management, summary, visualizations and conversions.For soil pedology, [aqp](https://github.com/ncss-tech/aqp/) provides a general toolkit for soil scientists: specialized data structures, soil profile summary, visualization, color conversion, and more. Most USDA-NRCS soils related databases and APIs can be accessed with [soilDB](https://github.com/ncss-tech/soilDB/). [SoilTaxonomy][] provides functions for parsing soil taxonomic terms. The ["Spatial"](https://CRAN.R-project.org/view=Spatial) and ["Spatio-Temporal"](https://CRAN.R-project.org/view=SpatioTemporal) CRAN task views provide extensive resources in spatial statistics. [fertplan][] provides fertilizer recommendations based on soil test results (note this packages is optimized for horticultural crop production in Italy). [soiltestcorr][] has functions for conducting correlation analysis between soil test values and crop yield data. 
+  [sharpshootR][] contains a compendium of utility functions supporting soils survey work including data management, summary, visualizations and conversions.For soil pedology, [aqp](https://github.com/ncss-tech/aqp/) provides a general toolkit for soil scientists: specialized data structures, soil profile summary, visualization, color conversion, and more. [SoilTaxonomy][] provides functions for parsing soil taxonomic terms. The ["Spatial"](https://CRAN.R-project.org/view=Spatial) and ["Spatio-Temporal"](https://CRAN.R-project.org/view=SpatioTemporal) CRAN task views provide extensive resources in spatial statistics. [fertplan][] provides fertilizer recommendations based on soil test results (note this packages is optimized for horticultural crop production in Italy). [soiltestcorr][] has functions for conducting correlation analysis between soil test values and crop yield data. 
 
 ### Weed science
 
@@ -140,6 +142,7 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
 [agridat]: https://CRAN.R-project.org/package=agridat 
 [agriTutorial]: https://CRAN.R-project.org/package=agriTutorial
 [agroBioData]: https://github.com/OnofriAndreaPG/agriCensData
+[agromet]: https://github.com/AgRoMeteorologiaINTA/agromet  
 [AgroReg]: https://cran.r-project.org/package=AgroReg
 [AlphaSimR]: https://cran.r-project.org/package=AlphaSimR
 [ALUES]: https://cran.r-project.org/package=ALUES
@@ -188,6 +191,7 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
 [MegaLMM]: https://github.com/deruncie/MegaLMM/
 [meteor]: https://CRAN.R-project.org/package=meteor
 [metrica]: https://CRAN.R-project.org/package=metrica
+[MoBPS]: https://github.com/tpook92/mobps  
 [mvngGrAd]: https://cran.r-project.org/package=mvngGrAd
 [nlme]: https://CRAN.R-project.org/package=nlme
 [nlraa]: https://cran.r-project.org/package=nlraa
@@ -201,6 +205,7 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
 [polymapR]: https://CRAN.R-project.org/package=polymapR
 [polyqtlR]: https://CRAN.R-project.org/package=polyqtlR 
 [poppr]: https://cran.r-project.org/package=poppr
+[prism]: https://CRAN.R-project.org/package=prism  
 [PROSPER]: https://CRAN.R-project.org/package=PROSPER 
 [qgtools]: https://CRAN.R-project.org/package=qgtools
 [qtl]: https://CRAN.R-project.org/package=qtl
@@ -217,6 +222,7 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
 [Rwofost]: https://CRAN.R-project.org/package=Rwofost
 [sharpshootR]: https://CRAN.R-project.org/package=sharpshootR
 [simplePHENOTYPES]: https://github.com/samuelbfernandes/simplePHENOTYPES
+[SISINTAR]: https://github.com/INTA-Suelos/SISINTAR
 [sommer]: https://CRAN.R-project.org/package=sommer
 [soilDB]: https://CRAN.R-project.org/package=soilDB
 [SoilTaxonomy]: https://CRAN.R-project.org/package=SoilTaxonomy
