@@ -9,5 +9,6 @@ view: 2
 header:
   caption: ""
   image: ""
+outputs: html
 ---
 

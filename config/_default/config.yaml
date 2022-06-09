@@ -7,6 +7,14 @@ title: Idaho Ag Stats # Website name
 baseurl: '' # Website URL
 copyright: 'Copyright @ {year} by the [University of Idaho Statistical Programs](https://www.uidaho.edu/cals/statistical-programs). <br> Built with [Wowchemy](https://wowchemy.com/), a free open-source web builder.' 
     # Footer text, e.g. '© {year} Me'
+    
+
+############################
+## custom stuff for rss feed
+############################ 
+outputFormats:
+  outputFormats.RSS:
+    baseName: 'rss'
 
 ############################
 ## LANGUAGE
@@ -45,8 +53,11 @@ permalinks:
   #publication_types: '/publication-type/:slug/'
 disableAliases: true
 outputs:
-  home: [HTML, RSS, JSON, WebAppManifest, headers, redirects]
-  section: [HTML, RSS]
+  home: [HTML, JSON, WebAppManifest, headers, redirects]
+  section: [HTML]
+  page: [HTML, RSS]
+  taxonomyTerm: [HTML]
+  taxonomy: [HTML]
 markup:
   defaultMarkdownHandler: goldmark
   goldmark:
