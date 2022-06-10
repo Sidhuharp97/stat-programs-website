@@ -9,7 +9,7 @@ date: "2022-05-13T00:00:00Z"
 image:
   caption: "Map of Australia as R package hex stickers; image credit: [Mitchell O'Hara-Wild](https://www.mitchelloharawild.com/blog/user-2018-feature-wall/)"
   focal_point: ""
-lastMod: "2022-06-09T00:00:00Z"
+lastMod: "`r format(Sys.Date(), '%B %d, %Y')`"
 projects: 
 subtitle: Finding the R packages that support your research
 summary: 
@@ -61,7 +61,7 @@ If you think that a package is missing from the list, please [open an issue](htt
 
 ### Agrometerology
 
-  [Meteor][] provides a set of functions for weather and climate data manipulation to support crop and crop disease modeling. The [agromet][] package includes a series of functions to calculate climatic and hydrological indices and statistics from tidy data.  United States weather data from NOAA can be accessed with [rnoaa][]. Historic U.S. climate data from the [PRISM Climate Group](https://www.prism.oregonstate.edu/) can be accessed with [prism][]. 
+  [Meteor][] provides a set of functions for weather and climate data manipulation to support crop and crop disease modeling. The [agromet][] package includes a series of functions to calculate climatic and hydrological indices and statistics from tidy data.  United States weather data from NOAA can be accessed with [rnoaa][]. Historic U.S. climate data from the [PRISM Climate Group](https://www.prism.oregonstate.edu/) can be accessed with [prism][]. Data from the [Copernicus](https://cds.climate.copernicus.eu/cdsapp#!/dataset/sis-agrometeorological-indicators?tab=overview) data set of agrometerological indicators can be downloaded and extracted using [ag5Tools][]. 
 
 ### Agronomic trials
 
@@ -71,7 +71,7 @@ If you think that a package is missing from the list, please [open an issue](htt
   
 #### General analysis
   
-  The package [agricolae][] contains functions for analyzing many common designs in agriculture trials such as split plot, lattice, Latin square and some additional functions such AMMI and AUDPC calculations. [statgenSTA][] has functions for single trial analysis with and without spatial components. The proprietary software [asreml](https://www.vsni.co.uk/software/asreml) provides an R version of their mixed model fitting functions for field trial analysis (note this is not open source and also requires an annual paid license). CRAN also contains an add-on package [asremlPlus][] that provides several accessory functions to asreml. [INLA][] provides tools for Bayesian inference of latent Gaussian models. It contains functions for modelling spatial variation, such as field experiments or farm locations. [SpATS][] can be used to adjust for field spatial variation using [p-splines](http://dx.doi.org/10.1002/bimj.202100212). A localised method of spatial adjustment for unreplicated trials, moving grid adjustment, is implemented with the [mvngGrAd][]. 
+  The package [agricolae][] contains functions for analyzing many common designs in agriculture trials such as split plot, lattice, Latin square and some additional functions such AMMI and AUDPC calculations. [statgenSTA][] has functions for single trial analysis with and without spatial components. The proprietary software [asreml](https://www.vsni.co.uk/software/asreml) provides an R version of their mixed model fitting functions for field trial analysis (note this is not open source and also requires an annual license). CRAN also contains an add-on package [asremlPlus][] that provides several accessory functions to asreml. [INLA][] provides tools for Bayesian inference of latent Gaussian models. It contains functions for modelling spatial variation, such as field experiments or farm locations. [SpATS][] can be used to adjust for field spatial variation using [p-splines](http://dx.doi.org/10.1002/bimj.202100212). A localised method of spatial adjustment for unreplicated trials, moving grid adjustment, is implemented with the [mvngGrAd][]. [ClimMobTools][] is the API Client for the [ClimMob](https://climmob.net/) citizen science platform in R. The [gosset][] package provides the toolkit for a workflow to analyse experimental agriculture data, from data synthesis to model selection and visualisation. 
   
   
 #### High throughput phenotyping (HTP)
@@ -136,6 +136,7 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
   The package [drc][] offers versatile model fitting and after-fitting functions for dose-response curves. [PROSPER][] is a package for simulating weed population dynamics at the individual and population level under a range of conditions including herbicide resistance and herbicide pressure. For ecological studies and analytical applications, the [CRAN task view for Environmetrics](https://cran.r-project.org/web/views/Environmetrics.html) provides a list of existing R resources in this topic. 
 
 
+[ag5Tools]: https://cran.r-project.org/package=ag5Tools
 [AGHmatrix]: https://CRAN.R-project.org/package=AGHmatrix
 [agriCensData]: https://github.com/OnofriAndreaPG/agriCensData
 [agricolae]: https://CRAN.R-project.org/package=agricolae
@@ -156,6 +157,7 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
 [bravo]: https://CRAN.R-project.org/package=bravo
 [breedR]: https://github.com/famuvie/breedR
 [cdlTools]:  https://CRAN.R-project.org/package=cdlTools
+[ClimMobTools]: https://CRAN.R-project.org/package=ClimMobTools
 [cpgen]: https://github.com/cheuerde/cpgen
 [CropScapeR]: https://CRAN.R-project.org/package=CropScapeR 
 [desplot]: https://CRAN.R-project.org/package=desplot 
@@ -173,7 +175,8 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
 [fertplan]: https://github.com/mbask/fertplan
 [FW]: https://github.com/lian0090/FW/
 [ggfertilizer]: https://github.com/wenlong-liu/ggfertilizer
-[gge]: https://CRAN.R-project.org/package=gge 
+[gge]: https://CRAN.R-project.org/package=gge
+[gosset]: https://CRAN.R-project.org/package=gosset
 [GWASpoly]: https://github.com/jendelman/GWASpoly
 [hagis]: https://CRAN.R-project.org/package=hagis
 [hnp]: https://cran.r-project.org/package=hnp 
