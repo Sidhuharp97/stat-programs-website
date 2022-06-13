@@ -59,15 +59,15 @@ If you think that a package is missing from the list, please [open an issue](htt
 
   The task views for [Econometrics](https://cran.rstudio.com/web/views/Econometrics.html), [Empirical Finance](https://cran.r-project.org/web/views/Finance.html), and [TimeSeries](https://cran.r-project.org/web/views/TimeSeries.html) provide information on packages and tools relevant to agriculture economics.
 
-### Agrometerology
+### Agrometeorology
 
-  [Meteor][] provides a set of functions for weather and climate data manipulation to support crop and crop disease modeling. The [agromet][] package includes a series of functions to calculate climatic and hydrological indices and statistics from tidy data.  United States weather data from NOAA can be accessed with [rnoaa][]. Historic U.S. climate data from the [PRISM Climate Group](https://www.prism.oregonstate.edu/) can be accessed with [prism][]. Data from the [Copernicus](https://cds.climate.copernicus.eu/cdsapp#!/dataset/sis-agrometeorological-indicators?tab=overview) data set of agrometerological indicators can be downloaded and extracted using [ag5Tools][]. 
+The [Hydrology CRAN Task View](https://cran.r-project.org/web/views/Hydrology.html) has many resources for accessing and processing weather and climate data. [Meteor][] provides a set of functions for weather and climate data manipulation to support crop and crop disease modeling. Data from the [Copernicus](https://cds.climate.copernicus.eu/cdsapp#!/dataset/sis-agrometeorological-indicators?tab=overview) data set of agrometeorological indicators can be downloaded and extracted using [ag5Tools][]. 
 
 ### Agronomic trials
 
 #### Experimental design 
   
-  The package [agricolae][] provides extensive resources for the planning and analysis of planned field experiments. The CRAN task for [ExperimentalDesign](https://cran.rstudio.com/web/views/Econometrics.html) provide additional information on experimental design for a wide variety of research problems. [desplot][] is for plotting maps of agricultural trials laid out in grids. 
+  The package [agricolae][] provides extensive resources for the planning and analysis of planned field experiments. The CRAN task for [ExperimentalDesign](https://cran.rstudio.com/web/views/Econometrics.html) provide additional information on experimental design for a wide variety of research problems. [desplot][] is for plotting maps of agricultural trials laid out in grids. [DiGGer][] was developed for rectangular field trials; it's purpose is to help users determine the optimal experimental design based on the treatment structure and number of replicates.  
   
 #### General analysis
   
@@ -125,11 +125,11 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
   
 ### Rural sociology
 
-  See the CRAN task view for [Psychometrics](https://cran.r-project.org/web/views/Psychometrics.html) and [SocialScience](https://cran.r-project.org/web/views/SocialSciences.html). Both the ['Survival' CRAN task view](https://cran.microsoft.com/snapshot/2022-03-27/web/views/Survival.html) and the [agriCensData][] package provide tools for working with interval and censored data. 
+  See the CRAN task view for [Psychometrics](https://cran.r-project.org/web/views/Psychometrics.html) and [SocialScience](https://cran.r-project.org/web/views/SocialSciences.html). Both the [Survival CRAN task view](https://cran.microsoft.com/snapshot/2022-03-27/web/views/Survival.html) and the [agriCensData][] package provide tools for working with interval and censored data. 
 
 ### Soil science
   
-  [sharpshootR][] contains a compendium of utility functions supporting soils survey work including data management, summary, visualizations and conversions.For soil pedology, [aqp](https://github.com/ncss-tech/aqp/) provides a general toolkit for soil scientists: specialized data structures, soil profile summary, visualization, color conversion, and more. [SoilTaxonomy][] provides functions for parsing soil taxonomic terms. The ["Spatial"](https://CRAN.R-project.org/view=Spatial) and ["Spatio-Temporal"](https://CRAN.R-project.org/view=SpatioTemporal) CRAN task views provide extensive resources in spatial statistics. [fertplan][] provides fertilizer recommendations based on soil test results (note this packages is optimized for horticultural crop production in Italy). [soiltestcorr][] has functions for conducting correlation analysis between soil test values and crop yield data. 
+  [sharpshootR][] contains a compendium of utility functions supporting soils survey work including data management, summary, visualizations and conversions.For soil pedology, [aqp](https://github.com/ncss-tech/aqp/) provides a general toolkit for soil scientists: specialized data structures, soil profile summary, visualizatio, color conversion, and more. [SoilTaxonomy][] provides functions for parsing soil taxonomic terms. The ["Spatial](https://CRAN.R-project.org/view=Spatial) and [Spatio-Temporal](https://CRAN.R-project.org/view=SpatioTemporal) CRAN task views provide extensive resources in spatial statistics. [fertplan][] provides fertilizer recommendations based on soil test results (note this packages is optimized for horticultural crop production in Italy). [soiltestcorr][] has functions for conducting correlation analysis between soil test values and crop yield data. 
 
 ### Weed science
 
@@ -143,7 +143,6 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
 [agridat]: https://CRAN.R-project.org/package=agridat 
 [agriTutorial]: https://CRAN.R-project.org/package=agriTutorial
 [agroBioData]: https://github.com/OnofriAndreaPG/agriCensData
-[agromet]: https://github.com/AgRoMeteorologiaINTA/agromet  
 [AgroReg]: https://cran.r-project.org/package=AgroReg
 [AlphaSimR]: https://cran.r-project.org/package=AlphaSimR
 [ALUES]: https://cran.r-project.org/package=ALUES
@@ -162,6 +161,7 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
 [CropScapeR]: https://CRAN.R-project.org/package=CropScapeR 
 [desplot]: https://CRAN.R-project.org/package=desplot 
 [diaQTL]: https://github.com/jendelman/diaQTL
+[DiGGer]: http://www.nswdpibiom.org/austatgen/software/  
 [drc]: https://CRAN.R-project.org/package=drc 
 [DSSAT]: https://CRAN.R-project.org/package=DSSAT 
 [emmeans]: https://CRAN.R-project.org/package=emmeans
@@ -192,7 +192,6 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
 [MapRtools]: https://github.com/jendelman/MapRtools
 [MCMCglmm]: https://CRAN.R-project.org/package=MCMCglmm
 [MegaLMM]: https://github.com/deruncie/MegaLMM/
-[meteor]: https://CRAN.R-project.org/package=meteor
 [metrica]: https://CRAN.R-project.org/package=metrica
 [MoBPS]: https://github.com/tpook92/mobps  
 [mvngGrAd]: https://cran.r-project.org/package=mvngGrAd
@@ -208,7 +207,6 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
 [polymapR]: https://CRAN.R-project.org/package=polymapR
 [polyqtlR]: https://CRAN.R-project.org/package=polyqtlR 
 [poppr]: https://cran.r-project.org/package=poppr
-[prism]: https://CRAN.R-project.org/package=prism  
 [PROSPER]: https://CRAN.R-project.org/package=PROSPER 
 [qgtools]: https://CRAN.R-project.org/package=qgtools
 [qtl]: https://CRAN.R-project.org/package=qtl
@@ -218,7 +216,6 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
 [Recocrop]: https://CRAN.R-project.org/package=Recocrop 
 [rMVP]: https://CRAN.R-project.org/package=rMVP
 [rnassqs]: https://CRAN.R-project.org/package=rnassqs 
-[rnoaa]: https://CRAN.R-project.org/package=rnoaa 
 [Rquefts]: https://CRAN.R-project.org/package=Rquefts
 [rrBLUP]: https://CRAN.R-project.org/package=rrBLUP
 [rusda]:  https://CRAN.R-project.org/package=rusda
