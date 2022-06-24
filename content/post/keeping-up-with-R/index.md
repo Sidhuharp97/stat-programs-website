@@ -58,10 +58,12 @@ If you think that a package is missing from the list, please [open an issue](htt
 ### Agricultural economics
 
   The task views for [Econometrics](https://cran.rstudio.com/web/views/Econometrics.html), [Empirical Finance](https://cran.r-project.org/web/views/Finance.html), and [TimeSeries](https://cran.r-project.org/web/views/TimeSeries.html) provide information on packages and tools relevant to agriculture economics.
+  
+  Several packages have been developed specifically for agricultural price forecasting. [vmdTDNN][] forecasts univariate time series data using variational mode decomposition based time delay neural network models as described by [Dragomiretskiy 2014](https://doi.org/10.1109/TSP.2013.2288675). [stlELM][] also conducts univariate time series forecasting Univariate time series, using seasonal-trend decomposition procedures based on loess (STL) combined with the extreme learning machine developed by [Xiong et al 2018](https://doi.org/10.1016%2Fj.neucom.2017.11.053). [eemdTDNN][] does the same, utilizing different decomposition based time delay neural network models. For method details, see [Yu et al 2008](https://doi.org/10.1016%2Fj.eneco.2008.05.003). 
 
 ### Agrometeorology
 
-The [Hydrology CRAN Task View](https://cran.r-project.org/web/views/Hydrology.html) has many resources for accessing and processing weather and climate data. [Meteor][] provides a set of functions for weather and climate data manipulation to support crop and crop disease modeling. Data from the [Copernicus](https://cds.climate.copernicus.eu/cdsapp#!/dataset/sis-agrometeorological-indicators?tab=overview) data set of agrometeorological indicators can be downloaded and extracted using [ag5Tools][]. 
+The [Hydrology CRAN Task View](https://cran.r-project.org/web/views/Hydrology.html) has many resources for accessing and processing weather and climate data. [Meteor][] provides a set of functions for weather and climate data manipulation to support crop and crop disease modeling. Data from the [Copernicus](https://cds.climate.copernicus.eu/cdsapp#!/dataset/sis-agrometeorological-indicators?tab=overview) data set of agrometeorological indicators can be downloaded and extracted using [ag5Tools][]. The [frost][] package contains a compilation of empirical methods used by farmers and agronomic engineers to predict the minimum temperature to detect a frost event. [agroclim][] contains functions to compute agroclimatic indices useful to zoning areas based on climatic variables and to evaluate the importance of temperature and precipitation for individual crops or in general for agricultural lands.
 
 ### Agronomic trials
 
@@ -71,7 +73,7 @@ The [Hydrology CRAN Task View](https://cran.r-project.org/web/views/Hydrology.ht
   
 #### General analysis
   
-  The package [agricolae][] contains functions for analyzing many common designs in agriculture trials such as split plot, lattice, Latin square and some additional functions such AMMI and AUDPC calculations. [statgenSTA][] has functions for single trial analysis with and without spatial components. The proprietary software [asreml](https://www.vsni.co.uk/software/asreml) provides an R version of their mixed model fitting functions for field trial analysis (note this is not open source and also requires an annual license). CRAN also contains an add-on package [asremlPlus][] that provides several accessory functions to asreml. [INLA][] provides tools for Bayesian inference of latent Gaussian models. It contains functions for modelling spatial variation, such as field experiments or farm locations. [SpATS][] can be used to adjust for field spatial variation using [p-splines](http://dx.doi.org/10.1002/bimj.202100212). A localised method of spatial adjustment for unreplicated trials, moving grid adjustment, is implemented with the [mvngGrAd][]. [ClimMobTools][] is the API Client for the [ClimMob](https://climmob.net/) citizen science platform in R. The [gosset][] package provides the toolkit for a workflow to analyse experimental agriculture data, from data synthesis to model selection and visualisation. 
+  The package [agricolae][] contains functions for analyzing many common designs in agriculture trials such as split plot, lattice, Latin square and some additional functions such AMMI and AUDPC calculations. [statgenSTA][] has functions for single trial analysis with and without spatial components. The proprietary software [asreml](https://www.vsni.co.uk/software/asreml) provides an R version of their mixed model fitting functions for field trial analysis (note this is not open source and also requires an annual license). CRAN also contains an add-on package [asremlPlus][] that provides several accessory functions to asreml. [INLA][] provides tools for Bayesian inference of latent Gaussian models. It contains functions for modelling spatial variation, such as field experiments or farm locations. [SpATS][] can be used to adjust for field spatial variation using [p-splines](http://dx.doi.org/10.1002/bimj.202100212). A localised method of spatial adjustment for unreplicated trials, moving grid adjustment, is implemented with the [mvngGrAd][]. [ClimMobTools][] is the API Client for the [ClimMob](https://climmob.net/) citizen science platform in R. The [gosset][] package provides the toolkit for a workflow to analyse experimental agriculture data, from data synthesis to model selection and visualisation. [AgroR][] has general functions and a [shiny app][https://agrorproject.shinyapps.io/agror_shiny/] for analysis of common designs in agriculture: CRD, RCBD and Latin square. 
   
   
 #### High throughput phenotyping (HTP)
@@ -129,7 +131,9 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
 
 ### Soil science
   
-  [sharpshootR][] contains a compendium of utility functions supporting soils survey work including data management, summary, visualizations and conversions.For soil pedology, [aqp](https://github.com/ncss-tech/aqp/) provides a general toolkit for soil scientists: specialized data structures, soil profile summary, visualizatio, color conversion, and more. [SoilTaxonomy][] provides functions for parsing soil taxonomic terms. The ["Spatial](https://CRAN.R-project.org/view=Spatial) and [Spatio-Temporal](https://CRAN.R-project.org/view=SpatioTemporal) CRAN task views provide extensive resources in spatial statistics. [fertplan][] provides fertilizer recommendations based on soil test results (note this packages is optimized for horticultural crop production in Italy). [soiltestcorr][] has functions for conducting correlation analysis between soil test values and crop yield data. 
+  [sharpshootR][] contains a compendium of utility functions supporting soils survey work including data management, summary, visualizations and conversions.For soil pedology, [aqp](https://github.com/ncss-tech/aqp/) provides a general toolkit for soil scientists: specialized data structures, soil profile summary, visualizatio, color conversion, and more. [SoilTaxonomy][] provides functions for parsing soil taxonomic terms. The ["Spatial](https://CRAN.R-project.org/view=Spatial) and [Spatio-Temporal](https://CRAN.R-project.org/view=SpatioTemporal) CRAN task views provide extensive resources in spatial statistics. 
+  
+  The [suitability](https://www.fao.org/land-water/databases-and-software/crop-information/en/) of specific soils for crop production can be analyzed using [soilassessment], including soil fertility classes, soil erosion models and soil salinity classification. Suitability requirements are for crops grouped into cereal crops, nuts, legumes, fruits, vegetables, industrial crops, and root crops. [soiltestcorr][] has functions for conducting correlation analysis between soil test values and crop yield data. [fertplan][] provides fertilizer recommendations based on soil test results (note this packages is optimized for horticultural crop production in Italy).
 
 ### Weed science
 
@@ -143,6 +147,8 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
 [agridat]: https://CRAN.R-project.org/package=agridat 
 [agriTutorial]: https://CRAN.R-project.org/package=agriTutorial
 [agroBioData]: https://github.com/OnofriAndreaPG/agriCensData
+[agroclim]: https://CRAN.R-project.org/package=agroclim  
+[AgroR]: https://CRAN.R-project.org/package=AgroR  
 [AgroReg]: https://cran.r-project.org/package=AgroReg
 [AlphaSimR]: https://cran.r-project.org/package=AlphaSimR
 [ALUES]: https://cran.r-project.org/package=ALUES
@@ -164,6 +170,7 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
 [DiGGer]: http://www.nswdpibiom.org/austatgen/software/  
 [drc]: https://CRAN.R-project.org/package=drc 
 [DSSAT]: https://CRAN.R-project.org/package=DSSAT 
+[eemdTDNN]: https://CRAN.R-project.org/package=eemdTDNN  
 [emmeans]: https://CRAN.R-project.org/package=emmeans
 [EnvRtype]: https://github.com/allogamous/EnvRtype
 [epifitter]: https://CRAN.R-project.org/package=epifitter
@@ -172,7 +179,8 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
 [faobulk]: https://github.com/muuankarski/faobulk  
 [FAOSTAT]: https://CRAN.R-project.org/package=FAOSTAT
 [FedData]: https://CRAN.R-project.org/package=FedData
-[fertplan]: https://github.com/mbask/fertplan
+[fertplan]: https://github.com/mbask/fertplan  
+[frost]: https://anadiedrichs.github.io/frost/  
 [FW]: https://github.com/lian0090/FW/
 [ggfertilizer]: https://github.com/wenlong-liu/ggfertilizer
 [gge]: https://CRAN.R-project.org/package=gge
@@ -224,6 +232,7 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
 [simplePHENOTYPES]: https://github.com/samuelbfernandes/simplePHENOTYPES
 [SISINTAR]: https://github.com/INTA-Suelos/SISINTAR
 [sommer]: https://CRAN.R-project.org/package=sommer
+[soilassessment]: https://CRAN.R-project.org/package=soilassessment   
 [soilDB]: https://CRAN.R-project.org/package=soilDB
 [SoilTaxonomy]: https://CRAN.R-project.org/package=SoilTaxonomy
 [soiltestcorr]: https://CRAN.R-project.org/package=soiltestcorr
@@ -237,7 +246,9 @@ Packages supporting genetic prediction using mixed models augmented with pedigre
 [statgenIBD]:	https://CRAN.R-project.org/package=statgenIBD
 [statgenMPP]:	https://CRAN.R-project.org/package=statgenMPP
 [statgenSTA]: https://CRAN.R-project.org/package=statgenSTA
+[stlELM]: https://CRAN.R-project.org/package=stlELM   
 [tidyUSDA]: https://CRAN.R-project.org/package=tidyUSDA
 [usdampr]: https://CRAN.R-project.org/package=usdampr
+[vmdTDNN]: https://github.com/cran/vmdTDNN   
 [Xpolaris]: https://github.com/lhmrosso/XPolaris
 
