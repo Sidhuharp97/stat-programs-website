@@ -32,7 +32,8 @@ In time, you may find you truly love solving the various logic puzzles R puts be
 * [RStudio Primers](https://rstudio.cloud/learn/primers)   
 * [R for Excel Users](https://rstudio-conf-2020.github.io/r-for-excel/])    
 * [R for Reproducible Research](https://swcarpentry.github.io/r-novice-gapminder/)   
-* [Short Introduction to R](https://datacarpentry.org/R-ecology-lesson/01-intro-to-r.html)    
+* [Short Introduction to R](https://datacarpentry.org/R-ecology-lesson/01-intro-to-r.html)   
+* [YaRrr! The Pirate’s Guide to R](https://bookdown.org/ndphillips/YaRrr/)
 * [EdX short courses](https://www.edx.org/learn/r-programming)   
 
 
