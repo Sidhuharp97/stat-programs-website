@@ -1,0 +1,29 @@
+<!-- Newsletter Signup -->
+<style type="text/css" media="screen">
+    {{ partial "css/newsletter.css" . | safeCSS }}
+</style>
+<link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+
+<div id="revue-embed" class="revue-embed">
+    <form action="https://tinyletter.com/idahoagstats/" method="post" id="revue-form" name="revue-form"
+          target="popupwindow" onsubmit="window.open('https://tinyletter.com/idahoagstats', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true">
+      
+      
+      
+        <div class="revue-header">
+            <p>Sign up for our newsletter</p>
+        </div>
+        <div class="revue-description">
+            <p>Agricultural statistical content focused on R and SAS, along with info about upcoming workshops, lectures, and trainings relevant to these topics</p>
+            <p>Sent monthly (thereabouts)</p>
+        </div>
+        <div class="revue-input">
+            <input type="email" class="button" name="email" id="member_email" placeholder="Your email address">
+            <input type="hidden" name="embed" value="1">
+            <input type="submit" class="button" id="member_submit" value="Subscribe"/>
+        </div>
+    
+</div>
+
+
+        
