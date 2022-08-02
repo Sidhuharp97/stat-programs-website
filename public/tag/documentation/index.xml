@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>documentation | Idaho Ag Stats</title>
+    <link>/tag/documentation/</link>
+      <atom:link href="/tag/documentation/index.xml" rel="self" type="application/rss+xml" />
+    <description>documentation</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Copyright @ 2022 by the [University of Idaho Statistical Programs](https://www.uidaho.edu/cals/statistical-programs). Built with [Wowchemy](https://wowchemy.com/), a free open-source web builder.</copyright><lastBuildDate>Thu, 05 May 2022 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png</url>
+      <title>documentation</title>
+      <link>/tag/documentation/</link>
+    </image>
+    
+    <item>
+      <title>Finding Help in R</title>
+      <link>/post/help-in-r/</link>
+      <pubDate>Thu, 05 May 2022 00:00:00 +0000</pubDate>
+      <guid>/post/help-in-r/</guid>
+      <description>&lt;h2 id=&#34;what-do-you-do-when-you-need-to-solve-a-problem-in-r&#34;&gt;What do you do when you need to solve a problem in R?&lt;/h2&gt;
+&lt;p&gt;If you have been programming for any amount of time, you have learned that you are likely to encounter errors programming in R and resolving those coding errors can be challenging.&lt;/p&gt;
+&lt;p&gt;For most everyone, goggling an error message is the first step. This is not a bad choice as it often leads you to people who have already encountered the error and solved it. But, it can also lead you to a labyrinth of different, possible conflicting, possibly incomprehensible solutions. Additionally, it is not always the most time efficient method to solve a coding problem.&lt;/p&gt;
+&lt;h2 id=&#34;some-alternatives&#34;&gt;Some Alternatives&lt;/h2&gt;
+&lt;h3 id=&#34;check-the-documentation&#34;&gt;Check the documentation!&lt;/h3&gt;
+&lt;p&gt;There&amp;rsquo;s an ancient proverb about the importance of reading documentation: &amp;ldquo;you can spend 2 hours searching the web in order to save 15 minutes of reading the documentation.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;Package and function documentation can be very helpful. There are two main aspects of documentation:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Function reference: this describes the arguments a function can take, the expected format for those arguments and information about the function object. It may also contain theoretical details that are needed to understand the argument options and examples. Documentation varies in quality greatly across R packages. It can occasionally be too bare bones to be useful, but often (especially in base R commands and tidyverse packages) the documentation is very detailed and helpful. Submission to CRAN requires that packages have a documentation file that lists all package function documentation in alphabetical order.&lt;/li&gt;
+&lt;li&gt;Vignettes: these are tutorials accompanying how to use a package functions. These usually cover a subset of functions and include text explanations. They are basically long examples. Vignettes can be enormously helpful. They are not required for submission to CRAN, so they are not always available, especially for older legacy packages. You can find these on the package website (if it exists) or its CRAN link. Here are some vignettes from the package &lt;a href=&#34;https://CRAN.R-project.org/package=tidyr&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;{tidyr}&lt;/a&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;how-do-we-find-documentation&#34;&gt;How do we find documentation?&lt;/h4&gt;
+&lt;p&gt;You find function documentation via the R console:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;?par  # does an exact search on &amp;quot;par&amp;quot;
+??plot  # does a fuzzy match on &amp;quot;plot&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This will open help files for those items.&lt;/p&gt;
+&lt;p&gt;Sometimes, you will discover there are multiple options and possibly different help files associated with a function name (just run &lt;code&gt;methods(&#39;mean&#39;)&lt;/code&gt; or &lt;code&gt;methods(&#39;anova&#39;)&lt;/code&gt; to see what I mean).&lt;/p&gt;
+&lt;p&gt;These are functions that act differently depending on the R object type they are called to interact with (e.g. &lt;code&gt;mean(some_dates)&lt;/code&gt; will behave differently than &lt;code&gt;mean(some_numbers)&lt;/code&gt;). Which leads to the next point: all R objects have a class assigned to them. You can check this with &lt;code&gt;class()&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;y &amp;lt;- rnorm(20); x &amp;lt;- y + rnorm(20) 
+m &amp;lt;- lm(y ~ x)
+class(y)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;numeric&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;class(m)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;lm&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Understanding this difference between functions will help you understand which documentation files will help you solve your problem.&lt;/p&gt;
+&lt;p&gt;More importantly, once you know the object class, you can search for methods that exist for that class.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;methods(class = &amp;quot;lm&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##  [1] add1           alias          anova          case.names     coerce        
+##  [6] confint        cooks.distance deviance       dfbeta         dfbetas       
+## [11] drop1          dummy.coef     effects        extractAIC     family        
+## [16] formula        hatvalues      influence      initialize     kappa         
+## [21] labels         logLik         model.frame    model.matrix   nobs          
+## [26] plot           predict        print          proj           qr            
+## [31] residuals      rstandard      rstudent       show           simulate      
+## [36] slotsFromS3    summary        variable.names vcov          
+## see &#39;?methods&#39; for accessing help and source code
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;From this, we can see a special &lt;code&gt;plot()&lt;/code&gt; option exists (that provides several diagnostic plots), functions for extracting residuals (&lt;code&gt;rstudent()&lt;/code&gt;, &lt;code&gt;residuals()&lt;/code&gt;), a version of &lt;code&gt;anova()&lt;/code&gt; written for object type &amp;ldquo;lm&amp;rdquo;, and much much more.&lt;/p&gt;
+&lt;h3 id=&#34;read-your-error-messages&#34;&gt;Read your error messages&lt;/h3&gt;
+&lt;p&gt;Error messages can be obtuse and confusing (especially if you are new to programming). We have all have experienced (and will experience again) this error message:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;r_function_error.jpg&#34; alt=&#34;confused man meme at R error&#34;&gt;&lt;/p&gt;
+&lt;p&gt;It is telling us we are trying to subset (extract) information from a &amp;lsquo;closure&amp;rsquo; (which is a function). In essence, there was an attempt to do something like &lt;code&gt;mean$myvar&lt;/code&gt; when &lt;code&gt;mean()&lt;/code&gt; is a function, not a data.frame.&lt;/p&gt;
+&lt;p&gt;However, error messages can also be trying to tell you something important. Here&amp;rsquo;s a recent experience of mine:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;tweet_ignored_error.png&#34; width=&#34;80%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Over time, these messages will become comprehensible. It&amp;rsquo;s still the same messages, but your R knowledge will help you understand them. But, becoming fluent in R error messages implies &lt;em&gt;reading them and trying to understand them&lt;/em&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;specific-places-to-ask-for-help&#34;&gt;Specific places to ask for help&lt;/h3&gt;
+&lt;p&gt;Eventually, you may need to search forums or ask for help from kind strangers. If Google fails you, here are some other useful resources:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://community.rstudio.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;RStudio Community&lt;/a&gt;, a helpful forum that is only for R questions. It is run by RStudio and moderated (to an extent). This is one of the more useful sites to search or post on.
+&lt;br&gt;&lt;br&gt;
+&lt;img src=&#34;rstudio_community.png&#34; alt=&#34;rstudio community screenshot&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.rfordatasci.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;R4DS community&lt;/a&gt;, a friendly, welcoming community. Join their slack channel and ask a question.&lt;br&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;img src=&#34;r4ds_screenshot.png&#34; alt=&#34;R for DS community screenshot&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://stackoverflow.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Stack overflow&lt;/a&gt;, the long-established site of all questions programming. Can often be helpful.
+&lt;br&gt;&lt;br&gt;
+&lt;img src=&#34;stackoverflow_screenshot.png&#34; alt=&#34;stack overflow screen shot&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;consider-reading-the-source-code&#34;&gt;Consider reading the source code&lt;/h3&gt;
+&lt;p&gt;This is best for advanced users, but it can hep you resolve very specific questions about a function. Reading source code will also help improve your own coding.&lt;/p&gt;
+&lt;p&gt;** How to find source code: **&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Type the function name in the console without parentheses:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;mean.default
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## function (x, trim = 0, na.rm = FALSE, ...) 
+## {
+##     if (!is.numeric(x) &amp;amp;&amp;amp; !is.complex(x) &amp;amp;&amp;amp; !is.logical(x)) {
+##         warning(&amp;quot;argument is not numeric or logical: returning NA&amp;quot;)
+##         return(NA_real_)
+##     }
+##     if (na.rm) 
+##         x &amp;lt;- x[!is.na(x)]
+##     if (!is.numeric(trim) || length(trim) != 1L) 
+##         stop(&amp;quot;&#39;trim&#39; must be numeric of length one&amp;quot;)
+##     n &amp;lt;- length(x)
+##     if (trim &amp;gt; 0 &amp;amp;&amp;amp; n) {
+##         if (is.complex(x)) 
+##             stop(&amp;quot;trimmed means are not defined for complex data&amp;quot;)
+##         if (anyNA(x)) 
+##             return(NA_real_)
+##         if (trim &amp;gt;= 0.5) 
+##             return(stats::median(x, na.rm = FALSE))
+##         lo &amp;lt;- floor(n * trim) + 1
+##         hi &amp;lt;- n + 1 - lo
+##         x &amp;lt;- sort.int(x, partial = unique(c(lo, hi)))[lo:hi]
+##     }
+##     .Internal(mean(x))
+## }
+## &amp;lt;bytecode: 0x7fa5749f17f8&amp;gt;
+## &amp;lt;environment: namespace:base&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Sometimes this is not informative&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;c
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## function (...)  .Primitive(&amp;quot;c&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;subset
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## function (x, ...) 
+## UseMethod(&amp;quot;subset&amp;quot;)
+## &amp;lt;bytecode: 0x7fa573afcb48&amp;gt;
+## &amp;lt;environment: namespace:base&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;`[`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## .Primitive(&amp;quot;[&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Use {the package {lookup} to find what you need&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;remotes::install_github(&amp;quot;jimhester/lookup&amp;quot;)
+lookup::lookup(`[`)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;{lookup} checks CRAN, Bioconductor and GitHub for source code! Prior to {lookup}, finding source code for R functions was &lt;a href=&#34;https://github.com/jennybc/access-r-source#readme&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;challenging&lt;/a&gt;. Please note that this &amp;ldquo;lookup&amp;rdquo; is NOT the same same package called &amp;ldquo;lookup&amp;rdquo; found on CRAN. They have zero overlapping functionality.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

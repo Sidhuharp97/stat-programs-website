@@ -1,0 +1,116 @@
+---
+title: "Mixed Model Analysis of Covariance and Dummy Variable Regression in SAS"
+author: "Statistical Programs, University of Idaho"
+date: "4/6/2022"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    toc_collapsed: true
+    toc_depth: 3
+    number_sections: true
+    css: .\sas.default.css
+bibliography: references.bib  
+link-citations: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r include=FALSE}
+require(SASmarkdown)
+
+saspath <- "C:/Program Files/SASHome/SASFoundation/9.4/sas.exe"
+
+sasopts <- "-nosplash -ls 200"
+```
+
+# Introduction
+
+  This tutorial will cover Analysis of Covariance and Dummy Variable Regression (DVR) using SAS. Analysis of Covariance (ANCOVA) and DVR are linear models that combine the characteristics of [ANOVA](https://agstats.io/tutorials/sas-proc-mixed.html){target="_blank"} and [Regression](https://agstats.io/tutorials/sas-proc-reg.html){target="_blank"}. While ANOVA uses all discrete, categorical factors and regression uses all continuous variables, ANCOVA and DVR models are a combination of both discrete factors and continuous regressors. 
+  
+  Both ANCOVA and DVR have the same or very similar structure mathematically. They differ, however, in their interpretation. Analysis of Covariance aims at adjusting the estimation and comparisons of discrete factors through a linear relationship with an additional continuous variable or covariate. For example, an analysis might seek to compare average daily gain (ADG) in calves for various types of feed rations (factors). ADG, however, can also be related to the initial body weight of the calves. The analysis, then, could fit the discrete rations as factors, while simultaneously adding initial body weight to the model as a continuous covariate. The resulting mean estimates and comparisons from the model would then be adjusted for initial body weight. Doing the analysis in this manner is a post-hoc method of accounting for a potential confounding effect. To be effective, ANCOVA assumes the covariate is linearly related to the response variable. In addition, it is best to have unique covariate values for every experimental unit. Lastly, multiple covariates are possible, however, care should be taken to avoid using too many and considering whether the covariates may interact of be related to one another.
+  
+  Dummy Variable Regression, on the other hand, focuses on the linear relationship with the covariate. That is, we want to compare regression relationships across the discrete levels of the factors. An example might be comparing the biomass response of a crop to nitrogen rates (continuous covariate) across several varieties (discrete factor). As with ANCOVA, there is an assumption that the relationship with the covariate is linear. We also want to take caution in comparing too many levels of a factors, e.g. comparing 3-4 varieties as opposed to comparing 30 varieties. for details on how Dummy Variable regression model work see the [DVR](https://agstats.io/tutorials/sas-proc-reg.html){target="_blank"} section of the Regression tutorial.
+
+  For more detailed information on mixed models, ANOVA, Regression, DVR, and ANCOVA in SAS, the readers are referred to @Claassen2018.
+
+
+# Data used in examples
+  
+This tutorial will use one set of data to illustrate both ANCOVA and DVR. The data describe a potato variety trial (2 varieties) and measure above ground vine weight over 5 weeks in a blocked experimental design. A CSV file for this data can be found [here](./Data/vine_wt.csv) and example code to read in and plot the data is shown below. For more information on reading data into SAS, please see the tutorial on the SAS [Data Step](https://agstats.io/tutorials/){target="_blank"}.
+
+```{r Example1, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
+
+proc import out= work.vine
+	datafile= ".\data\vine_wt.csv"
+	dbms=csv replace;
+run;
+
+proc sgplot data=vine;
+	scatter x=week y=vine_wt/group=variety;
+run;
+```
+
+# Analysis of Covariance
+
+Both an ANOVA model and an ANCOVA model are demonstrated below. The covariance model is set up in the same manner as an ANOVA model, with the addition of the covariate (Week, in this case) as a fixed effect. The important aspect here is that Week **is not** in the ANCOVA CLASS statement. This causes Week to enter the model as the numeric values: 1, 2, 3, 4, and 5. 
+
+```{r Example2, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
+
+proc mixed data=vine;
+	class block variety;
+	model vine_wt = variety;
+	random block ;
+  lsmeans variety;
+  title1 'ANOVA';
+run;
+
+proc mixed data=vine;
+	class block variety;
+	model vine_wt = variety week;
+	random block ;
+  lsmeans variety;
+  title1 'ANCOVA';
+run;
+```
+
+  In the ANCOVA analysis, the Type 3 test for Week has a low p-value and, hence, appears to be relevant to the analysis. Note that Week has 1 degree of freedom. This should always be the case for covariates. If you see more degrees of freedom, then likely you have used the covariate in the CLASS statement. The estimated ANCOVA LSMeans are identical to those from ANOVA, however, the standard errors for the ANCOVA means are substantially smaller than the ANOVA version. The Analysis of Covariance is providing higher precision estimates because those means are now adjusted for Week, as are any associated tests. 
+  The use of the covariate has cost 1 DF relative to the ANOVA (35 df to 34), however, the low p-value for the covariate and the increased precision of the LSMeans would justify this cost.
+  
+# Dummy Variable Regression
+  
+  In the following example, a similar model is used with the addition of an interaction term, Variety\*Week. There are two options also added to the MODEL statement for *solution* and *noint*. In this model, the main effect of Variety codes for the regression intercept coefficients of each variety. The interaction term codes for the respective slope coefficients. This is called the *Full Model* because it allows for all intercepts and all slopes to be independently estimated. Because Proc Mixed attempts to insert an overall intercept term by default, and we have already specified a term for intercepts, the *noint* option is used to suppress the overall default value. Also by default, SAS does not print the coefficients for factors in the Proc Mixed output. Because of this, the *solution* option is used to force them to be printed. These will be the intercept and slope estimates. The last option, *outp=pred*, tells SAS to save the predicted values in a new data set *Pred*. This data set will have all the original data, in addition to the predicted values and their standard errors. That data is then used after Proc mixed to plot and visualize the predicted lines for each Variety.
+  The comparison of the two regression lines for each variety occurs in the *Contrast* statements. The lines can be compared in several ways. We can ask if the intercepts are equivalent (contrast #1). We can also ask if the slopes or rate of change over Weeks is the same for each variety (contrast #2). Or, lastly, we can ask if both intercepts and slopes are equivalent (contrast #3, coincidence of lines).
+  
+```{r Example3, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
+
+proc mixed data=vine;
+	class block variety;
+	model vine_wt = variety variety*week/solution noint outp=pred;
+	random block ;
+  contrast 'Intercepts' Variety 1 -1;
+  contrast 'Slopes' Variety*Week 1 -1;
+  contrast 'Lines' Variety 1 -1, Variety*Week 1 -1;
+title1 'DVR';
+run;
+
+proc sgplot data=pred;
+	series x=week y=pred/group=variety;
+	scatter x=week y=vine_wt/group=variety;
+	
+run;
+```
+  
+In the output, we can see in the Solution for Fixed Effects table that the intercepts are 348 and 333 for Norchip and Russet, respectively, while the slopes were 76 and 131, respectively. The contrast results give us more information. There is no detectable difference in the intercept terms and, even though the slopes differ by almost 2x, there is weak evidence that they are different. The overall test of lines does show a strong difference. This is likely becuase the lines contrast has 2 DF and looks at both intercepts and slopes simultaneously, while the individual tests are less powerful with 1 DF and carried out independently. Overall there is some evidence that the lines differ and that difference is due to a larger slope value for Russet.
+  The plot that follows demonstrates this with lines overlaying the data points.
+  
+# References  
+  
+
+
+ 
+  
+

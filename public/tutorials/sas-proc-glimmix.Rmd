@@ -1,0 +1,405 @@
+---
+title: "Generalized Linear Mixed Models in SAS"
+author: "Statistical Programs, University of Idaho"
+date: "21/4/2022"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    toc_collapsed: true
+    toc_depth: 3
+    number_sections: true
+    css: .\sas.default.css
+bibliography: references.bib  
+link-citations: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r include=FALSE}
+require(SASmarkdown)
+
+saspath <- "C:/Program Files/SASHome/SASFoundation/9.4/sas.exe"
+
+sasopts <- "-nosplash -ls 200  "
+```
+
+# Introduction
+  Generalized linear models are an extension of traditional linear models that allow non-normaly distributed data types to be incorporated into the linear modeling framework. While the topic can be complex, @Stroup2014 provides an excellent introduction which is partially reproduced here. I would highly recommend those wishing to use generalized linear models read the complete article and reference it in their published works.
+  
+  
+  "*Analysis of variance rests on three assumptions: independent observations, normally distributed data, and homogeneous variance, the latter meaning that the variance among experimental units does not change with treatment. However, data with nonnormal distributions are common in most areas of research. Examples include the percentage of seeds that germinate (binomial), weed count per plot (Poisson or negative binomial), time to flowering (exponential or gamma), disease rating category (multinomial), and proportion of leaf area affected (beta), to name a few. Data from emerging genomic and other “-omic” research often share characteristics with non-normal distributions. For all distributions except the normal, the variance depends on the mean. As a consequence, whenever the normality assumption is violated, the equal variance assumption must also be violated—at least, assuming that treatments affect the mean response. The question addressed here is: how should such data be analyzed?*" 
+
+…
+
+"*Between the early 1990s and the late 2000s, advances in statistical theory and methodology that had been incubating for decades, enabled by rapid and sustained increases in computing capability, combined to dramatically change the conversation. The advance specifically relevant to this discussion is the GLMM. Generalized linear mixed models extend the linear model theory underpinning ANOVA to accommodate data that may be non-normal, may have heterogeneous variance, and, indeed, may be correlated. Viewed through the GLMM lens, the pre-1990s understanding of non-normal data—still pervasive in the agricultural research community—is antiquated at best, obsolete at worst.*" 
+
+…
+
+"*By the mid-2000s, practical GLMM software began to appear. The SAS PROC GLIMMIX was introduced in 2005. Several GLMM packages in R—GLMPQL, GEE, LME4, etc.—appeared as well. This was a watershed moment for statistical analysis. For the first time, useable software existed to implement the full range of statistical models explicitly intended to accommodate both complex experiments (primarily a mixed model issue) and non-normal data (primarily a generalized linear model issue). The extensive development of theory and methodology during the previous decades became available to researchers in accessible form. This explains why the entire question of how to do statistical analysis of non-normal data from experimental research is now being reassessed. Statistics, like all other disciplines, is dynamic; it is not a fixed set of unchanging rules passed down from Fisher and company.*"
+
+   @Stroup2014
+   
+ <br><br>  
+<div class="infobox">
+ **Terminology**
+
+  Statistics as a field is an evolving science and some terms and abbreviations have become outdated and confusing. Below are some common model types and their abbreviations. Be aware, in this context, "*GLM*" as an abbreviation does *not* mean Proc GLM in SAS. The models we are dealing with here are referred to as GLMM or GLIM.
+  
+  
+**LM:**        Linear Model.  Assumes a fixed linear process fit to Normal Data. (PROC GLM).
+
+**LMM:**    Linear Mixed Model.  Assumes a linear process with fixed and random components fit to 
+Normal data. (PROC MIXED).
+
+**GLM:**     Generalized Linear Model.  Assumes a fixed linear process fit to Normal or non-normal  data. (PROC GENMOD) Note: This is different than PROC GLM!!
+
+**GLMM or GLIM:**  Generalized Linear Mixed Model.  Assumes a linear process with fixed and random
+components fit to Normal or non-normal data. (PROC GLIMMIX).
+
+
+</div><br>
+
+  As mentioned above, the normal distribution is unlike others in the family of distributions (exponential) that we use for statistical inference. Specifically, it's mean and variance are independent and separate quantities. In all other distributions we use, the variance is some function of the mean. The table below lists some common examples. In the Poisson distribution, for example, the mean and variance are the same quantity. 
+  
+| Distribution | Mean | Variance | Type of Data & Range  |
+|---|---|---|---|
+| Normal   | $\mu$   | $\sigma^2$   | *Continuous* $[- ∞, \infty]$  |
+| Binomial  | $Np$  | $Np(1-p)$  | Discrete Count from Total *integer* $[0, N]$ |
+| Negative Binomial | $\mu$ | $\mu + \phi\mu^2$  | Discrete Count *integer* $[0, \infty]$ |
+| Poisson | $\mu$ | $\mu$  | Discrete Count *integer* $[0, \infty]$ |
+| Exponential | $\mu$ | $\mu^2$  | *Continuous* $[0, \infty]$ |
+| Beta | $p$ | $p(1-p)/(1+\phi)$  | *Continuous* [0, 1] |
+
+This change from normality not only affects the assumption of constant variance, but it also becomes import during estimation. Consider, for example, the commonly used model for a Randomized Complete Block experimental design:
+
+$$y_{ij} = \mu + \tau_i + \beta_j + \tau\beta_{ij}$$
+where $y_{ij}$ is the response, $\mu$ is the overall mean, $\tau_i$ is the $i^{th}$ treatment, $\beta_j$ is the $j^{th}$ block, and $\tau\beta_{ij}$ is the block treatment interaction. Under an assumption of normality, the interaction term (usually the model residual) is considered the estimate for the variance, $\sigma^2$. In most statistical software, this assumption is implicit and the interaction is not explicitly stated in the code. In SAS Proc Mixed, for example, we would specify:
+
+```
+Proc Mixed;
+  Class treatment block;
+  model y = treatment;
+  random block;
+run;
+```
+
+That is, the random statement does not specify *block\*treatment*. SAS "assumes" the residual will estimate the variance.
+
+When we switch to another distribution such as the Poisson, however, the mean and variance are now considered equal, and hence, we must specify the full model to accommodate both the mean and variance. The corresponding code in SAS using the generalized linear mixed model procedure Proc Glimmix would then be:
+
+```
+Proc Glimmix;
+  Class treatment block;
+  Model y = treatment/dist=poisson;
+  Random block block*treatment;
+run;
+```
+To understand this, we must think about the process generating the data versus what we can observe. At the base of the data process, we assume the underlying nature of the data will be of some form, say, Poisson in this case, e.g. the process will be generating discrete counts of weeds in a plot or cells in a culture. The process of measuring it will, however, be subject to sampling and error. That error is typically, with good reason, assumed to be random and normally distributed. What we actually observe, however, is a combination of these two and is referred to as the marginal distribution. It is neither Poisson nor Normal. What the Proc Glimmix model above is doing is allowing us to separate the two. The Model and Random statements together describe the base unit response as Poisson, given (or after accounting for) the normally distributed random effects of blocks. An important sidenote, is to consider the case where the underlying base distribution is normal. When that is combined with the distribution of random effects, also normal, it turns out that the combination of normal distributions is itself normal. Hence, in the past when we've assumed a normal distribution, this issue has never come up or needed to be considered.
+
+The final consideration for generalized models is referred to as scale. When applying generalized distributions to linear modeling of data, the estimation process is best carried out on what is called the "*natural parameter*" of the distribution. What this term refers to is a function that linearizes or "*links*" the distribution to a linear additive descriptor. The concept is similar, but not equivalent, to the classical process of transforming data before analysis. For example, in classical analysis, we might take the logarithm of count data before analysis. In a generalized linear model with Poisson count data, we use a log *link* function. Other distributions have their own associated link functions. For example, binomial and Beta distributions use a *logit* function, while the Poisson and exponential distributions use a logarithmic (log) *link*. The normal distribution (and an associated distribution called the lognormal) is, again, unique relative to the others and has a link called an *identity* function. The identity link essentially does nothing to the data, like multiplying by 1.0 or adding 0.0 to a data value.
+
+This is important to understand because the model (and all its estimates and inferences) will be based on the link values or **model** scale. To bring these back to a framework that is interpretable, we must untransform or *inverse link* the model scale estimates back to a **data** scale.  These terms will be used and demonstrated in the examples that follow.
+
+
+
+
+
+# Data used in examples
+  
+Three data examples are used for demonstration below and are from @Stroup2014. Readers wishing to access these data are referred to the supplementary files associated with that article.
+
+## Binomial Data
+The first example, intro_binomial, is a set of binomial observations in a randomized complete block design. Each binomial observation consists of counts (*Count*) taken from 100 observations (*Total*) from each experimental unit. There are 2 treatments (*Treatment*) and eight blocks (*Block*). These data could represent responses such as the number of diseased plants in a sample of 100 plants from each plot in a field experiment or the number of insect traps with a target species out of 100 traps per plot, etc.
+
+<br><br>
+```{r Data1, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=FALSE, engine.opts=sasopts, comment="", error=FALSE}
+
+data intro_binomial;
+ input block Treatment Count Total;
+datalines;
+1 0 98 100
+1 1 94 100
+2 0 95 100
+2 1 36 100
+3 0 93 100
+3 1 85 100
+4 0 94 100
+4 1 88 100
+5 0 99 100
+5 1 91 100
+6 0 61 100
+6 1 82 100
+7 0 84 100
+7 1 43 100
+8 0 92 100
+8 1 71 100
+;
+```
+
+```{r Data1a, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=FALSE}
+
+proc print data=intro_binomial;
+title1 'Binomial Data';
+title2 'Stroup, W. W. 2014.  Rethinking the Analysis of Non-Normal Data in Plant and Soil Science. Agron. J. 106:1–17. ';
+run;
+
+```
+
+## Count Data
+The second data set represents discrete counts recorded from a randomized complete block design. Again there are two treatments (*Trt*) and eight blocks (*Block*). The counts are values greater than or equal to zero. Examples here might be the number of insects observed in a segment of time or the number of cows with mastitis per dairy. The underlying distributions for these counts can be considered as either Poisson or Negative Binomial. The details on this will be discussed further below.
+<br><br>
+
+```{r Data2, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=FALSE, engine.opts=sasopts, comment="", error=FALSE}
+
+data RCB_Counts;
+ input Block Trt Count;
+datalines;
+1 0 1
+1 1 36
+2 0 5
+2 1 109
+3 0 21
+3 1 30
+4 0 7
+4 1 48
+5 0 2
+5 1 0
+6 0 6
+6 1 2
+7 0 0
+7 1 5
+8 0 19
+8 1 26
+;
+run;
+```
+
+```{r Data2a, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=FALSE}
+
+proc print;
+title1 'Poisson/Negative Binomial Data';
+title2 'Stroup, W. W. 2014.  Rethinking the Analysis of Non-Normal Data in Plant and Soil Science. Agron. J. 106:1–17. ';
+run;
+
+```
+
+## Proportional Data
+The last data set pertains to data that are inherently recorded as a proportion or percentage. Such data are unique in that they are constrained to a minimum or 0.0 on the low end and 1.0 (or 100%) on the upper end. Such data may be encountered in nutrient sampling, e.g. %C or %N, etc. or compositional data such as % of a given taxa or % make up of a soil sample. The Binomial data from the first data set could also be expressed as a proportion, however, if the complete binomial data is present, it is advisable to treat it as such, rather than as a proportion. Before using the proportional data type, if it is expressed as a percentage, it should be converted to a proportion by dividing it by 100. Also, it should be noted that some data are recorded as a percent change or percent difference. While such data are similar to proportional data, they are not constrained between [0, 1], and can exceed 1.0 or even be negative. That type of data, therefore,must be handled in a different manner. For true proportional data, a strong candidate distribution is the Beta distribution which is naturally constrained to the range [0, 1]. 
+<br><br>
+
+```{r Data3, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=FALSE, engine.opts=sasopts, comment="", error=FALSE}
+
+data beta_intro;
+ input block trt proportion;
+datalines;
+1 1 0.573
+1 2 0.925
+2 1 0.044
+2 2 0.835
+3 1 0.888
+3 2 0.949
+4 1 0.008
+4 2 0.941
+5 1 0.99
+5 2 0.994
+6 1 0.409
+6 2 0.958
+7 1 0.117
+7 2 0.52
+8 1 0.926
+8 2 0.975
+;
+run;
+```
+
+```{r Data3a, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=FALSE}
+
+proc print;
+title1 'Proportion (Beta) Data';
+title2 'Stroup, W. W. 2014.  Rethinking the Analysis of Non-Normal Data in Plant and Soil Science. Agron. J. 106:1–17. ';
+run;
+
+```
+<br>  
+There are other potential distributions that can be considered that will not be covered here. These could include the lognormal distribution (useful for positively skewed continuous data such as concentrations), binary data which have two responses (Yes/No, 0/1, +/-, etc.), and even the Normal distribution which defaults to a traditional mixed model analysis. Although special circumstances can arise with any of these,the general concepts outlined here will apply to these distributions as well.
+
+<br><br>
+<div class="infobox">
+ **Additional Notes on Data **
+
+Many of the link functions associated with generalized linear modeling involve a logarithmic function. This can result in problems if the data have a values of zero, or an argument in the link fucntion resolves to zero. While there are more sophisticated models for handling zeros specifically (e.g. zero inflated models or hurdle models), those are beyond the scope of this tutorial. In many cases, the problems can be mitigated by altering the zero values slightly through the addition of a small constant, e.g. 0.0001. In the case of proportional data, this must include recoding values of 1.0 to 0.9999 as well. While this is not an optimal solution, it can yield viable results provided the data does not contain an excessive amount of problematic values. In those cases where excessive zeros are present, it may be advisable to consider alternative analyses such as a conditional analysis only on non-zero values, or analyses that omit certain treatments that have consistent zero response, or even precluding any inferential statistical analysis at all and simply summarizing the data for reporting.
+
+</div><br>
+
+# Required Statements
+
+ The statements and syntax used by Proc Glimmix are very similar to other procedures like Proc GLM or Proc Mixed.
+
+Following the call to Proc Glimmix, there are three statement types that must be specified for ANOVA. The first is the **CLASS** statement which is used to define variables which represent factor groupings or classifications. Examples would be treatment and replication ID numbers or letters. Since the values of these variables represent the levels of an effect, SAS will accept either numeric or alphabetic data in the CLASS statement. Note: Data do not have to be sorted according to the CLASS variables. 
+
+The second required statement is **MODEL**. The model statement specifies the response variable and and how the independent fixed effect factors of the **CLASS** statement enter the model. The general form is: 
+
+*MODEL Response = Fixed factors/\<options\>;*
+
+where Fixed factors is a list of all or some of the variables given in the **CLASS** statement. Proc Mixed also provides the ability to easily state interaction as well as nested terms in the **MODEL** statement. Interaction effects represent combinations of factors and can be specified by using the \* symbol between two or more terms, for example: A\*B. This notation can become cumbersome if many interactions are present so a shorthand version exists. The vertical bar between effects signifies all possible interactions. An example would be: A|B|C which produces the effects A, B, A\*B, C, A\*C, B\*C, and A\*B\*C, in that order. Nesting occurs when one effect exists completely within another effect either in time or space. These effects are denoted with parentheses such as B(A) which is read as 'Factor B within factor A'. The \*, |, and () can be used alone or in combination to specify the exact model required. 
+
+The *Response* in the **MODEL** statement will differ when using binomial data. In that case, it will be written in a fractional form, X/Y, where X is the variable for counts and Y is a variable for total samples (trials) evaluated per experimental unit.
+
+The \<options\> portion of the **MODEL** statement can diff from previous procedures. Specifically, this is where we tell SAS what distribution we'd like to assume (*DIST=*), as well as the link function (*LINK=*). For example, to request a Poisson distribution with a log link we would use:
+
+*MODEL y = A B A\*B/ DIST=poisson link=log;*
+
+If the *DIST* option is omitted, SAS assumes a normal distribution. If the *LINK* option is omitted, SAS assumes the predfined link for that distribution (refer to the SAS documentation on Glimmix for details).
+In a Proc Mixed call, only *one* **MODEL** statement can be given.
+
+
+The last required statement for a mixed model is the **Random** statement. This statement tells SAS what factors to treat as random effects. These factors *must* be listed in the **CLASS** statement along with the fixed effects. As with fixed effects, random factors can also be specified as interaction or nested terms in the same manner as the **MODEL** statement. Unlike the **MODEL** statement, multiple **RANDOM** statements can be used within one Proc Mixed call.
+
+There are two methods of specifying **RANDOM** statements: Direct and Indirect. Each method can achieve the same goal, but the method of estimation for the random effects may differ between the two. In some cases where SAS is having trouble estimating the model, the indirect method may help. Examples of each are generally shown as:
+
+**Direct Form**
+
+*Random replication;* 
+
+**Indirect Form**
+
+*Random intercept/subject=replication;*
+
+In the indirect form, **intercept** and **subject** are key words that must be used. Here, **subject** specifies the basic experimental or observational unit that the variance components will be computed from. If multiple random effects are necessary and the indirect form is used, then a **RANDOM** statement must be specified for each random effect. Alternatively, in the direct form, multiple random effects can be listed in a single **RANDOM** statement. 
+
+Both the direct and indirect forms can also specify options. Most commonly, these options relate to how the variance-covariance model matrix should be set up using a **Type=** option. By default, Proc Mixed assumes a "variance component" structure where a single variance is estimated for each random effect. This can also be specified with a **Type=VC** option. Other available types allow for the estimation of additional covariances between observations or subjects. The choice of a covariance structure is dependent on the experimental set up and SAS provides for many different types. In using them, however, care should be taken to use the simplest structure possible while maintaining good representation and estimation of the data. Specifying a variance-covariance structure that is too complex will inevitably lead to estimation problems.
+
+## Additional Statements and Options
+
+One of the flexabilities of mixed models is their ability to incorporate correlation structure. Repeated measures designs are an example of this and are accommodated into Proc Glimmix. Unlike Proc Mixed, however, this is done through the **RANDOM** statement outlined above. As with the standard **RANDOM** statement, the **SUBJECT** and **TYPE** options may be used to specify the basic unit at which the repeated effect occurs, e.g. individual plots, animals, etc., as well as the correlation structure associated with them. The correlation structures available are numerous and cover both time as well as spatial effects. Typical examples of correlational structures for time effects would be *UN* for unstructured, *CS* for compound symmetry, and *AR(1)* for autoregressive correlations. Spatial correlation can also be specified for most common semivariogram models such as *SP(POW)*, *SP(GAUS)*, and *SP(EXP)* for power, Gaussian, and exponential models, respectively. As before, care should be taken when specifying correlational structures with large numbers of components to avoid computational problems in estimation.
+
+**LSMEANS**: Although Proc Glimmix estimates models utilizing the technique of Maximum Likelihood, SAS has retained the nomenclature LSMEANS or Least Squares Means for estimating means for fixed effects. SAS provides for comparison of LSMEANS by the **DIFF** or **PDIFF** options which produce a table of all possible pair-wise comparisons and their associated t-tests. It is important to remember that the probabilities associated with these comparisons are applicable to a limited number of preplanned tests only. If a multiple comparison adjustment to these tests is needed, the **Adjust=** option can be used with any of several adjustment types such as *Tukeys*, *Bonferroni*, etc. The default is equivalent to Fishers LSD. In addition to the mean estimates, standard errors will also be produced for each mean. **LSMEANS** can also be used for interaction and nested effects, when applicable. Note, however, that **LSMEANS** can only be estimated for fixed effects listed in the **CLASS** statement.
+
+One additional feature Proc Glimmix has here over Proc Mixed is plotting capabilities. This is particularly useful when investigating the nature of potential interactions. **LSMEANS** can be plotted within Proc Glimmix with confidence intervals, colored groupings, and joined points. An example for a two factor interaction might be:
+
+*LSMEANS A\*B/plots=mean(join cl sliceby = A ilink);*
+
+Here a plot of means vs factor B is produced. The plot contains joined data points for each level of A with 95% confidence intervals. The ilink option (inverse link) requests the plot be drawn on the *Data* scale.
+
+**CONTRAST**: Single degree of freedom contrasts which test specific hypotheses of interest are an alternative to pair-wise comparisons. SAS provides for these with the **CONTRAST** statement. A single df contrast has the general form of: 
+
+CONTRAST 'any label' Factor name {coefficients}; 
+
+The label portion allows you to give a name to the hypothesis being tested so it can be identified in the output. The Factor name identifies what fixed effect the contrast is working on and the coefficients specify the contrast itself. An example might be: 
+
+CONTRAST ' Trts vs Ctrl' A 2 -1 -1;
+
+Here the average of the **LSMEANS** for the last 2 levels of fixed effect A are contrasted to the first level. Some contrasts test more than one hypothesis at a time (multiple DF contrasts) and these are separated by a comma in the **CONTRAST** statement. For example: 
+
+CONTRAST 'Testit' A 2 -1 -1 , A 0 1 -1;
+
+would be a 2 degree of freedom contrast that jointly tests the average of levels 2 and 3 to level 1 of factor A, simultaneously with a comparison of level 2 to level 3 of factor A.
+
+**ODS**: ODS is an abbreviation for Output Delivery System. In SAS, the ODS is very generalized and has many functions. In this case, **ODS** will allow us to output and save to a SAS data set many of the internal statistical values involved with ANOVA. Most commonly, this will be model estimates, and specifically for ANOVA, **LSMEANS**. This gives the user the ability to manipulate, plot, or output from SAS the estimated means. The general format for this would be:
+
+ODS output LSMeans=\<name\>;
+
+Here, "LSMeans" is a keyword indicating the statistic we want to save. Note the spelling and capitalization as it must be written exactly in this form. The *\<name\>* portion is what you want to call the data set containing the means. This data set will have predefined variables indicating the fixed effect, it's level, the mean value (Estimate), its standard error (StdErr), and the df, t-value and p-value for testing whether the mean is equal to zero. If confidence limits (CL) were requested with the LSMeans, then they will be output as well as "Lower" and "Upper". When multiple fixed effects are listed in the LSMEANS statement, then all the means for all listed effects will be present in the saved data set. Note: To use the **ODS** output statement, the requested statistics, such as LSmeans, must be used as part of the Proc Glimmix call.
+
+# Examples
+
+## Binomial Data
+For binomial data, the response on the lefthand side of the model consists of to parts, the counts indicating how may times something happened or was observed (Events), and a total, representing the number of times an event was assessed (Trials). In this hypothetical data there were 100 trials for each treatment and block combination (experimental unit). This could be, say 100 seeds in a germination tray, or the number of wells on a reaction plate. The corresponding events or counts might be how many out of the 100 seeds germinated or how many of the 100 cells showed a positive reaction. This scenario is repeated for each treatment in each block. 
+
+
+```{r Example1, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=FALSE}
+
+proc glimmix data=intro_binomial;
+   class block Treatment;
+   model Count/Total=Treatment/dist=binomial link=logit;
+   random block block*treatment;
+   lsmeans Treatment / cl ilink plots=mean(cl ilink);
+   title1 'Binomial Example';
+run;
+```
+
+### Model Information
+The initial portions of the output describe the data and options used. For Glimmix, there is additional information regarding the distribution and link function assumed. This is followed by class levels recognized by SAS and observation s used. As with any ANOVA analysis, this should be checked carefully to assure the data are being read correctly and that the classification factors are represented as you expect.  Here we have two levels of treatment and 8 blocks. For the binomial, the data are summarized by observations (16) as well as the total number of events (counts) and trials (Totals). In every block and treatment combination we had 100 trials so this is reproted as 16X100=1600. The number of trials is the sum of all counts.
+
+Additional information on the estimation are given in subsequent tables. We won't cover the details of this here, but the final message in the section:
+
+*Convergence criterion (PCONV=1.11022E-8) satisfied.*
+
+is important. It indicates that the iterative algorithm of the estimation process was able to settle on an answer. You should always see a similar message when doing these analyses.
+
+In the model fit table, an important piece for discrete data is the statistic for the Chi Square/DF. This value is an indicator for a condition known as *overdispersion*, which simply means the variance estimated is bigger than expected. Because the the non-normal distributions have known relationships between their means and variances (see the table in the introduction above), we have some idea what the variance of each should be. If this statistic is close to 1.0, then there is little evidence of overdispersion. If, however, it is larger, then the data may indicate overdispersion. That is, the model, as specified, is not accounting for enough variability given the assumed distribution. In this case, the value is 0.98, which is close to one, suggesting things are ok. If, as an exercise, the model were rerun, this time omitting the block\*treatment random effect, the statistic would be 7.05, strongly suggesting the model is not accounting for enough variability. If an analysis is showing overdispersion, there are some possibilities: 1) like this example, we have incorrectly specified the model and perhaps omitted something from the random effects; 2) We may have assumed the incorrect distribution (more on this in the next example), or 3) there is unaccounted for variability in our data which we may or may not be able to adjust for. Models with overdispersion can lead to incorrect inference and should, therefore, be viewed skeptically. 
+
+### Model Estimation
+The final tables give estimates for the variance components (covariance parameter estimates), the ANOVA table for fixed effects, and the estimated means. The fixed effect of treatment here shows weak evidence for treatment differences (p=0.0355). 
+
+Estimated means are in the last table. For the binomial distribution, the parameter of interest is $p$, the probability of an event, e.g. seed germination or a positive reaction, occurring. The logit link function used for modeling is defined as:
+
+$logit(p) = log(\frac{p}{1-p})$
+
+These logit values for each treatment are shown in the *Estimate* column of the table, along with their standard errors and tests of whether they equal zero or not. Note that these tests are on the linked, *model scale*, logit estimates, not the probability estimates of $p$. Hence, the logit value will only equal zero when the argument of the log function is 1.0, or when $p = 1-p => p = 0.5$. Therefore, these tests assess whether the probability of an event or non-event are equally likely. Such tests may or may not make sense, depending on the problem. The later columns of this table are usually of more interest to researchers and the result from the *ilink* or inverse link option in the LSMeans statement. This gets us out of the *Model Scale* of estimation and back to a more interpretable framework of the *Data Scale*. The *Mean* column (and those to the right of it) show information for the estimated probabilities of the event in each treatment, 0.92 and 0.78. Because we added the *cl* option we also get 95% confidence intervals for these estimates.
+
+The plot following the means table results from the *plot=* option and depicts each mean and its 95% confidence interval. These are also on the *Data Scale* due to the *link* option in the plot request. One important note on this graph: The confidence intervals are **non-symmetric**. This occurs because the binomial parameter, $p$, is restricted to between 0.0 and 1.0. In non-normal data, this will always be the case and, because of this, plots that display means plus or minus standard errors are incorrect. It is strongly advised that plots be reported with confidence intervals and not with standard errors when using GLMM.
+
+## Count Data
+
+Count data is common in agricultural and biological research. In this case, we again assume a randomized complete block design with two treatments and eight blocks. Here the response in the model is just one variable, count. The Poisson distribution is a good fit here as it describes the probability of some number of discrete events occuring in a set time or space. Examples would be the number of animal behaviors (drinking, eating, resting, etc) in an hour, or the number of seeds in a weighed sample core. Like the binomial case, the random statement specifies a full model with all possible random effects.
+
+In many biological data sets, count data can also indicate overdispersion. For such data, a common adjustment is to change the distribution assumed to the negative binomial (negbin in SAS). This distribution has an extra parameter, $\phi$, to account for extra variation. Code for this model is shown below (commented out) for demonstration. The *nloptions* statement in that example is used to help SAS converge on an estimate by extending the default iterations.
+
+```{r Example2, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
+
+proc glimmix data=RCB_Counts;
+    class block trt;
+    model count=trt/d=poisson link=log;
+    lsmeans trt/plots=mean(ilink cl);
+    random block block*trt;
+    title1 'Poisson Example';
+run;
+
+/*
+proc glimmix data=RCB_Counts;
+   class block trt;
+   model count=trt/d=negbin link=log;
+   nloptions maxiter=50;
+   random block;
+   lsmeans trt/plots=mean(ilink cl);
+run;
+*/
+```
+
+### Model Information and Estimates
+
+The output from this model is generally similar to the binomial example above. Here the link function is *log*, so the *Estimate* column in the LSMeans output are log values. The ilink option provides *Data Scale* estimated counts under the *Mean* and associated columns. As was seen in the previous example, the confidence intervals in the mean plot are non-symmetric, and estimates, in this case, are bounded to be strictly greater than zero.
+
+
+## Proportional Data
+
+Proportional data is measured naturally on a percentage or proportional scale and is best described with a Beta distribution. It does not have the *Trials* of binomial data and, on the proportional scale, it must between 0.0 and 1.0. Percentages should be divided by 100 prior to analysis, and values equal to 0.0 or 1.0 should be changed to 0.0001 and 0.9999, respectively to avoid computational problems. Like the binomial distribution, the link here is a logit and the parameter of interest is the proportion of an event. Examples could include the percent of a field plot showing disease or the percent N in a soil sample.
+
+The Beta distribution can be tricky to fit. Data that contain numerous values close to zero or 1.0 can cause computational difficulties. Getting analyses on such data to converge may take several adjustments on advanced estimation options not covered here.
+
+The code below demonstrates this distribution in Glimmix. It is recommended to use the estimation method  quadrature in the call to Glimmix for proportional data. For quadrature estimation, however, SAS requires we use the indirect method of specifying the random statement(s). Like the negative binomial, the Beta has an extra parameter, $\phi$, to account for variability, so in this case, the random term block*trt is omitted.
+
+```{r Example3, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
+
+proc glimmix data=beta_intro method=quadrature;
+   class block trt;
+   model proportion=trt/d=beta link=logit;
+   random intercept / subject=block;
+   lsmeans trt / cl ilink plots=mean(ilink cl);
+   title 'Proportional (Beta) Data';
+run;
+
+```
+
+# References:  
+  
+
+
+ 
+  
+

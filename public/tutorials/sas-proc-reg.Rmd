@@ -1,0 +1,332 @@
+---
+title: "Least Squares Regression in SAS"
+author: "Statistical Programs, University of Idaho"
+date: "2022-03-25"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    toc_collapsed: true
+    toc_depth: 3
+    number_sections: true
+    css: .\sas.default.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r include=FALSE}
+require(SASmarkdown)
+
+saspath <- "C:/Program Files/SASHome/SASFoundation/9.4/sas.exe"
+
+sasopts <- "-nosplash -ls 200"
+```
+
+# Introduction
+
+This document is an introduction to estimating and diagnosing simple and multiple linear regression fixed effect models in SAS. Some additional knowledge of SAS may be useful for understanding certain aspects of this tutorial and the readers are referred to: [Data Step](https://agstats.io/tutorials/){target="_blank"} and [Graphics and Plotting](https://agstats.io/tutorials/){target="_blank"}. Application of mixed model methodology to linear regression is also possible. While much of the theoretical background and diagnostics still apply to these models, the details and considerations of setting these models up in SAS are covered [elsewhere](https://agstats.io/tutorials/){target="_blank"}. Likewise, readers interested in fixed or mixed nonlinear modeling are referred to the [specific tutorials](https://agstats.io/tutorials/){target="_blank"} on those subjects.
+  
+In simple linear regression, we define a linear relationship between a continuous dependent response, $y_i$, and an independent continuous regressor variable, $x_1$ as:
+
+$$y_{i} = \beta_0 + \beta_1 \cdot x_{1} + \epsilon_{i}$$
+where $\beta_0$ and $\beta_1$ are an intercept term and regression coefficient, respectively. The last term, $\epsilon_i$, is the regression error assumed to be distributed as: $\epsilon_i \sim N(0, \sigma^2)$. The index $i$ refers to the $i^{th}$ observation. With some additional considerations, this model can also be theoretically extended to k multiple regressor variables, e.g. $x_2, x_3, \ldots, x_k$ and their corresponding coefficients, $\beta_2, \beta_3, \ldots, \beta_k$.  
+  
+Regression models have various uses including prediction of the response $y_i$, description and exploration of potential relationships between variables, and structural comparisons of estimated relationships between groups.
+
+# Data used in examples
+  
+  
+## Photosynthesis
+Two data examples will be used here. The first is adapted from Steele and Torrie, _Principles and Procedures of Statistics: A Biometrical Approach_, McGraw-Hill Book Co., 1980, pg 244. These data describe a study investigating the changes in the response, photosynthetic rate, that correspond to changes in two regressor variables: irradiation level and leaf resistance to water vapor.  A data step to read in these data would be:
+
+```{r data1, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=TRUE, engine.opts=sasopts, comment=""}
+data photo;
+    input photo irrad resist;
+    cards;
+    348     294      990
+    131     190      968
+    402     294      1868
+    731     550      1814
+    526     550      2521
+    1346    2000     1516
+    655     550      1935
+    360     550      4675
+    618     550      2234
+    1385    2000     1158
+    1550    2000     985
+    1415    2000     1697
+    1467    2000     646
+    842     800      1086
+    927     800      998
+    1099    1200     911
+    1086    1200     765
+    910     1200     1284
+    1255    1600     915
+    1137    1600     1410
+    349     400      4111
+    498     400      1802
+    989     800      801
+    829     800      983
+;
+```
+  
+## Soybean Yield  
+
+The second set of data is taken from Allen and Cady, _Analyzing Experimental Data by Regression_, Lifetime Learning Pub., 1982, pg 234 and describes soybean yields as they relate to plant height with an additional qualitative factor describing the controlled lighting conditions: 1) Ambient light, 2) Additional artificial light, and 3) Partial shading. The SAS code for reading this data is:
+
+```{r data2, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=TRUE, engine.opts=sasopts, comment=""}
+data soybean;
+    input yield height treatment;
+    cards;
+    12.2    48  1
+    12.4    52  1
+    11.9    42  1
+    11.3    35  1
+    11.8    40  1
+    12.1    48  1
+    13.1    60  1
+    12.7    61  1
+    12.4    50  1
+    11.4    33  1
+    12.3    48  1
+    12.2    51  1
+    12.6    56  1
+    13.2    65  1
+    12.3    51  1
+    16.6    63  2
+    15.8    50  2
+    16.5    63  2
+    15.0    33  2
+    15.4    38  2
+    15.6    45  2
+    15.8    50  2
+    15.8    48  2
+    16.0    50  2
+    15.0    35  2
+    16.2    50  2
+    16.7    62  2
+    15.8    49  2
+    15.9    52  2
+     9.5    52  3
+     9.5    54  3
+     9.6    58  3
+     8.8    45  3
+     9.5    57  3
+     9.8    62  3
+     9.1    52  3
+    10.3    67  3
+     9.5    55  3
+     8.5    40  3
+     8.6    41  3
+    10.4    67  3
+     9.4    55  3
+    10.2    66  3
+     9.3    56  3
+;
+run;
+```
+  
+  
+# Simple Linear Regression
+## Initial steps
+
+A first step in regression analysis should always be an examination of the data. Graphical methods in simple linear regression are particularly useful. Here we use the first data set to produce a scatter plot looking at photosynthesis rate vs irradiance using the general plotting procedure **PROC SGPLOT**.
+  
+```{r Example1, engine="sashtml", engine.path=saspath, include=TRUE, engine.opts=sasopts, comment=""}
+title1 'Least Squares Regression';
+
+proc sgplot data=photo;
+	scatter y=photo x=irrad/; 
+	xaxis label='Irradiation' LABELATTRS=( Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+	yaxis label="Photosynthesis Rate" LABELATTRS=( Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+title2 'Observed Data';
+run;
+```
+This initial plot is useful for discerning characteristics of potential relationships. Here we see that the relationship between photosynthesis and irradiation is positive. We can also see that this relationship is more or less proportional or linear. Hence, a linear regression is a plausible model for these data and we expect that any estimated model should reflect the positive direction of the relationship.
+  
+  
+## Estimation and Diagnostics
+
+A common means of estimating linear regression models in SAS is the procedure **PROC REG**. While there are other procedures that can accomplish this task, the REG procedure has more diagnostic functionality built into it that make it the best choice for a fixed linear regression. As with all SAS procedures, there are required and optional statements. A summary of these is shown below.  
+
+### Required Statements
+
+**MODEL**: The only required statement under **PROC REG** is the **MODEL** statement. This statement defines the model as well as the order in which variables are included. The general form of the **MODEL** statement is: *Dependent var* = *Regressor var's* / *option1 option2* ...  Here, *dependent var* is a numeric response (the variable to be modeled) and *regressor var's* is a list of one or more numeric variables paired with the *dependent var*. In most applications, both dependent variables and regressor variables are continuous, numeric values. *Options* are keywords which specify various details of the analysis, and as usual in SAS, they are listed at the end of a statement after a slash (/). More than one **MODEL** statement can be used in each call to **PROC REG**, if needed.  
+
+Unlike the **MODEL** statement of other procedures, **PROC REG** does not allow the use of crossed or nested terms. Thus, the symbols \*, |, and () should not appear in the **MODEL** statement. If a crossed term is required in the model, it must be explicitly defined in a preceding **DATA STEP** or read in with the original data.  
+
+**MODEL Statement Options**: **PROC REG** provides a wide array of options for regression analysis. All of these, however, fall into three broad categories. Printing options determine what details of the analysis should be printed in the output. Examples would be *P*, *CLM*, or *I* for predicted values, prediction intervals, and the $(X' X)^{-1}$ matrix, respectively. The second type of options are diagnostic. Examples include *R*, *DW*, and *INFLUENCE*, for a preliminary residual analysis, the Durbin-Watson statistic, and influence statistics, respectively. The last category of options are used to specify the model itself. Examples of these might be *NOINT*, *SELECTION*, and *INCLUDE*. These, in order, result in the fit of a model with no intercept, requesting REG use various model selection procedures when multiple regressor variables are present, and providing a list of regressor variables that must be included in all models tested.  
+  
+  
+**OUTPUT**: The **OUTPUT** statement will save requested regression statstics to a new SAS data set. Examples of these would be predicted values, raw or studentized residuals, confidence intervals, etc. The format of the **OUTPUT** statement is: *OUTPUT OUT=(data set name) option=name1 option=name2 ...*, where the options might be *P* for predicted values, *RSTUDENT* or *R* for studentized or raw residuals, respecively, or *L95M* and *U95M* for lower and upper 95% confidence intervals on the estimated model. The *name1*, *name2*, etc. give the SAS variable names for the respective output statistics. Although **PROC REG** produces many diagnostic statsitics and plots by default, outputting these statistics to a separate data set allows SAS to utilize them in other procedures, such as further computation or more sophisticated plotting.   
+
+The code below demonstrates a call to **PROC REG** for the photosynthesis data set. The predicted values and residuals are saved to the output data set, *STATS*.  
+  
+```{r Example2, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=TRUE, engine.opts=sasopts, comment=""}
+
+proc reg data=photo;
+    model photo=irrad ;
+	output out=stats p=pred_photo r=resid rstudent = student;
+run;
+```
+  
+  
+From the resulting output, we can see that there were n=24 observations used. In the ANOVA table, there were 23 total degrees of freedom (DF=n-1), 1 DF for the model and 23-1=22 DF for the error term. The model F test (model mean square/error mean square) is large (F=221.2; p=0.0001) indicating a relationship is detectable. Some summary information for CV, $r^2$, and other statistics are given in the next table. The final table gives the estimated parameter values for the intercept and the regression coefficient. The intercept, or predicted photosynthetic rate when irradiation = 0, is 245.4 and the rate of change in photosynthesis with increasing irradiation is 0.62. This value is positive, as expected, has a small p-value, and estimates that photosynthetic rate will increase 0.62 units for every unit increase in irradiation.  
+
+The final section are default graphics displaying various residual and other diagnostics. For example, the studentized residual plots indicate the residuals were of reasonable magnitude (under normality assumptions we expected them to be between 2 to 3 units of the mean of 0) and have a somewhat random distribution (there may be some curvature in the residual pattern indicating a linear model may not completely capture this response relationship). The Cook's D plot suggests that the second data point may be high leverage affecting the regression because it is above the reference line. The final two plots display a larger version of the raw residuals and the predicted line with 95% confidence bounds on the model (shaded area) and individual points (dashed lines). Overall, this model seems to adequately provide a simple description of the relationship between photosynthetic rate and irradiation. For more information on regression and regression diagnostics, see: *Applied Linear Regression Models.* Kutner, Nachtsheim, and Neter and *Regression Diagnostics: Identifying Influential Data and Sources of Collinearity.* Belsley, Kuh, and Welsch.
+  
+We can also produce some of these plots using the output data set *STATS*. This data set contains all the original data from data set *PHOTO* with the additional statistics we requested. The code below uses this output data set to produce a more customizable version of these plots.
+
+```{r Example3, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=TRUE, engine.opts=sasopts, comment=""}
+
+proc print data=stats;
+run;
+
+proc sgplot data=stats;
+	scatter y=photo x=irrad/FILLEDOUTLINEDMARKERS markerattrs=(symbol=circlefilled size=14) MARKERFILLATTRS= (color=blue)
+     MARKEROUTLINEATTRS=(color=black); 
+	series y=pred_photo x=irrad;
+	xaxis label='Irradiation' LABELATTRS=( Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+	yaxis label="Photosynthesis Rate" LABELATTRS=( Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+title2 'Observed vs Predicted';
+run;
+	
+proc sgplot data=stats;
+	scatter y=resid x=pred_photo/FILLEDOUTLINEDMARKERS markerattrs=(symbol=circlefilled size=14) MARKERFILLATTRS= (color=green)
+     MARKEROUTLINEATTRS=(color=black); 
+	refline 0/axis=y;
+	xaxis label='Predicted Value' LABELATTRS=( Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+	yaxis label="Residual" LABELATTRS=( Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+title2 'Raw residuals vs Predicted';
+run;
+
+proc sgplot data=stats;
+	scatter y=student x=pred_photo/FILLEDOUTLINEDMARKERS markerattrs=(symbol=circlefilled size=14) MARKERFILLATTRS= (color=orange)
+     MARKEROUTLINEATTRS=(color=black); 
+	refline 0/axis=y;
+	xaxis label='Predicted Value' LABELATTRS=( Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+	yaxis label="Studentized Residual" LABELATTRS=( Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+title2 'Studentized Residuals vs Predicted';
+run;
+```
+# Multiple Linear Regression
+
+In this example, we extend the analysis above to multiple regression by examining the relationship of photosynthesis rate with both irradiation and resistance to water vapor. As with simple linear regression, a good place to start is to examine the potential individual relationships graphically. The resulting plots may not be as clear as a simple linear model because the two variables can be influencing the response simultaneously, however, general patterns can often be seen.  
+  
+  
+```{r Example4, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=TRUE, engine.opts=sasopts, comment=""}
+
+title1 'Multiple Regression';
+
+proc sgplot data=photo;
+	scatter y=photo x=irrad/; 
+	xaxis label='Irradiation' LABELATTRS=(Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+	yaxis label="Photosynthesis Rate" LABELATTRS=( Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+title2 'Observed Data: Irradiation';
+run;
+
+proc sgplot data=photo;
+	scatter y=photo x=resist/; 
+	xaxis label='Water Vapor Resistance' LABELATTRS=(Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+	yaxis label="Photosynthesis Rate" LABELATTRS=( Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+title2 'Observed Data: Resistance';
+run;
+
+```
+
+The plot for irradiance is unchanged from previously. The new plot for resistance indicates a possible negative relationship with photosynthesis rate.  
+  
+## Diagnostics  
+
+While the modeling process and many diagnostics are the same for multiple regression, introducing two or more regressor variables into the model requires additional considerations and diagnostics. Specifically, we now must consider whether the regressors are related to one another. This is referred to as collinearity and can cause problems through inflated variability. SAS provides the means to assess this through **COLLIN** and **VIF** options on the **MODEL** statement as well as the default and additional plotting options.
+
+```{r Example5, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=TRUE, engine.opts=sasopts, comment=""}
+
+proc reg data=photo plots = DFBetas(label);
+    model photo=irrad resist/r influence collinoint vif;
+	output out=stats p=pred_photo r=resid rstudent = student;
+run;
+
+```
+  
+In this model there are now two degrees of freedom, one for each regressor, and the model has a large F value (150.56, p < 0.0001). The $r^2$ has increased to $r^2=0.93$ from the simple linear example above ($r^2=0.91$), however, some caution is warranted as this measure will inherently increase as regressors are added to the model. The parameter estimates table gives more information. Both regressors have large t values and corresponding smaller p-values suggesting they are relevant in the relationship to photosynthetic rate. As before, the coefficient for irradiation is positive, although a bit smaller than the previous estimate, and as suspected from the initial data plots, the coefficient for water vapor resistance is negative. The last column in this table gives the VIF or, variance inflation factor, for each regressor. This statistic is computed from the multiple correlation, $r^2_i$, of each regressor relative to the other regressors, i.e. 
+$$VIF = 1/(1 - r^2_i)$$
+where i refers to the $i^{th}$ regressor. For 'large' sample sizes, values larger than 1 may indicate collinearity. In this case, both values are larger than 1, however, the sample size is not that large at n=24, so this cutoff may not be a good measure.  
+  
+The next table gives further metrics for assessing collinearity. The condition index is conputed from a variance decomposition routine. Values above 10 are usually considered problematic. Both regressors fall well below this value. The last measures are the proportion of variance values. Starting with the smallest eigenvalue (0.6195) the proportion for each variable is 0.69. Again, for large sample sizes, a cutoff of above 0.5 is often suggested for indicating collinearity problems, however, given the lower sample size here, these probably are not an issue even though they are greater than 0.5.  
+  
+The final table gives influence statistics for each observation. Some of these are repeated from the plots. The DFFits and DFBetas statistics, however, are new. These respectively measure how much each observation influences the model fit, or the respective parameter estimates. Larger values may point to observations that have more influence on the regression fit compared to the other data. Here, the second observation appears to have the most influence. One way to see this graphically is the *plots=dfbetas(label)* option in the **PROC REG** call (labeled *Influence diagnotics for photo*). Although some other points (1 and 23) are slightly beyond the reference lines, this plot shows the second observation to be quite different from the other observations. Notably, this observation also was indicated in the Cook's D, residual, and leverage plots. A good rule of thumb when lookig at any statistical diagnostic is not to rely on one measure or strict cutoff values for decision making, but rather to make a decision across several metrics. In this case we would want to go back and reassess the second data point. Was it recorded correctly? Are there any field notes relevant to that point that may call into question it's validity. That said, typically, you should NOT delete observations unless you have a defensible reason for doing so. Many times in scientific investigations, it is the data that do not fit the model that are the most informative.  
+  
+#  Comparing regression lines (Dummy Variable Regression, DVR)
+## Introduction - defining dummy variables 
+
+One common use of regression is the incorporation of qualitative treatment structures. Doing so allows the comparison of model relationships based on different subsets of the data. This, however, requires that the models be of the same mathematical form, i.e. parameter estimates from linear models with different regressors are not comparible. All the models used should also fit their respective data well. In this technique, the models will be a proxy for the data, so they should represent the data in a reliable fashion. Given these constraints, two or more models can be compared by combining the models into a single *full* model via a special class of regressors, dummy variables. Dummy variables are binary, usually coded as [0,1] that act like an on off switch corresponding to the different qualitative or treatment variable levels. A full dummy variable model allows the user to estimate all treatment regression models simultaneously and compare combinations of parameters across the models as needed to test hypotheses of interest.  
+  
+Suppose, for example, we have two treatments and have linear regression models for each:
+
+$$y_{i1} = \beta_{01} + \beta_{11} \cdot x_{i} + \epsilon_{i1} \hspace{5cm} (1)$$   
+  
+$$y_{i2} = \beta_{02} + \beta_{12} \cdot x_{i} + \epsilon_{i2}  \hspace{5cm} (2)$$  
+  
+  
+where the second subscript refers to treatment 1 or 2. Together, we have four parameters, two intercepts and two slopes. It may be of interest, for example, to compare the two slope parameters, $\beta_{11}$ and $\beta_{12}$. To do this we would need a common pooled estimate of the error, however, our models each have their own error terms, $\epsilon_{i1}$ and $\epsilon_{i2}$. In order to build a single *full* model with one common error term, we define new binary *dummy* variables that encode the treatment structure:  
+  
+$$ D_1 = \begin{bmatrix} 1 \hspace{1cm} if \hspace{.2cm} treatment = 1\\ 0 \hspace{1cm} if \hspace{.2cm} treatment = 2 \end{bmatrix}$$
+$$ D_2 = \begin{bmatrix} 0 \hspace{1cm} if \hspace{.2cm} treatment = 1\\ 1 \hspace{1cm} if \hspace{.2cm} treatment = 2 \end{bmatrix}$$
+We can now write a full model as:
+  
+  
+$$ y_i = (D_1 \cdot \beta_{01} + D_2 \cdot \beta_{02})  \hspace{.2cm} +  \hspace{.2cm} (D_1 \cdot \beta_{11} + D_2 \cdot \beta_{12}) \cdot x_i \hspace{.2cm} +  \hspace{.2cm} \epsilon_i  \hspace{5cm} (3) $$
+  
+  
+If we pick up an observation from treatment 1, then $D_1=1$ and $D_2=0$ and the full model reduces to model (1) above. If we have an observation from treatment 2, the full model returns model (2). Most importantly, we now have one common pooled error term, $\epsilon_i$ and can proceed to define contrasts to test hypotheses involving comparison of the regression parameters. This concept can be extended to any number of treatments by defining additional dummy variables, however, some caution is advised as the number of estimated parameters will increase with each treatment we add.  
+  
+Some may recognize this model as Analysis of Covariance (ANCOVA), where the model contains both continuous variables and qualitative factors. In fact, the two models are equivalent mathematically, however, they differ in their objectives. ANCOVA seeks to adjust mean comparisons of qualitative treatment effects using continuous covariates, while DVR focuses on comparing the continuous relationships across qualitative factors. Beware that DVR is sometimes incorrectly referred to as ANCOVA and, while they are mathematically equivalent, they have different analytical goals.   
+  
+In SAS, either **PROC REG** or more general linear model procedures such as **PROC GLM**, **PROC MIXED**, or **PROC GLIMMIX** can be used to fit a full model. Although it is technically possible in **PROC REG**, using that method requires manually defining dummy variables and their interactions separately for each treatment in a data step. A more expedient method uses the general linear model procedures which define dummy variables internally. In this example we will concentrate on the procedure **PROC GLM** for the fixed model case. Extension to mixed models through **PROC MIXED** or **PROC GLIMMIX** is also possible and similar enough that users can simply apply these principles to those procedures.  
+
+### Example using Soybean yield data  
+
+  The following code estimates the simple linear regression of soybean yield as a function of plant height, separately for each treatment. The procedure **PROC REG** is used for the initial estimation and a **BY** statement is used to process each treatment independently. Note that sorting the data by treatment is necessary before doing this. Diagnostic plots are omitted here for brevity. In a real analysis, however, this step would be used with full diagnostic evaluation, as shown in the previous examples above, to ensure that each treatment regression was adequate and representative of the data.
+  
+```{r Example6, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=TRUE, engine.opts=sasopts, comment=""}
+proc sort data= soybean;
+  by treatment;
+run;
+
+proc reg data=soybean plots=none;
+  model yield = height;
+  by treatment;
+run;
+```
+
+Assuming the previous regressions fit the data well, the next step is to form and estimate the full model using **PROC GLM**. We use this procedure because it can utilize the **CLASS** statement for the qualitative variable treatment. Internally, this causes SAS to define dummy variables for each treatment level, which can then be entered into the GLM MODEL statement.  In the model, the term *treatment* codes for the intercept parameters and the interaction *treatment\*height* codes for the slopes. The *noint* option is used because we have explicitly given SAS our own intercepts, and the *solution* option has GLM print the estimates, which is does not do by default. Contrast statements are added to test two hypotheses:  
+
+$H_0: \beta_{11} - \beta_{12} = 0$ ; are the two light treatments, 1 and 2, equivalent in their slope values, and  
+$H_0: \frac{(\beta_{11} + \beta_{12})}{2} - \beta_{13} = 0$ ; is the average slope of the light treatments equivalent to the shaded treatment.
+
+```{r Example7, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=TRUE, engine.opts=sasopts, comment=""}
+proc glm data=soybean;
+  class treatment;
+  model yield = treatment treatment*height/ ss3 noint solution;
+  contrast 'Compare light treatment slopes' treatment*height 1 -1 0;
+  contrast 'Compare average light treatment slope to shaded slope' treatment*height 1 1 -2;
+run;
+```
+
+Some notes from this output: The total number of observations, 44, is the sum of each treatment *n* from the regressions above. There are now 6 degrees of freedom in the model, one for each parameter: Three intercepts and three slopes. The tests on *treatment* and *treatment\*height* evaluate whether any of the intercepts or slopes are zero, respectively (we already know they are different from zero from the preceeding regression analyses).  
+  
+The two contrasts are listed below the ANOVA table. The F test for the first is small and has a large p-value, hence we would conclude that the two slopes of the light treatments are similar. The second contrast has a larger F value and p-value of 0.04, indicating there is some evidence that the shaded slope differs from the light treatments. The plot of observed and predicted values for each treatment supports this showing the shaded treatment to have a slightly steeper slope than the lighted treatments.  
+  
+Lastly, note that the parameter estimates shown from the *solution* option in the MODEL statement are **exactly** the same as the preceeding regression outputs.This should always be true and should always be checked to ensure the formulated full model is correct.  
+
+
+# References:  
+  
+*Applied Linear Regression Models.* Kutner, M.H. and Nachtsheim, C. and Neter, J., McGraw-Hill/Irwin, 2004.  
+
+*Regression Diagnostics: Identifying Influential Data and Sources of Collinearity.* David A. Belsley, Edwin Kuh, Roy E. Welsch. John Wiley & Sons, 2005 - Mathematics - 292 pg.  
+  
+

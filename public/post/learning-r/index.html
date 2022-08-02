@@ -1,0 +1,1268 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.0.0-beta.3 for Hugo" />
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Statistical Programs" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="R is notoriously difficult, finicky and at times, needlessly challenging (note that I just said the same thing three times, but the repetition is for emphasis). R is also powerful, flexible and extraordinarily nimble." />
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/learning-r/" />
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    <meta name="theme-color" content="#1565c0" />
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha512-W0xM4mr6dEP9nREo7Z9z+9X70wytKvMGeDsj7ps2+xg5QPrEBXC8tAW1IFnzjR6eoJ90JmCnFzerQJTLzIEHjA==" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.003d2be57501b5669ca58ef75468ece2.css" />
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+    <link rel="alternate" href="/post/learning-r/index.xml" type="application/rss+xml" title="Idaho Ag Stats" />
+  
+
+  
+    <link rel="manifest" href="/index.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_32x32_fill_lanczos_center_2.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_180x180_fill_lanczos_center_2.png" />
+
+  <link rel="canonical" href="/post/learning-r/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image" />
+  
+  <meta property="og:site_name" content="Idaho Ag Stats" />
+  <meta property="og:url" content="/post/learning-r/" />
+  <meta property="og:title" content="Resources for Learning R | Idaho Ag Stats" />
+  <meta property="og:description" content="R is notoriously difficult, finicky and at times, needlessly challenging (note that I just said the same thing three times, but the repetition is for emphasis). R is also powerful, flexible and extraordinarily nimble." /><meta property="og:image" content="/post/learning-r/featured.jpg" />
+    <meta property="twitter:image" content="/post/learning-r/featured.jpg" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2022-06-01T00:00:00&#43;00:00"
+      />
+    
+    <meta property="article:modified_time" content="2022-06-01T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/learning-r/"
+  },
+  "headline": "Resources for Learning R",
+  
+  "image": [
+    "/post/learning-r/featured.jpg"
+  ],
+  
+  "datePublished": "2022-06-01T00:00:00Z",
+  "dateModified": "2022-06-01T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Julia Piaskowski"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Agricultural Statistical Programs",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "R is notoriously difficult, finicky and at times, needlessly challenging (note that I just said the same thing three times, but the repetition is for emphasis). R is also powerful, flexible and extraordinarily nimble."
+}
+</script>
+
+  
+
+  
+
+  
+
+  
+
+<link rel="alternate" type="application/rss+xml" href="/post/learning-r/index.xml" title="Idaho Ag Stats" />
+
+
+
+  <title>Resources for Learning R | Idaho Ag Stats</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="22fbdc53a7beed0471add610775ef731" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.eca9bbc7a71accd5ebd9eee0ff004132.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container-xl">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Idaho Ag Stats</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Idaho Ag Stats</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/post"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"><span>Events</span><span class="caret"></span>
+          </a>
+          <div class="dropdown-menu">
+            
+              <a class="dropdown-item" href="/events/presentations"><span>Presentations</span></a>
+            
+              <a class="dropdown-item" href="/events/workshops"><span>Workshops</span></a>
+            
+          </div>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/tutorials"><span>Tutorials</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/index.xml"><i class='fa fa-rss'></i><span></span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+          
+          <li class="nav-item d-none d-lg-inline-flex">
+            <a class="nav-link" href="/"  aria-label="">
+              <i class="fas fa-" aria-hidden="true"></i>
+            </a>
+          </li>
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>Resources for Learning R</h1>
+
+  
+  <p class="page-subtitle">Free tutorials to help you learn R</p>
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+  <span >
+      <a href="/authors/jpiaskowski/">Julia Piaskowski</a></span>
+  </div>
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Jun 1, 2022
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    2 min read
+  </span>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/r/">R</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 680px;">
+  <div style="position: relative">
+    <img src="/post/learning-r/featured_hu418bc97a532b1302459cbd9deb2a4343_185105_720x0_resize_q75_lanczos.jpg" alt="" class="featured-image">
+    <span class="article-header-caption">Image from <b>How to Keep Your Volkswagen Alive</b> by John Muir and Gregg Tosh</span>
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>R is notoriously difficult, finicky and at times, needlessly challenging (note that I just said the same thing three times, but the repetition is for emphasis). R is also powerful, flexible and extraordinarily nimble. If you want to try out that great new thing, it&rsquo;s probably possible to do it in R without programming it from scratch. But, I&rsquo;m not doing you any favors by pretending that learning R is easy and painless. It is hard. R is a powerful programming language, and as usual, with great power, comes <em>a lot</em> of learning, practice and preparation to know how to use those powers.</p>
+<p><img src="R_is_hard.png" alt=""></p>
+<p>In time, you may find you truly love solving the various logic puzzles R puts before you. Or not.  Regardless, I wish you the best on your journey to learning R. This far from a comprehensive list (that&rsquo;s not the point), but here are a few resources to help get you started.</p>
+<h2 id="resources-for-the-beginner-r-user">Resources for the Beginner R User</h2>
+<ul>
+<li><a href="https://rstudio.cloud/learn/primers" target="_blank" rel="noopener">RStudio Primers</a></li>
+<li><a href="https://rstudio-conf-2020.github.io/r-for-excel/]" target="_blank" rel="noopener">R for Excel Users</a></li>
+<li><a href="https://swcarpentry.github.io/r-novice-gapminder/" target="_blank" rel="noopener">R for Reproducible Research</a></li>
+<li><a href="https://datacarpentry.org/R-ecology-lesson/01-intro-to-r.html" target="_blank" rel="noopener">Short Introduction to R</a></li>
+<li><a href="https://bookdown.org/ndphillips/YaRrr/" target="_blank" rel="noopener">YaRrr! The Pirate’s Guide to R</a></li>
+<li><a href="https://www.edx.org/learn/r-programming" target="_blank" rel="noopener">EdX short courses</a></li>
+</ul>
+<h2 id="resources-for-the-intermediate-r-user">Resources for the Intermediate R User</h2>
+<ul>
+<li><a href="https://r4ds.had.co.nz/" target="_blank" rel="noopener">R 4 Data Science</a></li>
+<li><a href="https://rstats.wtf/" target="_blank" rel="noopener">What They Forgot to Teach You (about R)</a></li>
+</ul>
+<h2 id="miscellaneous-very-useful-resources">Miscellaneous very useful resources</h2>
+<ul>
+<li><a href="https://www.rstudio.com/resources/cheatsheets/" target="_blank" rel="noopener">RStudio cheatsheets</a></li>
+<li><a href="https://r-graphics.org/" target="_blank" rel="noopener">R Graphics Cookbook</a> (a ggplot resource)</li>
+<li><a href="https://bookdown.org/yihui/rmarkdown/" target="_blank" rel="noopener">Rmarkdown: the Definitive Guide</a></li>
+<li><a href="https://rweekly.org/" target="_blank" rel="noopener">Rweekly Blog</a> (great place to learn about updates to the R ecosystem)</li>
+<li><a href="https://education.rstudio.com/learn/beginner/" target="_blank" rel="noopener">R Studio Resources</a> (there&rsquo;s so much here!)</li>
+<li><a href="https://www.youtube.com/c/RStudioPBC" target="_blank" rel="noopener">RStudio YouTube Channel</a></li>
+<li><a href="https://happygitwithr.com/" target="_blank" rel="noopener">Happy Git with R</a></li>
+<li><a href="https://adv-r.hadley.nz/" target="_blank" rel="noopener">Advanced R</a> (book, it is rather advanced)</li>
+</ul>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/r/">R</a>
+  
+  <a class="badge badge-light" href="/tag/beginner-r-user/">beginner R user</a>
+  
+  <a class="badge badge-light" href="/tag/learning-r/">learning R</a>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+
+
+
+  
+  
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="/authors/jpiaskowski/"><img class="avatar mr-3 avatar-circle" src="/authors/jpiaskowski/avatar_hue4a77a7c1beaa41bc4aa3fc7c99a9d6f_6498082_270x270_fill_lanczos_center_2.png" alt="Julia Piaskowski"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/authors/jpiaskowski/">Julia Piaskowski</a></h5>
+      <h6 class="card-subtitle">Statistician</h6>
+      <p class="card-text">My research interests include plant genetics, spatial statistics and how to implement open science and reproducible research practices routinely.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/SeedsandBreeds" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.com/citations?user=PMN2WZEAAAAJ" target="_blank" rel="noopener">
+        <i class="fas fa-graduation-cap"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/jpiaskowski" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/julia-piaskowski-4623145a" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/keeping-up-with-r/">R packages for Agricultural Research</a></li>
+      
+      <li><a href="/post/help-in-r/">Finding Help in R</a></li>
+      
+      <li><a href="/post/getting-r-setup/">Getting R Set Up</a></li>
+      
+      <li><a href="/post/reproducible-r/">Quick Tricks and Tips for Reproducible Research in R</a></li>
+      
+      <li><a href="/events/presentations/agstats-conference-2022/">Tools and Resources for R Users in Agricultural Research</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+    
+    
+<style type="text/css" media="screen">
+    .revue-embed {
+    background: #FEF7DF;
+    /*font-family: 'Lato', sans-serif;
+    color: #FDFCFB;*/
+    text-align: center;
+    border-radius: 5px;
+}
+
+form {
+    width: 80%;
+    margin: 0.5em auto;
+}
+
+.revue-header {
+    font-size: 26px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding-top: 0.5em;
+    padding-bottom: 1em;
+}
+
+.revue-description {
+    font-size: 15px;
+    letter-spacing: 1px;
+    line-height: 1.3em;
+    margin: -2px 0 45px;
+}
+
+.revue-input {
+    display: flex;
+    align-items: center;
+    padding-bottom: 2em;
+}
+
+.button {
+    height: 44px;
+    border: none;
+}
+
+#member_email {
+    width: 65%;
+    font-size: 14px;
+    background: #FDFCFB;
+    font-family: inherit;
+    color: #737373; 
+    letter-spacing: 1px;
+    text-indent: 5%;
+    border-radius: 5px 0 0 5px;
+}
+
+#member_submit {
+    width: 35%;
+    height: 46px;
+    font-size: 14px;
+    background: #FB4646;
+    font-family: inherit;
+    font-weight: bold;
+    color: inherit;
+    letter-spacing: 1px;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: background .3s ease-in-out;
+}
+
+#member_submit:hover {
+    background: #3AEBDA;
+}
+
+input:focus {
+    outline: none;
+    outline: 2px solid #3AEBDA;
+    box-shadow: 0 0 2px #3AEBDA;
+}
+
+</style>
+<link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+
+<div id="revue-embed" class="revue-embed">
+    <form action="https://tinyletter.com/idahoagstats/" method="post" id="revue-form" name="revue-form"
+          target="popupwindow" onsubmit="window.open('https://tinyletter.com/idahoagstats', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true">
+      
+      
+      
+        <div class="revue-header">
+            <p>Sign up for our newsletter</p>
+        </div>
+        <div class="revue-description">
+            <p>Agricultural statistical content focused on R and SAS, along with info about upcoming workshops, lectures, and trainings relevant to these topics</p>
+            <p>Sent monthly (thereabouts)</p>
+        </div>
+        <div class="revue-input">
+            <input type="email" class="button" name="email" id="member_email" placeholder="Your email address">
+            <input type="hidden" name="embed" value="1">
+            <input type="submit" class="button" id="member_submit" value="Subscribe"/>
+        </div>
+    
+</div>
+
+
+        
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    Copyright @ 2022 by the <a href="https://www.uidaho.edu/cals/statistical-programs">University of Idaho Statistical Programs</a>. <br> Built with <a href="https://wowchemy.com/">Wowchemy</a>, a free open-source web builder.
+  </p>
+
+  
+  
+
+
+
+
+
+
+
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.4/mermaid.min.js" integrity="sha512-as1BF4+iHZ3BVO6LLDQ7zrbvTXM+c/1iZ1qII/c3c4L8Rn5tHLpFUtpaEtBNS92f+xGsCzsD7b62XP3XYap6oA==" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/python.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/latex.min.js"></script>
+        
+      
+
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    <script src="/js/_vendor/bootstrap.bundle.min.f81d0a1705048649befc8b595e455a94.js"></script>
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.e20609e6ad3f7fce339ee2e74f13682b.js"></script>
+
+    
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+
+
+</body>
+</html>

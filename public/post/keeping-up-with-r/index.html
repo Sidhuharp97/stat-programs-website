@@ -1,0 +1,1321 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.0.0-beta.3 for Hugo" />
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Statistical Programs" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Last updated r format(Sys.Date(), &#39;%B %d, %Y&#39;)
+Agriculture encompasses a broad breadth of disciplines. Many, many package in base R and contributed packages are useful to agricultural researchers. For that reason, this is not exhaustive list of packages useful to agricultural research." />
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/keeping-up-with-r/" />
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    <meta name="theme-color" content="#1565c0" />
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha512-W0xM4mr6dEP9nREo7Z9z+9X70wytKvMGeDsj7ps2+xg5QPrEBXC8tAW1IFnzjR6eoJ90JmCnFzerQJTLzIEHjA==" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.003d2be57501b5669ca58ef75468ece2.css" />
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+    <link rel="alternate" href="/post/keeping-up-with-r/index.xml" type="application/rss+xml" title="Idaho Ag Stats" />
+  
+
+  
+    <link rel="manifest" href="/index.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_32x32_fill_lanczos_center_2.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_180x180_fill_lanczos_center_2.png" />
+
+  <link rel="canonical" href="/post/keeping-up-with-r/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image" />
+  
+  <meta property="og:site_name" content="Idaho Ag Stats" />
+  <meta property="og:url" content="/post/keeping-up-with-r/" />
+  <meta property="og:title" content="R packages for Agricultural Research | Idaho Ag Stats" />
+  <meta property="og:description" content="Last updated r format(Sys.Date(), &#39;%B %d, %Y&#39;)
+Agriculture encompasses a broad breadth of disciplines. Many, many package in base R and contributed packages are useful to agricultural researchers. For that reason, this is not exhaustive list of packages useful to agricultural research." /><meta property="og:image" content="/post/keeping-up-with-r/featured.jpg" />
+    <meta property="twitter:image" content="/post/keeping-up-with-r/featured.jpg" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2022-05-13T00:00:00&#43;00:00"
+      />
+    
+    <meta property="article:modified_time" content="2022-05-13T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/keeping-up-with-r/"
+  },
+  "headline": "R packages for Agricultural Research",
+  
+  "image": [
+    "/post/keeping-up-with-r/featured.jpg"
+  ],
+  
+  "datePublished": "2022-05-13T00:00:00Z",
+  "dateModified": "2022-05-13T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Julia Piaskowski"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Agricultural Statistical Programs",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "Last updated r format(Sys.Date(), '%B %d, %Y')\nAgriculture encompasses a broad breadth of disciplines. Many, many package in base R and contributed packages are useful to agricultural researchers. For that reason, this is not exhaustive list of packages useful to agricultural research."
+}
+</script>
+
+  
+
+  
+
+  
+
+  
+
+<link rel="alternate" type="application/rss+xml" href="/post/keeping-up-with-r/index.xml" title="Idaho Ag Stats" />
+
+
+
+  <title>R packages for Agricultural Research | Idaho Ag Stats</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="fc20067a9011f2b776cfd94bed866532" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.eca9bbc7a71accd5ebd9eee0ff004132.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container-xl">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Idaho Ag Stats</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Idaho Ag Stats</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/post"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"><span>Events</span><span class="caret"></span>
+          </a>
+          <div class="dropdown-menu">
+            
+              <a class="dropdown-item" href="/events/presentations"><span>Presentations</span></a>
+            
+              <a class="dropdown-item" href="/events/workshops"><span>Workshops</span></a>
+            
+          </div>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/tutorials"><span>Tutorials</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/index.xml"><i class='fa fa-rss'></i><span></span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+          
+          <li class="nav-item d-none d-lg-inline-flex">
+            <a class="nav-link" href="/"  aria-label="">
+              <i class="fas fa-" aria-hidden="true"></i>
+            </a>
+          </li>
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>R packages for Agricultural Research</h1>
+
+  
+  <p class="page-subtitle">Finding the R packages that support your research</p>
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+  <span >
+      <a href="/authors/jpiaskowski/">Julia Piaskowski</a></span>
+  </div>
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    May 13, 2022
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    17 min read
+  </span>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/r/">R</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 585px;">
+  <div style="position: relative">
+    <img src="/post/keeping-up-with-r/featured_hu0058b93ba53eb1c3b2476610a3d118a5_367200_720x0_resize_q75_lanczos.jpg" alt="" class="featured-image">
+    <span class="article-header-caption">Map of Australia as R package hex stickers; image credit: <a href="https://www.mitchelloharawild.com/blog/user-2018-feature-wall/">Mitchell O&rsquo;Hara-Wild</a></span>
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>Last updated <code>r format(Sys.Date(), '%B %d, %Y')</code></p>
+<p>Agriculture encompasses a broad breadth of disciplines. Many, many package in base R and contributed packages are useful to agricultural researchers. For that reason, this is not exhaustive list of packages useful to agricultural research. This is intended to cover major packages that in most cases, have been developed to support agricultural research and analytical needs.</p>
+<p>Note that some of these packages are on CRAN and others are on GitHub, Bioconductor, or R-forge.</p>
+<p>If you think that a package is missing from this list, please let us know by <a href="https://github.com/jpiaskowski/ctv-agriculture/issues/new?template=package_suggestion.md" target="_blank" rel="noopener">filing an issue</a> in the <a href="https://github.com/IdahoAgStats/ctv-agriculture" target="_blank" rel="noopener">GitHub repository</a> (preferred).</p>
+<h2 id="packages-with-general-applications">Packages with general applications</h2>
+<h3 id="agricultural--land-use-databases">Agricultural &amp; land use databases</h3>
+<p>Data from the United States Department of Agriculture&rsquo;s National Agricultural Statistical Service &lsquo;<a href="https://www.nass.usda.gov/Quick_Stats/" target="_blank" rel="noopener">Quick Stats</a>&rsquo; web API can be accessed with <a href="https://docs.ropensci.org/rnassqs/" target="_blank" rel="noopener">rnassqs</a> or with <a href="https://bradlindblad.github.io/tidyUSDA/" target="_blank" rel="noopener">tidyUSDA</a>, which also offers some mapping capabilities. The USDA&rsquo;s <a href="https://nassgeodata.gmu.edu/CropScape/" target="_blank" rel="noopener">Cropland Data Layer</a> API can be accessed with <a href="https://github.com/cbw1243/CropScapeR" target="_blank" rel="noopener">CropScapeR</a> and <a href="https://github.com/jlisic/cdlTools" target="_blank" rel="noopener">cdlTools</a> provides various utility functions for processing CDL data. The package <a href="https://docs.ropensci.org/rusda/" target="_blank" rel="noopener">rusda</a> provides an interface to access the USDA-ARS Systematic Mycology and Microbiology Laboratory (SMML)&rsquo;s <a href="https://nt.ars-grin.gov/fungaldatabases/index.cfm" target="_blank" rel="noopener">four databases</a>: Fungus-Host Distributions, Specimens, Literature and the Nomenclature database. USDA&rsquo;s Agricultural Resource Management Survey (<a href="https://www.nass.usda.gov/Surveys/Guide_to_NASS_Surveys/Ag_Resource_Management/" target="_blank" rel="noopener">ARMS</a>) data API can be accessed with <a href="https://github.com/cbw1243/rarms" target="_blank" rel="noopener">rarms</a>. The USDA&rsquo;s Livestock Mandatory Reporting data API can be accessed with <a href="https://CRAN.R-project.org/package=usdampr" target="_blank" rel="noopener">usdampr</a>. <a href="https://gitlab.com/paulrougieux/faostatpackage" target="_blank" rel="noopener">FAOSTAT</a> and <a href="https://github.com/muuankarski/faobulk" target="_blank" rel="noopener">faobulk</a> can be used to access data from the <a href="https://www.fao.org/faostat/en/#home" target="_blank" rel="noopener">FAOSTAT Database</a> of the Food and Agricultural Organization (FAO) of the United Nations. NASA soil moisture active-passive (SMAP) data can be accessed and processed by <a href="https://docs.ropensci.org/smapr/" target="_blank" rel="noopener">smapr</a>.</p>
+<p><a href="https://docs.ropensci.org/FedData" target="_blank" rel="noopener">FedData</a> provides access to geospatial data from the United States Soil Survey Geographic (<a href="https://www.nrcs.usda.gov/wps/portal/nrcs/detail/soils/survey/?cid=nrcs142p2_053627" target="_blank" rel="noopener">SSURGO</a>) database, the Global Historical Climatology Network (<a href="https://www.ncei.noaa.gov/products/land-based-station/global-historical-climatology-network-daily" target="_blank" rel="noopener">GHCN</a>), the Daymet gridded estimates of daily weather parameters for North America, the <a href="https://catalog.data.gov/dataset/international-tree-ring-data-bank-itrdb" target="_blank" rel="noopener">International Tree Ring Data Bank</a>, and the <a href="https://www.usgs.gov/centers/eros/science/national-land-cover-database#overview" target="_blank" rel="noopener">National Land Cover Database</a>. SSURGO data can also be accessed and processed with <a href="https://github.com/lhmrosso/XPolari" target="_blank" rel="noopener">XPolaris</a>. Most USDA-NRCS soils related databases and APIs can be accessed with <a href="http://ncss-tech.github.io/soilDB/" target="_blank" rel="noopener">soilDB</a>. <a href="https://github.com/INTA-Suelos/SISINTAR" target="_blank" rel="noopener">SISINTAR</a> provides access to SiSINTA (Sistema de información de Suelos del INTA), a soil profile database for Argentina, and functions for processing the data. SILO weather data from the <a href="https://www.longpaddock.qld.gov.au" target="_blank" rel="noopener">Queensland DES longpaddock website</a> can be accessed with <a href="https://CRAN.R-project.org/package=cropgrowdays" target="_blank" rel="noopener">cropgrowdays</a>. <a href="https://CRAN.R-project.org/package=febr" target="_blank" rel="noopener">febr</a> has utilities to access and process data from the <a href="https://www.pedometria.org/febr" target="_blank" rel="noopener">Brazilian Soil Data Repository</a>.</p>
+<p><a href="https://aravind-j.github.io/PGRdup/" target="_blank" rel="noopener">PGRdup</a> provides functions to aid the identification of probable/possible duplicates in Plant Genetic Resources (PGR) collections. <a href="https://CRAN.R-project.org/package=rfieldclimate" target="_blank" rel="noopener">rfieldclimate</a> provides functionality and parsers to interact with the <a href="https://api.fieldclimate.com/v2/docs/" target="_blank" rel="noopener">FieldClimate API</a>.</p>
+<h3 id="agricultural-data-sets">Agricultural data sets</h3>
+<p><a href="https://kwstat.github.io/agridat/" target="_blank" rel="noopener">Agridat</a> consists of a very large collection of agricultural data sets and example analyses; the package contains a vignette detailing additional data sets and extensive resources to support agricultural analysis. <a href="https://myaseen208.com/agriTutorial/index.html" target="_blank" rel="noopener">agritutorial</a> provides a collection of agricultural data sets and analysis with particular attention to crop experiments. On GitHub, the repository <a href="https://github.com/OnofriAndreaPG/agroBioData" target="_blank" rel="noopener">agroBioData</a> houses a collection of data sets supporting agriculture and applied biology (note that this is a collection of CSV files, not a package). The <a href="https://pubmed.ncbi.nlm.nih.gov/28724064/" target="_blank" rel="noopener">soybean nested associated mapping population data set</a> can be accessed via <a href="https://CRAN.R-project.org/package=SoyNAM" target="_blank" rel="noopener">SoyNAM</a>.  <a href="https://github.com/samuelbfernandes/simplePHENOTYPES" target="_blank" rel="noopener">simplePhenotypes</a> can be used for simulating pleiotropic, linked and epistatic phenotypes. USGS county data on fertilizer sales can be accessed with <a href="https://wenlong-liu.github.io/ggfertilizer/" target="_blank" rel="noopener">ggfertilizer</a>. The FAOSTAT data set collection on the Food and Agriculture Biomass Input–Output model (FABIO) is available through <a href="https://github.com/fineprint-global/fabio" target="_blank" rel="noopener">fabio</a> and described more in detail in <a href="https://pubs.acs.org/doi/10.1021/acs.est.9b03554" target="_blank" rel="noopener">Bruckner (2019)</a>. The R-forge subversion repository <a href="https://r-forge.r-project.org/scm/viewvc.php/pkg/?root=cropcc" target="_blank" rel="noopener">&lsquo;cropcc&rsquo;</a> hosts several R packages with climate change/cropping data set. Additionally, many  of the agriculture-focused packages listed in this guide also include data sets to illustrate their functionality (e.g. <a href="https://myaseen208.com/agricolae/" target="_blank" rel="noopener">agricolae</a>, <a href="https://CRAN.R-project.org/package=AgroTech" target="_blank" rel="noopener">AgroTech</a>, <a href="https://CRAN.R-project.org/package=ZeBook" target="_blank" rel="noopener">ZeBook</a>). Annual agriculture production data from the Peruvian Integrated System of Agricultural Statistics (SIEA) covering 2004 to 2014 can be accessed with <a href="https://omarbenites.github.io/cropdatape/" target="_blank" rel="noopener">cropdatape</a></p>
+<h3 id="general-analytical-packages-supporting-agricultural-research">General analytical packages supporting agricultural research</h3>
+<p>The packages <a href="https://femiguez.github.io/nlraa-docs/index.html" target="_blank" rel="noopener">nlraa</a> and <a href="https://github.com/cran/AgroReg" target="_blank" rel="noopener">AgroReg</a> provides general linear and nonlinear regression functions specifically for agricultural applications. <a href="https://onofriandreapg.github.io/agriCensData/" target="_blank" rel="noopener">agriCensData</a> is a flexible package for working with censored data (e.g. time to flowering, instrumentation values below the detection limit, disease scoring). The package <a href="https://arsilva87.github.io/biotools/" target="_blank" rel="noopener">biotools</a> can conduct a wide array of multivariate analysis for agronomists including genetic covariance, optimal plot size, tests for spatial dependence, and tests for seed lot heterogeneity. <a href="https://www.kaugrapes.com/" target="_blank" rel="noopener">grapesAgri1</a> houses a collection of shiny apps, <a href="https://www.kaugrapes.com/" target="_blank" rel="noopener">GRAPES</a> (General R-shiny based Analysis Platform Empowered by Statistics), that works as a graphical user interface for individuals to upload data files and analyse. Linear models and ANOVA for CRD and RCBD (2-way) model, correlation analysis, exploratory data analysis and other common hypothesis tests are supported.</p>
+<p><a href="https://alstat.github.io/ALUES/" target="_blank" rel="noopener">ALUES</a> implements methodology developed by the FAO and the International Rice Research Institute for evaluating land suitability for different crop production. <a href="https://CRAN.R-project.org/package=AGPRIS" target="_blank" rel="noopener">AGPRIS</a> (AGricultural PRoductivity in Space) provides functions for different spatial analyses in implemented in <a href="https://www.r-inla.org/home" target="_blank" rel="noopener">INLA</a> and other spatial approaches. The package <a href="https://CRAN.R-project.org/package=KenSyn" target="_blank" rel="noopener">KenSyn</a> has example data sets and analytical code supporting the book <a href="https://www.quae.com/produit/1514/9782759228164/de-l-analyse-des-reseaux-experimentaux-a-la-meta-analyse" target="_blank" rel="noopener"><strong>De L&rsquo;analyse des Réseaux Expérimentaux à la Méta-analyse</strong></a> (French) or <a href="https://link.springer.com/book/10.1007/978-94-024-1696-1" target="_blank" rel="noopener"><strong>From Experimental Network to Meta-analysis</strong></a> (English).</p>
+<p><a href="https://CRAN.R-project.org/package=AgroTech" target="_blank" rel="noopener">Agrotech</a> provides functionality for making chemical application calculations and example data sets.</p>
+<h2 id="discipline-specific-packages">Discipline-specific packages</h2>
+<h3 id="agricultural-economics">Agricultural economics</h3>
+<p>The task views for <a href="https://cran.rstudio.com/web/views/Econometrics.html" target="_blank" rel="noopener">Econometrics</a>, <a href="https://cran.r-project.org/web/views/Finance.html" target="_blank" rel="noopener">Empirical Finance</a>, and <a href="https://cran.r-project.org/web/views/TimeSeries.html" target="_blank" rel="noopener">TimeSeries</a> provide information on packages and tools relevant to agriculture economics.</p>
+<p>Several packages have been developed specifically for agricultural price forecasting. <a href="https://github.com/cran/vmdTDNN" target="_blank" rel="noopener">vmdTDNN</a> forecasts univariate time series data using variational mode decomposition based time delay neural network models as described by <a href="https://doi.org/10.1109/TSP.2013.2288675" target="_blank" rel="noopener">Dragomiretskiy 2014</a>. <a href="https://CRAN.R-project.org/package=stlELM" target="_blank" rel="noopener">stlELM</a> also conducts univariate time series forecasting univariate time series, using seasonal-trend decomposition procedures based on loess (STL) combined with the extreme learning machine developed by <a href="https://doi.org/10.1016%2Fj.neucom.2017.11.053" target="_blank" rel="noopener">Xiong et al 2018</a>. <a href="https://CRAN.R-project.org/package=eemdTDNN" target="_blank" rel="noopener">eemdTDNN</a> does the same, utilizing different decomposition based time delay neural network models. For method details, see <a href="https://doi.org/10.1016%2Fj.eneco.2008.05.003" target="_blank" rel="noopener">Yu et al 2008</a>.</p>
+<h3 id="agrometeorology">Agrometeorology</h3>
+<p>The <a href="https://cran.r-project.org/web/views/Hydrology.html" target="_blank" rel="noopener">Hydrology CRAN Task View</a> has many resources for accessing and processing weather and climate data. <a href="https://CRAN.R-project.org/package=meteor" target="_blank" rel="noopener">Meteor</a> provides a set of functions for weather and climate data manipulation to support crop and crop disease modeling. Data from the <a href="https://cds.climate.copernicus.eu/cdsapp#!/dataset/sis-agrometeorological-indicators?tab=overview" target="_blank" rel="noopener">Copernicus</a> data set of agrometeorological indicators can be downloaded and extracted using <a href="https://agrdatasci.github.io/ag5Tools/" target="_blank" rel="noopener">ag5Tools</a>. The <a href="https://anadiedrichs.github.io/frost/" target="_blank" rel="noopener">frost</a> package contains a compilation of empirical methods used by farmers and agronomic engineers to predict the minimum temperature to detect a frost event. <a href="https://CRAN.R-project.org/package=agroclim" target="_blank" rel="noopener">agroclim</a> contains functions to compute agroclimatic indices useful to zoning areas based on climatic variables and to evaluate the importance of temperature and precipitation for individual crops or in general for agricultural lands. <a href="https://CRAN.R-project.org/package=cropgrowdays" target="_blank" rel="noopener">cropgrowdays</a> can be used for calculating growing degree days, cumulative rainfall, number of stress day, mean radiation, evapotranspiration and other variables. It also can be used to access SILO weather data from the <a href="https://www.longpaddock.qld.gov.au" target="_blank" rel="noopener">Queensland DES longpaddock website</a>. Climate crop zones in Brazil can be accessed and calculated with <a href="https://CRAN.R-project.org/package=cropZoning" target="_blank" rel="noopener">cropZoning</a> using data sets from <a href="http://www.climatologylab.org/terraclimate.html" target="_blank" rel="noopener">TerraClimate</a> that are calibrated to weather stations run by the National Meteorological Institute of Brazil. The package <a href="https://CRAN.R-project.org/package=acdcR" target="_blank" rel="noopener">acdcR</a> (Agroclimatic Data by County) provides functions to calculate widely-used county-level variables in agricultural production or agroclimatic and weather analyses. <a href="pschmidtwalter.github.io/lwfbrook90r/">LWFBrook90R</a> provides an implementation of the soil vegetation atmosphere transport (SVAT) model LWF-BROOK90 to calculate daily evaporation (transpiration, interception, and soil evaporation) and soil water fluxes, along with soil water contents and soil water tension of a soil profile covered with vegetation. Leaf area index and soil moisture from microwave backscattering data based on the <a href="doi:10.1016/0034-4257%2893%2990053-Z">WCM model</a> can be calculated with the <a href="https://CRAN.R-project.org/package=WCM" target="_blank" rel="noopener">WCM</a> package.</p>
+<h3 id="agronomic-trials">Agronomic trials</h3>
+<h4 id="experimental-design">Experimental design</h4>
+<p>The package <a href="https://myaseen208.com/agricolae/" target="_blank" rel="noopener">agricolae</a> provides extensive resources for the planning and analysis of planned field experiments. Designs constructed by <a href="https://myaseen208.com/agricolae/" target="_blank" rel="noopener">agricolae</a> can be visualised with <a href="https://CRAN.R-project.org/package=agricolaeplotr" target="_blank" rel="noopener">agricolaeplotr</a>. The CRAN task for <a href="https://cran.rstudio.com/web/views/Econometrics.html" target="_blank" rel="noopener">ExperimentalDesign</a> provide additional information on experimental design for a wide variety of research problems. <a href="https://kwstat.github.io/desplot/" target="_blank" rel="noopener">desplot</a> is for plotting maps of agricultural trials laid out in grids. <a href="http://www.nswdpibiom.org/austatgen/software/" target="_blank" rel="noopener">DiGGer</a> was developed for rectangular field trials; its purpose is to help users determine the optimal experimental design based on the treatment structure and number of replicates.  <a href="https://inkaverse.com/" target="_blank" rel="noopener">inti</a> provides functionality for experimental design and manipulation and it is focused on <a href="https://excellenceinbreeding.org/toolbox/tools/field-book" target="_blank" rel="noopener">FieldBook</a> compatibility.</p>
+<h4 id="high-throughput-phenotyping-htp">High throughput phenotyping (HTP)</h4>
+<p><a href="https://biometris.github.io/statgenHTP/" target="_blank" rel="noopener">statgenHTP</a> is for analyzing data from HTP platform experiments, with some functions specifically designed to work with the proprietary software <a href="https://www.vsni.co.uk/software/asreml" target="_blank" rel="noopener">asreml</a>. <a href="https://CRAN.R-project.org/package=CropDetectR" target="_blank" rel="noopener">CropDetectR</a> can be used to identify crop rows from image data. <a href="https://CRAN.R-project.org/package=FWRGB" target="_blank" rel="noopener">FWRGB</a> can process plant images for downstream machine learning models to predict fresh biomass. <a href="https://CRAN.R-project.org/package=pliman" target="_blank" rel="noopener">pliman</a> provides tools for image manipulation to quantify plant leaf area, disease severity, number of disease lesions, and obtain statistics of image objects such as grains, pods, pollen, leaves, and more.</p>
+<h4 id="trial-analysis">Trial analysis</h4>
+<p>The package <a href="https://myaseen208.com/agricolae/" target="_blank" rel="noopener">agricolae</a> contains functions for analyzing many common designs in agriculture trials such as split plot, lattice, Latin square and some additional functions such AMMI and AUDPC calculations. Trials utilizing an incomplete block design can be analylsed used <a href="https://CRAN.R-project.org/package=ispd" target="_blank" rel="noopener">ispd</a>. <a href="https://biometris.github.io/statgenSTA/" target="_blank" rel="noopener">statgenSTA</a> has functions for single trial analysis with and without spatial components. The proprietary software <a href="https://www.vsni.co.uk/software/asreml" target="_blank" rel="noopener">asreml</a> provides an R version of their mixed model fitting functions for field trial analysis (note this is not open source and also requires an annual license). CRAN also contains an add-on package <a href="https://briencj.github.io/asremlPlus/" target="_blank" rel="noopener">asremlPlus</a> that provides several accessory functions to asreml. <a href="https://www.r-inla.org/home" target="_blank" rel="noopener">INLA</a> provides tools for Bayesian inference of latent Gaussian models. It contains functions for modelling spatial variation, such as field experiments or farm locations. The <a href="https://agrdatasci.github.io/gosset/" target="_blank" rel="noopener">gosset</a> package provides the toolkit for a workflow to analyse experimental agriculture data, from data synthesis to model selection and visualisation. <a href="https://agronomiar.github.io/AgroR_package/index.html" target="_blank" rel="noopener">AgroR</a> has general functions and a [shiny app][https://agrorproject.shinyapps.io/agror_shiny/] for analysis of common designs in agriculture: CRD, RCBD and Latin square.</p>
+<p><a href="https://CRAN.R-project.org/package=SpATS" target="_blank" rel="noopener">SpATS</a> can be used to adjust for field spatial variation using <a href="http://dx.doi.org/10.1002/bimj.202100212" target="_blank" rel="noopener">p-splines</a>. A localised method of spatial adjustment for unreplicated trials, moving grid adjustment, is implemented with <a href="https://cran.r-project.org/package=mvngGrAd" target="_blank" rel="noopener">mvngGrAd</a>. <a href="https://agrdatasci.github.io/ClimMobTools/" target="_blank" rel="noopener">ClimMobTools</a> is the API Client for the <a href="https://climmob.net/" target="_blank" rel="noopener">ClimMob</a> citizen science platform in R for agronomic trials.</p>
+<h3 id="animal-science">Animal science</h3>
+<p><a href="https://CRAN.R-project.org/package=usdampr" target="_blank" rel="noopener">usdampr</a> provides access to the USDA&rsquo;s Livestock Mandatory Reporting API. Many of the genetic packages described in this resource can also be applied to animals.</p>
+<h3 id="breeding--quantitative-genetics">Breeding &amp; quantitative genetics</h3>
+<p>See the R package repository <a href="https://www.bioconductor.org/" target="_blank" rel="noopener">Bionconductor</a> for bioinformatics tools to support the processing of high-throughput genomic data.</p>
+<p><a href="https://CRAN.R-project.org/package=lmDiallel" target="_blank" rel="noopener">lmDiallel</a> provides service functions for analysing data sets obtained from diallel experiments, as described in <a href="https://doi.org/10.1007%2Fs00122-020-03716-8" target="_blank" rel="noopener">Onofri 2020</a>. <a href="https://github.com/r-forge/plantbreeding" target="_blank" rel="noopener">plantbreeding</a> (available on R-forge: <code>install.packages(&quot;plantbreeding&quot;, repos=&quot;http://R-Forge.R-project.org&quot;)</code>) provides many convenience functions for working with populations and designs common in plant breeding including dialleles, line testers, augmented trials, the Carolina design, and more. <a href="https://github.com/reyzaguirre/st4gi" target="_blank" rel="noopener">st4gi</a> and <a href="https://CRAN.R-project.org/package=variability" target="_blank" rel="noopener">variability</a> provides several common utility functions for genetic improvement of crops. Also, please see the subsection on &ldquo;genotype-by-environment interactions&rdquo; for packages integrating environmental and genomic data in an analytical framework. <a href="https://CRAN.R-project.org/package=gpbStat" target="_blank" rel="noopener">gpbStat</a> provides functions for common plant breeding analyses including line-by-tester analysis (<a href="http://repository.ias.ac.in/89299" target="_blank" rel="noopener">Arunachalam 1974</a>) and diallel analysis (<a href="https://www.publish.csiro.au/bi/pdf/BI9560463" target="_blank" rel="noopener">Griffing, 1956</a>). <a href="https://CRAN.R-project.org/package=heritability" target="_blank" rel="noopener">heritability</a> implements marker-based estimation of heritability when observations on genetically identical replicates are available. <a href="https://CRAN.R-project.org/package=selection.index" target="_blank" rel="noopener">selection.index</a> calculates a selection index using the Smith (<a href="https://doi.org/10.1111%2Fj.1469-1809.1936.tb02143.x" target="_blank" rel="noopener">1973</a>) method.</p>
+<p><a href="https://cran.r-project.org/package=AlphaSimR" target="_blank" rel="noopener">AlphaSimR</a> is an implementation of the <a href="doi:10.3835/plantgenome2016.02.0013">AlphaSim algorithm</a> in R, providing functions for stochastic modelling of processes common to breeding programs such as selection and crossing. <a href="https://www.mobps.de/" target="_blank" rel="noopener">MoBPS</a> has a suite of functions for simulating genetic gain and economic costs in a plant breeding program. <a href="https://CRAN.R-project.org/package=isqg" target="_blank" rel="noopener">isqg</a> provides functions for high performance quantitative genetic simulations using a <a href="https://doi.org/10.1534%2Fg3.119.400373" target="_blank" rel="noopener">bitset-based algorithm</a>.</p>
+<h4 id="linkage-mapping--qtl-analysis">Linkage mapping &amp; QTL analysis</h4>
+<p>There are two notable and long-standing packages: (1) <a href="http://augustogarcia.me/onemap/" target="_blank" rel="noopener">onemap</a>, providing MapMaker/EXP like performance and extended functionality, and (2) <a href="https://rqtl.org/" target="_blank" rel="noopener">qtl</a> providing standard functionality for qtl mapping and  accessory functions for simulating crosses. <a href="https://CRAN.R-project.org/package=ASMap" target="_blank" rel="noopener">ASMap</a> is for fast linkage mapping with the algorithm &lsquo;MSTmap&rsquo;. <a href="https://github.com/jendelman/MapRtools" target="_blank" rel="noopener">MapRtools</a> is another linkage mapping package. Linkage maps can be visualized with <a href="https://CRAN.R-project.org/package=LinkageMapView" target="_blank" rel="noopener">LinkageMapView</a>. For polyploids, the packages <a href="https://mmollina.github.io/MAPpoly/" target="_blank" rel="noopener">mappoly</a> and <a href="https://CRAN.R-project.org/package=polymapR" target="_blank" rel="noopener">polymapR</a> can be used for linkage mapping and the packages <a href="https://gabrielgesteira.github.io/QTLpoly/" target="_blank" rel="noopener">qtlpoly</a> and <a href="https://CRAN.R-project.org/package=polyqtlR" target="_blank" rel="noopener">polyqtlR</a> can be used for qtl estimation. <a href="https://github.com/jendelman/diaQTL" target="_blank" rel="noopener">diaQTL</a> is for QTL and haplotype analysis of diallel populations (diploid and autotetraploid). <a href="https://biometris.github.io/statgenMPP/" target="_blank" rel="noopener">statgenMPP</a> can conduct QTL mapping in multi-parent populations.</p>
+<h4 id="gwas">GWAS</h4>
+<p>Genome-wide association study analysis can be conducted with <a href="https://biometris.github.io/statgenGWAS/" target="_blank" rel="noopener">statgenGWAS</a>. GWAS models across very large number of SNPs or observations can be estimated with <a href="https://github.com/xiaolei-lab/rMVP" target="_blank" rel="noopener">rMVP</a> and <a href="https://github.com/deruncie/MegaLMM/" target="_blank" rel="noopener">megaLMM</a>. Functions for autotetraploids are provided by <a href="https://github.com/jendelman/GWASpoly" target="_blank" rel="noopener">GWASpoly</a>, and these functions also work in diploid species. <a href="https://github.com/jendelman/StageWise" target="_blank" rel="noopener">StageWise</a> provides functions to conduct a 2-stage GWAS when the underlying phenotypic data are from multiple field trials. Variable selection for ultra-large dimensional GWAS data sets can be done with <a href="https://CRAN.R-project.org/package=bravo" target="_blank" rel="noopener">bravo</a>, which implements a Bayesian algorithm, selection of variables with embedded screening <a href="https://arxiv.org/abs/2006.07561" target="_blank" rel="noopener">SVEN</a>. <a href="https://biometris.github.io/statgenIBD/" target="_blank" rel="noopener">statgenIBD</a> can calculate IBD probabilities for biparental, three and four-way crosses.  For polyploids, <a href="https://github.com/jendelman/polyBreedR" target="_blank" rel="noopener">polyBreedR</a> provides convenience functions to facilitate the use of genome-wide markers for breeding autotetraploid species, and its functionality also extends to diploids.</p>
+<h4 id="genomic-prediction">Genomic prediction</h4>
+<p>Packages supporting genetic prediction using mixed models augmented with pedigree or genetic marker data include <a href="https://github.com/covaruber/sommer" target="_blank" rel="noopener">sommer</a>, <a href="https://CRAN.R-project.org/package=rrBLUP" target="_blank" rel="noopener">rrBLUP</a>, <a href="https://github.com/gdlc/BGLR-R" target="_blank" rel="noopener">BGLR</a>, <a href="https://github.com/perpdgo/lme4GS" target="_blank" rel="noopener">lme4gs</a>, <a href="https://github.com/variani/lme4qtl" target="_blank" rel="noopener">lme4qtl</a>, <a href="https://CRAN.R-project.org/package=pedigreemm" target="_blank" rel="noopener">pedigreemm</a>, <a href="https://CRAN.R-project.org/package=qgtools" target="_blank" rel="noopener">qgtools</a>, <a href="https://github.com/cheuerde/cpgen" target="_blank" rel="noopener">cpgen</a>, <a href="https://CRAN.R-project.org/package=QTLRel" target="_blank" rel="noopener">QTLrel</a>, and the licensed software <a href="https://www.vsni.co.uk/software/asreml" target="_blank" rel="noopener">asreml</a>. Many of these packages have built-in functionality for data preparation steps including data imputation and calculation of the relationship matrices. <a href="https://github.com/famuvie/breedR" target="_blank" rel="noopener">breedR</a> is a general purpose package for performing quantitative genetic analyses. Genome feature mixed linear models using frequentist and Bayesian approaches can be implemented with <a href="http://psoerensen.github.io/qgg/index.html" target="_blank" rel="noopener">qgg</a>. <a href="https://CRAN.R-project.org/package=pedmod" target="_blank" rel="noopener">pedmod</a> provides linear modelling functions integrating kinship for categorical outcomes.</p>
+<p><a href="https://CRAN.R-project.org/package=STGS" target="_blank" rel="noopener">STGS</a> implements several genomic selection models for single traits. <a href="https://CRAN.R-project.org/package=GSelection" target="_blank" rel="noopener">GSelection</a> implements genomic selection integrating additive and non-additive models. <a href="https://CRAN.R-project.org/package=GSMX" target="_blank" rel="noopener">GSMX</a>, multivariate genomic selection, estimates trait heritability and handles overfitting through cross validation. [TSDFG][] can estimate the optimal training population size and composition for genomic selection. <a href="https://CRAN.R-project.org/package=BGGE" target="_blank" rel="noopener">BGGE</a> conducts genomic prediction for continuous variables, focused on genotype-by-environment genomic selection models following the methods of <a href="https://doi.org/10.1007%2Fs00122-013-2243-1" target="_blank" rel="noopener">Jarquín 2014</a>. <a href="https://CRAN.R-project.org/package=BMTME" target="_blank" rel="noopener">BMTME</a> builds genomic selection prediction models that an be expanded to multiple traits and environments using Bayesian models developed by Montesinos-Lopéz (<a href="https://doi.org/10.1534%2Fg3.116.032359" target="_blank" rel="noopener">2016</a>, <a href="https://doi.org/10.1534%2Fg3.118.200728" target="_blank" rel="noopener">2018a</a>, <a href="https://doi.org/10.2134%2Fagronj2018.06.0362" target="_blank" rel="noopener">2018b</a>). <a href="https://CRAN.R-project.org/package=BWGS" target="_blank" rel="noopener">BWGS</a>, &ldquo;Breed Wheat Genomic Selection&rdquo;, provides a pipeline of functions for conducting genomic selection in hexaploid wheat.</p>
+<p><a href="https://github.com/rramadeu/AGHmatrix" target="_blank" rel="noopener">AGHmatrix</a> provides extensive options for calculating pedigree and genomic (additive and dominance) relationships. The <a href="https://CRAN.R-project.org/package=pedigree" target="_blank" rel="noopener">pedigree</a> packages provides functionality for ordering pedigrees, calculating and inverting the A matrix and other related tasks.</p>
+<h3 id="crop-growth-models--crop-modelling">Crop growth models &amp; crop modelling</h3>
+<p>The <a href="https://femiguez.github.io/apsimx-docs/" target="_blank" rel="noopener">apsimx</a> package has functions to read, inspect, edit and run files for APSIM &ldquo;Next Generation&rdquo; (json) and APSIM &ldquo;Classic&rdquo; (xml). Files with an <code>.apsim</code> extension correspond to APSIM Classic, the files with an <code>.apsimx</code> extension correspond to APSIM Next Generation. <a href="https://rapsimng.bangyou.me/" target="_blank" rel="noopener">rapsimng</a> works with Next Generation APSIM files. <a href="https://github.com/palderman/DSSAT" target="_blank" rel="noopener">DSSAT</a> provides a comprehensive R interface to the Decision Support System for Agrotechnology Transfer Cropping Systems Model (DSSAT-CSM) documented by <a href="https://doi.org/10.1016/S1161-0301%2802%2900107-7" target="_blank" rel="noopener">Jones (2003)</a>. This package provides cross-platform functions to read and write input files, run DSSAT-CSM, and read output files. The modelling framework <a href="www.simplace.net">Simplace</a> (Scientific Impact assessment and Modelling PLatform for Advanced Crop and Ecosystem management) can be accessed using the R package <a href="https://github.com/gk-crop/simplace_rpkg" target="_blank" rel="noopener">simplace</a>.</p>
+<p><a href="https://CRAN.R-project.org/package=meteor" target="_blank" rel="noopener">Meteor</a> provides a set of functions for weather and climate data manipulation to support crop and crop disease modeling. <a href="https://CRAN.R-project.org/package=cropDemand" target="_blank" rel="noopener">cropDemand</a> can be used to estimate crop water demand in Brazilian production regions using the <a href="http://www.climatologylab.org/terraclimate.html" target="_blank" rel="noopener">TerraClimate</a> data set. <a href="https://CRAN.R-project.org/package=Evapotranspiration" target="_blank" rel="noopener">Evapotranspiration</a> can estimate potential and actual evapotranspiration using 21 different models. <a href="https://adriancorrendo.github.io/metrica/" target="_blank" rel="noopener">metrica</a> has many convenience functions for comparing model predictions with ground truth data. <a href="https://CRAN.R-project.org/package=ZeBook" target="_blank" rel="noopener">ZeBook</a> provides data sets and examples to accompany the book <a href="https://www.elsevier.com/books/working-with-dynamic-crop-models/wallach/978-0-12-811756-9" target="_blank" rel="noopener">Working with Dynamic Crop Models</a>.</p>
+<p><a href="https://github.com/cropmodels/phenorice" target="_blank" rel="noopener">phenorice</a> is an R implementation of the <a href="http://dx.doi.org/10.1016/j.rse.2017.03.029" target="_blank" rel="noopener">phenorice model</a> for remote sensing of rice crop production. <a href="https://lbusett.github.io/phenoriceR/index.html" target="_blank" rel="noopener">phenoriceR</a> provides helper functions for processing data from the phenorice model. <a href="https://CRAN.R-project.org/package=Recocrop" target="_blank" rel="noopener">Recocrop</a> estimates environmental suitability for plants using a limiting factor approach for plant growth following <a href="doi:10.1007/BF00045728">Hackett (1991)</a>. <a href="https://CRAN.R-project.org/package=Rquefts" target="_blank" rel="noopener">Rquefts</a> provides an implementation of the QUEFTS (Quantitative Evaluation of the Native Fertility of Tropical Soils) model (<a href="https://doi.org/10.1016%2F0016-7061%2890%2990021-Z" target="_blank" rel="noopener">Janssen 1990</a>). <a href="https://CRAN.R-project.org/package=Rwofost" target="_blank" rel="noopener">Rwofost</a> is an implementation of the WOFOST (&ldquo;World Food Studies&rdquo;) crop growth model (<a href="https://doi.org/10.1016%2Fj.agsy.2018.06.018" target="_blank" rel="noopener">De Wit 2019</a>).</p>
+<h3 id="entomology">Entomology</h3>
+<p><a href="https://cran.r-project.org/package=hnp" target="_blank" rel="noopener">hnp</a> Generates half-normal plots with simulation envelopes using different diagnostics from a range of different fitted models. A few example data sets are included. The package <a href="https://onofriandreapg.github.io/agriCensData/" target="_blank" rel="noopener">agriCensData</a> provides functions for dealing with censored data. In addition, the <a href="https://cran.microsoft.com/snapshot/2022-03-27/web/views/Survival.html" target="_blank" rel="noopener">survival CRAN Task View</a> list CRAN resources for working with censored data.</p>
+<h3 id="food-science">Food science</h3>
+<p>For packages supporting sensory studies, see the <a href="https://cran.r-project.org/web/views/Psychometrics.html" target="_blank" rel="noopener">Psychometrics CRAN task view</a>. <a href="https://CRAN.R-project.org/package=NutrienTrackeR" target="_blank" rel="noopener">NutrienTrackeR</a> provides convenience functions for calculating nutrient content (macronutrients and micronutrients) of foods using food composition data from several reference databases, including: &lsquo;USDA&rsquo; (United States), &lsquo;CIQUAL&rsquo; (France), &lsquo;BEDCA&rsquo; (Spain) and &lsquo;CNF&rsquo; (Canada).</p>
+<h3 id="genotype-by-environment-interactions">Genotype-by-environment interactions</h3>
+<p><a href="https://biometris.github.io/statgenGxE/" target="_blank" rel="noopener">statgenGxE</a> has several functions for handling various analytical approaches for addressing genotype-by-environment interactions. <a href="https://github.com/frahik/IBCF.MTME" target="_blank" rel="noopener">IBCF.MTME</a> implements item-based collaborative filtering for multi-trait and multi-environment trials. The package <a href="https://kwstat.github.io/gge" target="_blank" rel="noopener">gge</a> is useful for producing GGE biplots, while <a href="https://myaseen208.com/bayesammi/" target="_blank" rel="noopener">bayesammi</a> can conduct Bayesian estimation of additive main effects multiplicative interaction model. <a href="https://allogamous.github.io/EnvRtype/" target="_blank" rel="noopener">EnvRtype</a> can be used for assembling climate data, data set preparation and environmental classification. <a href="https://github.com/lian0090/FW/" target="_blank" rel="noopener">FW</a> implements Finlay-Wilkinson regression using a Gibbs sampler; <a href="https://CRAN.R-project.org/package=spFW" target="_blank" rel="noopener">spFW</a> also conducts spatial Finlay-Wilkinson analysis for multi-environmental trials using a Bayesian hierarchical model. A wide variety of stability analysis statistics can be calculated via <a href="https://CRAN.R-project.org/package=agrostab" target="_blank" rel="noopener">agrostab</a> including coefficient of homeostaticity, specific adaptive ability, weighted homeostaticity index, <a href="https://doi.org/10.4141%2Fcjps88-018" target="_blank" rel="noopener">superiority measure</a>, <a href="https://doi.org/10.2135%2Fcropsci1966.0011183X000600010011x" target="_blank" rel="noopener">regression on environmental index</a>, <a href="https://doi.org/10.2135%2Fcropsci1971.0011183X001100020006x" target="_blank" rel="noopener">Tai&rsquo;s stability parameters</a>, <a href="https://doi.org/10.1038%2Fhdy.1972.87" target="_blank" rel="noopener">stability variance</a>, ecovalence and other stability parameters.</p>
+<h3 id="plant-pathology">Plant pathology</h3>
+<p><a href="https://alvesks.github.io/epifitter/" target="_blank" rel="noopener">epifitter</a> provides functions for analysis and visualization of plant disease progress curve data. <a href="https://chgigot.github.io/epiphy/" target="_blank" rel="noopener">epiphy</a> is a toolbox for analyzing plant disease epidemics. It provides a common framework for plant disease intensity data recorded over time and/or space. <a href="https://openplantpathology.github.io/hagis/" target="_blank" rel="noopener">hagis</a> has functions for analysis of plant pathogen pathotype survey data. Functions provided calculate distribution of susceptibilities, distribution of complexities with statistics, pathotype frequency distribution, as well as diversity indices for pathotypes. Populations with mixed clonal/sexual reproductive strategies can be analyzed with <a href="https://grunwaldlab.github.io/poppr/" target="_blank" rel="noopener">poppr</a>, which has population genetic analysis tools for hierarchical analysis of partially clonal populations. <a href="https://ihsankhaliq.github.io/ascotraceR/" target="_blank" rel="noopener">ascotraceR</a> can simulate an Ascochyta blight infection in a chickpea field following the model developed by <a href="https://doi.org/10.1094%2FPHYTO.2002.92.10.1110" target="_blank" rel="noopener">Diggle (2022)</a>). Stochastic disease modelling of plant pathogens incorporating spatial and genetic information can be done with <a href="https://csiro-inra.pages.biosp.inrae.fr/landsepi/" target="_blank" rel="noopener">landsepi</a>. Evolution of resistance genes under pesticide pressure can be simulated under different numbers of pests, modes of pest reproduction, resistance loci, number of pesticides and other facets with <a href="https://bradduthie.github.io/resevol/" target="_blank" rel="noopener">resevol</a>.</p>
+<h3 id="rural-sociology">Rural sociology</h3>
+<p>See the CRAN task view for <a href="https://CRAN.R-project.org/view=Psychometrics" target="_blank" rel="noopener">Psychometrics</a> for general sociology packages. . Both the <a href="https://CRAN.R-project.org/view=Survival" target="_blank" rel="noopener">Survival CRAN task view</a> and the <a href="https://onofriandreapg.github.io/agriCensData/" target="_blank" rel="noopener">agriCensData</a> package provide tools for working with interval and censored data.</p>
+<h3 id="soil-science-and-precision-agriculture">Soil science and precision agriculture</h3>
+<p><a href="http://ncss-tech.github.io/sharpshootR/" target="_blank" rel="noopener">sharpshootR</a> contains a compendium of utility functions supporting soils survey work including data management, summary, visualizations and conversions.For soil pedology, <a href="https://github.com/ncss-tech/aqp/" target="_blank" rel="noopener">aqp</a> provides a general toolkit for soil scientists: specialized data structures, soil profile summary, visualisation, color conversion, and more. <a href="http://ncss-tech.github.io/SoilTaxonomy/" target="_blank" rel="noopener">SoilTaxonomy</a> provides functions for parsing soil taxonomic terms. The <a href="https://CRAN.R-project.org/view=Spatial" target="_blank" rel="noopener">&ldquo;Spatial</a> and <a href="https://CRAN.R-project.org/view=SpatioTemporal" target="_blank" rel="noopener">Spatio-Temporal</a> CRAN task views provide extensive resources in spatial statistics. <a href="https://CRAN.R-project.org/package=pedometrics" target="_blank" rel="noopener">pedometrics</a> has many utility functions for common analyses of soil data.</p>
+<p><a href="http://en.wikipedia.org/wiki/Water_retention_curv" target="_blank" rel="noopener">Soil water retention curves</a> can be calculated by the <a href="https://CRAN.R-project.org/package=soilwater" target="_blank" rel="noopener">soilwater</a> packages using the Van Genuchten method for soil water retention and Mualem method for hydraulic conductivity. <a href="https://CRAN.R-project.org/package=SoilR" target="_blank" rel="noopener">SoilR</a> models soil organic matter decomposition in terrestrial ecosystems with linear and nonlinear models. Soil texture triangles can be graphed using <a href="https://cran.r-project.org/package=soiltexture" target="_blank" rel="noopener">soiltexture</a>; this package can also classify and transform soil texture data. <a href="https://CRAN.R-project.org/package=sorcering" target="_blank" rel="noopener">sorcering</a> can be used to model soil organic carbon and soil organic nitrogen and to calculate N mineralisation rates. <a href="https://CRAN.R-project.org/package=QI" target="_blank" rel="noopener">QI</a> can be used to calculate potassium intensity and exchangeability. <a href="https://adriancorrendo.github.io/soiltestcorr/" target="_blank" rel="noopener">soiltestcorr</a> has functions for conducting correlation analysis between soil test values and crop yield data. <a href="https://CRAN.R-project.org/package=SoilTesting" target="_blank" rel="noopener">SoilTesting</a> provides functions for calculating soil mineral concentrations from analytical lab results. <a href="https://github.com/mbask/fertplan" target="_blank" rel="noopener">fertplan</a> provides fertilizer recommendations based on soil test results (note this packages is optimized for horticultural crop production in Italy). <a href="https://CRAN.R-project.org/package=DMMF" target="_blank" rel="noopener">DMMF</a> implements the daily based Morgan-Morgan-Finney (DMMF) soil erosion model (<a href="https://doi.org/10.3390%2Fw9040278" target="_blank" rel="noopener">Choi et al., 2017</a>) for estimating surface runoff and sediment budgets from a field or a catchment on a daily basis. Estimation and prediction of parameters of soil hydraulic property models can be accomplished with <a href="https://CRAN.R-project.org/package=spsh" target="_blank" rel="noopener">spsh</a>.</p>
+<p>Agriculture image features from spectral data can extracted with [agrifeature][]. It has functions to calculate gray level co-occurrence matrix (GLCM), RGB-based vegetative index (RGB VI) and normalized difference vegetation index (NDVI). Experimental units (e.g. plots) can be obtained from spectral images using <a href="https://CRAN.R-project.org/package=rPAex" target="_blank" rel="noopener">rPAex</a>. <a href="https://CRAN.R-project.org/package=mapsRinteractive" target="_blank" rel="noopener">mapsRinteractive</a> provides functions for working with soil point data in raster format. The <a href="https://www.fao.org/land-water/databases-and-software/crop-information/en/" target="_blank" rel="noopener">suitability</a> of specific soils for crop production can be analyzed using <a href="https://CRAN.R-project.org/package=soilassessment" target="_blank" rel="noopener">soilassessment</a>, including soil fertility classes, soil erosion models and soil salinity classification. Suitability requirements are for crops grouped into cereal crops, nuts, legumes, fruits, vegetables, industrial crops, and root crops. [mpsline2][] implements a mass-preserving spline to soil attributes to make continuous down-profile estimates of attributes measured over discrete, often discontinuous depth intervals.</p>
+<h3 id="weed-science">Weed science</h3>
+<p>The package <a href="https://doseresponse.github.io/drc/" target="_blank" rel="noopener">drc</a> offers versatile model fitting and after-fitting functions for dose-response curves. <a href="https://CRAN.R-project.org/package=LW1949" target="_blank" rel="noopener">LW1949</a> implements the Litchefield and Wilcoxon (<a href="http://jpet.aspetjournals.org/content/96/2/99.abstract" target="_blank" rel="noopener">1949</a>) dose-response analysis. <a href="https://CRAN.R-project.org/package=PROSPER" target="_blank" rel="noopener">PROSPER</a> is a package for simulating weed population dynamics at the individual and population level under a range of conditions including herbicide resistance and herbicide pressure. For ecological studies and analytical applications, the <a href="https://cran.r-project.org/web/views/Environmetrics.html" target="_blank" rel="noopener">CRAN task view for Environmetrics</a> provides a list of existing R resources in this topic.</p>
+<h2 id="additional-links">Additional links</h2>
+<ul>
+<li><a href="https://inkaverse.com" target="_blank" rel="noopener">InkaVerse</a>: a collection of shiny apps and an R package (<a href="https://inkaverse.com/" target="_blank" rel="noopener">inti</a>) to support field trials analyses for trials managed in <a href="https://excellenceinbreeding.org/toolbox/tools/field-book" target="_blank" rel="noopener">FieldBook</a>.</li>
+</ul>
+<h3 id="relevant-r-forge-projects-not-otherwise-listed-in-this-resource">Relevant R-Forge Projects (not otherwise listed in this resource)</h3>
+<ul>
+<li><a href="https://r-forge.r-project.org/projects/gsif" target="_blank" rel="noopener">Global Soil Information Facilities</a>: an initiative of the <a href="africasoils.net">World Soil Information Institute and Africa Soil Information Service</a> (ISRIC) team.</li>
+<li><a href="https://r-forge.r-project.org/projects/soilspec/" target="_blank" rel="noopener">Soil Spectroscopy and Chemometrics</a>: methods for soil spectroscopy and chemometrics involving spectral data conversion, calibration and prediction methods.</li>
+<li><a href="https://r-forge.r-project.org/projects/ithir/" target="_blank" rel="noopener">Digital Soil Informatic Tools</a>: quantitative and numerical analysis of soils and phenomena and other information related to soils, with a focus on pedometrics.</li>
+<li><a href="https://r-forge.r-project.org/projects/reclim/" target="_blank" rel="noopener">Reclim</a>: a collection of weather reduction functions of kinetics for the introductory carbon balance model (ICBM), a compartmental soil organic carbon model.</li>
+<li><a href="https://r-forge.r-project.org/projects/inspectr/" target="_blank" rel="noopener">inspectr</a>: handling and analysis of Vis-NIR spectra, with a focus on soil science applications.</li>
+<li><a href="https://r-forge.r-project.org/projects/cropsim/" target="_blank" rel="noopener">Crop &amp; Disease Modelling</a>:  dynamic &amp; mechanistic simulation of crop growth and development, and of plant diseases.</li>
+<li><a href="https://r-forge.r-project.org/projects/biocro/" target="_blank" rel="noopener">biocro</a>: functions and data for plant and crop modeling. Simulates C4 photosynthesis, biomass production and estimates parameters for plant physiological models using optimization techniques and Markov chains.</li>
+<li><a href="https://r-forge.r-project.org/projects/cropcc/" target="_blank" rel="noopener">Crop Climate Change Course</a>: materials for the course &ldquo;Analyzing the impact of climate change on crops and varieties&rdquo;</li>
+</ul>
+<hr>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/r/">R</a>
+  
+  <a class="badge badge-light" href="/tag/cran/">CRAN</a>
+  
+  <a class="badge badge-light" href="/tag/agriculture/">agriculture</a>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+
+
+
+  
+  
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="/authors/jpiaskowski/"><img class="avatar mr-3 avatar-circle" src="/authors/jpiaskowski/avatar_hue4a77a7c1beaa41bc4aa3fc7c99a9d6f_6498082_270x270_fill_lanczos_center_2.png" alt="Julia Piaskowski"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/authors/jpiaskowski/">Julia Piaskowski</a></h5>
+      <h6 class="card-subtitle">Statistician</h6>
+      <p class="card-text">My research interests include plant genetics, spatial statistics and how to implement open science and reproducible research practices routinely.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/SeedsandBreeds" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.com/citations?user=PMN2WZEAAAAJ" target="_blank" rel="noopener">
+        <i class="fas fa-graduation-cap"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/jpiaskowski" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/julia-piaskowski-4623145a" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/events/presentations/agstats-conference-2022/">Tools and Resources for R Users in Agricultural Research</a></li>
+      
+      <li><a href="/post/learning-r/">Resources for Learning R</a></li>
+      
+      <li><a href="/post/help-in-r/">Finding Help in R</a></li>
+      
+      <li><a href="/post/getting-r-setup/">Getting R Set Up</a></li>
+      
+      <li><a href="/post/reproducible-r/">Quick Tricks and Tips for Reproducible Research in R</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+    
+    
+<style type="text/css" media="screen">
+    .revue-embed {
+    background: #FEF7DF;
+    /*font-family: 'Lato', sans-serif;
+    color: #FDFCFB;*/
+    text-align: center;
+    border-radius: 5px;
+}
+
+form {
+    width: 80%;
+    margin: 0.5em auto;
+}
+
+.revue-header {
+    font-size: 26px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding-top: 0.5em;
+    padding-bottom: 1em;
+}
+
+.revue-description {
+    font-size: 15px;
+    letter-spacing: 1px;
+    line-height: 1.3em;
+    margin: -2px 0 45px;
+}
+
+.revue-input {
+    display: flex;
+    align-items: center;
+    padding-bottom: 2em;
+}
+
+.button {
+    height: 44px;
+    border: none;
+}
+
+#member_email {
+    width: 65%;
+    font-size: 14px;
+    background: #FDFCFB;
+    font-family: inherit;
+    color: #737373; 
+    letter-spacing: 1px;
+    text-indent: 5%;
+    border-radius: 5px 0 0 5px;
+}
+
+#member_submit {
+    width: 35%;
+    height: 46px;
+    font-size: 14px;
+    background: #FB4646;
+    font-family: inherit;
+    font-weight: bold;
+    color: inherit;
+    letter-spacing: 1px;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: background .3s ease-in-out;
+}
+
+#member_submit:hover {
+    background: #3AEBDA;
+}
+
+input:focus {
+    outline: none;
+    outline: 2px solid #3AEBDA;
+    box-shadow: 0 0 2px #3AEBDA;
+}
+
+</style>
+<link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+
+<div id="revue-embed" class="revue-embed">
+    <form action="https://tinyletter.com/idahoagstats/" method="post" id="revue-form" name="revue-form"
+          target="popupwindow" onsubmit="window.open('https://tinyletter.com/idahoagstats', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true">
+      
+      
+      
+        <div class="revue-header">
+            <p>Sign up for our newsletter</p>
+        </div>
+        <div class="revue-description">
+            <p>Agricultural statistical content focused on R and SAS, along with info about upcoming workshops, lectures, and trainings relevant to these topics</p>
+            <p>Sent monthly (thereabouts)</p>
+        </div>
+        <div class="revue-input">
+            <input type="email" class="button" name="email" id="member_email" placeholder="Your email address">
+            <input type="hidden" name="embed" value="1">
+            <input type="submit" class="button" id="member_submit" value="Subscribe"/>
+        </div>
+    
+</div>
+
+
+        
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    Copyright @ 2022 by the <a href="https://www.uidaho.edu/cals/statistical-programs">University of Idaho Statistical Programs</a>. <br> Built with <a href="https://wowchemy.com/">Wowchemy</a>, a free open-source web builder.
+  </p>
+
+  
+  
+
+
+
+
+
+
+
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.4/mermaid.min.js" integrity="sha512-as1BF4+iHZ3BVO6LLDQ7zrbvTXM+c/1iZ1qII/c3c4L8Rn5tHLpFUtpaEtBNS92f+xGsCzsD7b62XP3XYap6oA==" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/python.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/latex.min.js"></script>
+        
+      
+
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    <script src="/js/_vendor/bootstrap.bundle.min.f81d0a1705048649befc8b595e455a94.js"></script>
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.e20609e6ad3f7fce339ee2e74f13682b.js"></script>
+
+    
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+
+
+</body>
+</html>
