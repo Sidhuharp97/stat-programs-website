@@ -1,0 +1,368 @@
+---
+title: "SAS Graphing and Plotting"
+author: "Statistical Programs, University of Idaho"
+date: "2022-03-25"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    toc_collapsed: true
+    toc_depth: 3
+    number_sections: true
+    css: .\sas.default.css
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r include=FALSE}
+require(SASmarkdown)
+
+saspath <- "C:/Program Files/SASHome/SASFoundation/9.4/sas.exe"
+
+sasopts <- "-nosplash -ls 200"
+```
+
+# Introduction
+This tutorial demonstrates some common plot types and associated refinements such as marker selection, titles, coloring, etc. Older versions of SAS relied on text graphics (*Proc PLOT*) or a suite of procedures in the *SAS Graphics* package. We now use more flexible and updated options in the *ODS Graphics* suite. Specifically, the demonstrations below use the SAS procedure **SGPLOT** which is a general plotting procedure that can generate many different plot types. Further procedures for producing multi-paneled plots or defining custom plot layouts are also available, but are not covered here. <br>
+
+# Data used in the Examples
+
+The data used here describes beak depth and length for two finch species collected on the Gallapagos Islands during two years: [Data here](https://www.kaggle.com/datasets/crbelhekar619/darwins-finches-evolution-dataset?resource=download ){target="_blank"}. The data was collected by Peter and Rosemary Grant in 1975 and 2012 to examine evolutionary modifications in the finch beaks due to environmental changes. The code to read in and  partially print the data is shown below.
+
+
+```{r Data1, engine="sashtml", collectcode=TRUE, engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
+
+/* Read in the Grant finch data. */
+  
+data finch_1975;
+  infile '.\Data\Finch_1975.csv' firstobs=2 delimiter=',';
+  input Band Species$ length depth year;
+run;
+
+data finch_2012;
+  infile '.\Data\Finch_2012.csv' firstobs=2 delimiter=',';
+  input Band Species$ length depth year;
+run;
+
+data all;
+	set finch_1975 finch_2012;
+run;
+
+proc print data=all(obs=12);
+run;
+```
+
+The data contain information on bird ID (Band), species (fortis and scandens), beak length and depth in mm, and the year of collection (1975 , 2012).
+
+# Common Plot Types
+
+## Scatter Plots
+
+The scatter plot is probably the most common plotting method. It is useful for discerning potential relationships and structure between two variables. It displays observations as individual data points on an X-Y set of axes. The initial example below plots beak length and depth against one another  using the **Scatter** statement. The where statement selects out only the 1975 data.
+
+```{r Scatter1, engine="sashtml", engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
+
+proc sgplot data=all;
+	where year=1975;
+	scatter x=length y=depth;
+	title1 '1975 Finch Data Scatter Plot';
+run;
+
+```
+
+In this plot we can see there is a positive relationship between depth and length, but also there are two groupings of data points, indicating some further structure. One aim of plotting is exploration of the data. To examine this structure further, we might opt to see if the groupings are related to some qualitative classification  information such as year or species. Since this is only 1975 data, we'll try species. This is done by adding the *group=* option to the **Scatter** statement. We've also added a *styleattrs* statement to specify colors and marker options to control what the data points look like (colored circles with black outlines at a dimension of 10 pixels).
+
+```{r Scatter2, engine="sashtml", engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
+
+ods graphics;
+proc sgplot data=all;
+	styleattrs datacolors=(green blue);
+	where year=1975;
+	scatter x=length y=depth/group=species filledoutlinedmarkers markeroutlineattrs=(color=black) markerattrs=(symbol=circlefilled size=10);
+	title1 '1975 Finch Data Scatter Plot with Species';
+run;
+
+```
+
+We can now see from this simple scatter plot that the groupings are associated with species.
+
+
+## Lines
+
+Another common plot is to plot lines. In the case of regression modeling, we often plot lines along with the scatter plot.  In this example the depth variable is fit as a function of length in a linear regression for each species. The output is then saved for plotting. For details on linear regression, see the tutorial on [regression](https://agstats.io/tutorials/sas-proc-reg.html){target="_blank"}.
+
+```{r Line1, engine="sashtml", include=FALSE, collectcode=TRUE, engine.path=saspath, engine.opts=sasopts, comment="", error=TRUE}
+
+proc sort data=all;
+	by species year;
+run;
+
+proc reg data=all;
+  where year=1975;
+	model depth =length;
+	by species;
+	output out=predicted p = pred;
+run;
+```
+
+```
+proc sort data=all;
+	by species year length;
+run;
+
+proc reg data=all;
+  where year=1975;
+	model depth =length;
+	by species;
+	output out=predicted p = pred;
+run;
+
+```
+The output data set *predicted* is then used to do plotting as before with the addition of a **SERIES** statement which draws lines linking data points. The *group=* option is  used again, this time to create separate lines for each species. The *datacontrastcolors=* option specifies the colors for the lines.
+
+```{r Line2, engine="sashtml", engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
+
+ods graphics;
+proc sgplot data=predicted;
+	styleattrs  datacolors=(green blue) datacontrastcolors=(green blue);
+	where year=1975;
+	scatter x=length y=depth/group=species filledoutlinedmarkers markeroutlineattrs=(color=black) markerattrs=(symbol=circlefilled size=10);
+  series x=length y=pred/group=species;
+	title1 '1975 Finch Data Scatter Plot with lines for each Species';
+run;
+
+```
+
+
+## Bar Charts
+
+Bar charts are commonly used to display results from ANOVA. In the example below, a [MIXED model](https://agstats.io/tutorials/sas-proc-mixed.html){target="_blank"} is used to assess the effects of species and year and their interaction on beak length. The means (LSMEANS) are output and plotted with the **vbarparm** statement in *Proc Sgplot*. This statement is used to create vertical bar charts. A similar statement, **hbarparm**, is available for horizontal bar charts. There are also statements vbar and hbar, but they have fewer options available. The options in the statement also specify upper and lower confidence intervals resulting from the *CL* option in the lsmeans call from proc mixed. We again use the group option to separate species. This is a clustered bar chart producing a separate set of bars for each year. This is done with the *groupdisplay=* option.
+
+```{r Bar1, engine="sashtml", include=FALSE, collectcode=TRUE, engine.path=saspath, engine.opts=sasopts, comment="", error=TRUE}
+
+proc mixed data=all;
+  class species year;
+	model length = species year species*year;
+	lsmeans species*year/cl;
+	ods output LSMeans=means;
+run;
+```
+
+```
+proc mixed data=all;
+  class species year;
+	model length = species year species*year;
+	lsmeans species*year/cl;
+	ods output LSMeans=means;
+run;
+```
+
+```{r Bar2, engine="sashtml", engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
+
+proc sgplot data=means;
+  styleattrs datacolors=(green blue) datacontrastcolors=(black black);
+	vbarparm category=Year response=estimate / LIMITATTRS=(color=black)
+   	limitlower=lower limitupper=upper group=Species OUTLINEATTRS=(color=black) groupdisplay=cluster;
+	title1 'Finch Data Bar Chart';
+run;
+```
+
+## Histograms
+
+A histogram displays the frequency distribution of a continuos variable. In *Proc Sgplot*, the statement histogram is used. The example below looks at the overall distribution of beak lengths.
+
+```{r Hist1, engine="sashtml", engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
+
+proc sgplot data=all;
+	histogram length;
+	title1 'Histogram of Beak Lengths';
+run;
+```
+
+Here we can see there are two distinct peaks. As was shown above, these likely relate to species. We can visualize the distribution of each species on one plot by employing the **styleattrs** statement with two colors as well as the *group=* option in the histogram statement.
+
+
+```{r Hist2, engine="sashtml", engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
+
+proc sgplot data=all;
+	styleattrs datacolors=(lightgreen lightblue);
+	histogram length/group=species;
+	title1 'Histogram of Beak Lengths with Species';
+run;
+```
+
+## Box and Jitter Plots
+
+Two other methods for examining a variable's distribution are Jitter plots and box plots. The jitter plot plots individual data points on the y-axis with a discrete classification variable on the x-axis. In order to make the points more visable, a small deviation or "jitter" is added to the discrete levels of the x-axis. This is done using the *scatter* statement with the *jitter* option.
+
+```{r Box1, engine="sashtml", engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
+
+
+proc sgplot data=all;
+	where species='scandens';
+	scatter x=year y=length/jitter filledoutlinedmarkers markerfillattrs=(color=white) markeroutlineattrs=(color=black) markerattrs=(symbol=circlefilled size=3);
+	title1 'Finch Data Jitter Plot';
+run;
+```
+
+The *vbox* (or *hbox*) statements produce boxplots. A boxplot is a visual representation of distribution percentiles. The upper and lower edges of the box are the 75th and 25 percentiles, respectively, while the middle line represents the 50th percentile (median). A marker in the box indicates the mean. Tails or whiskers on the box extend to the minimum and maximum of the data.  Here options controlling the color and thickness of these points are used as well as colors for the boxes. this example looks at the scandens species only with boxes for each year.
+
+```{r Box2, engine="sashtml", engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
+
+proc sgplot data=all;
+	where species='scandens';
+	vbox length/category=year boxwidth=.3 MEDIANATTRS=(color=black thickness=1.5) MEANATTRS=(color=black symbol=diamondfilled size=12) 
+		FILLATTRS=(transparency=.8 color=red) LINEATTRS=(color=black thickness=1.5) WHISKERATTRS=(color=black thickness=1.5);
+	title1 'Finch Data Box Plot';
+run;
+```
+
+The boxplot on it's own has been noted to sometimes represent a deceptive view of the data. To adjust for this, boxplots and jitter plots are often combined to give a better indication of the data distributions. We do this by combining bother the *jitter scatter* statement and the *vbox* statement in one *Sgplot* call.
+
+
+```{r Box3, engine="sashtml", engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
+
+proc sgplot data=all;
+	where species='scandens';
+	scatter x=year y=length/ jitter filledoutlinedmarkers markerfillattrs=(color=white) markeroutlineattrs=(color=black) markerattrs=(symbol=circlefilled size=3);
+	vbox length/category=year boxwidth=.3 MEDIANATTRS=(color=black thickness=1.5) MEANATTRS=(color=black symbol=diamondfilled size=12) 
+		FILLATTRS=(transparency=.8 color=red) LINEATTRS=(color=black thickness=1.5) WHISKERATTRS=(color=black thickness=1.5);
+	title1 'Finch Data Jitter and Box Plot';
+run;
+
+```
+
+# Specialty Plots
+
+## Confidence Ellipses
+
+Scatter plots with groupings can be displayed with bivariate confidence ellipses to suggest or explore possible groupings. The ellipses are essentially two-dimensional confidence bounds and they make an assumption of bivariate normality for the two variables involved. While they can be informative, they should be used cautiously as the human eye is very good at suggesting groupings where none exist. The ellipses also do not indicate definitive groups. There is no hypothesis test here.
+
+This call to *Sgplot* is more complex than the examples above. Before the call, we must first define some variables for each group level in a data step. In this example, separate variables are defined for the depth and length of each species. The data is partially printed to examine this new structure.
+
+```{r Ellipse1, engine="sashtml", engine.path=saspath, collectcode=TRUE, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
+
+data test_Plot;
+	keep length_F length_S depth_F depth_S;  /* names of new variables */
+	merge all(where=(species='fortis' and year=1975) 
+              rename=(length=length_F depth=depth_F))
+      	  all(where=(species='scandens' and year=1975) 
+              rename=(length=length_S depth=depth_S));
+run;
+
+proc print data=test_Plot(obs=12);
+run;
+```
+
+This new data set is then called by *Proc Sgplot* using scatter statements on the new variables as shown above with options to specify marker color, shape and size. Following these are *Ellipse* statements for the same set of variables. They also have options specifying colors, etc. A transparency value is given so the data points in the *Scatter* statement show through the ellipses. There are additional options indicating a name and label for each ellipse. This is done so the plot legend can be customized. Lastly, because these are confidence ellipses, we specify a confidence level with the *alpha=* option. In this case, at 95% confidence.
+
+```{r Ellipse2, engine="sashtml", engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
+
+proc sgplot data=test_Plot noautolegend;
+	scatter x=length_F y=depth_F/filledoutlinedmarkers markerfillattrs=(color=green) markeroutlineattrs=(color=black) markerattrs=(symbol=circlefilled size=10);
+	scatter x=length_S y=depth_S/filledoutlinedmarkers markerfillattrs=(color=blue) markeroutlineattrs=(color=black) markerattrs=(symbol=circlefilled size=10);
+
+	ellipse x=length_F y=depth_F/ Outline Fill LINEATTRS=(color=black pattern=1) FILLATTRS=(color=green transparency=.8) name='PartF' legendlabel="G. fortis 1975" alpha=.05;
+	ellipse x=length_S y=depth_S/ Outline Fill LINEATTRS=(color=black pattern=1) FILLATTRS=(color=blue transparency=.8) name='PartS' legendlabel="G. scandens 1975" alpha=.05;
+	keylegend "PartF" "PartS";
+
+title1 'Finch Data Ellipses Plot';
+run;
+
+```
+
+## Forest Plots for Odds and Odds Ratios
+
+This example uses a new data set that deals with statistical odds and odds ratios. The data measure the odds that an insect will establish in a new environment given insect characterstics and categories. The plot uses the *Hilow* statement which plots hi and low values connected by a line. A scatter statement is also used to plot the midpoints as these are 95% confidence bounds. The chart is drawn horizontally, which is standard for forest plots in logistic regression. A new option *datalabel* with *datalabelattrs* are used to label the data points with text from the text variable  characteristic.  Axes statements, demonstrated below, are used to define axes. A reference line is drown on the horizontal x-axis with the *refline* statement.
+
+```
+data odds;
+	length Category Characteristic $15;
+	input Category$	Characteristic$	Odds	lower_odds	upper_odds;
+	cards;
+Feeding_place	Aboveground	1.7363	1.3795	2.1855
+Feeding_place	Belowground	1.326	0.8875	1.9812
+Damaging_stage	Adult/Immature	1.9019	1.4243	2.5395
+Damaging_stage	Immature	1.2106	0.8958	1.6359
+Voltinism	Bivoltine	1.229	0.885	1.7068
+Voltinism	Multivoltine	2.2242	1.5971	3.0976
+Voltinism	Univoltine	1.2779	0.9402	1.737
+;
+run;
+
+proc sgplot data=odds ; /** scale all plots the same **/ *uniform=all;
+  	styleattrs datacolors=(green blue red) DATACONTRASTCOLORS=(green blue red) ;
+	highlow y=characteristic high=upper_odds low=lower_odds/group=category type=line lineattrs=(pattern=solid) highcap=serif lowcap=serif LINEATTRS=(thickness=2);
+	scatter y=characteristic x=odds/group=category FILLEDOUTLINEDMARKERS markerattrs=(symbol=circlefilled size=14) MARKEROUTLINEATTRS=(color=black) datalabel=characteristic DATALABELATTRS=(Color=black Family=Arial Style=Italic Weight=Bold size=10);
+	refline 1 /axis=x lineattrs=(pattern=shortdash color=black) ;
+	yaxis label='Characteristic' TYPE=discrete DISCRETEORDER=data LABELATTRS=( Family=Arial Size=15 Weight=Bold) display=(NOVALUES NOTICKS);
+	xaxis label='Odds for Establishment'  LABELATTRS=( Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+	title1 'Plot of Odds of Establishment';
+run;
+```
+<img src="./images/forest.png" alt="Forest Plot" width="600" />
+
+
+# Refinements
+
+## Controling Axes (Fonts and Appearance)
+
+The *Xaxis* and *Yaxis* statements are used to label the axes and define their size, text, fonts, and colors. In these options, the *Label* portions control the descriptive text along the axis, while the *Value* portions control the numeric text content along each axis.
+
+```{r Axes1, engine="sashtml", engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
+
+proc sgplot data=all;
+	where year=1975;
+	styleattrs datacolors=(green blue);
+	scatter x=length y=depth/group=species filledoutlinedmarkers markeroutlineattrs=(color=black) markerattrs=(symbol=circlefilled size=10);
+	xaxis label="Beak Length (mm)" LABELATTRS=(Color=black Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Color=black Family=Arial Weight=Bold);
+	yaxis label="Beak Depth (mm)" LABELATTRS=(Color=black Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Color=black Family=Arial Weight=Bold);
+	title1 'Finch Data Scatter Plot';
+run;
+
+```
+
+## Subscripts, Superscripts, and Special Characters
+
+Sometimes in labels, titles, and axes we need to use special characters, such as Greek letters or symbols, as well subscripts and superscripts. To use these characters, SAS relies on a standard computer programming system called Unicode. Unicode font sets contain a very large array of characters, including those from many non-English languages. When we want to use these characters, we need to tell SAS and this is done with an "escape" character that essentially says 'everything after this is special, so treat it as Unicode'. The *escape* character can be any keyboard character and is specified before we use it in an *ODS* statement: **ods escapechar = ** and the character in quotes. Below in the demonstration, the escape character is set to the carrot or hat character, "^".
+
+To call a Unicode character we give the escape character, followed by **{unicode 'cccc'x}** where the *'cccc'* portion is the hexidecimal value of the special character. These character values must be looked up. A good site for this can be found by searching on the web site  [here](https://www.compart.com/en/unicode/){target="_blank"}.
+
+In the example below, the x-axis has several common special characters specified.
+
+
+```{r sub_sup1, engine="sashtml", engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
+
+ods escapechar='^';
+
+proc sgplot data=all;
+	where year=1975;
+	styleattrs datacolors=(green blue);
+	scatter x=length y=depth/group=species filledoutlinedmarkers markeroutlineattrs=(color=black) markerattrs=(symbol=circlefilled size=10);
+	xaxis label="alpha ^{unicode '03b1'x}, beta ^{unicode '03b2'x}, degrees F^{unicode '00b0'x}, sup one ^{unicode '00b9'x}, sup two ^{unicode '00b2'x}, minus one ^{unicode '207B'x}^{unicode '00b9'x}, minus two ^{unicode '207B'x}^{unicode '00b2'x}" 
+LABELATTRS=(Color=black Family=monotype Size=15 Weight=Bold) VALUEATTRS=(Color=black Family=Arial Weight=Bold);
+	yaxis label="Beak Depth (mm)" LABELATTRS=(Color=black Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Color=black Family=Arial Weight=Bold);
+	title1 'Finch Data Scatter Plot';
+run;
+
+
+```
+
+## More on Colors
+
+Colors are a useful way to incorporate information from additional variable into an existing plot. For example, below the jitter plot demonstrated above displays the distribution of beak depth. We can add additional information about beak length as well. This is done using the options **colormodel=** and **colorrespone=** to the scatter statement. This first definesa color gradient over which the additional variable values will be colorized. This should include at least two colors, and the order runs from low to high corresponding to the first to last colors listed. The colorresponse option specifies the additional variable to color code on. On the resulting plot a color gradient bar will be added as a legend for the coloring. Note: this option works best when the additional variable for coloring information is continuous, not discrete.
+
+
+```{r color1, engine="sashtml", engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
+
+proc sgplot data=all;
+	where species='scandens';
+	scatter x=year y=depth/colormodel=(green yellow red) colorresponse = length jitter filledoutlinedmarkers markerfillattrs=(color=white) markeroutlineattrs=(color=black) markerattrs=(symbol=circlefilled size=10);
+	*vbox length/category=year boxwidth=.3 MEDIANATTRS=(color=black thickness=1.5) MEANATTRS=(color=black symbol=diamondfilled size=12) 
+		FILLATTRS=(transparency=.8 color=red) LINEATTRS=(color=black thickness=1.5) WHISKERATTRS=(color=black thickness=1.5);
+	xaxis label='Year' TYPE=discrete  LABELATTRS=( Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+	yaxis label='G. scandens Beak Depth (mm)' LABELATTRS=( Family=Arial Size=12 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+	title1 'Finch Data Jitter with Colors';
+run;
+```
