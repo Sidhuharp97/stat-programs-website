@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>functions | Idaho Ag Stats</title>
+    <link>/tag/functions/</link>
+      <atom:link href="/tag/functions/index.xml" rel="self" type="application/rss+xml" />
+    <description>functions</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Copyright @ 2022 by the [University of Idaho Statistical Programs](https://www.uidaho.edu/cals/statistical-programs). Built with [Wowchemy](https://wowchemy.com/), a free open-source web builder.</copyright><lastBuildDate>Tue, 08 Feb 2022 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png</url>
+      <title>functions</title>
+      <link>/tag/functions/</link>
+    </image>
+    
+    <item>
+      <title>How to Write Custom Functions in R</title>
+      <link>/post/writing-r-functions/</link>
+      <pubDate>Tue, 08 Feb 2022 00:00:00 +0000</pubDate>
+      <guid>/post/writing-r-functions/</guid>
+      <description>&lt;p&gt;You may find yourself needing to do something repeatedly in R. Sure, you can cut-and-paste and change that one thing, or two things, or five things, but this quickly becomes cumbersome. The result can be a very long R file and the likelihood of making a mistake that you don&amp;rsquo;t notice increases (e.g. forgetting to change a variable or an argument).&lt;/p&gt;
+&lt;p&gt;There is the general rule of DRY: don&amp;rsquo;t repeat yourself. In practice, if something has to pasted more than twice, then consider writing a function to accomplish that aim instead.&lt;/p&gt;
+&lt;h3 id=&#34;introduction-to-writing-functions&#34;&gt;Introduction to Writing Functions&lt;/h3&gt;
+&lt;p&gt;R functions follow a general structure:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;my_function_name &amp;lt;- function(argument1, argument2) {
+  final_output &amp;lt;- action(argument1, argument2)
+  return(final_output)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;A classic function example is conversion of temperature from Fahrenheit to celsius:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;fahr_to_cel &amp;lt;- function(fahr) {
+  # function that converts temperature in degrees Fahrenheit to celsius
+  # input: fahr: numeric value representing temp in degrees fahrenheit
+  # output: kelvin: numeric converted temp in celsius
+  celsius &amp;lt;- ((fahr - 32) * (5 / 9)) 
+  return(celsius)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This function takes a numeric value, temperature in Fahrenheit, and outputs another numeric value, that same value converted to celsius.&lt;/p&gt;
+&lt;p&gt;Function usage:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;fahr_to_cel(80)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 26.66667
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This function can be called for a large number of values at once:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# create a vector of 100 numbers randomly sampled between 1 and 100. 
+x1 &amp;lt;- sample(1:100, 100, replace = TRUE)
+x2 &amp;lt;- fahr_to_cel(x1)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you provide the incorrect type of data, the function will not work:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;fahr_to_cel(&amp;quot;thirty&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Error in fahr - 32: non-numeric argument to binary operator
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;a-more-complex-example&#34;&gt;A More Complex Example&lt;/h3&gt;
+&lt;p&gt;Often we want to do something more complicated. One thing I want to do frequently is build boxplots.&lt;/p&gt;
+&lt;p&gt;First, simulate some data. This data set has two categorical variables, &lt;code&gt;cat1&lt;/code&gt; and &lt;code&gt;cat2&lt;/code&gt;, and 4 different continuous variables generated through data simulation.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;mydata &amp;lt;- data.frame(cat1 = rep(c(&amp;quot;A&amp;quot;, &amp;quot;B&amp;quot;, &amp;quot;C&amp;quot;, &amp;quot;D&amp;quot;), 10),
+                     cat2 = rep(c(&amp;quot;one&amp;quot;, &amp;quot;two&amp;quot;), each = 20),
+                     var1 = rnorm(40),
+                     var2 = runif(40), 
+                     var3 = rlnorm(40),
+                     var4 = rbeta(40, 1, 5))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Next, write up an example of what you want to do. In this example, let&amp;rsquo;s create a boxplot:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;boxplot(var1 ~ cat1, data = mydata,
+        main = NA, col = &amp;quot;orangered&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/writing-r-functions/index_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Now, let&amp;rsquo;s put that in a function. Start with the basic function framework:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;boxplot_func = function() {
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Next, insert the function code. Start by cut-and-pasting the original boxplot command ran above:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;boxplot_func = function() {
+    boxplot(var1 ~ cat1, data = mydata,
+    main = NA, col = &amp;quot;orangered&amp;quot;)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Decide on arguments you want to control and put that inside the &lt;code&gt;function()&lt;/code&gt; parentheses. Probably the independent and dependent variable (x and y, respectively), as well as the data frame needed.&lt;/p&gt;
+&lt;p&gt;Put those arguments inside &lt;code&gt;function()&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;boxplot_func = function(df, x, y) {
+    boxplot(var1 ~ cat1, data = mydata,
+    main = NA, col = &amp;quot;orangered&amp;quot;)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then indicate where those arguments are used in the function. They must be used in the function (otherwise, why have them?).&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;boxplot_func = function(df, x, y) {
+    boxplot(y ~ x, data = df,
+    main = NA, col = &amp;quot;orangered&amp;quot;)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;However, if you try to use this function, it won&amp;rsquo;t work. The argument &lt;code&gt;y ~ x&lt;/code&gt; is a special class of object in R called &amp;ldquo;formula&amp;rdquo; and the formatting and object type must match. Formulas are used widely in R for linear modelling and follow the exact same convention:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;y ~ x  
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;em&gt;Note that the information on either side of &lt;code&gt;~&lt;/code&gt; can become more complicated. (but not in this function).&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;So, create a formula object using the functions &lt;code&gt;formula()&lt;/code&gt; and &lt;code&gt;paste()&lt;/code&gt; within the function and insert that into the basic boxplot code. If you don&amp;rsquo;t know how to use those function, type &lt;code&gt;?formula&lt;/code&gt; and &lt;code&gt;?paste&lt;/code&gt; into the console to learn more about them.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;boxplot_func = function(df, x, y) {
+    f = formula(paste(y, &amp;quot;~&amp;quot;, x))
+    boxplot(f, data = df,
+    main = NA, col = &amp;quot;orangered&amp;quot;)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;What if you want the ability to change the color? Insert a new argument and replace it in the function body:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;boxplot_func = function(x, y, color) {
+    f = formula(paste(y, &amp;quot;~&amp;quot;, x))
+    boxplot(f, data = df,
+    main = NA, col = color)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you want the option to set the some options or if you choose not to, have the function choose values automatically as defaults, that can be done by naming the argument in &lt;code&gt;formula()&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;boxplot_func = function(df = mydata, x, y, color = &amp;quot;springgreen&amp;quot;) {
+    f = formula(paste(y, &amp;quot;~&amp;quot;, x))
+    boxplot(f, data = df,
+    main = NA, col = color)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Next step is to run the function as it is currently written (highlight the function code and click run). Next, make sure you add this function (i.e. &lt;code&gt;boxplot_funct = function(...)&lt;/code&gt;) to your R environment by running it in the console. You can check it exists in your R global environment as thus:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;ls()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;boxplot_func&amp;quot; &amp;quot;fahr_to_cel&amp;quot;  &amp;quot;mydata&amp;quot;       &amp;quot;x1&amp;quot;           &amp;quot;x2&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now, call the function and make sure it does what we want?&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;boxplot_func(mydata, &amp;quot;cat1&amp;quot;, &amp;quot;var1&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/writing-r-functions/index_files/figure-html/unnamed-chunk-15-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;boxplot_func(x = &amp;quot;cat2&amp;quot;, y = &amp;quot;var1&amp;quot;, col = &amp;quot;darkcyan&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/writing-r-functions/index_files/figure-html/unnamed-chunk-15-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;boxplot_func(mydata, &amp;quot;cat2&amp;quot;, &amp;quot;var4&amp;quot;, col = &amp;quot;khaki&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/writing-r-functions/index_files/figure-html/unnamed-chunk-15-3.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;What if it doesn&amp;rsquo;t do what we want? What if you get strange output? No output? Or strange error messages? Herein comes the world of debugging (another blog post for another day).&lt;/p&gt;
+&lt;h3 id=&#34;error-checking-and-error-messages&#34;&gt;Error Checking and Error Messages&lt;/h3&gt;
+&lt;p&gt;You may have noticed earlier this strange error message:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;fahr_to_cel(&amp;quot;thirty&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Error in fahr - 32: non-numeric argument to binary operator
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is a very confusing message. We most certainly provided a &amp;ldquo;non-numeric argument&amp;rdquo;, but what is a &amp;ldquo;binary operator&amp;rdquo;? Turns out that is a programming speak for a standard mathematical operations addition, subtraction, multiplication and division (called &amp;lsquo;binary&amp;rsquo; because they take two inputs). Still, we are likely to encounter more strange error messages written in programmer speak that confuse us or someone else using our functions. We can write custom error messages that are produced when certain errors occur.&lt;/p&gt;
+&lt;p&gt;Here is the temperature conversion function again:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;fahr_to_cel &amp;lt;- function(fahr) {
+  celsius &amp;lt;- ((fahr - 32) * (5 / 9)) 
+  return(celsius)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Since they can only take numeric argument, maybe we can start for checking for this? There are a few options in do this. One of the easiest to use is &lt;code&gt;stopifnot()&lt;/code&gt;. This functions takes the general form: &lt;code&gt;stopifnot(&amp;quot;my custom error message&amp;quot; = test)&lt;/code&gt;. What constitutes a &amp;lsquo;test&amp;rsquo; is an R expression that returns a TRUE or FALSE value after being evaluated. Examples of this are &lt;code&gt;is.character(x)&lt;/code&gt;, &lt;code&gt;is.NA(x)&lt;/code&gt;, &lt;code&gt;x &amp;gt; 0&lt;/code&gt; and so on. For each of these statements, the expectation is that R will true a TRUE or FALSE. If the test does not do this reliably (e.g. you may not be able to evaluate &lt;code&gt;x &amp;gt; 0&lt;/code&gt; if x is non-numeric), then a different test is needed.&lt;/p&gt;
+&lt;p&gt;In our case, we can use &lt;code&gt;is.numeric()&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;fahr_to_cel &amp;lt;- function(fahr) {
+  stopifnot(&amp;quot;input is not numeric&amp;quot; = is.numeric(fahr))
+  celsius &amp;lt;- ((fahr - 32) * (5 / 9)) 
+  return(celsius)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let&amp;rsquo;s run some test cases:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;fahr_to_cel(30)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] -1.111111
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;fahr_to_cel(&amp;quot;thirty&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Error in fahr_to_cel(&amp;quot;thirty&amp;quot;): input is not numeric
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As expected, the first one worked and the second generated an error message.&lt;/p&gt;
+&lt;p&gt;Naturally, this is a very trivial example, but if you write more complicated functions with the intent of them automatically accomplishing a goal for you, these error messages can be helpful.&lt;/p&gt;
+&lt;h3 id=&#34;functions-and-tidy-evaluation&#34;&gt;Functions and Tidy Evaluation&lt;/h3&gt;
+&lt;p&gt;If you&amp;rsquo;ve worked with the tidyverse, you know it handles input a bit differently. In summary, quotes are used far less often. This makes writing function quite challening at times and required the use of the double curly braces, &lt;code&gt;{{}}&lt;/code&gt; or the &amp;ldquo;bang-bang&amp;rdquo; operator &lt;code&gt;!!&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;What if we wanted to do a boxplot function using ggplot?&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s what the code would look like:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(ggplot2)
+
+mydata &amp;lt;- data.frame(cat = rep(c(&amp;quot;AA&amp;quot;, &amp;quot;BB&amp;quot;), each = 50), 
+                     obs = c(rnorm(50), runif(50)))
+
+ggplot(mydata, aes(x = cat, y = obs)) +
+  geom_boxplot(aes(fill = cat), alpha = 0.5) +
+  geom_jitter(height = 0, width = 0.2, alpha = 0.6, color = &amp;quot;black&amp;quot;) + 
+  guides(fill = &amp;quot;none&amp;quot;) +
+  theme_classic()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/writing-r-functions/index_files/figure-html/unnamed-chunk-19-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;But, if you try to write a function following the usual rules, it won&amp;rsquo;t work properly:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;gboxplot_func &amp;lt;- function(x1, y1) {
+  ggplot(mydata, aes(x = x1, y = y1)) +
+  geom_boxplot(aes(fill = x1), alpha = 0.5) +
+  geom_jitter(height = 0, width = 0.2, alpha = 0.6, color = &amp;quot;black&amp;quot;) + 
+  guides(fill = &amp;quot;none&amp;quot;) +
+  theme_classic()
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;gboxplot_func(cat, obs)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Error in FUN(X[[i]], ...): object &#39;obs&#39; not found
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/writing-r-functions/index_files/figure-html/unnamed-chunk-21-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;This one works, but the results are crazy.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;gboxplot_func(&amp;quot;cat&amp;quot;, &amp;quot;obs&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/writing-r-functions/index_files/figure-html/unnamed-chunk-22-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Why are the results wonky? Because while this function see &amp;ldquo;mydata&amp;rdquo; has 100 observations, it cannot connect &amp;ldquo;cat&amp;rdquo; and &amp;ldquo;obs&amp;rdquo; to the data frame.&lt;/p&gt;
+&lt;p&gt;This is where the special operators come in:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;gboxplot_func2 &amp;lt;- function(x1, y1) {
+  ggplot(mydata, aes(x = {{x1}}, y = {{y1}})) +
+  geom_boxplot(aes(fill = {{x1}}), alpha = 0.5) +
+  geom_jitter(height = 0, width = 0.2, alpha = 0.6, color = &amp;quot;black&amp;quot;) + 
+  guides(fill = &amp;quot;none&amp;quot;) +
+  theme_classic()
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;gboxplot_func2(cat, obs)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/writing-r-functions/index_files/figure-html/unnamed-chunk-24-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The curly braces enable us to insert unquoted tidy variables and use ggplot.&lt;/p&gt;
+&lt;p&gt;What if you have multiple options to specify in a single arguments? You can use the &lt;code&gt;...&lt;/code&gt; notation (in the final argument):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;var_sum_funct(storms, day, name)[1:5,] # one grouping factor
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 5 × 3
+##   name      Mean     SD
+##   &amp;lt;chr&amp;gt;    &amp;lt;dbl&amp;gt;  &amp;lt;dbl&amp;gt;
+## 1 AL011993  8.75 13.7  
+## 2 AL012000  7.75  0.5  
+## 3 AL021992 25.6   0.548
+## 4 AL021994 20.3   0.516
+## 5 AL021999  2.75  0.5
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;var_sum_funct(storms, day, name, status)[1:5,] # many grouping factors
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## `summarise()` has grouped output by &#39;name&#39;. You can override using the `.groups` argument.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 5 × 4
+## # Groups:   name [5]
+##   name     status               Mean     SD
+##   &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;               &amp;lt;dbl&amp;gt;  &amp;lt;dbl&amp;gt;
+## 1 AL011993 tropical depression  8.75 13.7  
+## 2 AL012000 tropical depression  7.75  0.5  
+## 3 AL021992 tropical depression 25.6   0.548
+## 4 AL021994 tropical depression 20.3   0.516
+## 5 AL021999 tropical depression  2.75  0.5
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;var_sum_funct(storms, day) # unusual example! 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 1 × 2
+##    Mean    SD
+##   &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
+## 1  15.9  9.01
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is a very brief introduction to tidy evaluation. More information on tidy evaluation is available for &lt;a href=&#34;https://ggplot2.tidyverse.org/articles/ggplot2-in-packages.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ggplot&lt;/a&gt; and &lt;a href=&#34;https://dplyr.tidyverse.org/articles/programming.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;dplyr&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

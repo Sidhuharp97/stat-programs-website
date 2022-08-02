@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>William Price | Idaho Ag Stats</title>
+    <link>/authors/bprice/</link>
+      <atom:link href="/authors/bprice/index.xml" rel="self" type="application/rss+xml" />
+    <description>William Price</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Copyright @ 2022 by the [University of Idaho Statistical Programs](https://www.uidaho.edu/cals/statistical-programs). Built with [Wowchemy](https://wowchemy.com/), a free open-source web builder.</copyright>
+    <image>
+      <url>/authors/bprice/avatar_hu07a119625e817e757d80ba6b1af81644_106941_270x270_fill_q75_lanczos_center.jpg</url>
+      <title>William Price</title>
+      <link>/authors/bprice/</link>
+    </image>
+    
+  </channel>
+</rss>

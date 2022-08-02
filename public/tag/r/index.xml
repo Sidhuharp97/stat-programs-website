@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R | Idaho Ag Stats</title>
+    <link>/tag/r/</link>
+      <atom:link href="/tag/r/index.xml" rel="self" type="application/rss+xml" />
+    <description>R</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>Copyright @ 2022 by the [University of Idaho Statistical Programs](https://www.uidaho.edu/cals/statistical-programs). Built with [Wowchemy](https://wowchemy.com/), a free open-source web builder.</copyright><lastBuildDate>Mon, 16 May 2022 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png</url>
+      <title>R</title>
+      <link>/tag/r/</link>
+    </image>
+    
+    <item>
+      <title>Tools and Resources for R Users in Agricultural Research</title>
+      <link>/events/presentations/agstats-conference-2022/</link>
+      <pubDate>Mon, 16 May 2022 00:00:00 +0000</pubDate>
+      <guid>/events/presentations/agstats-conference-2022/</guid>
+      <description>&lt;p&gt;This is a part of an effort to establish a CRAN task view for agricultural research. Feel free to contribute to this at our &lt;a href=&#34;https://github.com/IdahoAgStats/ctv-agriculture&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GitHub repository&lt;/a&gt;. You can find a prose version of this poster &lt;a href=&#34;/post/keeping-up-with-r/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>R packages for Agricultural Research</title>
+      <link>/post/keeping-up-with-r/</link>
+      <pubDate>Fri, 13 May 2022 00:00:00 +0000</pubDate>
+      <guid>/post/keeping-up-with-r/</guid>
+      <description>&lt;p&gt;Finding the R packages that support your work can be challenging. Keeping up with the ongoing changes that occur in the R package ecosystem can be even harder. There are tools out there to ease this burden:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://cran.r-project.org/web/views/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CRAN Task Views&lt;/a&gt; These topic-specific resources are intended as a general guide to R packages relevant to a topic. They are not exhaustive lists of every possible package. There is not an agricultural CRAN task view&amp;hellip;.yet (hence this blog post).&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://ropensci.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;R Open Science&lt;/a&gt; is running a new tool, &lt;a href=&#34;https://r-universe.dev/search/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;R Universe&lt;/a&gt; to provide organization-specific resources for package discovery and exploration. Idaho Ag Stats is running an &lt;a href=&#34;https://idahoagstats.r-universe.dev/ui#packages&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ag stats universe&lt;/a&gt; for the packages described in this post.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://rweekly.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;R weekly&lt;/a&gt; provides weekly curated summaries by rotating curators on major developments in R. They have an RSS feed, too!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Below is a compiled list of know R resources supporting agricultural research. Agriculture encompasses a broad breadth of disciplines. Many, many package in base R and contributed packages are useful to agricultural researchers. For that reason, this is not exhaustive list. It is intended to cover major packages that in most cases, have been developed to support agricultural research and analytical needs.&lt;/p&gt;
+&lt;p&gt;Note that some of these packages are on CRAN and others are on GitHub, Bioconductor, or R-forge.&lt;/p&gt;
+&lt;p&gt;If you think that a package is missing from the list, please &lt;a href=&#34;https://github.com/IdahoAgStats/ctv-agriculture/issues&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;open an issue&lt;/a&gt; on the GitHub repo for this topic.&lt;/p&gt;
+&lt;h2 id=&#34;core-packages-with-general-applications&#34;&gt;Core Packages with general applications&lt;/h2&gt;
+&lt;h3 id=&#34;agricultural-and-landuse-databases&#34;&gt;Agricultural and landuse databases&lt;/h3&gt;
+&lt;p&gt;Data from the United States Department of Agriculture&amp;rsquo;s National Agricultural Statistical Service &amp;lsquo;&lt;a href=&#34;https://www.nass.usda.gov/Quick_Stats/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Quick Stats&lt;/a&gt;&amp;rsquo; web API can be accessed with &lt;a href=&#34;https://CRAN.R-project.org/package=rnassqs&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;rnassqs&lt;/a&gt; or with &lt;a href=&#34;https://CRAN.R-project.org/package=tidyUSDA&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;tidyUSDA&lt;/a&gt;, which also offers some mapping capabilities. The USDA&amp;rsquo;s &lt;a href=&#34;https://nassgeodata.gmu.edu/CropScape/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Cropland Data Layer&lt;/a&gt; API can be accessed with &lt;a href=&#34;https://CRAN.R-project.org/package=CropScapeR&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CropScapeR&lt;/a&gt; and &lt;a href=&#34;https://CRAN.R-project.org/package=cdlTools&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;cdlTools&lt;/a&gt; provides various utility functions for processing CDL data. The package &lt;a href=&#34;https://CRAN.R-project.org/package=rusda&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;rusda&lt;/a&gt; provides an interface to access the USDA-ARS Systematic Mycology and Microbiology Laboratory (SMML)&amp;rsquo;s &lt;a href=&#34;https://nt.ars-grin.gov/fungaldatabases/Literature/Literature.cfm&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;four databases&lt;/a&gt;: Fungus-Host Distributions, Specimens, Literature and the Nomenclature database. USDA&amp;rsquo;s Agricultural Resource Management Survey (&lt;a href=&#34;https://www.nass.usda.gov/Surveys/Guide_to_NASS_Surveys/Ag_Resource_Management/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ARMS&lt;/a&gt;) data API can be accessed with &lt;a href=&#34;https://CRAN.R-project.org/package=rarms&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;rarms&lt;/a&gt;. The USDA&amp;rsquo;s Livestock Mandatory Reporting data API can be accessed with &lt;a href=&#34;https://CRAN.R-project.org/package=usdampr&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;usdampr&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://CRAN.R-project.org/package=FAOSTAT&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;FAOSTAT&lt;/a&gt; and &lt;a href=&#34;https://github.com/muuankarski/faobulk&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;faobulk&lt;/a&gt; can be used to access data from the &lt;a href=&#34;https://www.fao.org/faostat/en/#home&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;FAOSTAT Database&lt;/a&gt; of the Food and Agricultural Organization (FAO) of the United Nations.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://CRAN.R-project.org/package=FedData&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;FedData&lt;/a&gt; provides access to geospatial data from The Soil Survey Geographic (&lt;a href=&#34;https://www.nrcs.usda.gov/wps/portal/nrcs/detail/soils/survey/?cid=nrcs142p2_053627&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;SSURGO&lt;/a&gt;) database, the Global Historical Climatology Network (&lt;a href=&#34;https://www.ncei.noaa.gov/products/land-based-station/global-historical-climatology-network-daily&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GHCN&lt;/a&gt;), the Daymet gridded estimates of daily weather parameters for North America, the &lt;a href=&#34;https://catalog.data.gov/dataset/international-tree-ring-data-bank-itrdb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;International Tree Ring Data Bank&lt;/a&gt;, and the &lt;a href=&#34;https://www.usgs.gov/centers/eros/science/national-land-cover-database#overview&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;National Land Cover Database&lt;/a&gt;. The NOAA database API can be acccessed with &lt;a href=&#34;https://CRAN.R-project.org/package=rnoaa&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;rnoaa&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;data-sets&#34;&gt;Data sets&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://CRAN.R-project.org/package=agridat&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Agridat&lt;/a&gt; consists of a very large collection of agricultural data sets and example analyses; the package contains a vignette detailing additional data sets and extensive resources to support agricultural analysis. &lt;a href=&#34;https://CRAN.R-project.org/package=agriTutorial&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;agriTutorial&lt;/a&gt; provides a collection of agricultural data sets and analysis with particular attention to crop experiments. On GitHub, the repository &lt;a href=&#34;https://github.com/OnofriAndreaPG/agriCensData&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;agroBioData&lt;/a&gt; houses a collection of data sets supporting agriculture and applied biology (note that this is a collection of CSV files, not a package). The &lt;a href=&#34;https://pubmed.ncbi.nlm.nih.gov/28724064/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;soybean nested associated mapping population data set&lt;/a&gt; can be accessed via &lt;a href=&#34;https://CRAN.R-project.org/package=SoyNAM&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;SoyNAM&lt;/a&gt;.  &lt;a href=&#34;https://github.com/samuelbfernandes/simplePHENOTYPES&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;simplePhenotypes&lt;/a&gt; can be used for simulating pleiotropic, linked and epistatic phenotypes. USGS county data on fertilizer sales can be explored with &lt;a href=&#34;https://github.com/wenlong-liu/ggfertilizer&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ggfertilizer&lt;/a&gt;. The FAOSTAT data set collection on the Food and Agriculture Biomass Input–Output model (FABIO) is available through &lt;a href=&#34;https://github.com/fineprint-global/fabio&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;fabio&lt;/a&gt; and described more in detail in &lt;a href=&#34;https://pubs.acs.org/doi/10.1021/acs.est.9b03554&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Bruckner 2019&lt;/a&gt;. The R-forge subversion repository &lt;a href=&#34;https://r-forge.r-project.org/scm/viewvc.php/pkg/?root=cropcc&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&amp;lsquo;cropcc&amp;rsquo;&lt;/a&gt; hosts several R packages with climate change/cropping data set. Additionally, many  of the agriculture-focused packages listed in this guide also include data sets to illustrate their functionality (e.g. &lt;a href=&#34;https://CRAN.R-project.org/package=BGLR&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;BGLR&lt;/a&gt;, &lt;a href=&#34;https://CRAN.R-project.org/package=agricolae&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;agricolae&lt;/a&gt;, &lt;a href=&#34;https://github.com/lian0090/FW/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;FW&lt;/a&gt;).&lt;/p&gt;
+&lt;h3 id=&#34;general-analytical-packages-supporting-agricultural-research&#34;&gt;General analytical packages supporting agricultural research&lt;/h3&gt;
+&lt;p&gt;The package &lt;a href=&#34;https://cran.r-project.org/package=nlraa&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;nlraa&lt;/a&gt; provides nonlinear regression fucntions specifically for agricultural applications. &lt;a href=&#34;https://github.com/OnofriAndreaPG/agriCensData&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;agriCensData&lt;/a&gt; is a flexible package for working with censored data (e.g. time to flowering, instrumentation values below the detection limit, disease scoring). The R suite of linear and non-linear modelling packages, &lt;a href=&#34;https://CRAN.R-project.org/package=nlme&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;nlme&lt;/a&gt;, &lt;a href=&#34;https://CRAN.R-project.org/package=lme4&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;lme4&lt;/a&gt;, and &lt;a href=&#34;https://CRAN.R-project.org/package=MCMCglmm&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;MCMCglmm&lt;/a&gt; are useful for analysing a wide array of studies. The accessory package &lt;a href=&#34;https://CRAN.R-project.org/package=emmeans&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;emmeans&lt;/a&gt; works with those packages (and more) to calculated the estimated marginal means for the independent variables. The CRAN task view on &lt;a href=&#34;https://cran.r-project.org/web/views/MissingData.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;MissingData&lt;/a&gt; is helpful for understanding how to impute for missing data. See the &lt;a href=&#34;https://cran.r-project.org/web/views/MetaAnalysis.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Meta-analysis CRAN task view&lt;/a&gt; for packages supporting meta-analyses.&lt;/p&gt;
+&lt;h2 id=&#34;discipline-specific-packages&#34;&gt;Discipline-specific packages&lt;/h2&gt;
+&lt;h3 id=&#34;agricultural-economics&#34;&gt;Agricultural economics&lt;/h3&gt;
+&lt;p&gt;The task views for &lt;a href=&#34;https://cran.rstudio.com/web/views/Econometrics.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Econometrics&lt;/a&gt;, &lt;a href=&#34;https://cran.r-project.org/web/views/Finance.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Empirical Finance&lt;/a&gt;, and &lt;a href=&#34;https://cran.r-project.org/web/views/TimeSeries.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;TimeSeries&lt;/a&gt; provide information on packages and tools relevant to agriculture economics.&lt;/p&gt;
+&lt;h3 id=&#34;agronomic-trials&#34;&gt;Agronomic trials&lt;/h3&gt;
+&lt;h4 id=&#34;experimental-design&#34;&gt;Experimental design&lt;/h4&gt;
+&lt;p&gt;The package &lt;a href=&#34;https://CRAN.R-project.org/package=agricolae&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;agricolae&lt;/a&gt; provides extensive resources for the planning and analysis of planned field experiments. The CRAN task for &lt;a href=&#34;https://cran.rstudio.com/web/views/Econometrics.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ExperimentalDesign&lt;/a&gt; provide additional information on experimental design for a wide variety of research problems. &lt;a href=&#34;https://CRAN.R-project.org/package=desplot&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;desplot&lt;/a&gt; is for plotting maps of agricultural trials laid out in grids.&lt;/p&gt;
+&lt;h4 id=&#34;general-analysis&#34;&gt;General analysis&lt;/h4&gt;
+&lt;p&gt;The package &lt;a href=&#34;https://CRAN.R-project.org/package=agricolae&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;agricolae&lt;/a&gt; contains functions for analyzing many common designs in agriculture trials such as split plot, lattice, Latin square and some additional functions such AMMI and AUDPC calculations. &lt;a href=&#34;https://CRAN.R-project.org/package=statgenSTA&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;statgenSTA&lt;/a&gt; has functions for single trial analysis with and without spatial components. The proprietary software &lt;a href=&#34;https://www.vsni.co.uk/software/asreml&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;asreml&lt;/a&gt; provides an R version of their mixed model fitting functions for field trial analysis (note this is not open source and also requires an annual license). CRAN also contains an add-on package &lt;a href=&#34;https://CRAN.R-project.org/package=asremlPlus&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;asremlPlus&lt;/a&gt; that provides several accessory functions to asreml. &lt;a href=&#34;https://github.com/inbo/INLA&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;INLA&lt;/a&gt; provides tools for Bayesian inference of latent Gaussian models. It was developed specifically for agriculture and contains functions for modelling spatial variation in field experiments.&lt;/p&gt;
+&lt;h4 id=&#34;genotype-by-environment-interactions&#34;&gt;Genotype-by-environment interactions&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;https://CRAN.R-project.org/package=statgenGxE&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;statgenGxE&lt;/a&gt; has several functions for handling various analytical approaches for addressing genotype-by-environment interactions. &lt;a href=&#34;https://CRAN.R-project.org/package=IBCF.MTME&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;IBCF.MTME&lt;/a&gt; implements item-based collaborative filtering for multi-trait and multi-environment trials following &lt;a href=&#34;https://pubmed.ncbi.nlm.nih.gov/29097376/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Montesinos-López 2018&lt;/a&gt;. The package &lt;a href=&#34;https://CRAN.R-project.org/package=gge&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;gge&lt;/a&gt; is useful for producing GGE biplots, while &lt;a href=&#34;https://CRAN.R-project.org/package=bayesammi&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;bayesammi&lt;/a&gt; can conduct Bayesian estimation of additive main effects multiplicative interaction model. &lt;a href=&#34;https://github.com/allogamous/EnvRtype&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;EnvRtype&lt;/a&gt; can be used for assembling climate data, data set preparation and environmental classification. &lt;a href=&#34;https://github.com/lian0090/FW/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;FW&lt;/a&gt; implements Finlay-Wilkinson regression using a Gibbs sampler.&lt;/p&gt;
+&lt;h4 id=&#34;high-throughput-phenotyping-htp&#34;&gt;High throughput phenotyping (HTP)&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;https://CRAN.R-project.org/package=statgenHTP&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;statgenHTP&lt;/a&gt; is for analyzing data from HTP platform experiments, with some functions specifically designed to work with the proprietary software &lt;a href=&#34;https://www.vsni.co.uk/software/asreml&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;asreml&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;animal-science&#34;&gt;Animal science&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://CRAN.R-project.org/package=usdampr&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;usdampr&lt;/a&gt; provides access to the USDA&amp;rsquo;s Livestock Mandatory Reporting API. Many of the genetic packages described in this resource can also be applied to animal breeders.&lt;/p&gt;
+&lt;h3 id=&#34;breeding-and-genetics&#34;&gt;Breeding and genetics&lt;/h3&gt;
+&lt;p&gt;See the &lt;a href=&#34;https://cran.r-project.org/web/views/Phylogenetics.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Phylogenetics CRAN task view&lt;/a&gt; describing R packages for taxonomy, community ecology (including microbiome work) and of course, phylogenetics. In addition, the R package repository &lt;a href=&#34;https://www.bioconductor.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Bionconductor&lt;/a&gt; provides bioinformatics tools for the processing of high-throughput genomic data. &lt;a href=&#34;https://CRAN.R-project.org/package=lmDiallel&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;lmDiallel&lt;/a&gt; provides service functions for analysing data sets obtained from diallel experiments, as described in &lt;a href=&#34;https://doi.org/10.1007%2Fs00122-020-03716-8&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Onofri 2020&lt;/a&gt;. &lt;a href=&#34;https://r-forge.r-project.org/projects/plantbreeding/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;plantbreeding&lt;/a&gt; (available on R-forge: &lt;code&gt;install.packages(&amp;quot;plantbreeding&amp;quot;, repos=&amp;quot;http://R-Forge.R-project.org&amp;quot;)&lt;/code&gt;) provides many convenience functions for working with populations and designs common in plant breeding including dialleles, line testers, augmented trials, the Carolina design, and more. &lt;a href=&#34;https://github.com/reyzaguirre/st4gi&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;st4gi&lt;/a&gt; provides several general functions for genetic improvement of crops.&lt;/p&gt;
+&lt;h4 id=&#34;linkage-mapping--qtl-analysis&#34;&gt;Linkage mapping &amp;amp; QTL analysis&lt;/h4&gt;
+&lt;p&gt;There are two notable and long-standing packages: (1) &lt;a href=&#34;https://CRAN.R-project.org/package=onemap&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;onemap&lt;/a&gt;, providing MapMaker/EXP like performance and extended functionality, and (2) &lt;a href=&#34;https://CRAN.R-project.org/package=qtl&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;qtl&lt;/a&gt; providing standard functionality for qtl mapping and  accessory functions for simulating crosses. &lt;a href=&#34;https://CRAN.R-project.org/package=ASMap&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ASMap&lt;/a&gt; is for fast linkage mapping with the algorithm &amp;lsquo;MSTmap&amp;rsquo;. &lt;a href=&#34;https://github.com/jendelman/MapRtools&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;MapRtools&lt;/a&gt; is provides miscellaneous functions for linkage mapping and exploration. A existing linkage map can be visualized with &lt;a href=&#34;https://CRAN.R-project.org/package=LinkageMapView&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;LinkageMapView&lt;/a&gt;. For polyploids, the packages &lt;a href=&#34;https://CRAN.R-project.org/package=mappoly&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;mappoly&lt;/a&gt; and &lt;a href=&#34;https://CRAN.R-project.org/package=polymapR&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;polymapR&lt;/a&gt; can be used for linkage mapping and the packages &lt;a href=&#34;https://CRAN.R-project.org/package=qtlpoly&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;qtlpoly&lt;/a&gt; and &lt;a href=&#34;https://CRAN.R-project.org/package=polyqtlR&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;polyqtlR&lt;/a&gt; can be used for qtl estimation. &lt;a href=&#34;https://github.com/jendelman/diaQTL&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;diaQTL&lt;/a&gt; is for QTL and haplotype analysis of diallel populations (diploid and autotetraploid). &lt;a href=&#34;https://CRAN.R-project.org/package=statgenMPP&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;statgenMPP&lt;/a&gt; can conduct QTL mapping in multi-parent populations.&lt;/p&gt;
+&lt;h4 id=&#34;gwas&#34;&gt;GWAS&lt;/h4&gt;
+&lt;p&gt;Genome-wide association study analysis can be conducted with &lt;a href=&#34;https://CRAN.R-project.org/package=statgenGWAS&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;statgenGWAS&lt;/a&gt;. GWAS models across very large number of SNPs or observations can be estimated with &lt;a href=&#34;https://CRAN.R-project.org/package=rMVP&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;rMVP&lt;/a&gt; and &lt;a href=&#34;https://github.com/deruncie/MegaLMM/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;megaLMM&lt;/a&gt;. Functions for autotetraploids are provided by &lt;a href=&#34;https://github.com/jendelman/GWASpoly&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GWASpoly&lt;/a&gt;, and these functions also work in diploid species. &lt;a href=&#34;https://github.com/jendelman/StageWise&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;StageWise&lt;/a&gt; provides functions to conduct a 2-stage GWAS when the underlying phenotypic data are from multiple field trials.&lt;/p&gt;
+&lt;h4 id=&#34;general-genetic-prediction&#34;&gt;General Genetic Prediction&lt;/h4&gt;
+&lt;p&gt;Packages supporting genetic prediction from pedigree or genetic marker data include &lt;a href=&#34;https://CRAN.R-project.org/package=sommer&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;sommer&lt;/a&gt;, &lt;a href=&#34;https://CRAN.R-project.org/package=rrBLUP&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;rrBLUP&lt;/a&gt;, &lt;a href=&#34;https://CRAN.R-project.org/package=BGLR&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;BGLR&lt;/a&gt;, &lt;a href=&#34;https://github.com/perpdgo/lme4GS&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;lme4gs&lt;/a&gt;, &lt;a href=&#34;https://github.com/variani/lme4qtl&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;lme4qtl&lt;/a&gt;, &lt;a href=&#34;https://CRAN.R-project.org/package=pedigreemm&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;pedigreemm&lt;/a&gt;, &lt;a href=&#34;https://CRAN.R-project.org/package=qgtools&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;qgtools&lt;/a&gt; and the licensed software &lt;a href=&#34;https://www.vsni.co.uk/software/asreml&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;asreml&lt;/a&gt;. Many of these packages have built-in functionality for data preparation steps including data imputation and calculation of the relationship matrices. &lt;a href=&#34;https://CRAN.R-project.org/package=AGHmatrix&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;AGHmatrix&lt;/a&gt; provides extensive options for calculating pedigree and genomic (additive and dominance) relationship matrices and &lt;a href=&#34;https://CRAN.R-project.org/package=statgenIBD&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;statgenIBD&lt;/a&gt; can calculate IBD probabilities for biparental, three and four-way crosses. &lt;a href=&#34;https://github.com/famuvie/breedR&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;breedR&lt;/a&gt; is a general purpose package for performing quantitative genetic analyses. For polyploids, &lt;a href=&#34;https://github.com/jendelman/polyBreedR&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;polyBreedR&lt;/a&gt; provides convenience functions to facilitate the use of genome-wide markers for breeding autotetraploid species, and its functionality also extends to diploids.&lt;/p&gt;
+&lt;h3 id=&#34;crop-modelling&#34;&gt;Crop Modelling&lt;/h3&gt;
+&lt;p&gt;The &lt;a href=&#34;https://CRAN.R-project.org/package=apsimx&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;apsimx&lt;/a&gt; package has functions to read, inspect, edit and run files for APSIM &amp;ldquo;Next Generation&amp;rdquo; (json) and APSIM &amp;ldquo;Classic&amp;rdquo; (xml). Files with an &lt;code&gt;.apsim&lt;/code&gt; extension correspond to APSIM Classic, the files with an &lt;code&gt;.apsimx&lt;/code&gt; extension correspond to APSIM Next Generation. &lt;a href=&#34;https://CRAN.R-project.org/package=rapsimng&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;rapsimng&lt;/a&gt; works with Next Generation APSIM files. &lt;a href=&#34;https://CRAN.R-project.org/package=DSSAT&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;DSSAT&lt;/a&gt; provides a comprehensive R interface to the Decision Support System for Agrotechnology Transfer Cropping Systems model (DSSAT-CSM) documented by &lt;a href=&#34;https://doi.org/10.1016/S1161-0301%2802%2900107-7&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Jones et al (2003)&lt;/a&gt;. This package provides cross-platform functions to read and write input files, run DSSAT-CSM, and read output files.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://CRAN.R-project.org/package=meteor&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Meteor&lt;/a&gt; provides a set of functions for weather and climate data manipulation to support crop and crop disease modeling.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/cropmodels/phenorice&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;phenorice&lt;/a&gt; is an R implementation of the &lt;a href=&#34;http://dx.doi.org/10.1016/j.rse.2017.03.029&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;phenorice model&lt;/a&gt; for remote sensing of rice crop production. &lt;a href=&#34;https://github.com/lbusett/phenoriceR&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;phenoriceR&lt;/a&gt; provides helper functions for processing data from the phenorice model. &lt;a href=&#34;https://CRAN.R-project.org/package=Recocrop&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Recocrop&lt;/a&gt; estimates environmental suitability for plants using a limiting factor approach for plant growth following &lt;a href=&#34;https://doi:10.1007/BF00045728&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Hackett 1991&lt;/a&gt;. &lt;a href=&#34;https://CRAN.R-project.org/package=Rquefts&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Rquefts&lt;/a&gt; provides an implementation of the QUEFTS (Quantitative Evaluation of the Native Fertility of Tropical Soils) model (&lt;a href=&#34;https://doi.org/10.1016%2F0016-7061%2890%2990021-Z&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Janssen 1990&lt;/a&gt;). &lt;a href=&#34;https://CRAN.R-project.org/package=Rwofost&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Rwofost&lt;/a&gt; is an implementation of the WOFOST (&amp;ldquo;World Food Studies&amp;rdquo;) crop growth model(&lt;a href=&#34;https://doi.org/10.1016%2Fj.agsy.2018.06.018&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;De Wit 2019&lt;/a&gt;).&lt;/p&gt;
+&lt;h3 id=&#34;entomology&#34;&gt;Entomology&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://cran.r-project.org/package=hnp&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;hnp&lt;/a&gt; Generates half-normal plots with simulation envelopes using different diagnostics from a range of different fitted models. A few example datasets are included. The package &lt;a href=&#34;https://github.com/OnofriAndreaPG/agriCensData&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;agriCensData&lt;/a&gt; provides functions for dealing with censored data. In addition, the &lt;a href=&#34;https://cran.microsoft.com/snapshot/2022-03-27/web/views/Survival.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;survival CRAN Task View&lt;/a&gt; list CRAN resources for working with censored data.&lt;/p&gt;
+&lt;h3 id=&#34;food-science&#34;&gt;Food science&lt;/h3&gt;
+&lt;p&gt;For packages supporting sensory studies, see the &lt;a href=&#34;https://cran.r-project.org/web/views/Psychometrics.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Psychometrics CRAN task view&lt;/a&gt;. &lt;a href=&#34;https://CRAN.R-project.org/package=NutrienTrackeR&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;NutrienTrackeR&lt;/a&gt; provides convenience functions for calculating nutrient content (macronutrients and micronutrients) of foods using food composition data from several reference databases, including: &amp;lsquo;USDA&amp;rsquo; (United States), &amp;lsquo;CIQUAL&amp;rsquo; (France), &amp;lsquo;BEDCA&amp;rsquo; (Spain) and &amp;lsquo;CNF&amp;rsquo; (Canada).&lt;/p&gt;
+&lt;h3 id=&#34;plant-pathology&#34;&gt;Plant pathology&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://CRAN.R-project.org/package=epifitter&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;epifitter&lt;/a&gt; provides functions for analysis and visualization of plant disease progress curve data. &lt;a href=&#34;https://CRAN.R-project.org/package=epiphy&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;epiphy&lt;/a&gt; is a toolbox for analyzing plant disease epidemics. It provides a common framework for plant disease intensity data recorded over time and/or space. &lt;a href=&#34;https://CRAN.R-project.org/package=hagis&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;hagis&lt;/a&gt; provides functions for analysis of plant pathogen pathotype survey data. Functions provided calculate distribution of susceptibilities, distribution of complexities with statistics, pathotype frequency distribution, as well as diversity indices for pathotypes. &lt;a href=&#34;https://cran.r-project.org/package=poppr&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;poppr&lt;/a&gt; is for for genetic analysis of populations with mixed clonal/sexual reproductive strategies. Provides population genetic analysis tools for hierarchical analysis of partially clonal populations.&lt;/p&gt;
+&lt;h3 id=&#34;rural-sociology&#34;&gt;Rural Sociology&lt;/h3&gt;
+&lt;p&gt;See the CRAN task view for &lt;a href=&#34;https://cran.r-project.org/web/views/Psychometrics.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Psychometrics&lt;/a&gt; and &lt;a href=&#34;https://cran.r-project.org/web/views/SocialSciences.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;SocialScience&lt;/a&gt;. Both the &lt;a href=&#34;https://cran.microsoft.com/snapshot/2022-03-27/web/views/Survival.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&amp;lsquo;Survival&amp;rsquo; CRAN task view&lt;/a&gt; and the &lt;a href=&#34;https://github.com/OnofriAndreaPG/agriCensData&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;agriCensData&lt;/a&gt; package provide tools for working with interval and censored data.&lt;/p&gt;
+&lt;h3 id=&#34;soil-science&#34;&gt;Soil Science&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://CRAN.R-project.org/package=sharpshootR&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;sharpshootR&lt;/a&gt; contains a compendium of utility functions supporting soils survey work including data management, summary, visualizations and conversions.For soil pedology, &lt;a href=&#34;https://github.com/ncss-tech/aqp/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;aqp&lt;/a&gt; provides a general toolkit for soil scientists: specialized data structures, soil profile summary, visualization, color conversion, and more. Most USDA-NRCS soils related databases and APIs can be accessed with &lt;a href=&#34;https://github.com/ncss-tech/soilDB/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;soilDB&lt;/a&gt;. &lt;a href=&#34;https://CRAN.R-project.org/package=SoilTaxonomy&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;SoilTaxonomy&lt;/a&gt; provides functions for parsing soil taxonomic terms. The &lt;a href=&#34;https://CRAN.R-project.org/view=Spatial&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&amp;ldquo;Spatial&amp;rdquo;&lt;/a&gt; and &lt;a href=&#34;https://CRAN.R-project.org/view=SpatioTemporal&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&amp;ldquo;Spatio-Temporal&amp;rdquo;&lt;/a&gt; CRAN task views provide extensive resources in spatial statistics. &lt;a href=&#34;https://github.com/mbask/fertplan&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;fertplan&lt;/a&gt; provides fertilizer recommendations based on soil test results (note this packages is optimized for horticultural crop production in Italy).&lt;/p&gt;
+&lt;h3 id=&#34;weed-science&#34;&gt;Weed Science&lt;/h3&gt;
+&lt;p&gt;The package &lt;a href=&#34;https://CRAN.R-project.org/package=drc&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;drc&lt;/a&gt; offers versatile model fitting and after-fitting functions for dose-response curves. &lt;a href=&#34;https://CRAN.R-project.org/package=PROSPER&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;PROSPER&lt;/a&gt; is a package for simulating weed population dynamics at the individual and population level under a range of conditions including herbicide resistance and herbicide pressure. For ecological studies and analytical applications, the &lt;a href=&#34;https://cran.r-project.org/web/views/Environmetrics.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CRAN task view for Environmetrics&lt;/a&gt; provides a list of existing R resources in this topic.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Finding Help in R</title>
+      <link>/post/help-in-r/</link>
+      <pubDate>Thu, 05 May 2022 00:00:00 +0000</pubDate>
+      <guid>/post/help-in-r/</guid>
+      <description>&lt;h2 id=&#34;what-do-you-do-when-you-need-to-solve-a-problem-in-r&#34;&gt;What do you do when you need to solve a problem in R?&lt;/h2&gt;
+&lt;p&gt;If you have been programming for any amount of time, you have learned that you are likely to encounter errors programming in R and resolving those coding errors can be challenging.&lt;/p&gt;
+&lt;p&gt;For most everyone, goggling an error message is the first step. This is not a bad choice as it often leads you to people who have already encountered the error and solved it. But, it can also lead you to a labyrinth of different, possible conflicting, possibly incomprehensible solutions. Additionally, it is not always the most time efficient method to solve a coding problem.&lt;/p&gt;
+&lt;h2 id=&#34;some-alternatives&#34;&gt;Some Alternatives&lt;/h2&gt;
+&lt;h3 id=&#34;check-the-documentation&#34;&gt;Check the documentation!&lt;/h3&gt;
+&lt;p&gt;There&amp;rsquo;s an ancient proverb about the importance of reading documentation: &amp;ldquo;you can spend 2 hours searching the web in order to save 15 minutes of reading the documentation.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;Package and function documentation can be very helpful. There are two main aspects of documentation:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Function reference: this describes the arguments a function can take, the expected format for those arguments and information about the function object. It may also contain theoretical details that are needed to understand the argument options and examples. Documentation varies in quality greatly across R packages. It can occasionally be too bare bones to be useful, but often (especially in base R commands and tidyverse packages) the documentation is very detailed and helpful. Submission to CRAN requires that packages have a documentation file that lists all package function documentation in alphabetical order.&lt;/li&gt;
+&lt;li&gt;Vignettes: these are tutorials accompanying how to use a package functions. These usually cover a subset of functions and include text explanations. They are basically long examples. Vignettes can be enormously helpful. They are not required for submission to CRAN, so they are not always available, especially for older legacy packages. You can find these on the package website (if it exists) or its CRAN link. Here are some vignettes from the package &lt;a href=&#34;https://CRAN.R-project.org/package=tidyr&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;{tidyr}&lt;/a&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;how-do-we-find-documentation&#34;&gt;How do we find documentation?&lt;/h4&gt;
+&lt;p&gt;You find function documentation via the R console:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;?par  # does an exact search on &amp;quot;par&amp;quot;
+??plot  # does a fuzzy match on &amp;quot;plot&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This will open help files for those items.&lt;/p&gt;
+&lt;p&gt;Sometimes, you will discover there are multiple options and possibly different help files associated with a function name (just run &lt;code&gt;methods(&#39;mean&#39;)&lt;/code&gt; or &lt;code&gt;methods(&#39;anova&#39;)&lt;/code&gt; to see what I mean).&lt;/p&gt;
+&lt;p&gt;These are functions that act differently depending on the R object type they are called to interact with (e.g. &lt;code&gt;mean(some_dates)&lt;/code&gt; will behave differently than &lt;code&gt;mean(some_numbers)&lt;/code&gt;). Which leads to the next point: all R objects have a class assigned to them. You can check this with &lt;code&gt;class()&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;y &amp;lt;- rnorm(20); x &amp;lt;- y + rnorm(20) 
+m &amp;lt;- lm(y ~ x)
+class(y)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;numeric&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;class(m)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;lm&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Understanding this difference between functions will help you understand which documentation files will help you solve your problem.&lt;/p&gt;
+&lt;p&gt;More importantly, once you know the object class, you can search for methods that exist for that class.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;methods(class = &amp;quot;lm&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##  [1] add1           alias          anova          case.names     coerce        
+##  [6] confint        cooks.distance deviance       dfbeta         dfbetas       
+## [11] drop1          dummy.coef     effects        extractAIC     family        
+## [16] formula        hatvalues      influence      initialize     kappa         
+## [21] labels         logLik         model.frame    model.matrix   nobs          
+## [26] plot           predict        print          proj           qr            
+## [31] residuals      rstandard      rstudent       show           simulate      
+## [36] slotsFromS3    summary        variable.names vcov          
+## see &#39;?methods&#39; for accessing help and source code
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;From this, we can see a special &lt;code&gt;plot()&lt;/code&gt; option exists (that provides several diagnostic plots), functions for extracting residuals (&lt;code&gt;rstudent()&lt;/code&gt;, &lt;code&gt;residuals()&lt;/code&gt;), a version of &lt;code&gt;anova()&lt;/code&gt; written for object type &amp;ldquo;lm&amp;rdquo;, and much much more.&lt;/p&gt;
+&lt;h3 id=&#34;read-your-error-messages&#34;&gt;Read your error messages&lt;/h3&gt;
+&lt;p&gt;Error messages can be obtuse and confusing (especially if you are new to programming). We have all have experienced (and will experience again) this error message:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;r_function_error.jpg&#34; alt=&#34;confused man meme at R error&#34;&gt;&lt;/p&gt;
+&lt;p&gt;It is telling us we are trying to subset (extract) information from a &amp;lsquo;closure&amp;rsquo; (which is a function). In essence, there was an attempt to do something like &lt;code&gt;mean$myvar&lt;/code&gt; when &lt;code&gt;mean()&lt;/code&gt; is a function, not a data.frame.&lt;/p&gt;
+&lt;p&gt;However, error messages can also be trying to tell you something important. Here&amp;rsquo;s a recent experience of mine:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;tweet_ignored_error.png&#34; width=&#34;80%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Over time, these messages will become comprehensible. It&amp;rsquo;s still the same messages, but your R knowledge will help you understand them. But, becoming fluent in R error messages implies &lt;em&gt;reading them and trying to understand them&lt;/em&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;specific-places-to-ask-for-help&#34;&gt;Specific places to ask for help&lt;/h3&gt;
+&lt;p&gt;Eventually, you may need to search forums or ask for help from kind strangers. If Google fails you, here are some other useful resources:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://community.rstudio.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;RStudio Community&lt;/a&gt;, a helpful forum that is only for R questions. It is run by RStudio and moderated (to an extent). This is one of the more useful sites to search or post on.
+&lt;br&gt;&lt;br&gt;
+&lt;img src=&#34;rstudio_community.png&#34; alt=&#34;rstudio community screenshot&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.rfordatasci.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;R4DS community&lt;/a&gt;, a friendly, welcoming community. Join their slack channel and ask a question.&lt;br&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;img src=&#34;r4ds_screenshot.png&#34; alt=&#34;R for DS community screenshot&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://stackoverflow.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Stack overflow&lt;/a&gt;, the long-established site of all questions programming. Can often be helpful.
+&lt;br&gt;&lt;br&gt;
+&lt;img src=&#34;stackoverflow_screenshot.png&#34; alt=&#34;stack overflow screen shot&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;consider-reading-the-source-code&#34;&gt;Consider reading the source code&lt;/h3&gt;
+&lt;p&gt;This is best for advanced users, but it can hep you resolve very specific questions about a function. Reading source code will also help improve your own coding.&lt;/p&gt;
+&lt;p&gt;** How to find source code: **&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Type the function name in the console without parentheses:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;mean.default
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## function (x, trim = 0, na.rm = FALSE, ...) 
+## {
+##     if (!is.numeric(x) &amp;amp;&amp;amp; !is.complex(x) &amp;amp;&amp;amp; !is.logical(x)) {
+##         warning(&amp;quot;argument is not numeric or logical: returning NA&amp;quot;)
+##         return(NA_real_)
+##     }
+##     if (na.rm) 
+##         x &amp;lt;- x[!is.na(x)]
+##     if (!is.numeric(trim) || length(trim) != 1L) 
+##         stop(&amp;quot;&#39;trim&#39; must be numeric of length one&amp;quot;)
+##     n &amp;lt;- length(x)
+##     if (trim &amp;gt; 0 &amp;amp;&amp;amp; n) {
+##         if (is.complex(x)) 
+##             stop(&amp;quot;trimmed means are not defined for complex data&amp;quot;)
+##         if (anyNA(x)) 
+##             return(NA_real_)
+##         if (trim &amp;gt;= 0.5) 
+##             return(stats::median(x, na.rm = FALSE))
+##         lo &amp;lt;- floor(n * trim) + 1
+##         hi &amp;lt;- n + 1 - lo
+##         x &amp;lt;- sort.int(x, partial = unique(c(lo, hi)))[lo:hi]
+##     }
+##     .Internal(mean(x))
+## }
+## &amp;lt;bytecode: 0x7fa5749f17f8&amp;gt;
+## &amp;lt;environment: namespace:base&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Sometimes this is not informative&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;c
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## function (...)  .Primitive(&amp;quot;c&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;subset
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## function (x, ...) 
+## UseMethod(&amp;quot;subset&amp;quot;)
+## &amp;lt;bytecode: 0x7fa573afcb48&amp;gt;
+## &amp;lt;environment: namespace:base&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;`[`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## .Primitive(&amp;quot;[&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Use {the package {lookup} to find what you need&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;remotes::install_github(&amp;quot;jimhester/lookup&amp;quot;)
+lookup::lookup(`[`)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;{lookup} checks CRAN, Bioconductor and GitHub for source code! Prior to {lookup}, finding source code for R functions was &lt;a href=&#34;https://github.com/jennybc/access-r-source#readme&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;challenging&lt;/a&gt;. Please note that this &amp;ldquo;lookup&amp;rdquo; is NOT the same same package called &amp;ldquo;lookup&amp;rdquo; found on CRAN. They have zero overlapping functionality.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Getting R Set Up</title>
+      <link>/post/getting-r-setup/</link>
+      <pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate>
+      <guid>/post/getting-r-setup/</guid>
+      <description>&lt;h3 id=&#34;install-r&#34;&gt;Install R:&lt;/h3&gt;
+&lt;p&gt;You can download R &lt;a href=&#34;https://cloud.r-project.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;. Get the correct R distribution for your operating system. Once downloaded, click on downloaded file, and follow the installation instructions.&lt;/p&gt;
+&lt;p&gt;Note that R is updated several times per year. If your installation is a year old or more, consider updating your version of R to the latest version.&lt;/p&gt;
+&lt;h3 id=&#34;install-rstudio&#34;&gt;Install RStudio&lt;/h3&gt;
+&lt;p&gt;Rstudio is not R, rather, it is a user interface for accessing R. It is a complicated interface with many features for developers. Despite its complexity, RStudio is nevertheless a very helpful R user interface for users of all abilities. It can downloaded &lt;a href=&#34;https://www.rstudio.com/products/rstudio/download/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;. For most users, the free version of &amp;ldquo;RStudio Desktop&amp;rdquo; should be chosen. Once downloaded, click on downloaded file, and follow the installation instructions.&lt;/p&gt;
+&lt;h3 id=&#34;install-rtools-optional&#34;&gt;Install Rtools (optional)&lt;/h3&gt;
+&lt;p&gt;Only Windows users need to consider this step. This app is for compiling R packages with C, C++ and Fortran code. It is a separate piece of software that has to be downloaded and installed (it is not an R package). Rtools is not needed by all users and if you don&amp;rsquo;t know if you need this, it is absolutely fine to skip this step.  If you do think you need this, You can find it &lt;a href=&#34;https://cran.r-project.org/bin/windows/Rtools/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;. Download and install.&lt;/p&gt;
+&lt;h3 id=&#34;setting-up-rstudio-setup-optional&#34;&gt;Setting up RStudio Setup (optional)&lt;/h3&gt;
+&lt;p&gt;This is an optional step, but it is highly recommended. This step will prevent RStudio from saving all of your objects in a session to &lt;em&gt;.Rdata&lt;/em&gt; file that is then automatically loaded whenever you open R.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;install.packages(&amp;quot;usethis&amp;quot;); library(usethis)
+usethis::use_blank_slate()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can disable this across all projects in R with the drop-down menu &lt;strong&gt;Tools&lt;/strong&gt; &amp;ndash;&amp;gt; &lt;strong&gt;Global Options&amp;hellip;&lt;/strong&gt; &amp;ndash;&amp;gt; unclick &amp;lsquo;&lt;strong&gt;Restore .RData into workspace at startup&lt;/strong&gt;&amp;rsquo; and set &amp;lsquo;&lt;strong&gt;Save workspace to .rRData on exit&lt;/strong&gt;&amp;rsquo; to &amp;lsquo;&lt;strong&gt;Never&lt;/strong&gt;&amp;rsquo;.&lt;/p&gt;
+&lt;p&gt;Why is automatic loading of an &lt;em&gt;.Rdata&lt;/em&gt; file not recommended? Because it makes your work less reproducible. You may have created test objects that will unexpectedly interfere with downstream operations or analysis. You may have changed the original data source, but an older version is saved in the &lt;em&gt;.Rdata&lt;/em&gt; file. More explanation is given by &lt;a href=&#34;https://usethis.r-lib.org/reference/use_blank_slate.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;RStudio&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you are used to opening R and seeing all of your previous objects automatically loaded into the objects pane, this will be an adjustment. The solution is to save your processes into &lt;em&gt;.R&lt;/em&gt; scripts that capture all information from packages loaded, file import, all data manipulations and other operations important. If these steps are slow and there is a need to access intermediate objects, these can be saved in tabular formats readable by many applications (e.g. &lt;em&gt;.txt&lt;/em&gt; or &lt;em&gt;.csv&lt;/em&gt;) or saved as a specific R object (see &lt;code&gt;saveRDS()&lt;/code&gt; in the R help files) and reloaded in another session.&lt;/p&gt;
+&lt;h4 id=&#34;set-up-version-control-optional&#34;&gt;Set up version control (optional)&lt;/h4&gt;
+&lt;p&gt;If you use Git or SVN, you can perform Git operations directions from RStudio and interact with remote repositories. If you don&amp;rsquo;t use version control, this step can be skipped. If you do use version control, the command line or other third-party software (e.g. Gitkraken) are fine to use instead or in addition to RStudio&amp;rsquo;s interface. The implementation of git in R is very minimal and supports only a limited number of actions, so you are likely to need other software to perform complicated git actions. It is useful for file additions, commits, pushes and pulls.&lt;/p&gt;
+&lt;p&gt;You can set up Git by going to &lt;strong&gt;Tools&lt;/strong&gt; &amp;ndash;&amp;gt; &lt;strong&gt;Global Options&lt;/strong&gt; &amp;ndash;&amp;gt; &lt;strong&gt;Git/SVN&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;This is not the right space to provide detailed instructions for using git as an R user, but Jenny Bryan has written a very helpful &lt;a href=&#34;https://happygitwithr.com/index.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;tutorial&lt;/a&gt; covering this subject.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Quick Tricks and Tips for Reproducible Research in R</title>
+      <link>/post/reproducible-r/</link>
+      <pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate>
+      <guid>/post/reproducible-r/</guid>
+      <description>&lt;h3 id=&#34;make-sure-your-rstudio-session-is-not-saving-rdata-automatically&#34;&gt;Make sure your Rstudio session is not saving .RData automatically:&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;Note: this step requires the&lt;/em&gt; &lt;strong&gt;usethis&lt;/strong&gt; &lt;em&gt;package; please install this package if you do not already have it installed.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Step 1 is to disable automatic saving of your objects to a &lt;em&gt;.RData&lt;/em&gt; file. This file is automatically loaded when R restarts. Since we often create all sorts of miscellaneous objects during a session with a clear record of why, loading all objects without a clear sense of their provenance is often not reproducible by other.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;usethis::use_blank_slate()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can read more about this function in its &lt;a href=&#34;https://usethis%60.R%60-lib.org/reference/use_blank_slate.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can disable this across all projects in R with the drop-down menu &lt;strong&gt;Tools&lt;/strong&gt; &amp;ndash;&amp;gt; &lt;em&gt;Global Options&amp;hellip;&lt;/em&gt; &amp;ndash;&amp;gt; unclick &amp;lsquo;&lt;em&gt;Restore .RData into workspace at startup&lt;/em&gt;&amp;rsquo; and set &amp;lsquo;&lt;em&gt;Save workspace to .rRData on exit&lt;/em&gt;&amp;rsquo; to &amp;lsquo;&lt;em&gt;Never&lt;/em&gt;&amp;rsquo;.&lt;/p&gt;
+&lt;h3 id=&#34;save-all-code-you-run-in-an-r-or-rmd-file&#34;&gt;Save all code you run in an &lt;em&gt;.R&lt;/em&gt; or &lt;em&gt;.Rmd&lt;/em&gt; file&lt;/h3&gt;
+&lt;p&gt;This is your source code. It&amp;rsquo;s as real and as important as your input data. This file should capture a set of actions that can be repeated by another person (e.g. your PI, other colleagues yourself in the future) including packages loaded, files imported, all data manipulations and the outputs from these actions (e.g. visualisations, analytical outcomes). The idea is to capture your thought process and specific actions so this can be repeated in full. In most analyses, it is extremely likely* you will revisit a project and need to repeat what has already been done! Keeping a record of actions will save you considerable time because you will not have to attempt to recall and/or reconstruct exactly what you did in previous sessions.&lt;/p&gt;
+&lt;p&gt;*&lt;em&gt;Consider yourself very lucky if this does not happen!&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id=&#34;regularly-restart-your-r-session&#34;&gt;Regularly restart your R session&lt;/h3&gt;
+&lt;p&gt;Yes, that means wiping all the loaded packaged and objects from the session (if you followed the first recommendation in these instructions), but the upside is that your analysis are reproducible. This means future you can repeat those analyses and get the same results back you did earlier.&lt;/p&gt;
+&lt;p&gt;You can restart R by manually closing and opening RStudio. You can also restart the R session with RStudio by navigating to the menu item &lt;strong&gt;Session&lt;/strong&gt; &amp;ndash;&amp;gt; &lt;strong&gt;Restart R&lt;/strong&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;use-r-projects&#34;&gt;Use R projects&lt;/h3&gt;
+&lt;p&gt;This is optional, but it will make your life easier. Whenever you start a new analytical endeavor in R, create an R project by navigating to &lt;strong&gt;File&lt;/strong&gt; &amp;ndash;&amp;gt; &lt;strong&gt;New Project&lt;/strong&gt; in RStudio. There are many options available for setting the [project directory (where the &lt;em&gt;.Rproj&lt;/em&gt; file lives), the type of project (e.g. R package, Shiny app or blank), and options to initialise a git repo. The simplest option is to choose &lt;strong&gt;New Project&lt;/strong&gt; (no special type) in a dedicated directory. The main advantage of projects is that by opening an &lt;em&gt;.Rproj&lt;/em&gt; file, the working directory is automatically set to that directory. If you are using a cloud solution for working across different computers or working with collaborators, this will make things easier because you can use relative paths for importing data and outputting files. There would be no more need for this at the top of your script:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;setwd(&amp;quot;specific/path/to/my/computer&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Additionally, for setting up gitbooks through &amp;lsquo;bookdown&amp;rsquo;, R packages, Shiny apps, and other complicated R endeavors, the automated set-up through R projects can be immensely helpful.  This is sometimes referred to as &amp;ldquo;project-oriented workflow.&amp;rdquo; In addition to using R projects with a dedicated directory for each research project, I also prefer to have a consistent directory structure for each project like this one:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;top-level-directory
+│   README.md
+│
+└───data
+│   │   file011.txt
+│   │   file012.txt
+│   │
+│   └───spatial_files
+│       │   file208.dbf
+│       │   file208.shp
+│       │   file208.shx
+│   
+└───scripts
+│   │   eda.R
+│   │   analysis.R
+│   │   plots.R
+│   │   final_report.Rmd
+|
+└───outputs
+│   │   plot1.png
+│   │   blups.csv
+|
+└───extra
+    │   some_paper.pdf
+    │   ...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I put all raw data needed for analysis into the &amp;lsquo;data&amp;rsquo; directory, any and all programming scripts in the &amp;lsquo;scripts&amp;rsquo; directory, all outputs (plots, tables, intermediate data object) in the &amp;lsquo;outputs&amp;rsquo; directory and everything else ends up &amp;lsquo;extra&amp;rsquo;. Naturally, there are many different directory structures to use and this is just one example. Find something that works best for your needs!&lt;/p&gt;
+&lt;h3 id=&#34;use-the-here-package&#34;&gt;Use the &amp;lsquo;here&amp;rsquo; package.&lt;/h3&gt;
+&lt;p&gt;This is also optional. It works like R projects for setting the working directory. However, for an R project to work, you have to open the .Rproj file in RStudio. What if you or your collaborators prefer to open R files directly and start using those? Here will look for the next directory level which there is a .Rproj file and set the working directory there.&lt;/p&gt;
+&lt;p&gt;If you want to import a file, &amp;ldquo;datafile.csv&amp;rdquo; that located in the data directory. Your .R script is actually located in the &amp;lsquo;scripts&amp;rsquo; directory. Normally, if you try to read that in, you need to specify the full path to &amp;ldquo;mydata.csv&amp;rdquo; or set the working directory and use a relative path. Again, these paths will not work if you switch computers or your collaborators are running these scripts on their own systems. This system gets even more complicated when working with an .Rmd file. Here&amp;rsquo;s an alternative approach that works the same across files and systems:&lt;/p&gt;
+&lt;p&gt;First, make sure you have .Rproj file to define the top-level directory.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;library(here)
+mydata &amp;lt;- read.csv(here(&amp;quot;data&amp;quot;, &amp;quot;datafile.csv&amp;quot;))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This code will construct this path: &amp;ldquo;data/datafile.csv&amp;rdquo; and execute that command under the assumption that wherever that .rproj is located (going up one directory at a time until it finds it) is where the working directory is set. Putting &lt;code&gt;library(here)&lt;/code&gt; into every .R or .Rmd file in a project will resolve these issues.&lt;/p&gt;
+&lt;h3 id=&#34;use-r-environments&#34;&gt;Use R environments.&lt;/h3&gt;
+&lt;p&gt;Again: optional, but it will make your life easier.&lt;/p&gt;
+&lt;p&gt;Often in academia, I might do an analysis, move on to something else and then have to return that analysis months or years later. I probably will have updated R and some or all of the packages used in that analysis. As a result of these updates, my original code may not work at all or may not do the intended actions. What I need are both the older version of R and the older packages. The package &amp;lsquo;renv&amp;rsquo; is a solution. It captures the versions of R and the loaded packages. It also builds a custom package library for your package (and caches this information across other projects using &lt;code&gt;renv&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;Start here:
+&lt;em&gt;(you need to also be using Rprojects since&lt;/em&gt; &lt;strong&gt;renv&lt;/strong&gt; &lt;em&gt;is searching for .Rproj file)&lt;/em&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;library(renv)
+renv::init()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you have a mature project that&amp;rsquo;s not undergoing any further development at this time, this is all you need to do.&lt;/p&gt;
+&lt;p&gt;If you continue to develop your project and install new packages, update your R environment like thus to ensure new or updated packaged are included:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;renv::snapshot()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you&amp;rsquo;re familiar with &lt;strong&gt;Packrat&lt;/strong&gt;, this is a replacement for that. This is particularly helpful for things that may have a long life span, like Shiny apps. The &lt;a href=&#34;https://rstudio.github.io/renv/articles/renv.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;renv package&lt;/a&gt; has extensive documentation worth reading.&lt;/p&gt;
+&lt;h3 id=&#34;final-comments&#34;&gt;Final Comments&lt;/h3&gt;
+&lt;p&gt;There are many more resources and recommendations for conducting reproducible research in R. There an entire &lt;a href=&#34;https://cran%60.R%60-project.org/web/views/ReproducibleResearch.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CRAN task view&lt;/a&gt; devoted to this!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
