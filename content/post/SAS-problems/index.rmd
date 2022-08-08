@@ -56,9 +56,9 @@ Debugging SAS can be a trying experience. Here are some techniques I use to help
 
 1.  Build long complex programs a step at a time. Start by reading in the data. Print it. Check it. Then do any calculations, then add PROCs and other DATA steps. Don't try to write the whole thing at once. Verify that a piece of code works and then move on.
 
-2.  Use Comments. Try to isolate problem code by commenting out sections of the program. This is a very useful technique. See Comments.
+2.  Use Comments. Try to isolate problem code by commenting out sections of the program. This is a very useful technique. See [Comments](https://agstats.io/tutorials/sas-data-step.html#42_Commenting_and_Documentation).
 
-3.  Try writing programs with consistent and readable structure. Use line breaks and indentation where needed and throw in comments to explain what is happening in the program. This will help organize the program flow in your mind and point out where things are going wrong. See Programming Habits.
+3.  Try writing programs with consistent and readable structure. Use line breaks and indentation where needed and throw in comments to explain what is happening in the program. This will help organize the program flow in your mind and point out where things are going wrong. See [Programming Habits](https://agstats.io/tutorials/sas-data-step.html#4_Programming_Habits).
 
 4.  Stay calm! Learning the quirks of SAS takes time. If all else fails let us know!
 
@@ -70,6 +70,6 @@ Debugging SAS can be a trying experience. Here are some techniques I use to help
 
 -   [Types of Errors in SAS](https://documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/lrcon/n1g8q3l1j2z1hjn1gj1hln0ci5gn.htm)
 
--   [SAS Error Codes](https://support.google.com/sas/table/9719896?hl=en)
+-   Beginning SAS [books](https://blogs.sas.com/content/sgf/2021/09/13/top-books-for-sas-programmers/)
 
 -   [Tips and Strategies for Mixed Modeling](http://support.sas.com/resources/papers/proceedings12/332-2012.pdf)
