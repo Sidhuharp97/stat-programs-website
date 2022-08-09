@@ -119,15 +119,6 @@
     <loc>/events/workshops/spatial-workshop/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/post/sas-troubleshooting/</loc>
-    <lastmod>2021-04-15T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tag/errors/</loc>
-    <lastmod>2021-04-15T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/category/errors/</loc>
-    <lastmod>2021-04-15T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>/post/getting-r-setup/</loc>
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
   </url><url>
@@ -138,18 +129,6 @@
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/category/reproducible-research/</loc>
-    <lastmod>2021-04-15T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tag/sas/</loc>
-    <lastmod>2021-04-15T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/category/sas/</loc>
-    <lastmod>2021-04-15T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/category/statistics/</loc>
-    <lastmod>2021-04-15T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/authors/bprice/</loc>
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/tag/field-experiments/</loc>
@@ -167,6 +146,8 @@
     <loc>/admin/</loc>
   </url><url>
     <loc>/tutorials/</loc>
+  </url><url>
+    <loc>/authors/bprice/</loc>
   </url><url>
     <loc>/authors/xdai/</loc>
   </url>
