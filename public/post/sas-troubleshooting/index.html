@@ -33,10 +33,10 @@
   
     
   
-  <meta name="description" content="R  What They Forgot to Teach You (about using R)  SAS  Data Import and Manipulation Linear Regression Mixed Model ANOVA Mixed Model ANCOVA and Dummy Variable Regression Generalized Mixed Model ANOVA Power and Sample Size Estimation Graphics and Plotting  Other Resources  Spatial Analysis for Agricultural Field Experiments Rstats4Ag (using R and SAS) Multivariate Statistical Machine Learning Methods for Genomic Prediction Basic Introduction to Linear models Mixed models in R Data Science for Agriculture in R Mixed Models for Agriculture in R  " />
+  <meta name="description" content="Common Errors and Corrections in SAS" />
 
   
-  <link rel="alternate" hreflang="en-us" href="/tutorials/" />
+  <link rel="alternate" hreflang="en-us" href="/post/sas-troubleshooting/" />
 
   
 
@@ -273,7 +273,7 @@
   
 
   
-    <link rel="alternate" href="/tutorials/index.xml" type="application/rss+xml" title="Idaho Ag Stats" />
+    <link rel="alternate" href="/post/sas-troubleshooting/index.xml" type="application/rss+xml" title="Idaho Ag Stats" />
   
 
   
@@ -283,7 +283,7 @@
   <link rel="icon" type="image/png" href="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_32x32_fill_lanczos_center_2.png" />
   <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_180x180_fill_lanczos_center_2.png" />
 
-  <link rel="canonical" href="/tutorials/" />
+  <link rel="canonical" href="/post/sas-troubleshooting/" />
 
   
   
@@ -294,24 +294,73 @@
   
   
     
-    
   
   
-  <meta property="twitter:card" content="summary" />
+  <meta property="twitter:card" content="summary_large_image" />
   
   <meta property="og:site_name" content="Idaho Ag Stats" />
-  <meta property="og:url" content="/tutorials/" />
-  <meta property="og:title" content="Tutorials | Idaho Ag Stats" />
-  <meta property="og:description" content="R  What They Forgot to Teach You (about using R)  SAS  Data Import and Manipulation Linear Regression Mixed Model ANOVA Mixed Model ANCOVA and Dummy Variable Regression Generalized Mixed Model ANOVA Power and Sample Size Estimation Graphics and Plotting  Other Resources  Spatial Analysis for Agricultural Field Experiments Rstats4Ag (using R and SAS) Multivariate Statistical Machine Learning Methods for Genomic Prediction Basic Introduction to Linear models Mixed models in R Data Science for Agriculture in R Mixed Models for Agriculture in R  " /><meta property="og:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" />
-    <meta property="twitter:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" /><meta property="og:locale" content="en-us" />
+  <meta property="og:url" content="/post/sas-troubleshooting/" />
+  <meta property="og:title" content="Common Errors and Solutions in SAS | Idaho Ag Stats" />
+  <meta property="og:description" content="Common Errors and Corrections in SAS" /><meta property="og:image" content="/post/sas-troubleshooting/featured.png" />
+    <meta property="twitter:image" content="/post/sas-troubleshooting/featured.png" /><meta property="og:locale" content="en-us" />
   
     
+      <meta
+        property="article:published_time"
+        content="2021-04-15T00:00:00&#43;00:00"
+      />
     
+    <meta property="article:modified_time" content="2021-04-15T00:00:00&#43;00:00">
   
 
   
 
 
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/sas-troubleshooting/"
+  },
+  "headline": "Common Errors and Solutions in SAS",
+  
+  "image": [
+    "/post/sas-troubleshooting/featured.png"
+  ],
+  
+  "datePublished": "2021-04-15T00:00:00Z",
+  "dateModified": "2021-04-15T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "William Price"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Agricultural Statistical Programs",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "Common Errors and Corrections in SAS"
+}
+</script>
 
   
 
@@ -319,15 +368,17 @@
 
   
 
-<link rel="alternate" type="application/rss+xml" href="/tutorials/index.xml" title="Idaho Ag Stats" />
+  
+
+<link rel="alternate" type="application/rss+xml" href="/post/sas-troubleshooting/index.xml" title="Idaho Ag Stats" />
 
 
 
-  <title>Tutorials | Idaho Ag Stats</title>
+  <title>Common Errors and Solutions in SAS | Idaho Ag Stats</title>
 </head>
 
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="0a88848674f199fc27d42cdcdd983e4c" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="986bccb7753c0e7b812d0057ff373c0f" >
 
   
   
@@ -447,7 +498,7 @@
         
 
         <li class="nav-item">
-          <a class="nav-link " href="/post"><span>Posts</span></a>
+          <a class="nav-link  active" href="/post"><span>Posts</span></a>
         </li>
 
         
@@ -493,7 +544,7 @@
         
 
         <li class="nav-item">
-          <a class="nav-link  active" href="/tutorials"><span>Tutorials</span></a>
+          <a class="nav-link " href="/tutorials"><span>Tutorials</span></a>
         </li>
 
         
@@ -639,50 +690,90 @@
 
 
 
-  
+
+
+
+
+
+
+
 
   
   
-  
+
+
 <div class="article-container pt-3">
-  <h1>Tutorials</h1>
+  <h1>Common Errors and Solutions in SAS</h1>
 
   
 
   
-    
 
 
 <div class="article-metadata">
 
   
   
+  
+  
+  <div>
+    
 
-  
-
-  
-
-  
-
-  
-  
-  
-  
+  <span >
+      <a href="/authors/bprice/">William Price</a></span>
+  </div>
   
   
 
   
+  <span class="article-date">
+    
+    
+      
+    
+    Apr 15, 2021
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    6 min read
+  </span>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/errors/">errors</a>, <a href="/category/statistics/">statistics</a>, <a href="/category/sas/">SAS</a></span>
   
 
 </div>
 
-    
-
-
-
-
-
   
+
+
+
+
+
+</div>
+
+
+<div class="article-header container featured-image-wrapper mt-4 mb-4" style="max-width: 608px; max-height: 685px;">
+  <div style="position: relative">
+    <img src="/post/sas-troubleshooting/featured.png" alt="" class="featured-image">
+    <span class="article-header-caption">Computer Meltdown</span>
+  </div>
 </div>
 
 
@@ -690,29 +781,53 @@
   <div class="article-container">
 
     <div class="article-style">
-      <h3 id="r">R</h3>
+      <p>You need to get that analysis done so you can write that report/paper/dissertation/thesis/presentation to meet that deadline to please the boss &hellip; BUT &hellip; SAS is giving you a heartburn! Don&rsquo;t panic. Although SAS errors look confusing, SAS is really trying to help you find the problem. Really! Look in the Log Window for any error messages. They are marked in RED. Now, remember that SAS runs sequentially, top to bottom, so any mistakes at the top of the program will propagate more errors down the line. <strong>Always try to fix the first error you see</strong>, then rerun the program. You may find that when the initial problems are fixed, the rest of the errors will vanish. When SAS gives an error message, it also lists a numeric code, like 201 or 76 indicating the line and character in the line where it had trouble. SAS will also underline the offending part of the program and mark it with the numeric code so you can match an error message with the problem area. It can&rsquo;t always find the exact place where the problem occurred, but it usually close by. For more debugging information take a look at the TIPS below on common mistakes and problems. Good Luck!</p>
+<h4 id="missing-quotes">Missing Quotes:</h4>
+<p>If you&rsquo;ve recieved the <strong>&ldquo;longer than 200 characters&rdquo;</strong> message then the cause of the problem is easy to find. You have left out a quote somewhere. Carefully go back through the program and check for both beginning and ending quotes in any statements that use quoted strings such as <em>TITLE</em>, <em>INFILE</em>, or <em>AXIS</em> statements . Quoted strings in SAS are color coded as a magenta color to make them easier to see. Large blocks of text appearing this color are an indicator of a missing quote. Also note that single quotes are different than double quote characters. If you start a string with one of these and end with the other type, SAS will indicate a missing quote.</p>
+<p>After you find the culprit, fix it. But wait! Correcting the problem is not quite that easy (somehow you knew that!). SAS builds up the code you run sequentially. So if you try to run the &ldquo;corrected&rdquo; code, SAS will STILL be looking for an ending quote from last time. The quotes will still be unbalanced and you&rsquo;ll still get an error message. This can be very frustrating, but here is the solution. First, correct the code, but before you run it, open a new editor window. Next, give SAS what it is looking for, the offending single quote. In the new editor window enter this: <strong>';</strong> and submit that as a program. This will satisfy SAS (ignore any error messages at this point). Then, go back to the original program and run it. The &ldquo;quote&rdquo; problem should go away.</p>
+<h4 id="missing-semicolons">Missing Semicolons:</h4>
+<p>Leaving out a semicolon is probably the easiest mistake to make. The error message you get may vary here depending on where the mistake was made. Usually you get a message like <strong>&ldquo;variable XXX not found&rdquo;</strong> or <strong>&ldquo;invalid option&rdquo;</strong>. SAS is trying to interpret the errant statement as part of the preceding statement and, therefore, gets it&rsquo;s cyberfeet tangled. The solution is obvious: put in the missing <strong>;</strong> and resubmit the program.</p>
+<h4 id="missing-run-statement">Missing RUN Statement:</h4>
+<p>Sometimes while running a program several times you&rsquo;ll notice that the <em>PROC LOTTERY</em> you had at the end of your program is missing from the output listing. So, thinking that SAS maybe just &ldquo;forgot&rdquo; to run it the first time, you run the program again. Now you find it at the top of the output listing instead of the bottom! What the heck is going on!? Remember, SAS runs both sequentially and cumulatively. The first time you ran the program, SAS saw the <em>PROC LOTTERY</em> at the end, but didn&rsquo;t find a <strong>RUN;</strong> statement. Without that it will hold on to the <em>PROC LOTTERY</em> and wait to execute it when it sees the next DATA or PROC step. When you run the program for the second time SAS first executes the PROC it is holding on to and then runs the submitted program (again leaving off the last PROC). This can cause confusion to no end (no pun intended!). The solution, of course, is to put in the missing <strong>RUN;</strong>. By the way, before you go running to your SAS manuals looking for <em>PROC LOTTERY</em>, remember this is only and example!</p>
+<h4 id="listing-windowfile">LISTING Window/File:</h4>
+<p>Like other portions of SAS, the Listing and Log windows or output files may be cumulative. If you know you have changed your calculations for yield from lbs to kilograms, but SAS seems to keep printing lbs in the output, make sure you have cleared out the Listing window. You are probably looking at an &ldquo;old&rdquo; output created before you changed things. This also applies to the Log window.</p>
+<h4 id="case-problems">Case problems:</h4>
+<p>SAS is creating too many levels of a variable, for example, when running <em>PROC MIXED</em>, <em>PROC GLIMMIX</em> or <em>PROC FREQ</em>. Go back and check the data very carefully. Alphabetic variables are case sensitive so the value <em>&ldquo;Trt1&rdquo;</em> is different from <em>&ldquo;TRT1&rdquo;</em>. This problem often creeps into programs when data has been combined over several years or locations. If you have this type of data, try to formulate a consistent template for yourself and others to use for entering data. Define what the treatment codes and variable names will be ahead of time. The only way to handle this problem is to change the data or use a data step and the <em>IF</em> statement to correct the problem.</p>
+<h4 id="0-and-o-problems">0 and O problems:</h4>
+<p>SAS keeps insisting that it can&rsquo;t find your variable <em>TRT0</em>, but you know it&rsquo;s there in the <em>INPUT</em> statement! Check things carefully. You may have used <strong>O</strong> (capital oh) instead of a zero. This is very easy to do and is made worse by the fact that the two are physically close together on most keyboards. Similar to problems with Case above, this mix up may also show up as a problem when reading in data. The only solution is to change the problem characters to the appropriate values and try again. If this problem occurs a lot, you might consider trying a different font which uses a dot or slash when writing a zero.</p>
+<h4 id="general-debugging-tips">General Debugging Tips:</h4>
+<p>Debugging SAS can be a trying experience. Here are some techniques I use to help the process.</p>
+<ol>
+<li>
+<p>Build long complex programs a step at a time. Start by reading in the data. Print it. Check it. Then do any calculations, then add PROCs and other DATA steps. Don&rsquo;t try to write the whole thing at once. Verify that a piece of code works and then move on.</p>
+</li>
+<li>
+<p>Use Comments. Try to isolate problem code by commenting out sections of the program. This is a very useful technique. See <a href="https://agstats.io/tutorials/sas-data-step.html#42_Commenting_and_Documentation" target="_blank" rel="noopener">Comments</a>.</p>
+</li>
+<li>
+<p>Try writing programs with consistent and readable structure. Use line breaks and indentation where needed and throw in comments to explain what is happening in the program. This will help organize the program flow in your mind and point out where things are going wrong. See <a href="https://agstats.io/tutorials/sas-data-step.html#4_Programming_Habits" target="_blank" rel="noopener">Programming Habits</a>.</p>
+</li>
+<li>
+<p>Stay calm! Learning the quirks of SAS takes time. If all else fails let us know!</p>
+</li>
+</ol>
+<h4 id="some-sas-resources-for-error-corrections">Some SAS Resources for Error Corrections:</h4>
 <ul>
-<li><a href="https://imci-idaho.github.io/2022-03-01-WhatTheyForgot/" target="_blank" rel="noopener">What They Forgot to Teach You</a> (about using R)</li>
-</ul>
-<h3 id="sas">SAS</h3>
-<ul>
-<li><a href="../tutorials/sas-data-step.html" target="_blank">Data Import and Manipulation</a></li>
-<li><a href="../tutorials/sas-proc-reg.html" target="_blank">Linear Regression</a></li>
-<li><a href="../tutorials/sas-proc-mixed.html" target="_blank">Mixed Model ANOVA</a></li>
-<li><a href="../tutorials/sas-ANCOVA.html" target="_blank">Mixed Model ANCOVA and Dummy Variable Regression</a></li>
-<li><a href="../tutorials/sas-proc-glimmix.html" target="_blank">Generalized Mixed Model ANOVA</a></li>
-<li><a href="../tutorials/sas-power.html" target="_blank">Power and Sample Size Estimation</a></li>
-<li><a href="../tutorials/sas-graphics.html" target="_blank">Graphics and Plotting</a></li>
-</ul>
-<h3 id="other-resources">Other Resources</h3>
-<ul>
-<li><a href="https://idahoagstats.github.io/guide-to-field-trial-spatial-analysis/" target="_blank" rel="noopener">Spatial Analysis for Agricultural Field Experiments</a></li>
-<li><a href="https://rstats4ag.org/" target="_blank" rel="noopener">Rstats4Ag</a> (using R and SAS)</li>
-<li><a href="https://link.springer.com/content/pdf/10.1007%2F978-3-030-89010-0.pdf" target="_blank" rel="noopener">Multivariate Statistical Machine Learning Methods for Genomic Prediction</a></li>
-<li><a href="https://lindeloev.github.io/tests-as-linear/#1_the_simplicity_underlying_common_tests" target="_blank" rel="noopener">Basic Introduction to Linear models</a></li>
-<li><a href="https://m-clark.github.io/mixed-models-with-R/" target="_blank" rel="noopener">Mixed models in R</a></li>
-<li><a href="https://schmidtpaul.github.io/DSFAIR/" target="_blank" rel="noopener">Data Science for Agriculture in R</a></li>
-<li><a href="https://schmidtpaul.github.io/MMFAIR/" target="_blank" rel="noopener">Mixed Models for Agriculture in R</a></li>
+<li>
+<p>Simply copy and paste the error message into a search engine like Google.</p>
+</li>
+<li>
+<p>Ask a question on the <a href="https://communities.sas.com/" target="_blank" rel="noopener">SAS forums:</a></p>
+</li>
+<li>
+<p><a href="https://documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/lrcon/n1g8q3l1j2z1hjn1gj1hln0ci5gn.htm" target="_blank" rel="noopener">Types of Errors in SAS</a></p>
+</li>
+<li>
+<p>Beginning SAS <a href="https://blogs.sas.com/content/sgf/2021/09/13/top-books-for-sas-programmers/" target="_blank" rel="noopener">books</a></p>
+</li>
+<li>
+<p><a href="http://support.sas.com/resources/papers/proceedings12/332-2012.pdf" target="_blank" rel="noopener">Tips and Strategies for Mixed Modeling</a></p>
+</li>
 </ul>
 
     </div>
@@ -724,6 +839,56 @@
 
 
 
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/sas/">SAS</a>
+  
+  <a class="badge badge-light" href="/tag/errors/">Errors</a>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+
+
+
+  
+  
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="/authors/bprice/"><img class="avatar mr-3 avatar-circle" src="/authors/bprice/avatar_hu07a119625e817e757d80ba6b1af81644_106941_270x270_fill_q75_lanczos_center.jpg" alt="William Price"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/authors/bprice/">William Price</a></h5>
+      <h6 class="card-subtitle">Statistician</h6>
+      <p class="card-text">My research interests include distributed robotics, mobile computing and programmable matter.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+</ul>
+
+    </div>
+  </div>
+
+
+  
 
 
 
@@ -738,9 +903,8 @@
 
 
 
-
-
-
+  
+  
 
 
 
