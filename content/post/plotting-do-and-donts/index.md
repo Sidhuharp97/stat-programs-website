@@ -24,4 +24,18 @@ https://www.nature.com/articles/s42003-022-03509-3/figures/4
 
 [Misuse of Color](https://www.nature.com/articles/s41467-020-19160-7)
 
+[nice guide](https://www.storytellingwithdata.com/chart-guide)
+
+[pudding](https://pudding.cool/) these folks tell some nice data stories!
+
+https://informationisbeautiful.net/
+ 
+https://practicaltypography.com/
+
+General rules:
+
+* avoid right-aligned type
+* avoid centering type (???)
+* color is nice, but never for primary information. It should always work in grayscale.
+* keep the background sparse 
 
