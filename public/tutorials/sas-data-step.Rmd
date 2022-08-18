@@ -65,7 +65,7 @@ Source: https://en.wikipedia.org/wiki/Punched_card<br>
 
 ## Program Format
 
-It is a good idea to use consistant structured formatting when writing programs (SAS or otherwise). While most computer software packages are indifferent to indentation, spacing, line breaks, etc., using these features will make your programs easier for people to read and understand. The 'Block' nature of SAS lends itself to this type of formating very well. Blank lines between blocks of code also improve readability and will be ignored by SAS. The code below illustrates two examples:<br>
+It is a good idea to use consistent structured formatting when writing programs (SAS or otherwise). While most computer software packages are indifferent to indentation, spacing, line breaks, etc., using these features will make your programs easier for people to read and understand. The 'Block' nature of SAS lends itself to this type of formating very well. Blank lines between blocks of code also improve readability and will be ignored by SAS. The code below illustrates two examples:<br>
 
 ### BAD<br>
 
