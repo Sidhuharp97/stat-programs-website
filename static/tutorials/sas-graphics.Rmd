@@ -306,6 +306,21 @@ run;
 
 # Refinements
 
+## Outputting Plots to Files
+
+In publishing reports or articles, publishers often require graphics be submitted as separate graphic files. The files themselves usually need to be of a specified type or format and produced at a specified resolution. Common file types are **png**. **jpg**, and **tiff**. Resolution is given by the number of "dots per inch" or dpi. Dpi values of 300-400 are typical. These and the name of the graphics file can be specified in SAS using ODS Graphics statements to specify where the file will be stored.
+
+```
+ods graphics /antialias=on reset width=10in height=6in imagename="First Plot File" IMAGEFMT =PNG;
+ODS LISTING image_dpi=300 GPATH = "C:\Figures" ;
+
+```
+
+Here we set the size of the plot to be 10 inches high by 6 inches wide. The file type will be **png** and the name of the file will be *First Plot File*. The file will be at a resolution of 300 dpi and written to the folder Figures on the C drive.
+
+These ODS statements should be placed before the *Proc Sgplot* call. You will need to repeat the statements with new names for each plot you produce.
+
+
 ## Controling Axes (Fonts and Appearance)
 
 The *Xaxis* and *Yaxis* statements are used to label the axes and define their size, text, fonts, and colors. In these options, the *Label* portions control the descriptive text along the axis, while the *Value* portions control the numeric text content along each axis.
@@ -351,7 +366,15 @@ run;
 
 ## More on Colors
 
-Colors are a useful way to incorporate information from additional variable into an existing plot. For example, below the jitter plot demonstrated above displays the distribution of beak depth. We can add additional information about beak length as well. This is done using the options **colormodel=** and **colorrespone=** to the scatter statement. This first definesa color gradient over which the additional variable values will be colorized. This should include at least two colors, and the order runs from low to high corresponding to the first to last colors listed. The colorresponse option specifies the additional variable to color code on. On the resulting plot a color gradient bar will be added as a legend for the coloring. Note: this option works best when the additional variable for coloring information is continuous, not discrete.
+### Custom Colors
+
+There may be times when it is useful to use colors that are not predefined. This might, for example, occur when we need to use a palette specifically for colorblindness. To do this, we specify the color in the appropriate place (as demonstrated in the examples above) using hexidecimal format. A hexidecimal color is specified using 6 alpha-numeric characters. In SAS, we indicate this is a hexidecimal value by preceding the 6 digits with the letters "**cx**". 
+
+Users can quickly find a desired color using a *color picker* such as the one provided by [Google](https://www.google.com/search?q=color+picker&rlz=1C1CHBD_enUS906US906&oq=color+picker&aqs=chrome..69i57j0i512j0i131i433i512l3j0i512j0i131i433i512l2j0i512.3247j0j7&sourceid=chrome&ie=UTF-8){target="_blank"} or others online or included with image editting software. A hexidecimal color example might be a red defined as cxeb4034 or a brown as cxab774d. Hexidecimal colors can be used anywhere a SAS procedure calls for a color.
+
+### Colors Defined by Continuous Variables
+
+Colors are a useful way to incorporate information from additional variable into an existing plot. For example, below the jitter plot demonstrated above displays the distribution of beak depth. We can add additional information about beak length as well. This is done using the options **colormodel=** and **colorresponse=** to the scatter statement. This first definesa color gradient over which the additional variable values will be colorized. This should include at least two colors, and the order runs from low to high corresponding to the first to last colors listed. The colorresponse option specifies the additional variable to color code on. On the resulting plot a color gradient bar will be added as a legend for the coloring. Note: this option works best when the additional variable for coloring information is continuous, not discrete.
 
 
 ```{r color1, engine="sashtml", engine.path=saspath, include=TRUE, engine.opts=sasopts, comment="", error=TRUE}
