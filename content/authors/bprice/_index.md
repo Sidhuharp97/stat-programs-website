@@ -1,6 +1,5 @@
 ---
-bio: My research interests include distributed robotics, mobile computing and programmable
-  matter.
+bio: My research interests include linear models, Bayesian Statistics, and nonlinear models.
 education:
   courses:
   - course: PhD in Plant Science
