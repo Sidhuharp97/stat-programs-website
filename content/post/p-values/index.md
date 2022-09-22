@@ -7,7 +7,6 @@ categories:
 - statistics
 date: "2022-09-22T00:00:00Z"
 draft: false
-featured: false
 image:
   caption: 'Image credit: DALLE-2'
   focal_point: ""
@@ -56,6 +55,6 @@ Points to remember: A small p-value does not indicate the strength of an effect 
 
 In general, employing common sense with professional modesty and avoiding strong declarative statements when reporting and discussing experimental results can go a long way towards averting p-value abuse. It may be useful to recall the research by Philip Tetlock regarding expert opinions [Why Foxes Are Better Forecasters Than Hedgehogs](https://longnow.org/seminars/02007/jan/26/why-foxes-are-better-forecasters-than-hedgehogs/): Pundants that make assertive statements with over confidence tend to be wrong in the long run, while those that are more tentative and conditional in their statements have a better track record. As scientists, we should strive to be foxed, not hedgehogs.
 
-![A fox and hedgehog (DALLE-2)](a hedgehog and fox on grass.png)
+![A fox and hedgehog (DALLE-2)](./a hedgehog and fox on grass.png)
 
 
