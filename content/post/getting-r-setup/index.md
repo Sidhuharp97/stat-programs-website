@@ -17,24 +17,22 @@ projects: [Reproducible Research]
 subtitle: "Some instructions for R installation and your R setup to support reproducible research."
 summary: "Some instructions for R installation and your R setup to support reproducible research."
 tags:
-- R
-- reproducible research
 title: Getting R Set Up
 ---
 
 
 
-### Install R:
+### Installing R:
 
 You can download R [here](https://cloud.r-project.org/). Get the correct R distribution for your operating system. Once downloaded, click on downloaded file, and follow the installation instructions.
   
 Note that R is updated several times per year. If your installation is a year old or more, consider updating your version of R to the latest version.
 
-### Install RStudio
+### Installing RStudio
 
 Rstudio is not R, rather, it is a user interface for accessing R. It is a complicated interface with many features for developers. Despite its complexity, RStudio is nevertheless a very helpful R user interface for users of all abilities. It can downloaded [here](https://www.rstudio.com/products/rstudio/download/). For most users, the free version of "RStudio Desktop" should be chosen. Once downloaded, click on downloaded file, and follow the installation instructions.
 
-### Install Rtools (optional)
+### Installing Rtools (optional)
 
 Only Windows users need to consider this step. This app is for compiling R packages with C, C++ and Fortran code. It is a separate piece of software that has to be downloaded and installed (it is not an R package). Rtools is not needed by all users and if you don't know if you need this, it is absolutely fine to skip this step.  If you do think you need this, You can find it [here](https://cran.r-project.org/bin/windows/Rtools/). Download and install.
 

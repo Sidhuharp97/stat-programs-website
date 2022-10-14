@@ -2,8 +2,11 @@
 title: "Introduction to Data Cleaning with the Tidyverse"
 author: jpiaskowski
 date: 2021-11-18
-categories: ["R"]
-tags: ["dplyr", "tidyr", "tidyverse"]
+categories: 
+- R
+- tidyverse
+- data cleaning
+tags: 
 draft: true
 ---
 

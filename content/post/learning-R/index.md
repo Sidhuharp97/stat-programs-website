@@ -4,6 +4,7 @@ authors:
 - jpiaskowski
 categories: 
 - R
+- learning R
 draft: false
 date: "2022-06-01T00:00:00Z"
 image:
@@ -12,11 +13,7 @@ image:
 lastMod: "2022-06-01T00:00:00Z"
 projects: 
 subtitle: Free tutorials to help you learn R
-summary: 
-tags: 
-- R
-- beginner R user
-- learning R
+summary: "R is notoriously difficult, finicky and at times, needlessly challenging. Many resources have been created to help new users learn and become competent at using R."
 ---
 
 R is notoriously difficult, finicky and at times, needlessly challenging (note that I just said the same thing three times, but the repetition is for emphasis). R is also powerful, flexible and extraordinarily nimble. If you want to try out that great new thing, it's probably possible to do it in R without programming it from scratch. But, I'm not doing you any favors by pretending that learning R is easy and painless. It is hard. R is a powerful programming language, and as usual, with great power, comes *a lot* of learning, practice and preparation to know how to use those powers.

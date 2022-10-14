@@ -5,6 +5,7 @@ authors:
 categories:
 - p-values
 - statistics
+- reproducible research
 date: "2022-09-22T00:00:00Z"
 draft: false
 image:
@@ -15,10 +16,8 @@ image:
 lastmod: "2021-04-15T00:00:00Z"
 projects: [Reproducible Research]
 subtitle: 
-summary: "Interpretation and use of p-values"
+summary: "Some lessons on proper interpretation and use of p-values"
 tags:
-- statistics
-- reproducible research
 ---
 
 ## What to make of p-values

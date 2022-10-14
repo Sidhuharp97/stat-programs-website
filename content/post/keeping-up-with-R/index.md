@@ -4,6 +4,8 @@ authors:
 - jpiaskowski
 categories: 
 - R
+- CRAN
+- agriculture
 draft: false
 date: "2022-05-13T00:00:00Z"
 image:
@@ -12,20 +14,18 @@ image:
 lastMod: "Sys.time()"
 projects: 
 subtitle: Finding the R packages that support your research
-summary: 
-tags: 
-- R
-- CRAN
-- agriculture
+summary: "A guide to existing packages that directly support agricultural research"
 ---
 
-Last updated:  July 29, 2022
+Last updated:  October 14, 2022
+
+**Update:** *This is now a [CRAN Task View](CRAN.R-project.org/view=Agriculture). Please check there for the most updated information. 
 
 Agriculture encompasses a broad breadth of disciplines. Many, many package in base R and contributed packages are useful to agricultural researchers. For that reason, this is not exhaustive list of packages useful to agricultural research. This is intended to cover major packages that in most cases, have been developed to support agricultural research and analytical needs. 
 
 Note that some of these packages are on CRAN and others are on GitHub, Bioconductor, or R-forge.
 
-If you think that a package is missing from this list, please let us know by [filing an issue](https://github.com/jpiaskowski/ctv-agriculture/issues/new?template=package_suggestion.md) in the [GitHub repository](https://github.com/IdahoAgStats/ctv-agriculture) (preferred). 
+If you think that a package is missing from this list, please let us know by [filing an issue](https://github.com/cran-task-views/Agriculture/issues) in the GitHub repository.
 
 ## Packages with general applications
 

@@ -11,17 +11,14 @@ date: "2022-08-17T00:00:00Z"
 draft: false
 featured: false
 image:
-  caption: 'Image credit: [**j.j. Ying**](https://unsplash.com)'
+  caption: 'Image credit: [**JJ Ying**](https://unsplash.com)'
   focal_point: ""
   placement: 2
   preview_only: false
 lastmod: "2021-04-15T00:00:00Z"
 projects: [Reproducible Research]
 subtitle: "Use of design in experimental research."
-summary: ""
-tags:
-- design
-- research
+summary: "In describing an experiment, we often use the word *design*. Design, however, can take on several meanings within the structure of a research study. Understanding the types of design is not only useful for reporting on the study, but can also inform the analysis of the associated data."
 ---
 
 In describing an experiment, we often use the word *design*. Design, however, can take on several meanings within the structure of a research study. This work summarizes an older article that describes this structure and the levels of design it is composed of (Urquhart, N. S. 1981). Understanding the types of design is not only useful for reporting on the study, but can also inform the analysis of the associated data.

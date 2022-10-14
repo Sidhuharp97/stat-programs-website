@@ -3,6 +3,8 @@ authors:
 - jpiaskowski
 categories: 
 - R
+- ANOVA
+- linear models
 draft: false
 date: "2021-11-17T00:00:00Z"
 image:
@@ -11,12 +13,7 @@ image:
 lastMod: "2021-11-17T00:00:00Z"
 projects: 
 subtitle: Navigating the R linear model wilderness
-summary: 
-tags: 
-- ANOVA
-- linear models
-- lme4
-- emmeans
+summary: "ANOVA in R is a unfortunately a bit complicated. Unlike SAS, ANOVA functions in R lack a consistent structure, consistent output and the accessory packages for ANOVA display a patchwork of compatibility. The result is that it is easy to misspecify a model or make other mistakes."
 title: Applied ANOVA in R
 ---
 

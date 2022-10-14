@@ -4,6 +4,8 @@ authors:
 - bprice
 categories:
 - SAS
+- troubleshooting
+- documentation
 date: "2022-08-10T00:00:00Z"
 draft: false
 image:
@@ -16,9 +18,6 @@ projects:
 subtitle: 
 summary: "Common errors you will encounter in SAS and how to fix them."
 tags:
-- SAS
-- troubleshooting
-- statistics
 ---
 
 You need to get that analysis done so you can write that report/paper/dissertation/thesis/presentation to meet that deadline to please the boss ... BUT ... SAS is giving you heartburn! DON'T PANIC. 

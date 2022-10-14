@@ -4,6 +4,8 @@ authors:
 - jpiaskowski
 categories:
 - R
+- troubleshooting
+- documentation
 date: "2022-05-05T00:00:00Z"
 draft: false
 featured: false
@@ -14,10 +16,6 @@ image:
   preview_only: false
 subtitle: "How to find the help you need to solve your R programming problem."
 summary: "How to find help when you run into trouble using R"
-tags:
-- R
-- help
-- documentation
 ---
 
 ## What do you do when you need to solve a problem in R? 

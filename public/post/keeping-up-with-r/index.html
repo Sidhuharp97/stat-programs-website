@@ -33,8 +33,7 @@
   
     
   
-  <meta name="description" content="Last updated: July 29, 2022
-Agriculture encompasses a broad breadth of disciplines. Many, many package in base R and contributed packages are useful to agricultural researchers. For that reason, this is not exhaustive list of packages useful to agricultural research." />
+  <meta name="description" content="A guide to existing packages that directly support agricultural research" />
 
   
   <link rel="alternate" hreflang="en-us" href="/post/keeping-up-with-r/" />
@@ -281,8 +280,8 @@ Agriculture encompasses a broad breadth of disciplines. Many, many package in ba
     <link rel="manifest" href="/index.webmanifest" />
   
 
-  <link rel="icon" type="image/png" href="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_32x32_fill_lanczos_center_2.png" />
-  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_180x180_fill_lanczos_center_2.png" />
+  <link rel="icon" type="image/png" href="/media/icon_hu7ba84dbfc1f77034a85f055c8517ec9c_4951_32x32_fill_lanczos_center_2.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu7ba84dbfc1f77034a85f055c8517ec9c_4951_180x180_fill_lanczos_center_2.png" />
 
   <link rel="canonical" href="/post/keeping-up-with-r/" />
 
@@ -302,8 +301,7 @@ Agriculture encompasses a broad breadth of disciplines. Many, many package in ba
   <meta property="og:site_name" content="Idaho Ag Stats" />
   <meta property="og:url" content="/post/keeping-up-with-r/" />
   <meta property="og:title" content="R packages for Agricultural Research | Idaho Ag Stats" />
-  <meta property="og:description" content="Last updated: July 29, 2022
-Agriculture encompasses a broad breadth of disciplines. Many, many package in base R and contributed packages are useful to agricultural researchers. For that reason, this is not exhaustive list of packages useful to agricultural research." /><meta property="og:image" content="/post/keeping-up-with-r/featured.jpg" />
+  <meta property="og:description" content="A guide to existing packages that directly support agricultural research" /><meta property="og:image" content="/post/keeping-up-with-r/featured.jpg" />
     <meta property="twitter:image" content="/post/keeping-up-with-r/featured.jpg" /><meta property="og:locale" content="en-us" />
   
     
@@ -357,10 +355,10 @@ Agriculture encompasses a broad breadth of disciplines. Many, many package in ba
     "name": "Agricultural Statistical Programs",
     "logo": {
       "@type": "ImageObject",
-      "url": "/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_192x192_fill_lanczos_center_2.png"
+      "url": "/media/icon_hu7ba84dbfc1f77034a85f055c8517ec9c_4951_192x192_fill_lanczos_center_2.png"
     }
   },
-  "description": "Last updated: July 29, 2022\nAgriculture encompasses a broad breadth of disciplines. Many, many package in base R and contributed packages are useful to agricultural researchers. For that reason, this is not exhaustive list of packages useful to agricultural research."
+  "description": "A guide to existing packages that directly support agricultural research"
 }
 </script>
 
@@ -761,7 +759,7 @@ Agriculture encompasses a broad breadth of disciplines. Many, many package in ba
   
   <span class="middot-divider"></span>
   <span class="article-categories">
-    <i class="fas fa-folder mr-1"></i><a href="/category/r/">R</a></span>
+    <i class="fas fa-folder mr-1"></i><a href="/category/r/">R</a>, <a href="/category/cran/">CRAN</a>, <a href="/category/agriculture/">agriculture</a></span>
   
 
 </div>
@@ -787,10 +785,11 @@ Agriculture encompasses a broad breadth of disciplines. Many, many package in ba
   <div class="article-container">
 
     <div class="article-style">
-      <p>Last updated:  July 29, 2022</p>
+      <p>Last updated:  October 14, 2022</p>
+<p><strong>Update:</strong> *This is now a <a href="CRAN.R-project.org/view=Agriculture">CRAN Task View</a>. Please check there for the most updated information.</p>
 <p>Agriculture encompasses a broad breadth of disciplines. Many, many package in base R and contributed packages are useful to agricultural researchers. For that reason, this is not exhaustive list of packages useful to agricultural research. This is intended to cover major packages that in most cases, have been developed to support agricultural research and analytical needs.</p>
 <p>Note that some of these packages are on CRAN and others are on GitHub, Bioconductor, or R-forge.</p>
-<p>If you think that a package is missing from this list, please let us know by <a href="https://github.com/jpiaskowski/ctv-agriculture/issues/new?template=package_suggestion.md" target="_blank" rel="noopener">filing an issue</a> in the <a href="https://github.com/IdahoAgStats/ctv-agriculture" target="_blank" rel="noopener">GitHub repository</a> (preferred).</p>
+<p>If you think that a package is missing from this list, please let us know by <a href="https://github.com/cran-task-views/Agriculture/issues" target="_blank" rel="noopener">filing an issue</a> in the GitHub repository.</p>
 <h2 id="packages-with-general-applications">Packages with general applications</h2>
 <h3 id="agricultural--land-use-databases">Agricultural &amp; land use databases</h3>
 <p>Data from the United States Department of Agriculture&rsquo;s National Agricultural Statistical Service &lsquo;<a href="https://www.nass.usda.gov/Quick_Stats/" target="_blank" rel="noopener">Quick Stats</a>&rsquo; web API can be accessed with <a href="https://docs.ropensci.org/rnassqs/" target="_blank" rel="noopener">rnassqs</a> or with <a href="https://bradlindblad.github.io/tidyUSDA/" target="_blank" rel="noopener">tidyUSDA</a>, which also offers some mapping capabilities. The USDA&rsquo;s <a href="https://nassgeodata.gmu.edu/CropScape/" target="_blank" rel="noopener">Cropland Data Layer</a> API can be accessed with <a href="https://github.com/cbw1243/CropScapeR" target="_blank" rel="noopener">CropScapeR</a> and <a href="https://github.com/jlisic/cdlTools" target="_blank" rel="noopener">cdlTools</a> provides various utility functions for processing CDL data. The package <a href="https://docs.ropensci.org/rusda/" target="_blank" rel="noopener">rusda</a> provides an interface to access the USDA-ARS Systematic Mycology and Microbiology Laboratory (SMML)&rsquo;s <a href="https://nt.ars-grin.gov/fungaldatabases/index.cfm" target="_blank" rel="noopener">four databases</a>: Fungus-Host Distributions, Specimens, Literature and the Nomenclature database. USDA&rsquo;s Agricultural Resource Management Survey (<a href="https://www.nass.usda.gov/Surveys/Guide_to_NASS_Surveys/Ag_Resource_Management/" target="_blank" rel="noopener">ARMS</a>) data API can be accessed with <a href="https://github.com/cbw1243/rarms" target="_blank" rel="noopener">rarms</a>. The USDA&rsquo;s Livestock Mandatory Reporting data API can be accessed with <a href="https://CRAN.R-project.org/package=usdampr" target="_blank" rel="noopener">usdampr</a>. <a href="https://gitlab.com/paulrougieux/faostatpackage" target="_blank" rel="noopener">FAOSTAT</a> and <a href="https://github.com/muuankarski/faobulk" target="_blank" rel="noopener">faobulk</a> can be used to access data from the <a href="https://www.fao.org/faostat/en/#home" target="_blank" rel="noopener">FAOSTAT Database</a> of the Food and Agricultural Organization (FAO) of the United Nations. NASA soil moisture active-passive (SMAP) data can be accessed and processed by <a href="https://docs.ropensci.org/smapr/" target="_blank" rel="noopener">smapr</a>.</p>
@@ -875,16 +874,6 @@ Agriculture encompasses a broad breadth of disciplines. Many, many package in ba
 
 
 
-
-<div class="article-tags">
-  
-  <a class="badge badge-light" href="/tag/r/">R</a>
-  
-  <a class="badge badge-light" href="/tag/cran/">CRAN</a>
-  
-  <a class="badge badge-light" href="/tag/agriculture/">agriculture</a>
-  
-</div>
 
 
 
@@ -1028,23 +1017,6 @@ Agriculture encompasses a broad breadth of disciplines. Many, many package in ba
 
 
   
-  
-  <div class="article-widget content-widget-hr">
-    <h3>Related</h3>
-    <ul>
-      
-      <li><a href="/events/presentations/agstats-conference-2022/">Tools and Resources for R Users in Agricultural Research</a></li>
-      
-      <li><a href="/post/r-gui/">Graphical User Interfaces for R</a></li>
-      
-      <li><a href="/post/learning-r/">Resources for Learning R</a></li>
-      
-      <li><a href="/post/help-in-r/">Finding Help in R</a></li>
-      
-      <li><a href="/post/getting-r-setup/">Getting R Set Up</a></li>
-      
-    </ul>
-  </div>
   
 
 

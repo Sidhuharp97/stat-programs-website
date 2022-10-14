@@ -4,6 +4,7 @@ authors:
 - jpiaskowski
 categories: 
 - R
+- functions
 draft: false
 date: "2022-02-08T00:00:00Z"
 image:
@@ -12,9 +13,8 @@ image:
 lastMod: "2021-11-17T00:00:00Z"
 projects: 
 subtitle: A very short introduction. 
-summary: 
+summary: "If you have to repeat an action in R, functions are a great way to automate this process and avoid erross from cut-paste-replaCE. Here is a short introduction on how to write these functions."
 tags: 
-- functions
 ---
 
 
