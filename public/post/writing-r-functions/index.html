@@ -33,7 +33,7 @@
   
     
   
-  <meta name="description" content="You may find yourself needing to do something repeatedly in R. Sure, you can cut-and-paste and change that one thing, or two things, or five things, but this quickly becomes cumbersome." />
+  <meta name="description" content="If you have to repeat an action in R, functions are a great way to automate this process and avoid erross from cut-paste-replaCE. Here is a short introduction on how to write these functions." />
 
   
   <link rel="alternate" hreflang="en-us" href="/post/writing-r-functions/" />
@@ -301,7 +301,7 @@
   <meta property="og:site_name" content="Idaho Ag Stats" />
   <meta property="og:url" content="/post/writing-r-functions/" />
   <meta property="og:title" content="How to Write Custom Functions in R | Idaho Ag Stats" />
-  <meta property="og:description" content="You may find yourself needing to do something repeatedly in R. Sure, you can cut-and-paste and change that one thing, or two things, or five things, but this quickly becomes cumbersome." /><meta property="og:image" content="/post/writing-r-functions/featured.jpg" />
+  <meta property="og:description" content="If you have to repeat an action in R, functions are a great way to automate this process and avoid erross from cut-paste-replaCE. Here is a short introduction on how to write these functions." /><meta property="og:image" content="/post/writing-r-functions/featured.jpg" />
     <meta property="twitter:image" content="/post/writing-r-functions/featured.jpg" /><meta property="og:locale" content="en-us" />
   
     
@@ -358,7 +358,7 @@
       "url": "/media/icon_hu7ba84dbfc1f77034a85f055c8517ec9c_4951_192x192_fill_lanczos_center_2.png"
     }
   },
-  "description": "You may find yourself needing to do something repeatedly in R. Sure, you can cut-and-paste and change that one thing, or two things, or five things, but this quickly becomes cumbersome."
+  "description": "If you have to repeat an action in R, functions are a great way to automate this process and avoid erross from cut-paste-replaCE. Here is a short introduction on how to write these functions."
 }
 </script>
 
@@ -761,7 +761,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-categories">
-    <i class="fas fa-folder mr-1"></i><a href="/category/r/">R</a></span>
+    <i class="fas fa-folder mr-1"></i><a href="/category/r/">R</a>, <a href="/category/functions/">functions</a></span>
   
 
 </div>
@@ -995,7 +995,8 @@ ggplot(mydata, aes(x = cat, y = obs)) +
 </code></pre>
 <pre><code class="language-r">var_sum_funct(storms, day, name, status)[1:5,] # many grouping factors
 </code></pre>
-<pre><code>## `summarise()` has grouped output by 'name'. You can override using the `.groups` argument.
+<pre><code>## `summarise()` has grouped output by 'name'. You can override using the
+## `.groups` argument.
 </code></pre>
 <pre><code>## # A tibble: 5 × 4
 ## # Groups:   name [5]
@@ -1012,7 +1013,7 @@ ggplot(mydata, aes(x = cat, y = obs)) +
 <pre><code>## # A tibble: 1 × 2
 ##    Mean    SD
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  15.9  9.01
+## 1  15.8  8.94
 </code></pre>
 <p>This is a very brief introduction to tidy evaluation. More information on tidy evaluation is available for <a href="https://ggplot2.tidyverse.org/articles/ggplot2-in-packages.html" target="_blank" rel="noopener">ggplot</a> and <a href="https://dplyr.tidyverse.org/articles/programming.html" target="_blank" rel="noopener">dplyr</a>.</p>
 
@@ -1024,12 +1025,6 @@ ggplot(mydata, aes(x = cat, y = obs)) +
 
 
 
-
-<div class="article-tags">
-  
-  <a class="badge badge-light" href="/tag/functions/">functions</a>
-  
-</div>
 
 
 
@@ -1412,7 +1407,7 @@ input:focus {
     
     
 
-    <script src="/js/_vendor/bootstrap.bundle.min.f81d0a1705048649befc8b595e455a94.js"></script>
+    <script src="/js/_vendor/bootstrap.bundle.min.96b79e4fd55cfeb144bda37cb9dee866.js"></script>
 
     
     

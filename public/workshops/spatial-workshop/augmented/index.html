@@ -1,0 +1,1291 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.0.0-beta.3 for Hugo" />
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Statistical Programs" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="The augmented experimental design is a special design where there is a large number of unreplicated plots interspersed with frequent checks that are replicated. This type of model is useful when the number of treatments is very large and/or replication is either impossible or unfeasible." />
+
+  
+  <link rel="alternate" hreflang="en-us" href="/workshops/spatial-workshop/augmented/" />
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    <meta name="theme-color" content="#1565c0" />
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.003d2be57501b5669ca58ef75468ece2.css" />
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/index.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_32x32_fill_lanczos_center_2.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_180x180_fill_lanczos_center_2.png" />
+
+  <link rel="canonical" href="/workshops/spatial-workshop/augmented/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary" />
+  
+  <meta property="og:site_name" content="Idaho Ag Stats" />
+  <meta property="og:url" content="/workshops/spatial-workshop/augmented/" />
+  <meta property="og:title" content="Augmented Designs | Idaho Ag Stats" />
+  <meta property="og:description" content="The augmented experimental design is a special design where there is a large number of unreplicated plots interspersed with frequent checks that are replicated. This type of model is useful when the number of treatments is very large and/or replication is either impossible or unfeasible." /><meta property="og:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" />
+    <meta property="twitter:image" content="/media/icon_hu3b3c4a2d8f23d5f02a77bc3c14c75958_2167_512x512_fill_lanczos_center_2.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2021-11-07T00:00:00&#43;00:00"
+      />
+    
+    <meta property="article:modified_time" content="2021-11-07T00:00:00&#43;00:00">
+  
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>Augmented Designs | Idaho Ag Stats</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="561372141df0a39b09e92d9d036e8b87" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.eca9bbc7a71accd5ebd9eee0ff004132.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container-xl">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Idaho Ag Stats</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Idaho Ag Stats</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/post"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/talks"><span>Talks</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/workshops"><span>Workshops</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+          
+          <li class="nav-item d-none d-lg-inline-flex">
+            <a class="nav-link" href="/"  aria-label="">
+              <i class="fas fa-" aria-hidden="true"></i>
+            </a>
+          </li>
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    
+
+
+
+
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      <form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-md-3 w-100" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <div class="d-flex">
+      <span class="d-md-none pl-1 flex-grow-1 text-left overflow-hidden">
+        
+          Spatial Statistics in Field Trials
+        
+      </span>
+      <span><i class="fas fa-chevron-down"></i></span>
+    </div>
+  </button>
+
+  
+  <button class="form-control sidebar-search js-search d-none d-md-flex">
+    <i class="fas fa-search pr-2"></i>
+    <span class="sidebar-search-text">Search...</span>
+    <span class="sidebar-search-shortcut">/</span>
+  </button>
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+  
+  
+  
+  
+  
+
+  
+  
+    
+
+    
+      
+
+      <ul class="nav docs-sidenav">
+        <li><a href="/workshops/"><i class="fas fa-arrow-left pr-1"></i>Workshops</a></li>
+      </ul>
+
+      
+      
+        
+          
+        
+      
+
+
+  
+    
+    
+    
+    
+      
+    
+    
+
+    
+      <div class="docs-toc-item">
+        <a class="docs-toc-link " href="/workshops/spatial-workshop/">Spatial Statistics in Field Trials</a>
+    
+      
+        <ul class="nav docs-sidenav">
+      
+
+
+  <li class=""><a href="/workshops/spatial-workshop/prep-work/">Computational Set-up</a></li>
+
+
+
+  <li class=""><a href="/workshops/spatial-workshop/why-spatial/">Why Care about Spatial Variation?</a></li>
+
+
+
+  <li class=""><a href="/workshops/spatial-workshop/diagnosis/">Diagnosing Spatial Autocorrelation</a></li>
+
+
+
+  <li class=""><a href="/workshops/spatial-workshop/variograms/">Empirical Variograms</a></li>
+
+
+
+  <li class=""><a href="/workshops/spatial-workshop/correlated-error-models/">Linear Models with Correlated Errors</a></li>
+
+
+
+  <li class=""><a href="/workshops/spatial-workshop/trend-modelling/">Modelling Spatial Trends</a></li>
+
+
+
+  <li class=""><a href="/workshops/spatial-workshop/model-comparison/">Comparing Models</a></li>
+
+
+
+  <li class="active"><a href="/workshops/spatial-workshop/augmented/">Augmented Designs</a></li>
+
+
+
+  <li class=""><a href="/workshops/spatial-workshop/conclusion/">Final thoughts</a></li>
+
+      
+        </ul>
+      
+    
+
+    
+      </div>
+    
+
+    
+  
+</nav>
+
+    </div>
+
+    
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#model-specification-1">Model specification #1</a></li>
+        <li><a href="#model-specification-2">Model specification #2</a></li>
+        <li><a href="#code-for-this-section">Code for this section</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article">
+
+        <div class="docs-article-container">
+          
+            
+  <nav class="d-none d-md-flex" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      
+  
+  
+  
+
+  <li class="breadcrumb-item">
+    <a href="/">
+      
+        Home
+      
+    </a>
+  </li>
+
+
+  <li class="breadcrumb-item">
+    <a href="/workshops/">
+      
+        Workshops
+      
+    </a>
+  </li>
+
+
+  <li class="breadcrumb-item">
+    <a href="/workshops/spatial-workshop/">
+      
+        Spatial Statistics in Field Trials
+      
+    </a>
+  </li>
+
+
+      <li class="breadcrumb-item active" aria-current="page">
+        Augmented Designs
+      </li>
+    </ol>
+  </nav>
+
+
+          
+
+          <h1>Augmented Designs</h1>
+
+          <div class="article-style">
+            <p>The augmented experimental design is a special design where there is a large number of unreplicated plots interspersed with frequent checks that are replicated. This type of model is  useful when the number of treatments is very large and/or replication is either impossible or unfeasible. Often, the primary goal of the studies using this design is to rank or select genotypes.</p>
+<p>Augmented models are analyzed in a fundamentally different method than RCBD models due to the large number of unreplicated observations. To adjust for the lack of replication, only a select set of treatments, usually of known performance, are replicated in the experiments. The error estimated from these replicated treatments is used in the analysis to evaluate the remaining genotypes.</p>
+<p>There are multiple way to specify an augmented model depending on what the researcher wants to know.</p>
+<h3 id="model-specification-1">Model specification #1</h3>
+<p>$$ Y_{ij} = \tau_i + \beta(\tau)_{ij} $$</p>
+<p>where:</p>
+<ul>
+<li>$ Y_{ij}$ is the response variable</li>
+<li>$ \tau_i$ is the effect of each check and the average effect of all unreplicated treatments</li>
+<li>$ \beta(\tau)_{ij}$ is is the effect of the $j^{th}$ unreplicated treatment nested within the overall effect of unreplicated treatments</li>
+</ul>
+<p>This model evaluates:</p>
+<ol>
+<li>The difference between all checks and the average of the unreplicated treatments.</li>
+<li>The difference between the unreplicated treatments.</li>
+</ol>
+<h3 id="model-specification-2">Model specification #2</h3>
+<p>$$ Y_{ij} = \delta_i + \gamma(\delta)_{ij} $$</p>
+<p>where:</p>
+<ul>
+<li>$ Y_{ij}$ is the response variable</li>
+<li>$ \delta_i$ is the average effect of all checks and the average effect of all unreplicated treatments (so there are only 2 treatment levels)</li>
+<li>$ \gamma(\delta)_{ij}$ is is the effect of the $j^{th}$ treatment nested within the either unreplicated treatments or the check observations</li>
+</ul>
+<p>This model evaluates:</p>
+<ol>
+<li>The difference between the average of the checks and the average of the unreplicated treatments</li>
+<li>The difference between all treatments</li>
+</ol>
+<p>These models are described more in depth in <a href="https://doi.org/10.2134/appliedstatistics.2016.0005.c13" target="_blank" rel="noopener">Burgueño et al, 2018</a>, along with a helpful discussion on when to treat any of these effects as fixed or random</p>
+<p>The data used here refer to a wheat genotype evaluation study carried out near Lind Washington. The study looked at 922 unreplicated genotypes (‘name’) accompanied by 9 replicated check wheat cultivars.</p>
+<h3 id="code-for-this-section">Code for this section</h3>
+<p><em>The following scripts build upon work done in previous section(s).</em></p>
+<details class="spoiler "  id="spoiler-0">
+  <summary>R</summary>
+  <p><pre><code># (if not already loaded)
+library(dplyr); library(nlme); library(ggplot2)
+library(gstat); library(sp)
+
+# read in data
+aug_data_origin &lt;- read.csv(&quot;data/augmented_lind.csv&quot;, 
+                            na.strings = c(&quot;&quot;, &quot;NA&quot;, &quot;.&quot;, &quot;999999&quot;)) %&gt;% 
+  slice(-1) %&gt;% # first line not needed
+  mutate(yieldkg = yieldg/1000)  # to prevent overflow
+
+# summarise the genoytypic data by checks/not checks
+gen_sum &lt;- group_by(aug_data_origin, name) %&gt;% summarise(counts = n()) %&gt;% 
+  mutate(delta =  case_when(
+    counts &gt; 1 ~ &quot;check&quot;,
+    counts == 1 ~ &quot;unrep&quot;))
+
+# need info on just the checks
+checks &lt;- gen_sum %&gt;% filter(delta == &quot;check&quot;) 
+
+# more summarise steps for different augmented modes
+gen_sum2 &lt;- gen_sum  %&gt;%  mutate(gamma = name) %&gt;% 
+  mutate(tau = case_when(
+    delta == &quot;check&quot; ~ gamma,
+    delta == &quot;unrep&quot; ~ &quot;unreplicate_obs&quot;)) %&gt;% 
+  mutate(beta = case_when(
+    delta == &quot;unrep&quot; ~ gamma,
+    delta == &quot;check&quot; ~ gamma))
+
+# merge original data set with info on treatment levels
+aug_data &lt;- aug_data_origin %&gt;% 
+  select(name, prow, pcol, yieldkg, yieldg) %&gt;%
+  mutate(row = prow*11.7, col = pcol*5.5) %&gt;% 
+  full_join(gen_sum2, by = &quot;name&quot;) 
+
+## modelling
+
+aug1 &lt;- lme(fixed = yieldg ~ tau,
+            random = ~ 1|tau/beta,
+            data = aug_data, na.action = na.exclude)
+
+# extract residuals
+aug_data$res &lt;- residuals(aug1)
+
+# plot residual chloroepleth map:
+ggplot(aug_data, aes(y = row, x = col)) +
+  geom_tile(aes(fill = res)) +
+  scale_fill_gradient(low = &quot;yellow&quot;, high = &quot;black&quot;) +
+  scale_x_continuous(breaks = seq(1,max(aug_data$row), 1)) +
+  scale_y_continuous(breaks = 1:max(aug_data$col)) +
+  coord_equal() +
+  theme_void() 
+
+# add spatial covariates
+aug_spatial &lt;- aug_data %&gt;% filter(!is.na(res))
+coordinates(aug_spatial) &lt;- ~ col + row
+max_dist = 0.5*max(dist(coordinates(aug_spatial)))
+
+aug_vario &lt;- gstat::variogram(res ~ 1, 
+                              cutoff = max_dist,
+                              width = max_dist/10, 
+                              data = aug_spatial)
+
+# optional to run: 
+nugget_start &lt;- min(aug_vario$gamma)
+aug_vgm &lt;- vgm(model = &quot;Exp&quot;, nugget = nugget_start)
+aug_variofit &lt;- fit.variogram(aug_vario, aug_vgm)
+plot(aug_vario, aug_variofit, main = &quot;Exponential model&quot;)
+
+cor_exp &lt;- corSpatial(form = ~ row + col, 
+                      nugget = T, fixed = F,
+                      type = &quot;exponential&quot;)
+
+aug1_sp &lt;- update(aug1, corr = cor_exp)
+
+# spatial parameters:
+aug1_sp$modelStruct$corStruct
+
+# extract BLUPs for unreplicated lines:
+aug1_blups &lt;- ranef(aug1_sp)$beta %&gt;% rename(yieldg = '(Intercept)')
+
+# look at variance components
+VarCorr(aug1_sp)
+
+##### OR #######
+
+# another formulation
+# delta estimates effects of replicated versus unreplicated genotypes
+# gamma estimates the effecs of all genotypes evaluated in the trial
+aug2 &lt;- lme(fixed = yieldkg ~ delta,
+            random = ~ 1|delta/gamma,
+            data = aug_data, na.action = na.exclude)
+
+aug2_sp &lt;- update(aug2, corr = cor_exp)
+
+# spatial parameters:
+aug2_sp$modelStruct$corStruct
+
+# extract BLUPs for unreplicated lines:
+aug_blups2 &lt;- ranef(aug2_sp)$gamma %&gt;% rename(yieldg = '(Intercept)')
+
+# look at variance components
+VarCorr(aug1_sp)
+</code></pre>
+</p>
+</details>
+<details class="spoiler "  id="spoiler-1">
+  <summary>SAS</summary>
+  <p><pre><code>filename AUG url &quot;https://raw.githubusercontent.com/IdahoAgStats/guide-to-field-trial-spatial-analysis/master/data/AB19F5_LIND.csv&quot;;
+
+PROC IMPORT OUT= WORK.augmented
+     DATAFILE= AUG
+     DBMS=CSV REPLACE;
+     GETNAMES=YES;
+     DATAROW=2; 
+RUN;
+
+data augmented;
+	set augmented;
+	if yieldg = 999999 or yieldg=. then delete; /* Remove missing values */
+	prow=prow*11.7; /*convert row and column indices to feet */
+	pcol=pcol*5.5;
+run;
+
+proc freq noprint data=augmented;
+	tables name/out=controls;
+run;
+
+data controls;
+	set controls;
+	if count &gt;1;
+run;
+
+proc sort data=controls;
+	by name;
+run;
+     
+proc sort data=augmented;
+	by name;
+run;
+
+data augmented;
+	merge augmented controls;
+	by name;
+	if count=. then d2=2; /* Unreplicated */
+	else d2=1;            /* Replicated */
+	yieldkg=yieldg/1000;
+run;
+
+PROC mixed data=augmented;
+	class name d2;
+	model yieldkg = d2/noint outp=residuals ddf=229 229;
+	lsmeans d2;
+	*lsmeans name(d2)/slice = d2;
+run;
+
+proc sgplot data=residuals;
+	HEATMAPPARM y=pRow x=pCol COLORRESPONSE=resid/ colormodel=(cx014458 cx1E8C6E cxE1FE01); 
+title1 'Field Map';
+run;
+
+proc variogram data=residuals plots(only)=(fitplot);
+   where yieldkg ^= .;
+   coordinates xc=pcol yc=pRow;
+   compute lagd=6.6 maxlags=25;
+   model form=auto(mlist=(gau, exp, pow, sph) nest=1);
+  var resid;
+run;
+
+PROC mixed data=augmented;
+	class name d2;
+	model yieldkg = d2 name(d2)/outp=adjresiduals ddf=229 229;
+	lsmeans d2;
+	repeated/subject=intercept type=sp(pow)(prow pcol) local;
+	ods output SolutionR =parms;
+	parms (0.074) (0.0051)(0.475)  ;
+	*lsmeans name(d2)/slice = d2;  # alot of output!!
+run;
+</code></pre>
+</p>
+</details>
+
+          </div>
+
+          
+
+
+
+          
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/workshops/spatial-workshop/model-comparison/" rel="next">Comparing Models</a>
+  </div>
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/workshops/spatial-workshop/conclusion/" rel="prev">Final thoughts</a>
+  </div>
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          <p>Last updated on Nov 7, 2021</p>
+
+          
+
+
+
+
+
+          
+
+
+
+
+          
+
+
+  
+  
+
+
+
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    Copyright @ 2022 by the <a href="https://www.uidaho.edu/cals/statistical-programs">University of Idaho Statistical Programs</a>. Built with <a href="https://wowchemy.com/">Wowchemy</a>, a free open-source web builder.
+  </p>
+
+  
+  
+
+
+
+
+
+
+
+</footer>
+
+
+    </main>
+  </div>
+</div>
+
+  </div>
+
+  <div class="page-footer">
+    
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.4/mermaid.min.js" integrity="sha512-as1BF4+iHZ3BVO6LLDQ7zrbvTXM+c/1iZ1qII/c3c4L8Rn5tHLpFUtpaEtBNS92f+xGsCzsD7b62XP3XYap6oA==" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/python.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/latex.min.js"></script>
+        
+      
+
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.2/anchor.min.js" integrity="sha512-I7w3ZdSFzw5j3jU3ZkNikBNeIrl3i+hEuEdwNmqUJvwNcaBUNcijnP2gd9DtGlgVYDplfjGoD8vTNsID+lCjqg==" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    <script src="/js/_vendor/bootstrap.bundle.min.f81d0a1705048649befc8b595e455a94.js"></script>
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.e20609e6ad3f7fce339ee2e74f13682b.js"></script>
+
+    
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+
+
+</body>
+</html>

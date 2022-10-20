@@ -1,10 +1,9 @@
 ---
 title: "Introduction to Creating Awesome Plots with ggplot2"
 author: jpiaskowski
-date: 2021-11-17
-categories: ["R"]
-tags: ["ggplot2", "data visualization"]
-draft: true
+date: 2022-10-20
+categories: ["R", "data visualization"]
+draft: false
 ---
 
  
@@ -15,6 +14,8 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, collapse = TRUE)
 ```{r, echo=FALSE,out.width="60%",out.height = "60%", fig.align='center'}
 knitr::include_graphics(c("curve_fitting.png"))
 ```
+
+*(It won't take that long to read this)*
 
 [**from XKCD**](https://xkcd.com/2048/)
 
@@ -27,10 +28,12 @@ We will load ggplot2, which will automatically load a useful package of color pa
 
 The data set, "nass.hay" is from the 'agridat' package. It is historic data on hay production across U.S. states from 1909 to 2012 gathered by the National Agricultural Statistics Service. This script also creates a data object only containing data from Idaho, and a data object with hay production stats from 2012. 
 
-```{r}
+```{r include=FALSE, echo=TRUE}
 library(dplyr); library(data.table); library(forcats)
 library(ggplot2)
+```
 
+```{r}
 library(agridat) # loaded so we can access the following date set:
 data("nass.hay")
 str(nass.hay)
