@@ -510,7 +510,7 @@ vignette("ggplot2")
 
 Plot of shots made by NBA Player Steph Curry, made using **gganimate**:  
 
-```{r eval=FALSE, echo=TRUE, class.source = 'fold-hide'}
+```{r eval=FALSE, echo=TRUE}
 library(tidyr)
 library(rjson)
 # shot data for Stephen Curry
