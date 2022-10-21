@@ -32,6 +32,9 @@
     <loc>/categories/</loc>
     <lastmod>2022-10-21T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>/category/data-cleaning/</loc>
+    <lastmod>2022-10-21T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>/category/data-visualization/</loc>
     <lastmod>2022-10-21T00:00:00+00:00</lastmod>
   </url><url>
@@ -41,10 +44,16 @@
     <loc>/post/intro-to-ggplot/</loc>
     <lastmod>2022-10-21T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>/post/data-cleaning-r/</loc>
+    <lastmod>2022-10-21T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>/post/</loc>
     <lastmod>2022-10-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/category/r/</loc>
+    <lastmod>2022-10-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/category/tidyverse/</loc>
     <lastmod>2022-10-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/authors/</loc>

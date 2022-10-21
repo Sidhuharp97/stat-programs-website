@@ -1,0 +1,2068 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.0.0-beta.3 for Hugo" />
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Statistical Programs" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Common tools and functions to help clean data sets and prepare them for analysis" />
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/data-cleaning-r/" />
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    <meta name="theme-color" content="#1565c0" />
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha512-W0xM4mr6dEP9nREo7Z9z+9X70wytKvMGeDsj7ps2+xg5QPrEBXC8tAW1IFnzjR6eoJ90JmCnFzerQJTLzIEHjA==" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.003d2be57501b5669ca58ef75468ece2.css" />
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+    <link rel="alternate" href="/post/data-cleaning-r/index.xml" type="application/rss+xml" title="Idaho Ag Stats" />
+  
+
+  
+    <link rel="manifest" href="/index.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hu7ba84dbfc1f77034a85f055c8517ec9c_4951_32x32_fill_lanczos_center_2.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu7ba84dbfc1f77034a85f055c8517ec9c_4951_180x180_fill_lanczos_center_2.png" />
+
+  <link rel="canonical" href="/post/data-cleaning-r/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image" />
+  
+  <meta property="og:site_name" content="Idaho Ag Stats" />
+  <meta property="og:url" content="/post/data-cleaning-r/" />
+  <meta property="og:title" content="Introduction to Data Cleaning with the Tidyverse | Idaho Ag Stats" />
+  <meta property="og:description" content="Common tools and functions to help clean data sets and prepare them for analysis" /><meta property="og:image" content="/post/data-cleaning-r/featured.png" />
+    <meta property="twitter:image" content="/post/data-cleaning-r/featured.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2022-10-21T00:00:00&#43;00:00"
+      />
+    
+    <meta property="article:modified_time" content="2022-10-21T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/data-cleaning-r/"
+  },
+  "headline": "Introduction to Data Cleaning with the Tidyverse",
+  
+  "image": [
+    "/post/data-cleaning-r/featured.png"
+  ],
+  
+  "datePublished": "2022-10-21T00:00:00Z",
+  "dateModified": "2022-10-21T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Statistical Programs"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Agricultural Statistical Programs",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/media/icon_hu7ba84dbfc1f77034a85f055c8517ec9c_4951_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "Common tools and functions to help clean data sets and prepare them for analysis"
+}
+</script>
+
+  
+
+  
+
+  
+
+  
+
+<link rel="alternate" type="application/rss+xml" href="/post/data-cleaning-r/index.xml" title="Idaho Ag Stats" />
+
+
+
+  <title>Introduction to Data Cleaning with the Tidyverse | Idaho Ag Stats</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="bcfba34cd2a6063c1fae370a2883e09b" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.eca9bbc7a71accd5ebd9eee0ff004132.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container-xl">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Idaho Ag Stats</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Idaho Ag Stats</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/post"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"><span>Events</span><span class="caret"></span>
+          </a>
+          <div class="dropdown-menu">
+            
+              <a class="dropdown-item" href="/events/presentations"><span>Presentations</span></a>
+            
+              <a class="dropdown-item" href="/events/workshops"><span>Workshops</span></a>
+            
+          </div>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/tutorials"><span>Tutorials</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/index.xml"><i class='fa fa-rss'></i><span></span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+          
+          <li class="nav-item d-none d-lg-inline-flex">
+            <a class="nav-link" href="/"  aria-label="">
+              <i class="fas fa-" aria-hidden="true"></i>
+            </a>
+          </li>
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>Introduction to Data Cleaning with the Tidyverse</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Oct 21, 2022
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    24 min read
+  </span>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/r/">R</a>, <a href="/category/tidyverse/">tidyverse</a>, <a href="/category/data-cleaning/">data cleaning</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 831px;">
+  <div style="position: relative">
+    <img src="/post/data-cleaning-r/featured_hu5599ece9c1af2c3b9eaee8044a842b2c_449063_720x0_resize_lanczos_2.png" alt="" class="featured-image">
+    
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <pre><code class="language-r">knitr::opts_chunk$set(echo = TRUE, eval=TRUE, include=TRUE)
+</code></pre>
+<p>If your file management system looks like this (no guilt, we have all been there), this is suggestive of some rather <em>ad hoc</em> approaches to data cleaning. As you work with your data, you will discover errors (this is a universal experience). How do you fix those?</p>
+<p><img src="phd_comics_filenames.png" alt="">
+<a href="https://phdcomics.com/comics/archive_print.php?comicid=1323" target="_blank" rel="noopener"><strong>from PHD comics</strong></a></p>
+<p>Newer scientists are likely to use point-and-click software like spreadsheet. The problem with this approach is that there is no record of your exact action, so you save a new copy of the data set with a new name. And on it goes. There are other ways to fix data errors using a transparent process that can avoid these multiplying data sets, or clarify what distinguishes one data set from another.</p>
+<h2 id="introduction">Introduction</h2>
+<blockquote>
+<p>Equip everyone regardless of means, to participate in the global economy that rewards data literacy.</p>
+</blockquote>
+<center> —RStudio mission statement </center>
+<p>The <a href="https://www.tidyverse.org/" target="_blank" rel="noopener">Tidyverse</a> is a collection of packages designed to help data users work more efficiently with their data. At the time of writing this, the Tidyverse consists of over 25 packages with diverse that range from connecting to google sheets to working with databases.</p>
+<p>Most Tidyverse functions have equivalent functions in base R (that is, the set of function that load automaticallty when R is launched). The difference is that tidyverse functions are often faster, the syntax may be clearer and easier to use (no guarantee, tho), and most importantly, <em>they all follow a similar structure and the results are consistent across packages</em> (within limits, this depends on the nature of the function).</p>
+<p><strong>Technical note:</strong> the Tidyverse uses &ldquo;non-standard evaluation&rdquo; (<a href="http://adv-r.had.co.nz/Computing-on-the-language.html" target="_blank" rel="noopener">NSE</a>) principles in its functions. NSE is a complicated topic, but in brief, it means that tidyverse function follow different rules than base R function. Tidyverse functions are easier to use, but, if you are used to base R functions, it will take some effort to reorient your R programming brain. Just a friendly warning before we dive in!</p>
+<h2 id="tidyverse-packages">Tidyverse Packages</h2>
+<h3 id="abbreviated-list-of-packages-useful-for-data-cleaning">Abbreviated list of packages useful for data cleaning</h3>
+<p>As mentioned, the Tidyverse is a collection of <a href="https://www.tidyverse.org/packages/" target="_blank" rel="noopener">many packages</a>. Below is a table of many very useful packages for data cleaning. This tutorial does not address all these packages, but they are worth checking out, depending on your data analytic needs.</p>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dplyr</td>
+<td>main package for organizing data</td>
+</tr>
+<tr>
+<td>forcats</td>
+<td>for managing categorical data</td>
+</tr>
+<tr>
+<td>janitor</td>
+<td>also not part of the tidyverse, has useful data cleaning functions</td>
+</tr>
+<tr>
+<td>lubridate</td>
+<td>for manipulating dates</td>
+</tr>
+<tr>
+<td>purrr</td>
+<td>advanced broadcasting of functions across data</td>
+</tr>
+<tr>
+<td>readr</td>
+<td>for reading in tabular data</td>
+</tr>
+<tr>
+<td>readxl</td>
+<td>for reading in MS excel sheets</td>
+</tr>
+<tr>
+<td>stringr</td>
+<td>for managing &ldquo;strings&rdquo; (character variables)</td>
+</tr>
+<tr>
+<td>tidyr</td>
+<td>to reshape data and handle missing values</td>
+</tr>
+</tbody>
+</table>
+<p><img src="tidyverse_hex.png" alt="">
+<strong>Honorable mention:</strong> data.table, which provides advanced handling functions for data.frames. While not part of the tidyverse officially, it is very efficient.</p>
+<h3 id="packages-used-in-this-tutorial">Packages Used in This Tutorial</h3>
+<pre><code class="language-r">library(readr)
+library(data.table)
+library(dplyr)
+</code></pre>
+<pre><code>## 
+## Attaching package: 'dplyr'
+</code></pre>
+<pre><code>## The following objects are masked from 'package:data.table':
+## 
+##     between, first, last
+</code></pre>
+<pre><code>## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+</code></pre>
+<pre><code>## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+</code></pre>
+<pre><code class="language-r">library(tidyr)
+</code></pre>
+<p>The warning messages indicate when there are identical function names across different packages. The last package loaded will override functions from previous-loaded packages when such conflicts arise. So, the order of how packages are loaded can matter. However, any function can be accessed by add a prefix of the package name and two colons to a particular function:</p>
+<pre><code>base::intersect(...)
+</code></pre>
+<h2 id="load-data">Load Data</h2>
+<h3 id="read_csv-v-readcsv">&lsquo;read_csv&rsquo; v &lsquo;read.csv&rsquo;</h3>
+<p>How do the functions <code>read.csv()</code> (from base R) and <code>read_csv</code> (from readr) differ in how they read in data?</p>
+<p>For this tutorial, 3 data sets will be used, &ldquo;nass_cotton&rdquo;, &ldquo;nass_barley&rdquo;, and &ldquo;nass_barley&rdquo;. These are historical data sets from the National Agricultural Statistics Service that indicate the total acreage and yield for the crops indicated for each each U.S. state and year from 1866 to 2011. They were provided by packaged &lsquo;agridat&rsquo;.</p>
+<p><em>Note: these data sets were originally obtained as thus:</em></p>
+<pre><code class="language-r">library(agridat) # a package of agricultural data sets
+data(&quot;nass.corn&quot;)
+data(&quot;nass.barley&quot;)
+data(&quot;nass.cotton&quot;)
+
+write.csv(nass.corn, &quot;nass_corn.csv&quot;, row.names = F)
+write.csv(nass.barley, &quot;nass_barley.csv&quot;, row.names = F)
+write.csv(nass.cotton, &quot;nass_cotton.csv&quot;, row.names = F)
+</code></pre>
+<p>When using the RStudio&rsquo;s point-and-click interface to load tabular data, it will typically call the function <code>read_csv()</code> for CSV files and <code>read_delim()</code> for text files. <code>read_csv()</code> is a wrapper for <code>read_delim()</code> with different default arguments.</p>
+<p>These arguments can be called using the command line interface as well.</p>
+<pre><code class="language-r">nass_barley &lt;- read.csv(&quot;nass_barley.csv&quot;) 
+nass_cotton &lt;- read_csv(&quot;nass_cotton.csv&quot;)
+</code></pre>
+<pre><code>## Rows: 2338 Columns: 4
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (1): state
+## dbl (3): year, acres, yield
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+</code></pre>
+<pre><code class="language-r"># contrast functions read.csv and read_csv
+str(nass_barley)
+</code></pre>
+<pre><code>## 'data.frame':	4839 obs. of  4 variables:
+##  $ year : int  1866 1866 1866 1866 1866 1866 1866 1866 1866 1866 ...
+##  $ state: chr  &quot;Connecticut&quot; &quot;Illinois&quot; &quot;Indiana&quot; &quot;Iowa&quot; ...
+##  $ acres: num  1000 96000 11000 66000 2000 10000 34000 7000 21000 20000 ...
+##  $ yield: num  22.5 23.4 23 22 23 23.5 21.5 25.5 26 26 ...
+</code></pre>
+<pre><code class="language-r">str(nass_cotton)
+</code></pre>
+<pre><code>## spec_tbl_df [2,338 × 4] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ year : num [1:2338] 1866 1866 1866 1866 1866 ...
+##  $ state: chr [1:2338] &quot;Alabama&quot; &quot;Arkansas&quot; &quot;Florida&quot; &quot;Georgia&quot; ...
+##  $ acres: num [1:2338] 977000 489000 155000 895000 1020000 ...
+##  $ yield: num [1:2338] 120 198 123 122 57 86 124 116 102 121 ...
+##  - attr(*, &quot;spec&quot;)=
+##   .. cols(
+##   ..   year = col_double(),
+##   ..   state = col_character(),
+##   ..   acres = col_double(),
+##   ..   yield = col_double()
+##   .. )
+##  - attr(*, &quot;problems&quot;)=&lt;externalptr&gt;
+</code></pre>
+<h3 id="a-bit-on-the-tibble">A Bit on the Tibble</h3>
+<p>A tibble is an object type created for the Tidyverse. This is the object type imported by &lsquo;readr&rsquo; and returned by many tidyverse functions. The tibble is like a data frame with a few other rules. Tibbles have a simplified printing function if you accidentally type in the object name - it will only print the first 10 lines and will truncate the number of columns to fit your screen. If you type the object name of a traditional data frame, the first 1000 lines of data are printed!</p>
+<p>To create a new tibble, you can use the function <code>tribble()</code> to create a tibble by rows, or the function <code>tibble()</code> for building a tibble column-wise, or <code>as.tibble()</code> to coerce an object to a tibble.</p>
+<p><img src="tribbles.jpg" width="40%" height="40%" style="display: block; margin: auto;" /></p>
+<p>There are a few aspects of tibbles that are fundamentally different from a standard data frame. Tibbles do not handle row names well and many tidyverse functions discard that information. This is often just fine - row names are computationally expensive to set and maintain. Also, it can be difficult to filter and sort data based on rownames. However, many other (non-tidyverse) package functions rely on the rownames attribute, so be aware of this behavior when using tidyverse functions on data sets.</p>
+<h3 id="function-details">Function details</h3>
+<ul>
+<li>
+<p>the most noticeable difference between <code>read.csv()</code> and <code>read_csv()</code> is that <code>read.csv()</code>&rsquo;s default behavior is to import character variables that with repeat values as factors, while <code>read_csv()</code> keeps those variables as character. The default behavior can be overrode in both functions.</p>
+</li>
+<li>
+<p><code>read_delim()</code> and its wrappers are faster than base versions (e.g. <code>read.csv()</code>), however, the difference will not be noticeable for small files (&lt; 10 Mb)</p>
+</li>
+<li>
+<p><code>read_delim()</code> offers additional flexibility such removing trailing and leading white space (&quot; hello&quot; and &ldquo;hello  &ldquo;) and automatically deleting empty rows (these things occur by default).</p>
+</li>
+<li>
+<p>specific values for missing data that are not &ldquo;NA&rdquo; (e.g. &ldquo;-9&rdquo;, &ldquo;.&quot;) can be set with with argument <code>na = ...</code></p>
+</li>
+<li>
+<p>the function can be sped up by setting values for the <code>col_types = ...</code> argument (e.g. character, numeric, date, et cetera)</p>
+</li>
+</ul>
+<pre><code class="language-r">nass_corn &lt;- read_csv(&quot;nass_corn.csv&quot;, col_types = cols(col_integer(), col_character(), col_double(), col_double()))
+str(nass_corn)
+</code></pre>
+<pre><code>## spec_tbl_df [6,381 × 4] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ year : int [1:6381] 1866 1866 1866 1866 1866 1866 1866 1866 1866 1866 ...
+##  $ state: chr [1:6381] &quot;Alabama&quot; &quot;Arkansas&quot; &quot;California&quot; &quot;Connecticut&quot; ...
+##  $ acres: num [1:6381] 1050000 280000 42000 57000 200000 ...
+##  $ yield: num [1:6381] 9 18 28 34 23 9 6 29 36.5 32 ...
+##  - attr(*, &quot;spec&quot;)=
+##   .. cols(
+##   ..   year = col_integer(),
+##   ..   state = col_character(),
+##   ..   acres = col_double(),
+##   ..   yield = col_double()
+##   .. )
+##  - attr(*, &quot;problems&quot;)=&lt;externalptr&gt;
+</code></pre>
+<p><strong>Note:</strong> if you have truly huge data, consider the <code>fread()</code> function in &lsquo;data.table&rsquo; or storing the data in database and using &lsquo;dbplyr&rsquo; to access it.</p>
+<h2 id="data-selection-and-subsetting">Data selection and subsetting</h2>
+<p><em>(from the package &lsquo;dplyr&rsquo;)</em></p>
+<h3 id="column-selection">Column selection</h3>
+<p>The <code>select()</code> function is used for column selection and has the formulation: <code>select(data, vars_to_select)</code>.</p>
+<p>**Select only the columns that you want: **</p>
+<pre><code class="language-r">barley_acres &lt;- select(nass_barley, state, year, acres)
+str(barley_acres)
+</code></pre>
+<pre><code>## 'data.frame':	4839 obs. of  3 variables:
+##  $ state: chr  &quot;Connecticut&quot; &quot;Illinois&quot; &quot;Indiana&quot; &quot;Iowa&quot; ...
+##  $ year : int  1866 1866 1866 1866 1866 1866 1866 1866 1866 1866 ...
+##  $ acres: num  1000 96000 11000 66000 2000 10000 34000 7000 21000 20000 ...
+</code></pre>
+<pre><code class="language-r">head(barley_acres)
+</code></pre>
+<pre><code>##         state year acres
+## 1 Connecticut 1866  1000
+## 2    Illinois 1866 96000
+## 3     Indiana 1866 11000
+## 4        Iowa 1866 66000
+## 5      Kansas 1866  2000
+## 6    Kentucky 1866 10000
+</code></pre>
+<p>**Select the columns you do not want: **</p>
+<pre><code class="language-r">barley_yield &lt;- select(nass_barley, -acres)
+str(barley_yield)
+</code></pre>
+<pre><code>## 'data.frame':	4839 obs. of  3 variables:
+##  $ year : int  1866 1866 1866 1866 1866 1866 1866 1866 1866 1866 ...
+##  $ state: chr  &quot;Connecticut&quot; &quot;Illinois&quot; &quot;Indiana&quot; &quot;Iowa&quot; ...
+##  $ yield: num  22.5 23.4 23 22 23 23.5 21.5 25.5 26 26 ...
+</code></pre>
+<pre><code class="language-r">barley_yield2 &lt;- select(nass_barley, -(c(acres, yield))) # multiple columns
+str(barley_yield2)
+</code></pre>
+<pre><code>## 'data.frame':	4839 obs. of  2 variables:
+##  $ year : int  1866 1866 1866 1866 1866 1866 1866 1866 1866 1866 ...
+##  $ state: chr  &quot;Connecticut&quot; &quot;Illinois&quot; &quot;Indiana&quot; &quot;Iowa&quot; ...
+</code></pre>
+<h3 id="sorting-data">Sorting data</h3>
+<p>Sort functions have the formulation: <code>sort(data, vars_to_sort)</code>.</p>
+<p><strong>Sort across one column:</strong></p>
+<pre><code class="language-r">corn_year &lt;- arrange(nass_corn, state)
+head(corn_year)
+</code></pre>
+<pre><code>## # A tibble: 6 × 4
+##    year state     acres yield
+##   &lt;int&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;
+## 1  1866 Alabama 1050000   9  
+## 2  1867 Alabama 1400000  13  
+## 3  1868 Alabama 1420000  12.5
+## 4  1869 Alabama 1430000  12  
+## 5  1870 Alabama 1330000  13.5
+## 6  1871 Alabama 1480000  11
+</code></pre>
+<p><strong>Sort across several columns:</strong></p>
+<pre><code class="language-r">corn_year_yield &lt;- arrange(nass_corn, year, yield)
+head(corn_year_yield)
+</code></pre>
+<pre><code>## # A tibble: 6 × 4
+##    year state            acres yield
+##   &lt;int&gt; &lt;chr&gt;            &lt;dbl&gt; &lt;dbl&gt;
+## 1  1866 Georgia        1770000   6  
+## 2  1866 South Carolina  950000   6.5
+## 3  1866 Alabama        1050000   9  
+## 4  1866 Florida         125000   9  
+## 5  1866 Mississippi     800000   9.5
+## 6  1866 North Carolina 1675000   9.5
+</code></pre>
+<p><strong>Sort in reverse order:</strong></p>
+<pre><code class="language-r">corn_year_yield_rev &lt;- arrange(nass_corn, desc(year), desc(yield))
+head(corn_year_yield_rev)
+</code></pre>
+<pre><code>## # A tibble: 6 × 4
+##    year state       acres yield
+##   &lt;int&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;
+## 1  2011 Washington 125000   225
+## 2  2011 Oregon      51000   215
+## 3  2011 California 150000   185
+## 4  2011 Idaho      120000   185
+## 5  2011 Arizona     32000   180
+## 6  2011 New Mexico  43000   180
+</code></pre>
+<h3 id="row-selection">Row selection</h3>
+<p>Based on their position or index (where the first row = 1):</p>
+<pre><code class="language-r">corn_first100 &lt;- slice(nass_corn, 100) # grab first 100 rows
+</code></pre>
+<h3 id="filtering-data">Filtering Data</h3>
+<p><em>(actually a type of row selection)</em></p>
+<p>Filtering enables users to select all columns of data based on a condition within a row or rows. The <code>filter()</code> function has the formulation: <code>select(data, condition_for_filter)</code>.</p>
+<p><strong>Filter based on one variable and exact match:</strong></p>
+<pre><code class="language-r">corn_AZ &lt;- filter(nass_corn, state == &quot;Arizona&quot;)
+head(corn_AZ)
+</code></pre>
+<pre><code>## # A tibble: 6 × 4
+##    year state   acres yield
+##   &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;
+## 1  1882 Arizona  3000    21
+## 2  1883 Arizona  3000    20
+## 3  1884 Arizona  3000    21
+## 4  1885 Arizona  3000    22
+## 5  1886 Arizona  3000    22
+## 6  1887 Arizona  3000    19
+</code></pre>
+<p>**Filter for matching several items: **</p>
+<pre><code class="language-r">barley_pnw &lt;- filter(nass_barley, state %in% c(&quot;Idaho&quot;, &quot;Oregon&quot;, &quot;Washington&quot;))
+head(barley_pnw)
+</code></pre>
+<pre><code>##   year  state acres yield
+## 1 1869 Oregon  6000  35.0
+## 2 1870 Oregon  7000  30.5
+## 3 1871 Oregon  8000  28.5
+## 4 1872 Oregon 11000  30.5
+## 5 1873 Oregon 15000  33.0
+## 6 1874 Oregon 17000  29.0
+</code></pre>
+<p>**Filter by numerical cut-off: **</p>
+<p>(first, look at summary of data)</p>
+<pre><code class="language-r">summary(nass_cotton$acres)
+</code></pre>
+<pre><code>##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+##      100   118000   550000  1206414  1431500 17749000
+</code></pre>
+<pre><code class="language-r">nass_cotton_high &lt;- filter(nass_cotton, acres &lt; 550000)
+</code></pre>
+<p><span style="color:mediumblue">Logical operators in R:</span></p>
+<table>
+<thead>
+<tr>
+<th>symbol</th>
+<th>meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;</td>
+<td>less than</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>less than or equal to</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>greater than</td>
+</tr>
+<tr>
+<td>&gt;=</td>
+<td>greater than or equal to</td>
+</tr>
+<tr>
+<td>==</td>
+<td>exactly equal to</td>
+</tr>
+<tr>
+<td>!=</td>
+<td>not equal to</td>
+</tr>
+<tr>
+<td>!x</td>
+<td>Not x</td>
+</tr>
+<tr>
+<td>x</td>
+<td>y</td>
+</tr>
+<tr>
+<td>x &amp; y</td>
+<td>x AND y</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Combine multiple filters:</strong></p>
+<p>(again, let&rsquo;s look at summaries of the data first)</p>
+<pre><code class="language-r">summary(nass_corn$yield)
+</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    3.00   23.00   36.00   52.41   73.00  225.00
+</code></pre>
+<pre><code class="language-r">range(nass_corn$year)
+</code></pre>
+<pre><code>## [1] 1866 2011
+</code></pre>
+<pre><code class="language-r">corn_Iowa_prewar &lt;- filter(nass_corn, year &lt; 1950 &amp; year &gt;= 1930 &amp; state == &quot;Iowa&quot;)
+with(corn_Iowa_prewar, plot(year, yield, col = &quot;dodgerblue&quot;, pch = 16, type = &quot;b&quot;))
+</code></pre>
+<p><img src="/post/data-cleaning-r/index_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<h2 id="data-transformations">Data transformations</h2>
+<h3 id="the-mutate-function-to-define-new-variables">The <code>mutate()</code> function to define new variables</h3>
+<p>Mutate functions have the formulation: <code>mutate(data, new_var_name = data_transformation)</code>. New variables are declared on the left and the right provides the operations for variable creation itself. Many operations are allowed within a mutate function:</p>
+<pre><code class="language-r">barley_HI &lt;- mutate(nass_barley, 
+                    harvest_index = acres/yield,
+                    Year = as.factor(year),
+                    Is_high = acres &gt; median(acres),
+                    crop = &quot;barley&quot;,
+                    relative_yld = yield/mean(yield))
+
+head(barley_HI)
+</code></pre>
+<pre><code>##   year       state acres yield harvest_index Year Is_high   crop relative_yld
+## 1 1866 Connecticut  1000  22.5      44.44444 1866   FALSE barley    0.6494957
+## 2 1866    Illinois 96000  23.4    4102.56410 1866    TRUE barley    0.6754755
+## 3 1866     Indiana 11000  23.0     478.26087 1866   FALSE barley    0.6639290
+## 4 1866        Iowa 66000  22.0    3000.00000 1866    TRUE barley    0.6350625
+## 5 1866      Kansas  2000  23.0      86.95652 1866   FALSE barley    0.6639290
+## 6 1866    Kentucky 10000  23.5     425.53191 1866   FALSE barley    0.6783622
+</code></pre>
+<h3 id="renaming-variables">Renaming variables</h3>
+<p>The <code>rename()</code> function renames columns using this notation: <code>rename(dataframe, newname = &quot;oldname&quot;)</code>:</p>
+<pre><code class="language-r">barley_HI &lt;- rename(barley_HI, high_acres = &quot;Is_high&quot;)
+str(barley_HI)
+</code></pre>
+<pre><code>## 'data.frame':	4839 obs. of  9 variables:
+##  $ year         : int  1866 1866 1866 1866 1866 1866 1866 1866 1866 1866 ...
+##  $ state        : chr  &quot;Connecticut&quot; &quot;Illinois&quot; &quot;Indiana&quot; &quot;Iowa&quot; ...
+##  $ acres        : num  1000 96000 11000 66000 2000 10000 34000 7000 21000 20000 ...
+##  $ yield        : num  22.5 23.4 23 22 23 23.5 21.5 25.5 26 26 ...
+##  $ harvest_index: num  44.4 4102.6 478.3 3000 87 ...
+##  $ Year         : Factor w/ 146 levels &quot;1866&quot;,&quot;1867&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ high_acres   : logi  FALSE TRUE FALSE TRUE FALSE FALSE ...
+##  $ crop         : chr  &quot;barley&quot; &quot;barley&quot; &quot;barley&quot; &quot;barley&quot; ...
+##  $ relative_yld : num  0.649 0.675 0.664 0.635 0.664 ...
+</code></pre>
+<h3 id="splitting-and-merging-columns">Splitting and Merging Columns</h3>
+<p>Combine multiple columns into one with the function <code>unite()</code>. Column data are pasted together as text, not added as numbers. The columns used to make the new variables are automatically discarded (this behavior can be stopped with the argument <code>remove = F</code>).</p>
+<p><code>unite()</code> functions have this formulation: <code>unite(data, new_var_name, vars_to_select)</code>.</p>
+<pre><code class="language-r">cotton_nass_new &lt;- unite(nass_cotton, &quot;ID&quot;, state, year)
+head(cotton_nass_new)
+</code></pre>
+<pre><code>## # A tibble: 6 × 3
+##   ID                 acres yield
+##   &lt;chr&gt;              &lt;dbl&gt; &lt;dbl&gt;
+## 1 Alabama_1866      977000   120
+## 2 Arkansas_1866     489000   198
+## 3 Florida_1866      155000   123
+## 4 Georgia_1866      895000   122
+## 5 Louisiana_1866   1020000    57
+## 6 Mississippi_1866 1668000    86
+</code></pre>
+<p>The Opposite function,<code>separate()</code>, has this structure:  <code>separate(data, col_to_split, names_of_new_cols)</code></p>
+<pre><code class="language-r">cotton_nass_new2 &lt;- separate(cotton_nass_new, 
+                             col = ID, 
+                             into = c(&quot;STATE&quot;, &quot;YEAR&quot;), 
+                             sep = &quot;_&quot;, 
+                             remove = F)
+head(cotton_nass_new2)
+</code></pre>
+<pre><code>## # A tibble: 6 × 5
+##   ID               STATE       YEAR    acres yield
+##   &lt;chr&gt;            &lt;chr&gt;       &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;
+## 1 Alabama_1866     Alabama     1866   977000   120
+## 2 Arkansas_1866    Arkansas    1866   489000   198
+## 3 Florida_1866     Florida     1866   155000   123
+## 4 Georgia_1866     Georgia     1866   895000   122
+## 5 Louisiana_1866   Louisiana   1866  1020000    57
+## 6 Mississippi_1866 Mississippi 1866  1668000    86
+</code></pre>
+<p>These last two functions are often quite useful - for pulling apart complicated ID columns, or for creating a unique identifier that can later be used for merging two data sets together.</p>
+<h2 id="merging-data-sets-with-dplyr">Merging data sets with &lsquo;dplyr&rsquo;</h2>
+<p>Merging different data sets by a common variable is a major advantage to using automated software. Doing this manually in spreadsheet programs is nearly impossible to do without introducing errors. There are 6 different merging or joining functions which differ in what data they keep and what are discarded.</p>
+<h3 id="standard-join-functions">Standard join functions</h3>
+<p>For merging 2 data frames. Join functions are first and foremost defined by the rows they return. The function use a common ID, which can be automatically detected or explicitly declared, to match observations in A with observations in B and returned a merged data frame. In most cases, all columns from both data frames are returned.</p>
+<p>The general formulation for join functions: <code>type_join(x_data, y_data, ID_key_variable)</code></p>
+<p><img src="dplyr_joins.png" alt=""></p>
+<center> **Know Your Joins** </center>
+<p><br></p>
+<p>The column(s) used for ID are only included once in the merged data frame, that is, the duplicated key column is dropped. However, if there are other (non-ID) columns with duplicated names across the data sets, the duplicate columns from first data set listed are given a &ldquo;.x&rdquo; suffix and the duplicate columns from second data set listed are given a &ldquo;.y&rdquo; suffix.</p>
+<p><strong>1. The <code>full_join()</code>:</strong> <br>
+- always the safest option, everything is returned
+- searches and matches when both the year and state of a single observation match the year and state:</p>
+<pre><code class="language-r"># first create a unique identifier variable
+cotton_nass_new &lt;- unite(nass_cotton, &quot;ID&quot;, state, year)
+barley_nass_new &lt;- unite(nass_barley, &quot;ID&quot;, state, year)
+
+#equivalent models - this is only true for full_joins
+cotton_barley_all &lt;- full_join(nass_cotton, nass_barley, by = c(&quot;year&quot;, &quot;state&quot;))
+cotton_barley_all2 &lt;- full_join(cotton_nass_new, barley_nass_new, by = &quot;ID&quot;)
+
+# compare dimensions after the joins - what is kept?
+dim(cotton_barley_all)
+</code></pre>
+<pre><code>## [1] 5935    6
+</code></pre>
+<pre><code class="language-r">dim(nass_cotton)
+</code></pre>
+<pre><code>## [1] 2338    4
+</code></pre>
+<pre><code class="language-r">dim(nass_barley)
+</code></pre>
+<pre><code>## [1] 4839    4
+</code></pre>
+<ul>
+<li><strong>Note:</strong> for the rest of the joins, which employ a filtering step, I recommend you always use a single unique identifier (called a &ldquo;key&rdquo;) for the joins. You can use multiple keys, but a single unique key is the clearest way to join data without generating duplicate observations.
+<ul>
+<li>When there is not a match, the rows from each data set are still returned and filled with NA for columns from the other data set.</li>
+</ul>
+</li>
+</ul>
+<p><strong>2. The <code>inner_join()</code>:</strong></p>
+<pre><code>- this function only keeps what is common between data sets:
+</code></pre>
+<pre><code class="language-r">cotton_barley_inner &lt;- inner_join(cotton_nass_new, barley_nass_new, by = &quot;ID&quot;)
+dim(cotton_barley_inner)
+</code></pre>
+<pre><code>## [1] 1242    5
+</code></pre>
+<pre><code class="language-r">head(cotton_barley_inner)
+</code></pre>
+<pre><code>## # A tibble: 6 × 5
+##   ID             acres.x yield.x acres.y yield.y
+##   &lt;chr&gt;            &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1 Tennessee_1866  649000     121    4000      23
+## 2 Texas_1866      490000     325    3000      16
+## 3 Tennessee_1867  611000     137    4000      19
+## 4 Texas_1867      491000     195    2000      20
+## 5 Tennessee_1868  520000     170    4000      18
+## 6 Texas_1868      581000     197    2000      22
+</code></pre>
+<pre><code>- several column names duplicates resulted in the addition of &quot;.x&quot; to duplicate columns from the cotton data set and &quot;.y&quot; to duplicate columns from the barley data set. 
+</code></pre>
+<pre><code class="language-r">colnames(cotton_barley_inner)[2:5] &lt;- c(&quot;cotton_acres&quot;, &quot;cotton_yield&quot;, &quot;barley_acres&quot;, &quot;barley_yield&quot;)
+</code></pre>
+<p><strong>3. The <code>left_join()</code>:</strong></p>
+<ul>
+<li>matches all rows for observations found in the tibble listed on the left:</li>
+</ul>
+<pre><code class="language-r">cotton_barley_left &lt;- left_join(cotton_nass_new, barley_nass_new, by = &quot;ID&quot;)
+dim(cotton_barley_left)
+</code></pre>
+<pre><code>## [1] 2338    5
+</code></pre>
+<p><strong>14. The <code>right_join()</code>:</strong></p>
+<ul>
+<li>matches all rows for observations found in the tibble listed on the left:</li>
+</ul>
+<pre><code class="language-r">cotton_barley_right &lt;- right_join(cotton_nass_new, barley_nass_new, by = &quot;ID&quot;)
+dim(cotton_barley_right)
+</code></pre>
+<pre><code>## [1] 4839    5
+</code></pre>
+<p>**5. The <code>semi_join()</code>: **</p>
+<pre><code>- This function is like `inner_join()` (only rows with keys in both data sets are kept) except it does not keep any data from the data set listed second:
+</code></pre>
+<pre><code class="language-r">cotton_barley_semi &lt;- semi_join(cotton_nass_new, barley_nass_new, by = &quot;ID&quot;)
+dim(cotton_barley_semi)
+</code></pre>
+<pre><code>## [1] 1242    3
+</code></pre>
+<pre><code class="language-r">str(cotton_barley_semi)
+</code></pre>
+<pre><code>## tibble [1,242 × 3] (S3: tbl_df/tbl/data.frame)
+##  $ ID   : chr [1:1242] &quot;Tennessee_1866&quot; &quot;Texas_1866&quot; &quot;Tennessee_1867&quot; &quot;Texas_1867&quot; ...
+##  $ acres: num [1:1242] 649000 490000 611000 491000 520000 581000 502000 720000 536000 922000 ...
+##  $ yield: num [1:1242] 121 325 137 195 170 197 145 195 203 255 ...
+</code></pre>
+<pre><code class="language-r">str(cotton_barley_inner)
+</code></pre>
+<pre><code>## tibble [1,242 × 5] (S3: tbl_df/tbl/data.frame)
+##  $ ID          : chr [1:1242] &quot;Tennessee_1866&quot; &quot;Texas_1866&quot; &quot;Tennessee_1867&quot; &quot;Texas_1867&quot; ...
+##  $ cotton_acres: num [1:1242] 649000 490000 611000 491000 520000 581000 502000 720000 536000 922000 ...
+##  $ cotton_yield: num [1:1242] 121 325 137 195 170 197 145 195 203 255 ...
+##  $ barley_acres: num [1:1242] 4000 3000 4000 2000 4000 2000 4000 2000 4000 2000 ...
+##  $ barley_yield: num [1:1242] 23 16 19 20 18 22 19 22 18.5 20.5 ...
+</code></pre>
+<p>**6. The <code>anti_join()</code>: **</p>
+<ul>
+<li>observations from A that <em>do not</em> match B are kept:</li>
+</ul>
+<pre><code class="language-r">cotton_barley_anti &lt;- anti_join(cotton_nass_new, barley_nass_new, by = &quot;ID&quot;)
+dim(cotton_barley_anti)
+</code></pre>
+<pre><code>## [1] 1096    3
+</code></pre>
+<h3 id="set-operations">Set operations</h3>
+<p>These are different from standard joins. They compare across <em>vectors</em> and return what has been specified in the statement. <em>Duplicates are discarded.</em> The purpose of set operations is to determine common or uncommon observations, not merge two different data sets.</p>
+<p><strong>Common set operations</strong></p>
+<p><img src="set_operations.png" alt=""></p>
+<pre><code class="language-r"># states with barley data but no cotton data
+setdiff(nass_barley$state, nass_cotton$test)
+</code></pre>
+<pre><code>## Warning: Unknown or uninitialised column: `test`.
+</code></pre>
+<pre><code>##  [1] &quot;Connecticut&quot;    &quot;Illinois&quot;       &quot;Indiana&quot;        &quot;Iowa&quot;          
+##  [5] &quot;Kansas&quot;         &quot;Kentucky&quot;       &quot;Maine&quot;          &quot;Massachusetts&quot; 
+##  [9] &quot;Michigan&quot;       &quot;Minnesota&quot;      &quot;Missouri&quot;       &quot;Nebraska&quot;      
+## [13] &quot;New Hampshire&quot;  &quot;New York&quot;       &quot;Ohio&quot;           &quot;Pennsylvania&quot;  
+## [17] &quot;Rhode Island&quot;   &quot;Tennessee&quot;      &quot;Texas&quot;          &quot;Vermont&quot;       
+## [21] &quot;Wisconsin&quot;      &quot;California&quot;     &quot;Oregon&quot;         &quot;Nevada&quot;        
+## [25] &quot;Colorado&quot;       &quot;Virginia&quot;       &quot;Arizona&quot;        &quot;Idaho&quot;         
+## [29] &quot;Montana&quot;        &quot;New Mexico&quot;     &quot;North Dakota&quot;   &quot;South Dakota&quot;  
+## [33] &quot;Utah&quot;           &quot;Washington&quot;     &quot;Maryland&quot;       &quot;Oklahoma&quot;      
+## [37] &quot;Wyoming&quot;        &quot;New Jersey&quot;     &quot;North Carolina&quot; &quot;South Carolina&quot;
+## [41] &quot;West Virginia&quot;  &quot;Arkansas&quot;       &quot;Delaware&quot;       &quot;Georgia&quot;       
+## [45] &quot;Mississippi&quot;    &quot;Alabama&quot;        &quot;Alaska&quot;
+</code></pre>
+<pre><code class="language-r"># states with cotton data, but no barley data
+setdiff(nass_cotton$state, nass_barley$state)
+</code></pre>
+<pre><code>## [1] &quot;Florida&quot;     &quot;Louisiana&quot;   &quot;Otherstates&quot;
+</code></pre>
+<pre><code class="language-r"># states that grow both
+intersect(nass_cotton$state, nass_barley$state)
+</code></pre>
+<pre><code>##  [1] &quot;Alabama&quot;        &quot;Arkansas&quot;       &quot;Georgia&quot;        &quot;Mississippi&quot;   
+##  [5] &quot;North Carolina&quot; &quot;South Carolina&quot; &quot;Tennessee&quot;      &quot;Texas&quot;         
+##  [9] &quot;Missouri&quot;       &quot;Virginia&quot;       &quot;Oklahoma&quot;       &quot;California&quot;    
+## [13] &quot;Arizona&quot;        &quot;New Mexico&quot;     &quot;Illinois&quot;       &quot;Kansas&quot;        
+## [17] &quot;Kentucky&quot;       &quot;Nevada&quot;
+</code></pre>
+<p><strong>What happens when there are multiple matches for an identifier?</strong></p>
+<p><em>(Each time there is a new match between the keys of two data frames, a new row is added for the matched data)</em></p>
+<h2 id="reshaping-data">Reshaping data</h2>
+<p><img src="wide_v_long.png" alt="">
+<strong>Same data, two formats</strong></p>
+<p>Two common approaches to reshaping data:</p>
+<ol>
+<li>&lsquo;tidyr&rsquo; (popular)</li>
+<li>&lsquo;data.table&rsquo; (flexible, fast)</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>reshaping action</th>
+<th>tidyr function</th>
+<th>data.table function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>long to wide</td>
+<td><code>pivot_wider()</code></td>
+<td><code>dcast()</code></td>
+</tr>
+<tr>
+<td>wide to long</td>
+<td><code>pivot_longer()</code></td>
+<td><code>melt()</code></td>
+</tr>
+</tbody>
+</table>
+<p><em>Note: the tidyr functions <code>pivot_wider()</code> and <code>pivot_longer()</code> replace <code>spread()</code> and <code>gather()</code>.</em></p>
+<h3 id="the-tidyr-approach">The tidyr approach:</h3>
+<h4 id="reshaping-from-long-to-wide">Reshaping from long to wide</h4>
+<pre><code class="language-r"># use the &quot;barley_pnw&quot; object created earlier (barley data from ID, OR and WA)
+nass_barley_pnw_wide &lt;- pivot_wider(barley_pnw,
+                                id_cols = year, 
+                                names_from = state,
+                                values_from = yield)
+
+head(nass_barley_pnw_wide)
+</code></pre>
+<pre><code>## # A tibble: 6 × 4
+##    year Oregon Idaho Washington
+##   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+## 1  1869   35      NA         NA
+## 2  1870   30.5    NA         NA
+## 3  1871   28.5    NA         NA
+## 4  1872   30.5    NA         NA
+## 5  1873   33      NA         NA
+## 6  1874   29      NA         NA
+</code></pre>
+<pre><code class="language-r">sample_n(nass_barley_pnw_wide, 5)
+</code></pre>
+<pre><code>## # A tibble: 5 × 4
+##    year Oregon Idaho Washington
+##   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+## 1  1876   28      NA       NA  
+## 2  1895   22.5    28       25.5
+## 3  1915   25      35       33.5
+## 4  1991   72      75       65  
+## 5  1984   62      66       65
+</code></pre>
+<p>There is also a <code>values_fill=</code> argument to fill in missing values when you know what those should be. The default behavior is to fill with an NA.</p>
+<h4 id="reshaping-multiple-variables">Reshaping multiple variables</h4>
+<pre><code class="language-r"># use the &quot;barley_pnw&quot; object created earlier (barley data from ID, OR and WA)
+nass_barley_pnw_wide2 &lt;- pivot_wider(barley_pnw,
+                                id_cols = year, 
+                                names_from = state,
+                                values_from = c(yield, acres))
+
+sample_n(nass_barley_pnw_wide2, 5)
+</code></pre>
+<pre><code>## # A tibble: 5 × 7
+##    year yield_Oregon yield_Idaho yield_Washington acres_Oregon acres_I…¹ acres…²
+##   &lt;int&gt;        &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1  1877         35          NA               NA          25000        NA      NA
+## 2  1878         25          NA               NA          27000        NA      NA
+## 3  1909         21.8        34.7             33.9       109000    132000  172000
+## 4  1879         31.4        NA               NA          29000        NA      NA
+## 5  1915         25          35               33.5        85000    136000  180000
+## # … with abbreviated variable names ¹​acres_Idaho, ²​acres_Washington
+</code></pre>
+<h4 id="reshaping-from-wide-to-long">Reshaping from wide to long</h4>
+<pre><code class="language-r">nass_barley_pnw_long &lt;- pivot_longer(nass_barley_pnw_wide,
+                                     cols = 2:ncol(nass_barley_pnw_wide),
+                                     names_to = &quot;State&quot;,
+                                     values_to = &quot;Yield&quot;, 
+                                     values_drop_na = T)
+
+head(nass_barley_pnw_long)
+</code></pre>
+<pre><code>## # A tibble: 6 × 3
+##    year State  Yield
+##   &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt;
+## 1  1869 Oregon  35  
+## 2  1870 Oregon  30.5
+## 3  1871 Oregon  28.5
+## 4  1872 Oregon  30.5
+## 5  1873 Oregon  33  
+## 6  1874 Oregon  29
+</code></pre>
+<pre><code class="language-r">dim(nass_barley_pnw_long)
+</code></pre>
+<pre><code>## [1] 403   3
+</code></pre>
+<pre><code class="language-r">dim(barley_pnw) # dimension of the original object
+</code></pre>
+<pre><code>## [1] 403   4
+</code></pre>
+<h3 id="the-datatable-approach">The data.table approach</h3>
+<p>Thus far, the package &lsquo;data.table&rsquo; has not been explored in any depth (and it still won&rsquo;t be for space considerations). Nevertheless, &lsquo;data.table&rsquo; is useful for manipulating large tables; it is extremely efficient (even better than tidyverse functions).</p>
+<h4 id="reshaping-from-long-to-wide-1">Reshaping from long to wide:</h4>
+<p>-we will use the previously created data set &ldquo;cotton_barley_inner&rdquo; from inner join of the barley and cotton data sets.</p>
+<pre><code class="language-r"># ID variable needs to be separated into State and year
+cotton_barley_inner2 &lt;- separate(cotton_barley_inner, ID, c(&quot;State&quot;, &quot;Year&quot;), sep = &quot;_&quot;)
+head(cotton_barley_inner2)
+</code></pre>
+<pre><code>## # A tibble: 6 × 6
+##   State     Year  cotton_acres cotton_yield barley_acres barley_yield
+##   &lt;chr&gt;     &lt;chr&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;
+## 1 Tennessee 1866        649000          121         4000           23
+## 2 Texas     1866        490000          325         3000           16
+## 3 Tennessee 1867        611000          137         4000           19
+## 4 Texas     1867        491000          195         2000           20
+## 5 Tennessee 1868        520000          170         4000           18
+## 6 Texas     1868        581000          197         2000           22
+</code></pre>
+<p>Reshape cotton acreage, using State as the ID variable:</p>
+<pre><code class="language-r">cotton_acres_wide &lt;- dcast(setDT(cotton_barley_inner2), State ~ Year, value.var = &quot;cotton_acres&quot;)
+</code></pre>
+<h4 id="reshaping-with-multiple-variables">Reshaping with multiple variables</h4>
+<p>Multiple ID variables can be specified on the left side of the tilde and/or multiple column categories can be specified on right side. Furthermore, multiple columns (the &ldquo;value.var&rdquo;) can be specified to fill the cells.</p>
+<p>Reshape cotton acreage, using State as the ID variable using both cotton acres and cotton yield to fill the cells:</p>
+<pre><code class="language-r">cotton_wide &lt;- dcast(setDT(cotton_barley_inner2), State ~ Year, value.var = c(&quot;cotton_acres&quot;, &quot;cotton_yield&quot;))
+
+sample(colnames(cotton_wide), 30)
+</code></pre>
+<pre><code>##  [1] &quot;cotton_acres_1971&quot; &quot;cotton_acres_1930&quot; &quot;cotton_acres_1984&quot;
+##  [4] &quot;cotton_acres_1909&quot; &quot;cotton_acres_1872&quot; &quot;cotton_acres_1897&quot;
+##  [7] &quot;cotton_acres_1868&quot; &quot;cotton_acres_1935&quot; &quot;cotton_yield_1988&quot;
+## [10] &quot;cotton_yield_2008&quot; &quot;cotton_yield_1963&quot; &quot;cotton_yield_1991&quot;
+## [13] &quot;cotton_yield_2002&quot; &quot;cotton_yield_1879&quot; &quot;cotton_yield_1967&quot;
+## [16] &quot;cotton_yield_1925&quot; &quot;cotton_yield_1903&quot; &quot;cotton_acres_1989&quot;
+## [19] &quot;cotton_yield_1960&quot; &quot;cotton_yield_1930&quot; &quot;cotton_acres_1892&quot;
+## [22] &quot;cotton_acres_1968&quot; &quot;cotton_yield_1920&quot; &quot;cotton_acres_1878&quot;
+## [25] &quot;cotton_acres_1902&quot; &quot;cotton_yield_1918&quot; &quot;cotton_yield_1866&quot;
+## [28] &quot;cotton_acres_1954&quot; &quot;cotton_yield_1881&quot; &quot;cotton_acres_1906&quot;
+</code></pre>
+<h4 id="implementing-a-summary-function-in-the-reshape">Implementing a summary function in the reshape</h4>
+<ul>
+<li>if there is more than one  observation for each cell, a summary function like mean can be used. If  function is not specified, the number of observations for that variable combination will be used.</li>
+</ul>
+<pre><code class="language-r">cotton_wide_meanYield &lt;- dcast(setDT(cotton_barley_inner2), cotton_acres ~ Year, value.var = &quot;cotton_yield&quot;, fun = mean, fill = 0)
+
+sample_n(cotton_wide_meanYield , 5)[,c(1, 100:106)]
+</code></pre>
+<pre><code>##    cotton_acres 1964 1965 1966 1967 1968 1969 1970
+## 1:      1868000    0    0    0    0    0    0    0
+## 2:      1055000    0    0    0    0    0  518    0
+## 3:      1695000    0    0    0    0    0    0    0
+## 4:      2553000    0    0    0    0    0    0    0
+## 5:      7084000    0    0    0    0    0    0    0
+</code></pre>
+<h4 id="reshaping-from-wide-to-long-1">Reshaping from wide to long</h4>
+<pre><code class="language-r">cotton_acres_long &lt;- melt(setDT(cotton_acres_wide), 
+                          id.vars = &quot;State&quot;, 
+                          measure.vars = 2:ncol(cotton_acres_wide), 
+                          variable.name = &quot;YEAR&quot;, 
+                          value.name = &quot;ACRES&quot;)
+
+sample_n(cotton_acres_long, 5)
+</code></pre>
+<pre><code>##          State YEAR ACRES
+## 1: Mississippi 1918    NA
+## 2:     Georgia 1871    NA
+## 3:      Nevada 1868    NA
+## 4:    Missouri 1867    NA
+## 5:      Nevada 1898    NA
+</code></pre>
+<pre><code class="language-r">cotton_long &lt;- melt(setDT(cotton_wide), 
+                          id.vars = &quot;State&quot;, 
+                          measure.vars = list(2:147,148:ncol(cotton_wide)), 
+                          variable.name = &quot;YEAR&quot;, 
+                          value.name = c(&quot;ACRES&quot;, &quot;YIELD&quot;), na.rm = T)
+
+sample_n(cotton_long, 5)
+</code></pre>
+<pre><code>##       State YEAR  ACRES YIELD
+## 1: Missouri   98 343000   630
+## 2: Oklahoma  100 555000   319
+## 3: Illinois   93   1600   208
+## 4:  Arizona   62 131000   335
+## 5: Illinois   69   6100   305
+</code></pre>
+<h2 id="grouping-and-summarising-data">Grouping and summarising data</h2>
+<ul>
+<li>The function <code>group_by()</code> provides a handy tool for breaking data into groups based on a common factor.</li>
+<li>The function <code>summarise()</code> often follows a grouping command. It will apply a summary function to a data set or a grouped data set.</li>
+<li>these all rely on the idea of piping, or chaining together operations, using the pipe operator: <code>%&gt;%</code>, rather than (1) a complicated nesting arrangement (see below) or (2) a large number of intermediate objects that you don&rsquo;t actually need.</li>
+</ul>
+<p><img src="nest_vs_pipe.jpg" width="70%" height="70%" style="display: block; margin: auto;" /></p>
+<p><strong>Example:</strong> group the cotton data set by year and output the mean yield for each year.</p>
+<pre><code class="language-r">cotton_annual_mean &lt;- group_by(nass_cotton, year) %&gt;% summarise(mean_yield = mean(yield, na.rm = T))
+with(cotton_annual_mean, plot(year, mean_yield, type = &quot;l&quot;, col = &quot;magenta&quot;, lwd = 1.5))
+</code></pre>
+<p><img src="/post/data-cleaning-r/index_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<p><strong>Example:</strong> Determine which states had the highest yields each year and plot highest yields over time</p>
+<pre><code class="language-r">corn_highest_yielders &lt;- nass_corn %&gt;% mutate(HI = yield/acres) %&gt;% 
+  group_by(year) %&gt;% slice(which.max(HI)) %&gt;% 
+  select(year, state, yield, HI) %&gt;% mutate(state = as.character(state)) 
+
+corn_highest_yielders %&gt;% group_by(state) %&gt;% tally(sort = T) 
+</code></pre>
+<pre><code>## # A tibble: 11 × 2
+##    state            n
+##    &lt;chr&gt;        &lt;int&gt;
+##  1 Montana         27
+##  2 Arizona         25
+##  3 Nevada          24
+##  4 Oregon          20
+##  5 Rhode Island    20
+##  6 Vermont         12
+##  7 Utah             8
+##  8 Maine            5
+##  9 Wyoming          3
+## 10 Connecticut      1
+## 11 Idaho            1
+</code></pre>
+<pre><code class="language-r">with(corn_highest_yielders, plot(year, yield, type = &quot;l&quot;, col = &quot;blue&quot;, lwd = 1.5, main = &quot;harvest index upper limit&quot;))
+</code></pre>
+<p><img src="/post/data-cleaning-r/index_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<h2 id="other-useful-functions">Other Useful Functions</h2>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Function</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dplyr</td>
+<td><code>pull()</code></td>
+<td>extracts a single column and returns a vector</td>
+</tr>
+<tr>
+<td>dplyr</td>
+<td><code>n()</code></td>
+<td>counts observations</td>
+</tr>
+<tr>
+<td>dplyr</td>
+<td><code>n_distinct()</code></td>
+<td>counts the number of unique observations</td>
+</tr>
+<tr>
+<td>dplyr</td>
+<td><code>distinct()</code></td>
+<td>keeps only unique observations</td>
+</tr>
+<tr>
+<td>dplyr</td>
+<td><code>starts_with()</code></td>
+<td>used within <code>select()</code>, for selecting columns that start with a specific string of characters</td>
+</tr>
+<tr>
+<td>tidyr</td>
+<td><code>drop_na()</code></td>
+<td>remove rows with any missing data</td>
+</tr>
+<tr>
+<td>tidyr</td>
+<td><code>fill()</code></td>
+<td>fills in missing values with whatever occurs before it (column-wise). Its behavior is dependent on row order</td>
+</tr>
+<tr>
+<td>tidyr</td>
+<td><code>replace_na()</code></td>
+<td>replace missing values with a user-defined value (only when is.na(x) evaluates as &ldquo;TRUE&rdquo;)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="free-training-resources">Free Training Resources</h2>
+<ul>
+<li><a href="%22https://r4ds.had.co.nz/%22">R for data science</a></li>
+<li><a href="%22https://www.rstudio.com/resources/cheatsheets/%22">RStudio Cheat sheets</a></li>
+<li><a href="%22https://www.tidyverse.org/packages/%22">Package documentation</a></li>
+<li>Tutorials by package authors:</li>
+</ul>
+<pre><code>vignette(&quot;dplyr&quot;)
+</code></pre>
+
+    </div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="/authors/admin/"><img class="avatar mr-3 avatar-circle" src="/authors/admin/avatar_hu9d5ce8c0d44b36c676b5077349a68ce7_218905_270x270_fill_lanczos_center_2.png" alt="Statistical Programs"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/authors/admin/">Statistical Programs</a></h5>
+      <h6 class="card-subtitle">Statistical Consultation</h6>
+      <p class="card-text">Focused on Supporting Agricultural Research in and around Idaho.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-paper-plane"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/" >
+        <i class="fas fa-"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.uidaho.edu/cals/statistical-programs" target="_blank" rel="noopener">
+        <i class="fas fa-info"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/IdahoAgStats" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+    
+    
+<style type="text/css" media="screen">
+    .revue-embed {
+    background: #FEF7DF;
+    /*font-family: 'Lato', sans-serif;
+    color: #FDFCFB;*/
+    text-align: center;
+    border-radius: 5px;
+}
+
+form {
+    width: 80%;
+    margin: 0.5em auto;
+}
+
+.revue-header {
+    font-size: 26px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding-top: 0.5em;
+    padding-bottom: 1em;
+}
+
+.revue-description {
+    font-size: 15px;
+    letter-spacing: 1px;
+    line-height: 1.3em;
+    margin: -2px 0 45px;
+}
+
+.revue-input {
+    display: flex;
+    align-items: center;
+    padding-bottom: 2em;
+}
+
+.button {
+    height: 44px;
+    border: none;
+}
+
+#member_email {
+    width: 65%;
+    font-size: 14px;
+    background: #FDFCFB;
+    font-family: inherit;
+    color: #737373; 
+    letter-spacing: 1px;
+    text-indent: 5%;
+    border-radius: 5px 0 0 5px;
+}
+
+#member_submit {
+    width: 35%;
+    height: 46px;
+    font-size: 14px;
+    background: #FB4646;
+    font-family: inherit;
+    font-weight: bold;
+    color: inherit;
+    letter-spacing: 1px;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: background .3s ease-in-out;
+}
+
+#member_submit:hover {
+    background: #3AEBDA;
+}
+
+input:focus {
+    outline: none;
+    outline: 2px solid #3AEBDA;
+    box-shadow: 0 0 2px #3AEBDA;
+}
+
+</style>
+<link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+
+<div id="revue-embed" class="revue-embed">
+    <form action="https://tinyletter.com/idahoagstats/" method="post" id="revue-form" name="revue-form"
+          target="popupwindow" onsubmit="window.open('https://tinyletter.com/idahoagstats', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true">
+      
+      
+      
+        <div class="revue-header">
+            <p>Sign up for our newsletter</p>
+        </div>
+        <div class="revue-description">
+            <p>Agricultural statistical content focused on R and SAS, along with info about upcoming workshops, lectures, and trainings relevant to these topics</p>
+            <p>Sent monthly (thereabouts)</p>
+        </div>
+        <div class="revue-input">
+            <input type="email" class="button" name="email" id="member_email" placeholder="Your email address">
+            <input type="hidden" name="embed" value="1">
+            <input type="submit" class="button" id="member_submit" value="Subscribe"/>
+        </div>
+    
+</div>
+
+
+        
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    Copyright @ 2022 by the <a href="https://www.uidaho.edu/cals/statistical-programs">University of Idaho Statistical Programs</a>. <br> Built with <a href="https://wowchemy.com/">Wowchemy</a>, a free open-source web builder.
+  </p>
+
+  
+  
+
+
+
+
+
+
+
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.4/mermaid.min.js" integrity="sha512-as1BF4+iHZ3BVO6LLDQ7zrbvTXM+c/1iZ1qII/c3c4L8Rn5tHLpFUtpaEtBNS92f+xGsCzsD7b62XP3XYap6oA==" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/python.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/latex.min.js"></script>
+        
+      
+
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    <script src="/js/_vendor/bootstrap.bundle.min.f81d0a1705048649befc8b595e455a94.js"></script>
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.e20609e6ad3f7fce339ee2e74f13682b.js"></script>
+
+    
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+
+
+</body>
+</html>

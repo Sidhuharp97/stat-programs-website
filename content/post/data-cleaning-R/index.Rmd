@@ -1,40 +1,47 @@
 ---
 title: "Introduction to Data Cleaning with the Tidyverse"
 author: jpiaskowski
-date: 2021-11-18
+date: 2022-10-21
 categories: 
 - R
 - tidyverse
 - data cleaning
 tags: 
-draft: true
+draft: false
+summary: "Common tools and functions to help clean data sets and prepare them for analysis"
 ---
 
  
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval=FALSE, include=FALSE)
+```{r setup, include=TRUE, echo=TRUE}
+knitr::opts_chunk$set(echo = TRUE, eval=TRUE, include=TRUE)
 ```
 
+If your file management system looks like this (no guilt, we have all been there), this is suggestive of some rather *ad hoc* approaches to data cleaning. As you work with your data, you will discover errors (this is a universal experience). How do you fix those? 
+
 ![](phd_comics_filenames.png)
-
-
 [**from PHD comics**](https://phdcomics.com/comics/archive_print.php?comicid=1323)
 
-### Introduction
+Newer scientists are likely to use point-and-click software like spreadsheet. The problem with this approach is that there is no record of your exact action, so you save a new copy of the data set with a new name. And on it goes. There are other ways to fix data errors using a transparent process that can avoid these multiplying data sets, or clarify what distinguishes one data set from another. 
+
+## Introduction
 
 > Equip everyone regardless of means, to participate in the global economy that rewards data literacy.    
 <center> —RStudio mission statement </center>
 
-The tidyverse is developed and maintained by many individuals, and it is closely tied to RStudio. It uses "non-standard evaluation" ([NSE](http://adv-r.had.co.nz/Computing-on-the-language.html)) principles in its functions. NSE is a complicated topic, but in brief, it means that tidyverse function follow different rules than base R function. Tidyverse functions are easier to use, but, if you are used to base R functions, reorienting your thinking takes some effort. Just a friendly warning before we dive in! 
+The [Tidyverse](https://www.tidyverse.org/) is a collection of packages designed to help data users work more efficiently with their data. At the time of writing this, the Tidyverse consists of over 25 packages with diverse that range from connecting to google sheets to working with databases. 
 
-Most tidyverse functions have equivalent functions in base R. The difference is that tidyverse functions are often faster, the code itself is usually (always?) shorter, and the results are consistent across systems and data types. Also, tidyverse functions are written for data frames, while many base functions are written for vectors. 
+Most Tidyverse functions have equivalent functions in base R (that is, the set of function that load automaticallty when R is launched). The difference is that tidyverse functions are often faster, the syntax may be clearer and easier to use (no guarantee, tho), and most importantly, *they all follow a similar structure and the results are consistent across packages* (within limits, this depends on the nature of the function).  
 
-#### Abbreviated list of packages useful for data cleaning   
-There are many packages to load. Here is a summary table of what each package does. We won't explore all these packages today, but they are worth checking out, depending on your data analytic needs. 
+**Technical note:** the Tidyverse uses "non-standard evaluation" ([NSE](http://adv-r.had.co.nz/Computing-on-the-language.html)) principles in its functions. NSE is a complicated topic, but in brief, it means that tidyverse function follow different rules than base R function. Tidyverse functions are easier to use, but, if you are used to base R functions, it will take some effort to reorient your R programming brain. Just a friendly warning before we dive in! 
+
+## Tidyverse Packages
+
+### Abbreviated list of packages useful for data cleaning   
+
+As mentioned, the Tidyverse is a collection of [many packages](https://www.tidyverse.org/packages/). Below is a table of many very useful packages for data cleaning. This tutorial does not address all these packages, but they are worth checking out, depending on your data analytic needs. 
 
 | Package | Purpose |
 |------------------|-----------------------------------------------|
-|data.table | not part of the tidyverse, advanced handling of data frames, very efficient |
 |dplyr | main package for organizing data |
 |forcats | for managing categorical data |
 |janitor | also not part of the tidyverse, has useful data cleaning functions |
@@ -46,17 +53,10 @@ There are many packages to load. Here is a summary table of what each package do
 |tidyr | to reshape data and handle missing values |
 
 ![](tidyverse_hex.png)
+**Honorable mention:** data.table, which provides advanced handling functions for data.frames. While not part of the tidyverse officially, it is very efficient. 
 
-**Please Note!**
+### Packages Used in This Tutorial
 
-The functions for reshaping data in 'tidyr` are currently under revision, but the new versions are likely to be finalised and adopted soon, so this tutorial will introduce the new ones (as well as demonstrate how to use alternative reshaping functions). In order to access the new 'tidyr' functions, you will need to download tidyr directly from its github repo:
-```
-# install.packages("devtools") # only run this line if you do not have devtools installed
-devtools::install_github("tidyverse/tidyr")
-```
-
-##### Load packages:
-(just the ones we will use today)
 ```{r}
 library(readr)
 library(data.table)
@@ -69,37 +69,41 @@ The warning messages indicate when there are identical function names across dif
 base::intersect(...)
 ```
 
-### Loading data with 'readr'
+## Load Data
+
+### 'read_csv' v 'read.csv'
+
+How do the functions `read.csv()` (from base R) and `read_csv` (from readr) differ in how they read in data? 
 
 For this tutorial, 3 data sets will be used, "nass_cotton", "nass_barley", and "nass_barley". These are historical data sets from the National Agricultural Statistics Service that indicate the total acreage and yield for the crops indicated for each each U.S. state and year from 1866 to 2011. They were provided by packaged 'agridat'. 
 
 *Note: these data sets were originally obtained as thus:*
-```
+```{r}
 library(agridat) # a package of agricultural data sets
 data("nass.corn")
 data("nass.barley")
 data("nass.cotton")
 
-write.csv(nass.corn, "Data/nass_corn.csv", row.names = F)
-write.csv(nass.barley, "Data/nass_barley.csv", row.names = F)
-write.csv(nass.cotton, "Data/nass_cotton.csv", row.names = F)
+write.csv(nass.corn, "nass_corn.csv", row.names = F)
+write.csv(nass.barley, "nass_barley.csv", row.names = F)
+write.csv(nass.cotton, "nass_cotton.csv", row.names = F)
 ```
 
 When using the RStudio's point-and-click interface to load tabular data, it will typically call the function `read_csv()` for CSV files and `read_delim()` for text files. `read_csv()` is a wrapper for `read_delim()` with different default arguments. 
 
 These arguments can be called using the command line interface as well. 
 ```{r}
-nass_barley <- read.csv("Data/nass_barley.csv") 
-nass_cotton <- read_csv("Data/nass_cotton.csv")
+nass_barley <- read.csv("nass_barley.csv") 
+nass_cotton <- read_csv("nass_cotton.csv")
 
 # contrast functions read.csv and read_csv
 str(nass_barley)
 str(nass_cotton)
 ```
 
-#### A bit on the tibble
+### A Bit on the Tibble
 
-A tibble is an object type created for the tidyverse. This is the object type imported by 'readr' and returned by many tidyverse functions. The tibble is like a data frame with a few other rules. Tibbles have a simplified printing function if you accidentally type in the object name - it will only print the first 10 lines and will truncate the number of columns to fit your screen. If you type the object name of a traditional data frame, the first 1000 lines of data are printed! 
+A tibble is an object type created for the Tidyverse. This is the object type imported by 'readr' and returned by many tidyverse functions. The tibble is like a data frame with a few other rules. Tibbles have a simplified printing function if you accidentally type in the object name - it will only print the first 10 lines and will truncate the number of columns to fit your screen. If you type the object name of a traditional data frame, the first 1000 lines of data are printed! 
 
 To create a new tibble, you can use the function `tribble()` to create a tibble by rows, or the function `tibble()` for building a tibble column-wise, or `as.tibble()` to coerce an object to a tibble.  
 
@@ -109,7 +113,7 @@ knitr::include_graphics(c("tribbles.jpg"))
 
 There are a few aspects of tibbles that are fundamentally different from a standard data frame. Tibbles do not handle row names well and many tidyverse functions discard that information. This is often just fine - row names are computationally expensive to set and maintain. Also, it can be difficult to filter and sort data based on rownames. However, many other (non-tidyverse) package functions rely on the rownames attribute, so be aware of this behavior when using tidyverse functions on data sets. 
 
-#### Function details
+### Function details
 
   * the most noticeable difference between `read.csv()` and `read_csv()` is that `read.csv()`'s default behavior is to import character variables that with repeat values as factors, while `read_csv()` keeps those variables as character. The default behavior can be overrode in both functions. 
   
@@ -121,17 +125,17 @@ There are a few aspects of tibbles that are fundamentally different from a stand
 
   * the function can be sped up by setting values for the `col_types = ...` argument (e.g. character, numeric, date, et cetera)  
 ```{r}
-nass_corn <- read_csv("Data/nass_corn.csv", col_types = cols(col_integer(), col_character(), col_double(), col_double()))
+nass_corn <- read_csv("nass_corn.csv", col_types = cols(col_integer(), col_character(), col_double(), col_double()))
 str(nass_corn)
 ```
 
 **Note:** if you have truly huge data, consider the `fread()` function in 'data.table' or storing the data in database and using 'dbplyr' to access it.
   
   
-### Data selection and subsetting
+## Data selection and subsetting
 *(from the package 'dplyr')*
 
-#### Column selection
+### Column selection
 
 The `select()` function is used for column selection and has the formulation: `select(data, vars_to_select)`.
 
@@ -150,7 +154,7 @@ barley_yield2 <- select(nass_barley, -(c(acres, yield))) # multiple columns
 str(barley_yield2)
 ```
 
-#### Sorting data
+### Sorting data
 
 Sort functions have the formulation: `sort(data, vars_to_sort)`.
 
@@ -172,14 +176,14 @@ corn_year_yield_rev <- arrange(nass_corn, desc(year), desc(yield))
 head(corn_year_yield_rev)
 ```
 
-#### Row selection 
+### Row selection 
 
 Based on their position or index (where the first row = 1):
 ```{r}
 corn_first100 <- slice(nass_corn, 100) # grab first 100 rows
 ```
 
-#### Filtering Data
+### Filtering Data
 *(actually a type of row selection)*
 
 Filtering enables users to select all columns of data based on a condition within a row or rows. The `filter()` function has the formulation: `select(data, condition_for_filter)`.
@@ -187,19 +191,19 @@ Filtering enables users to select all columns of data based on a condition withi
 **Filter based on one variable and exact match:** 
 ```{r}
 corn_AZ <- filter(nass_corn, state == "Arizona")
-str(corn_AZ)
 head(corn_AZ)
 ```
 
 **Filter for matching several items: **
 ```{r}
 barley_pnw <- filter(nass_barley, state %in% c("Idaho", "Oregon", "Washington"))
-str(barley_pnw)
 head(barley_pnw)
 ```
 
 **Filter by numerical cut-off: **
+
 (first, look at summary of data)
+
 ```{r}
 summary(nass_cotton$acres)
 nass_cotton_high <- filter(nass_cotton, acres < 550000)
@@ -224,7 +228,6 @@ nass_cotton_high <- filter(nass_cotton, acres < 550000)
 
 (again, let's look at summaries of the data first)
 ```{r}
-
 summary(nass_corn$yield)
 range(nass_corn$year)
 corn_Iowa_prewar <- filter(nass_corn, year < 1950 & year >= 1930 & state == "Iowa")
@@ -232,9 +235,9 @@ with(corn_Iowa_prewar, plot(year, yield, col = "dodgerblue", pch = 16, type = "b
 ```
 
 
-### Data transformations
+## Data transformations
 
-#### The `mutate()` function to define new variables
+### The `mutate()` function to define new variables
 
 Mutate functions have the formulation: `mutate(data, new_var_name = data_transformation)`. New variables are declared on the left and the right provides the operations for variable creation itself. Many operations are allowed within a mutate function: 
 ```{r}
@@ -248,7 +251,7 @@ barley_HI <- mutate(nass_barley,
 head(barley_HI)
 ```
 
-#### Renaming variables
+### Renaming variables
 
 The `rename()` function renames columns using this notation: `rename(dataframe, newname = "oldname")`:
 
@@ -257,7 +260,7 @@ barley_HI <- rename(barley_HI, high_acres = "Is_high")
 str(barley_HI)
 ```
 
-#### Splitting and Merging Columns
+### Splitting and Merging Columns
 
 Combine multiple columns into one with the function `unite()`. Column data are pasted together as text, not added as numbers. The columns used to make the new variables are automatically discarded (this behavior can be stopped with the argument `remove = F`). 
 
@@ -281,11 +284,11 @@ head(cotton_nass_new2)
 
 These last two functions are often quite useful - for pulling apart complicated ID columns, or for creating a unique identifier that can later be used for merging two data sets together.  
 
-### Merging data sets with 'dplyr'
+## Merging data sets with 'dplyr'
 
 Merging different data sets by a common variable is a major advantage to using automated software. Doing this manually in spreadsheet programs is nearly impossible to do without introducing errors. There are 6 different merging or joining functions which differ in what data they keep and what are discarded. 
 
-#### Standard join functions
+### Standard join functions
 
 For merging 2 data frames. Join functions are first and foremost defined by the rows they return. The function use a common ID, which can be automatically detected or explicitly declared, to match observations in A with observations in B and returned a merged data frame. In most cases, all columns from both data frames are returned. 
 
@@ -315,12 +318,13 @@ cotton_barley_all2 <- full_join(cotton_nass_new, barley_nass_new, by = "ID")
 dim(cotton_barley_all)
 dim(nass_cotton)
 dim(nass_barley)
-
 ```
-    - **Note:** for the rest of the joins, which employ a filtering step, always use a single unique identifier (called a "key") for the joins. 
+
+  - **Note:** for the rest of the joins, which employ a filtering step, I recommend you always use a single unique identifier (called a "key") for the joins. You can use multiple keys, but a single unique key is the clearest way to join data without generating duplicate observations. 
     - When there is not a match, the rows from each data set are still returned and filled with NA for columns from the other data set. 
 
 **2. The `inner_join()`:**   
+
     - this function only keeps what is common between data sets:
 ```{r}
 cotton_barley_inner <- inner_join(cotton_nass_new, barley_nass_new, by = "ID")
@@ -334,13 +338,16 @@ colnames(cotton_barley_inner)[2:5] <- c("cotton_acres", "cotton_yield", "barley_
 
 
 **3. The `left_join()`:**    
+
    - matches all rows for observations found in the tibble listed on the left:  
 ```{r}
 cotton_barley_left <- left_join(cotton_nass_new, barley_nass_new, by = "ID")
 dim(cotton_barley_left)
 ```
 
+
 **14. The `right_join()`:**  
+
    - matches all rows for observations found in the tibble listed on the left:  
 ```{r}
 cotton_barley_right <- right_join(cotton_nass_new, barley_nass_new, by = "ID")
@@ -348,6 +355,7 @@ dim(cotton_barley_right)
 ```
 
 **5. The `semi_join()`: **   
+
     - This function is like `inner_join()` (only rows with keys in both data sets are kept) except it does not keep any data from the data set listed second:
 ```{r}
 cotton_barley_semi <- semi_join(cotton_nass_new, barley_nass_new, by = "ID")
@@ -356,21 +364,22 @@ str(cotton_barley_semi)
 str(cotton_barley_inner)
 ```
 
-**6. The `anti_join()`: **   
-    - observations from A that *do not* match B are kept:
+**6. The `anti_join()`: **  
+
+  - observations from A that *do not* match B are kept:
 ```{r}
 cotton_barley_anti <- anti_join(cotton_nass_new, barley_nass_new, by = "ID")
 dim(cotton_barley_anti)
 ```
 
 
-#### Set operations
+### Set operations
 
 These are different from standard joins. They compare across *vectors* and return what has been specified in the statement. *Duplicates are discarded.* The purpose of set operations is to determine common or uncommon observations, not merge two different data sets. 
 
 **Common set operations**   
 
-![](set operations.png)
+![](set_operations.png)
 
 ```{r}
 # states with barley data but no cotton data
@@ -383,17 +392,18 @@ setdiff(nass_cotton$state, nass_barley$state)
 intersect(nass_cotton$state, nass_barley$state)
 ```
 
-**What happens when there are multiple matches for an identifier?** Each time there is a new match between the keys of two data frames, a new row is added for the matched data. 
+**What happens when there are multiple matches for an identifier?** 
 
-### Reshaping data
+*(Each time there is a new match between the keys of two data frames, a new row is added for the matched data)*
+
+## Reshaping data
 
 ![](wide_v_long.png)
 **Same data, two formats**  
 
+Two common approaches to reshaping data: 
 
-#### Two common approaches to reshaping data: 
-
-1. 'tidyr' (popular, in transition currently)
+1. 'tidyr' (popular)
 1. 'data.table' (flexible, fast)
 
 |reshaping action | tidyr function | data.table function |
@@ -403,11 +413,10 @@ intersect(nass_cotton$state, nass_barley$state)
 
 *Note: the tidyr functions `pivot_wider()` and `pivot_longer()` replace `spread()` and `gather()`.*
 
-##### The tidyr approach: 
+### The tidyr approach: 
 
-*At the time of writing this (April 9, 2019), these functions are available through GitHub, but they are still under developement and available through CRAN. However, they are likely to be completed and pushed to CRAN soon and become part of standard tidyverse functions.* 
+#### Reshaping from long to wide
 
-**Reshaping from long to wide:  **
 ```{r}
 # use the "barley_pnw" object created earlier (barley data from ID, OR and WA)
 nass_barley_pnw_wide <- pivot_wider(barley_pnw,
@@ -420,7 +429,8 @@ sample_n(nass_barley_pnw_wide, 5)
 ```
 There is also a `values_fill=` argument to fill in missing values when you know what those should be. The default behavior is to fill with an NA. 
 
-**Reshaping multiple variables:  **
+#### Reshaping multiple variables
+
 ```{r}
 # use the "barley_pnw" object created earlier (barley data from ID, OR and WA)
 nass_barley_pnw_wide2 <- pivot_wider(barley_pnw,
@@ -431,7 +441,7 @@ nass_barley_pnw_wide2 <- pivot_wider(barley_pnw,
 sample_n(nass_barley_pnw_wide2, 5)
 ```
 
-**Reshaping from wide to long:**
+#### Reshaping from wide to long 
 ```{r}
 nass_barley_pnw_long <- pivot_longer(nass_barley_pnw_wide,
                                      cols = 2:ncol(nass_barley_pnw_wide),
@@ -444,12 +454,11 @@ dim(nass_barley_pnw_long)
 dim(barley_pnw) # dimension of the original object
 ```
 
-
-##### The data.table approach
+### The data.table approach
 
 Thus far, the package 'data.table' has not been explored in any depth (and it still won't be for space considerations). Nevertheless, 'data.table' is useful for manipulating large tables; it is extremely efficient (even better than tidyverse functions).
 
-**Reshaping from long to wide: **
+#### Reshaping from long to wide: 
   -we will use the previously created data set "cotton_barley_inner" from inner join of the barley and cotton data sets. 
 ```{r}
 
@@ -463,7 +472,7 @@ Reshape cotton acreage, using State as the ID variable:
 cotton_acres_wide <- dcast(setDT(cotton_barley_inner2), State ~ Year, value.var = "cotton_acres")
 ```
 
-**Reshaping with multiple variables**  
+#### Reshaping with multiple variables  
 
 Multiple ID variables can be specified on the left side of the tilde and/or multiple column categories can be specified on right side. Furthermore, multiple columns (the "value.var") can be specified to fill the cells.
 
@@ -474,14 +483,16 @@ cotton_wide <- dcast(setDT(cotton_barley_inner2), State ~ Year, value.var = c("c
 sample(colnames(cotton_wide), 30)
 ```
 
-**Implementing a summary function in the reshape:** if there is more than one  observation for each cell, a summary function like mean can be used. If  function is not specified, the number of observations for that variable combination will be used.  
+#### Implementing a summary function in the reshape 
+
+  - if there is more than one  observation for each cell, a summary function like mean can be used. If  function is not specified, the number of observations for that variable combination will be used.  
 ```{r}
 cotton_wide_meanYield <- dcast(setDT(cotton_barley_inner2), cotton_acres ~ Year, value.var = "cotton_yield", fun = mean, fill = 0)
 
 sample_n(cotton_wide_meanYield , 5)[,c(1, 100:106)]
 ```
 
-**Reshaping from wide to long:**
+#### Reshaping from wide to long
 
 ```{r}
 cotton_acres_long <- melt(setDT(cotton_acres_wide), 
@@ -503,7 +514,7 @@ cotton_long <- melt(setDT(cotton_wide),
 sample_n(cotton_long, 5)
 ```
 
-### Grouping and summarising data
+## Grouping and summarising data
 
  - The function `group_by()` provides a handy tool for breaking data into groups based on a common factor. 
  - The function `summarise()` often follows a grouping command. It will apply a summary function to a data set or a grouped data set.
@@ -531,17 +542,7 @@ corn_highest_yielders %>% group_by(state) %>% tally(sort = T)
 with(corn_highest_yielders, plot(year, yield, type = "l", col = "blue", lwd = 1.5, main = "harvest index upper limit"))
 ```
 
-### Free training resources 
-
-* [R for data science]("https://r4ds.had.co.nz/")
-* [RStudio Cheat sheets]("https://www.rstudio.com/resources/cheatsheets/")
-* [Package documentation]("https://www.tidyverse.org/packages/")
-* Tutorials put together by package authors: 
-```
-vignette("dplyr")
-```
-
-### Other useful functions
+## Other Useful Functions
 
 |Package | Function |  Purpose  |
 |---------|-----------|------------------------------------------------------------|
@@ -554,5 +555,14 @@ vignette("dplyr")
 | tidyr | `fill()` | fills in missing values with whatever occurs before it (column-wise). Its behavior is dependent on row order |
 |tidyr | `replace_na()` | replace missing values with a user-defined value (only when is.na(x) evaluates as "TRUE")
 
+## Free Training Resources 
 
+* [R for data science]("https://r4ds.had.co.nz/")
+* [RStudio Cheat sheets]("https://www.rstudio.com/resources/cheatsheets/")
+* [Package documentation]("https://www.tidyverse.org/packages/")
+* Tutorials by package authors: 
+
+```
+vignette("dplyr")
+```
  
