@@ -1,9 +1,10 @@
 ---
 title: "Introduction to Creating Awesome Plots with ggplot2"
 author: jpiaskowski
-date: 2022-10-20
+date: 2022-10-21
 categories: ["R", "data visualization"]
 draft: false
+summary: "A step-by-step quick start tutorial for ggplot2" 
 ---
 
  
@@ -11,12 +12,13 @@ draft: false
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, collapse = TRUE)
 ```
 
+*(It won't take that long to read this)*
+<br>
+<br>
+
 ```{r, echo=FALSE,out.width="60%",out.height = "60%", fig.align='center'}
 knitr::include_graphics(c("curve_fitting.png"))
 ```
-
-*(It won't take that long to read this)*
-
 [**from XKCD**](https://xkcd.com/2048/)
 
 The package "ggplot2" has become the go-to package for making publication-quality plots. It is part of the tidyverse It can be complicated to use. It derived from the "[grammar of graphics](https://vita.had.co.nz/papers/layered-grammar.html)" concept that aims to have a consistent set of options to build a diverse set of simple or complex plots from data. 
@@ -394,12 +396,16 @@ There are many options for adjusting text. You you will inevitable need to consu
 
 R has a rich set of colors and some excellent palettes that provide excellent contrast and/or work for color-blind individuals. Several are automatically loaded with ggplot2, such as the RColorBrewer:  
 
-```{r fig.height=5}
+```{}
 library(RColorBrewer)
 display.brewer.all()
 ```
 
-The package 'viridis' also has some nice color palettes that are widely used and accepted. Information about color palettes have been [comprehensively explored by Emil Hvitfeldt](https://github.com/EmilHvitfeldt/r-color-palettes/blob/master/README.md) and worth a read. 
+```{r fig.height=6, out.height=6, echo=FALSE}
+knitr::include_graphics("rcolorbrewer.png")
+```
+
+The package **[viridis](https://sjmgarnier.github.io/viridis/)** also has some nice color palettes that are widely used. Also check out the **paletteer](https://emilhvitfeldt.github.io/paletteer/)** and the accompanying [R palette picker](https://emilhvitfeldt.github.io/r-color-palettes/) for a wider set of options.  
 
 ### Other Important Stuff
 
@@ -414,7 +420,7 @@ ggplot(hay_pnw) +
 ```
 
 ```
-ggsave("PNW_hay_production.png", dpi = 400)
+ggsave("PNW_hay_production.png", dpi = 300)
 ```
 
   * other acceptable formats:
@@ -479,7 +485,7 @@ ggplotly(pl)
 
 To save an interactive plot, use `htmlwidgets::saveWidget()`. 
 
-#### gganimate
+#### gganimate example
 
 ![](brownian_motion.gif)
 
@@ -493,16 +499,18 @@ Plot from "[Learn gganimate](https://github.com/ropenscilabs/learngganimate/blob
 ```
 vignette("ggplot2")
 ```
-**(there are innumerable ggplot tutorials on the interwebs)**
+  * There are innumerable ggplot tutorials on the interwebs, such as [here](https://ggplot2tutor.com/), [here](https://uc-r.github.io/ggplot_intro) and [here](https://r-statistics.co/Complete-Ggplot2-Tutorial-Part2-Customizing-Theme-With-R-Code.html), among others
 
   * [R Graphics Cookbook Online Tutorial](http://www.cookbook-r.com/Graphs)
-  * [R Graphics Cookbook](https://www.amazon.com/Graphics-Cookbook-Practical-Recipes-Visualizing-ebook/dp/B07JPL9K64/ref=sr_1_3?crid=2MKCW89GC5VP6&keywords=r+graphics+cookbook&qid=1554928039&s=books&sprefix=R+gra%2Cstripbooks%2C218&sr=1-3) ($$). This book is written by Winston Change, the main author of the ggplot2 package. 
+  * [R Graphics Cookbook](https://www.amazon.com/Graphics-Cookbook-Practical-Recipes-Visualizing-ebook/dp/B07JPL9K64/ref=sr_1_3?crid=2MKCW89GC5VP6&keywords=r+graphics+cookbook&qid=1554928039&s=books&sprefix=R+gra%2Cstripbooks%2C218&sr=1-3) ($$). This book is written by Winston Chang, the main author of the ggplot2 package. 
   
 ![](R_graphics_cookbook2.jpg)
-```{r eval=FALSE, include=FALSE}
 
-# instructions from: 
+**ggplot can be fun**  
 
+Plot of shots made by NBA Player Steph Curry, made using **gganimate**:  
+
+```{r eval=FALSE, echo=TRUE, class.source = 'fold-hide'}
 library(tidyr)
 library(rjson)
 # shot data for Stephen Curry
@@ -522,17 +530,14 @@ shotDataf$LOC_X <- as.numeric(as.character(shotDataf$LOC_X))
 shotDataf$LOC_Y <- as.numeric(as.character(shotDataf$LOC_Y))
 shotDataf$SHOT_DISTANCE <- as.numeric(as.character(shotDataf$SHOT_DISTANCE))
 
+# extract relevant data for plotting
 shots_made <- shotDataf %>% filter(EVENT_TYPE == "Made Shot") %>% select(LOC_X, LOC_Y) %>% 
   drop_na()
-```
-  
-  
-**ggplot can be fun**  
 
-Plot of shots made by NBA Player Steph Curry:  
-```{r eval=FALSE, include=FALSE}
+# set colors
 cols <- rep(c("blue", "blueviolet","cyan", "magenta"), ceiling(653/4))[1:653]
 
+# make plot! 
 ggplot(shots_made, aes(x=LOC_X, y=LOC_Y)) +
   geom_segment(aes(x = LOC_X, y = LOC_Y, xend = 0, yend = 0), 
                col = cols) +
@@ -544,10 +549,13 @@ ggplot(shots_made, aes(x=LOC_X, y=LOC_Y)) +
         plot.title = element_text(colour = "white", size = 20, hjust = 0.5, face = "bold"),
         axis.text = element_blank() 
   )
-
 ```
 
 ```{r eval=FALSE, include=FALSE}
-ggsave("featured.png")
+ggsave("steph_curry_shots_made_loop.gif")
+```
+
+```{r echo=FALSE}
+knitr::include_graphics("steph_curry_shots_made_loop.gif")
 ```
 
