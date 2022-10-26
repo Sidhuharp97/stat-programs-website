@@ -1,7 +1,7 @@
 ---
 title: "Mixed Model Analysis of Covariance and Dummy Variable Regression in SAS"
 author: "Statistical Programs, University of Idaho"
-date: "4/6/2022"
+date: "2022-04-06"
 output: 
   html_document:
     toc: true
