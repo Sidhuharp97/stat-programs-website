@@ -4718,11 +4718,11 @@ probability of 0.50 resulting in odds of 1.0. In the odds ratio table
 above, we see that this category compared to the “Over 65” group had an
 odds ratio close to 1.0 indicating the odds of Smart phone use in these
 two groups were similar.</p>
-<p>** Important <strong>: When reporting logistic regression results,
-</strong>It is not sufficient** to only report odds ratios. These are
-relative measurements and <strong>do not</strong> indicate the magnitude
-or sizes of the responses. Always present either the underlying
-probabilities, odds, or both.</p>
+<p><strong>Important</strong>: When reporting logistic regression
+results, <strong>It is not sufficient</strong> to only report odds
+ratios. These are relative measurements and <strong>do not</strong>
+indicate the magnitude or sizes of the responses. Always present either
+the underlying probabilities, odds, or both.</p>
 <div id="more-on-odds-ratio-and-odds-numeric-results" class="section level4 infobox" number="4.1.0.1">
 <h4><span class="header-section-number">4.1.0.1</span> More on Odds
 Ratio and Odds numeric results</h4>
@@ -4753,7 +4753,7 @@ that Catmod can do other model types, and this example is not meant to
 cover all those cases. Also, Proc Catmod cannot address or account for
 random model effects, so it has limitations in that way.</p>
 <p>Below, Catmod is used to assess the combined effect of Age and Size
-in the data (this ignore Device effects). The syntax for loglinear
+in the data (this ignores Device effects). The syntax for loglinear
 models in Catmod are unique compared to other SAS procedures. Here we
 use a special construct called <em><em>response</em></em> as a place
 holder in the model because both Age and Size could appear on either the
@@ -4761,8 +4761,8 @@ left or right hand sides of the model. The <em>loglin</em> statement
 following the model tells SAS what effects to evaluate on the right hand
 side. Here, the full model of main effects and interactions are
 requested. Catmod can also carry out contrasts. Because categorical
-model drop the last level of an effect for estimation, the contrasts may
-look different than other modeling procedures. In Catmod, if the
+models drop the last level of an effect for estimation, the contrasts
+may look different than other modeling procedures. In Catmod, if the
 contrast does not involve the last level of an effect, the contrasts are
 similar to other procedures and the coefficients add to zero. Note,
 however, the number of coefficients is one less than the number of
