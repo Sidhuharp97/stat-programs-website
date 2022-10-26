@@ -1,0 +1,185 @@
+---
+title: "Categorical Data Analysis in SAS"
+author: "Statistical Programs, University of Idaho"
+date: "26/October/2022"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    toc_collapsed: true
+    toc_depth: 3
+    number_sections: true
+    css: .\sas.default.css
+bibliography: references.bib  
+link-citations: true
+---
+
+
+```{r  setup, include=FALSE}
+require(SASmarkdown)
+sasopts <- "-nosplash -ls 200  "
+knitr::opts_chunk$set(engine.opts=list(sashtml=sasopts, sashtmllog=sasopts),
+                      comment=NA)
+```
+
+# Introduction
+
+  Categorical responses are data that are intrinsically qualitative or non-numerical. As such, they present some unique characteristics and issues for analysis. There are multiple categorical procedures in SAS for dealing with this. This tutorial will cover common ones use to carry out a variety of analysis types.
+  
+## Characteristics of Categorical Data
+
+  Examples of categorical data would be responses such as gender, level of education, Yes-No answers, etc. A characteristic of such data is that the categories are non-overlapping or mutually exclusive. Because of this, when the data are summarized to numbers like percentages, the values must add to 100%, a condition known as "Sum-to-One". A consequence of this is that if we know all but one category, we automatically know the missing category: If there are 60% Yes responses, then we know there are 40% No. If plants are recorded in three categories as 20% short and 30% medium, then we know there are also 50% tall. In analyses, this effects the number of parameters estimated. Generally, if there are C categories, then the analyses will estimate C-1 parameters.
+  
+  Another characteristic of some categorical data is order. For example in the short, medium, tall example above, there is a natural progression or order to the categories. Occasionally, we might also categorize true continuous data such as income or age into ordered categories, e.g. age: 20-35, 36-50, and greater than 50. These *Ordinal* data are often treated differently than non-ordered data (nominal data) by looking at the cumulative responses across the ordered groups measuring the incremental change between levels rather than the absolute percentage at each level.
+  
+  Individual categorical responses are referred to as *Multinomials*, as in a multinomial distribution (Multinomials with two categories are a special class referred to as *Binomials*). The individual categories or cells of the multinomial are characterized by the probability of that category occurring or being observed and the sum of all probabilities across the multinomial is 1.0. Categorical data can also occur in combinations or cross classifications of 2 or more multinomials and these are known as *Contingency Tables*. Like their singular counterparts, each combination or table cell is represented by a probability of that cell combination and these also sum to 1.0. Contingency tables can also be summarized by row or column totals and these are referred to as marginal distributions. All of these terms and structures can come into play during an analysis as will be demonstrated below.
+
+# Data used in Examples
+
+These data come from survey of participants who participated in several online pesticide safety workshops and are described in [Innovative Virtual Pesticide Recertification Webinar Series Achieves Success during the COVID-19 Pandemic, Himyck, R. et al. 2022, Journal of Pesticide Safety Education](https://aapse.wildapricot.org/resources/Documents/AAPSE%20Publications/JPSE/ARTICLES/83/83-2841-HTPFGHNS.pdf). While this survey covered many topics, the data used [here](./data/survey.xlsx) are a subset that relate to questions on participant age, size of community, and the online device they accessed the workshop with. Age is categorized into 5 levels, Community Size has 5 levels, and two types of Devices (Smart phone and Tablet) are considered. The distributions of Age by Device type are plotted below.
+
+<br><br>
+```{sashtml Data1, collectcode=TRUE}
+
+
+PROC IMPORT OUT= WORK.survey
+	DATAFILE= ".\Data\survey.xlsx"
+	DBMS=XLSX REPLACE;
+	sheet="Survey";
+RUN;
+	
+proc print;
+run;
+
+proc sgplot data=survey;
+  	styleattrs datacolors=(cx1805A7 cx8805A9 cxF717BB cxF71731 cxF78B17) datacontrastcolors=(black black black);
+	vbarparm category=Device response=Count / LIMITATTRS=(color=black)
+   	group=Age grouporder=data OUTLINEATTRS=(color=black) groupdisplay=cluster;
+	xaxis label='Device' TYPE=discrete DISCRETEORDER=formatted LABELATTRS=( Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+	yaxis label="Count" LABELATTRS=( Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+	title1 ' ';
+	keylegend /AUTOITEMSIZE valueattrs=(size=14) TITLEATTRS=(weight=bold size=12); 
+run;
+```
+
+# Basic Categorical Summary and Inference
+
+## One-way Marginal Analyses
+
+The most basic way to look at this data is to summarize the one-way marginal totals. In this example, we look at Age and Device, ignoring Community Size for now. This looks at Age and Device separately. The procedure used is *Proc Freq*, which is a tabulation procedure. A *Weight* statement is used to indicate the data are already summarized into counts. The *Table* statement implements the tabulation request. Both Age and Device are specified in the statement, generating two analyses. We could also issue two *Table* statements and generate equivalent results. The option *chisq* requests a test to assess whether all the categories within each factor have an equal probability of occurring. The *plots* option asks for frequency plots of each marginal distribution.
+
+
+```{sashtml Freq1}
+
+
+proc freq data=survey;
+	weight count;
+	tables age device/chisq plots(only)=freqplot;
+	title1 'Age and Device Marginals';
+run;
+```
+
+The output here gives the one-way tabulation for frequency (counts), percent, and the cumulative frequencies and percentages. The Chi-square test indicates that the probabilities of categories within each factor are not equal. Note, the degrees of freedom for each factor is one less than the respective factor levels.
+
+## Two-way Contingency Table Analysis
+
+Many times we want to assess the association between two or more categorical factors. In this example, a two-way contingency table is setup to look at the combination of Age and Device. A chi-square test (option *chisq*) is requested to examine the potential association or independence of the two.
+
+```{sashtml Freq2}
+
+options nonotes;
+proc freq data=survey;
+	weight count;
+	tables age*device/chisq;
+	title1 'Age by Device Contingency Table';
+run;
+```
+  In the resulting table, four numbers are given in each cell. From top to bottom they are: the number of observations for that cell, the corresponding percentage of that cell in the whole table, the row percentage of the cell, and finally, the column percentage. These last two percentages or marginal distributions are often useful for thinking about possible associations. For example, we could look at row percentages in this table representing the distribution of device types within each age group. If there were no association, the percentages of cell phones and tablets would be similar for every age class. Looking at the table, however, we see that the percentage of smart phone use in younger groups is higher than those in older age groups. The percentages for tablet use follow a reverse trend. This is also evident in the initial plot of the data given above.
+  
+  The chi-square test option confirms this where the p-value is < 0.0001, indicating an association was detected. In this table there are several tests carried out. Only the first two, Chi-Square and Likelihood Ratio Chi-Square, are relevant and either of these can be reported. Note that, like correlations, this does not imply causality, but just indicates that the distribution of Device types changes with Age classes and the Devices tend to trend in opposite direction as Age increases.
+
+# Advanced Categorical Analysis
+## Logistic Regression
+
+Sometimes it is of interest to more directly model the relationships between two or more categorical factors. One common means for doing this is logistic regression. In logistic regression, a *binary* categorical "response" is modeled as a function of other factors, which can be either categorical or continuous. A key here is that the response is a binary factor. While modeling can be done with more than two categories in the response, the interpretation becomes much more complex. In logistic regression, we indirectly model the proportions of the binary responses. This is done by selecting one of the categories, often referred to as a "success", and representing its proportion of success as *p*. The proportion of "failures" is then *1-p* because the proportions of "success" and "failure" must add to 1.0. Note that which category we assign as a "success" or "failure" is immaterial, but SAS will choose the lowest numeric value of the binary response as a "success" (In SAS, this can be reversed with the *(descending)* option placed after the response in the model statement). Once it is defined, however, the proportion is transformed logrithmically to:
+
+$$ transformed\;\; proportion = ln\left( \frac{p}{1-p}\right) = logit $$
+The fraction of success to failure in the log function is referred to as the *odds* of success, p, and the entire term as the log odds or logit. When logistic regression is run with a categorical factor on the right hand side of the model, the procedure will form one logit or log odds for every level of that factor. Results are then usually displayed or reported as the ratio of the odds (odds ratio = OR) of all levels relative to one selected level. By default, SAS determines this level to be the last alphabetical level. This can also be changed if needed (e.g. the *ref* option in a *Class* statement for SAS). An alternative is to also just report and interpret the proportions themselves along with the odds.
+
+SAS has several procedures that can run logistic regression. In the example below, *Proc Glimmix* is used as logistic regression is actually a generalized linear model. For more information on generalized linear models, see the tutorial [here](./sas-proc-glimmix.html). In this case the factor *Device* is the binary response. In order to get SAS to implement logistic regression, however, we need to get Glimmix to view this response as a numeric binary variable. We could recode the "Smart phone" : "Tablet" character values in the data, but here the *Proc Format* procedure is used to simply coerce the change to 0 and 1, respectively, without manipulating the data. In the model, a binary distribution is specified where the logit is the default link function. *Age* class is the factor on the right hand side of the model. The model will then assess the odds and odds ratios of *Smart phone* usage for each *Age* class. The *Lsmeans* statement, with the ilink and odds options, are used to display the predicted proportions of "success" (Smart phone) and the respective odds for each age class. These are also output to a separate data set and the plotted with *Proc Sgplot*.
+
+```{sashtml Logistic1}
+
+proc format;
+	value $dvf 'Smart phone' = '0'
+				'Tablet' = '1';
+run;
+ods graphics;
+				
+proc glimmix data=survey method=quad;
+	weight count;
+	class age;
+	model device = age/dist=binary oddsratio;
+	format device $dvf.;
+	lsmeans age/cl ilink odds;
+	ods output LSMeans=odds;
+run;
+				
+				
+proc sgplot data=odds noautolegend; 
+    styleattrs datacolors=(cx1805A7 cx8805A9 cxF717BB cxF71731 cxF78B17) DATACONTRASTCOLORS=(cx1805A7 cx8805A9 cxF717BB cxF71731 cxF78B17) ;
+    highlow y=age high=upperodds low=lowerodds/group=age type=line lineattrs=(pattern=solid) highcap=serif lowcap=serif LINEATTRS=(thickness=2);
+    scatter y=age x=odds/group=age FILLEDOUTLINEDMARKERS markerattrs=(symbol=circlefilled size=14) MARKEROUTLINEATTRS=(color=black) datalabel=age DATALABELATTRS=(Color=black Family=Arial Style=Italic Weight=Bold size=10);
+    refline 1 /axis=x lineattrs=(pattern=shortdash color=black) ;
+    yaxis label='Age' TYPE=discrete DISCRETEORDER=data LABELATTRS=( Family=Arial Size=15 Weight=Bold) display=(NOVALUES NOTICKS);
+    xaxis label='Odds of Smart Phone Use'  LABELATTRS=( Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+run;
+
+```
+
+Some notes on the output: First, in the *Response Profile*, Device type is listed as 0 or 1, reflecting the formats from the preceding Proc Format definitions. Also, note that the output states the procedure is modeling the probability that Device='0', which was defined to be "Smart phone". This will be the "p" in the logit function.
+
+Further down are the Type III test of Fixed Effects where the test of differences in the Age factor are given. In this case, Age has a low p-value suggesting the probabilities of Smart phone use are different across the Age categories. This is followed by the Odds Ratio table resulting from the *oddsratio* option in the *model* statement. Here there are four values listed. The last category, "Over 65" is the reference level (it was last alphabetically), so the other categories are compared to it. The odds ratios indicate the relative size of each category's odds compared to this reference level. The odds of Smart phone usage in "18-35" and "46-55" year olds are about 3 times as large as the "over 65" age group, while the "36-45" group is about 6.4 times as large. Although odds ratios are the commonly reported statistic for group comparison in logistic regression, they do not indicate the size of the underlying probabilities.
+
+The LSmeans table completes the information. Here the *Estimate* column values are the actual logit transformed values. These are not of much use for interpretation. The *ilink* and *odds* options, however, provide the estimated probabilities (*Mean* column) of Smart phone usage and the respective odds. The "36-45" age group has the highest probability at 0.695 or about 70%, while the two oldest groups have probabilities closer to 0.5 or equal probability. In the *Odds* column, the ratio of success = "Smart phone" to failure = "Tablet" are shown. These indicate how likely Smart phone use is for each group. 
+
+Both Odds Ratios and Odds are compared to 1.0. When the probability of success equals that of failure the odds are 1.0, or no preference for either. Also, if two groups have equal odds, their odds ratio will be 1.0. This is indicated in the respective confidence intervals for each statistic. In this example, we see that the "56-65" category had a probability of 0.50 resulting in odds of 1.0. In the odds ratio table above, we see that this category compared to the "Over 65" group had an odds ratio close to 1.0 indicating the odds of Smart phone use in these two groups were similar.
+
+** Important **: When reporting logistic regression results, **It is not sufficient** to only report odds ratios. These are relative measurements and **do not** indicate the magnitude or sizes of the responses. Always present either the underlying probabilities, odds, or both.
+
+<div class="infobox">
+#### More on Odds Ratio and Odds numeric results
+
+From the Odds Ratio and LSmeans tables, we can reconstruct the values and see the relationships among them. If we take the estimated probabilities for each category and compute p/(1-p), we get the odds. For example in the "18-35" group, the estimated probability of Smart phone use is 0.6494. Computing 0.6494/(1-.6494) gives 1.85, the odds for that category. If we further take the odds for "18-35" and divide it by the odds of "Over 65" = 1.85/0.6061 we get the odds ratio for "18-35" = 3.056. As noted above, we can reconstruct the underlying probabilities of categories from their odds, but we cannot do the same with only odds ratios. This is why it is important to present complete results when reporting logistic regression.
+</div><br>
+
+## Loglinear Models
+
+There are times, especially in survey data, where there are no obvious "independent/dependent" variable relationships. For example, in this data, the relationship between Age and Community Size may not be obvious in terms of one influencing the other. Regardless, we would still like to evaluate the effects of both or their combination. In these cases, it can be useful to use a class of models called Loglinear models. The procedure for these in SAS is *Proc Catmod*. Note that Catmod can do other model types, and this example is not meant to cover all those cases. Also, Proc Catmod cannot address or account for random model effects, so it has limitations in that way.
+
+Below, Catmod is used to assess the combined effect of Age and Size in the data (this ignore Device effects). The syntax for loglinear models in Catmod are unique compared to other SAS procedures. Here we use a special construct called *_response_* as a place holder in the model because both Age and Size could appear on either the left or right hand sides of the model. The *loglin* statement following the model tells SAS what effects to evaluate on the right hand side. Here, the full model of main effects and interactions are requested. 
+Catmod can also carry out contrasts. Because categorical model drop the last level of an effect for estimation, the contrasts may look different than other modeling procedures. In Catmod, if the contrast does not involve the last level of an effect, the contrasts are similar to other procedures and the coefficients add to zero. Note, however, the number of coefficients is one less than the number of levels for a factor. Size, for example, has 5 levels, so there are 4 coefficients in the contrast statements. When a contrast involves the last level (Rural in this case), special care needs to be taken in forming contrast coefficient values following this rule: The last effect level is set to be equal to the negative sum of all other coefficients for that effect. To illustrate, let the 5 levels of Size be represented by the greek letters $\alpha_1$ - $\alpha_5$. The last level is then set to $\alpha_5 = -(\alpha_1+\alpha_2+\alpha_3+\alpha_4 )$. A contrast comparing "Large City" to "Rural" would then be:
+
+$$ H_0 : (\alpha_1 - \alpha_5) = (\alpha_1 - (-(\alpha_1+\alpha_2+\alpha_3+\alpha_4 )) =\\ 
+\alpha_1 +\alpha_1+\alpha_2+\alpha_3+\alpha_4 = \\2\alpha_1 + \alpha_2+\alpha_3+\alpha_4$$
+The coefficients are, therefore, 2 1 1 1. Although these do not add to zero, as expected in other procedures, they are correct for this contrast. 
+
+Unfortunately, contrasts for interaction terms can become much more complex. In those cases, it may be better to construct a combined categorical variable for both Age and Size 
+
+(In a data step, define it as *Age_Size = Age||" "||Size;*)
+
+and run that variable in the model and as the loglin effect. While it will have many coefficients (24), the last level "Over 65 Rural" will be dropped and contrasts can be set up as shown above.
+
+```{sashtml Loglin1}
+
+proc catmod data=survey order=data;
+	weight count;
+	model Size*Age=_response_/pred=prob;
+	loglin Size Age Size*Age;
+	contrast 'Large vs Small City' Size 1 0 -1 0;
+	contrast 'Medium vs Town' Size 0 1 0 -1;
+	contrast 'Large vs Rural' Size 2 1 1 1;
+
+run;
+
+```
