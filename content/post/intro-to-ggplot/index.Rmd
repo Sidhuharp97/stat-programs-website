@@ -5,6 +5,11 @@ date: 2022-10-21
 categories: ["R", "data visualization"]
 draft: false
 summary: "A step-by-step quick start tutorial for ggplot2" 
+image:
+  caption: 'Plot Created with ggplot2 by [Georgios Karamanis](https://github.com/gkaramanis/tidytuesday/tree/master/2022/2022-week_27)'
+  focal_point: ""
+  placement: 2
+  preview_only: false
 ---
 
  
@@ -12,14 +17,6 @@ summary: "A step-by-step quick start tutorial for ggplot2"
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, collapse = TRUE)
 ```
 
-*(It won't take that long to read this)*
-<br>
-<br>
-
-```{r, echo=FALSE,out.width="60%",out.height = "60%", fig.align='center'}
-knitr::include_graphics(c("curve_fitting.png"))
-```
-[**from XKCD**](https://xkcd.com/2048/)
 
 The package "ggplot2" has become the go-to package for making publication-quality plots. It is part of the tidyverse It can be complicated to use. It derived from the "[grammar of graphics](https://vita.had.co.nz/papers/layered-grammar.html)" concept that aims to have a consistent set of options to build a diverse set of simple or complex plots from data. 
 

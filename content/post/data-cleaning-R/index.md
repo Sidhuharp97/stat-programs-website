@@ -1,7 +1,7 @@
 ---
 title: "Introduction to Data Cleaning with the Tidyverse"
 author: jpiaskowski
-date: 2022-10-21
+date: 2022-10-26
 categories: 
 - R
 - tidyverse
@@ -28,6 +28,8 @@ Newer scientists are likely to use point-and-click software like spreadsheet. Th
 
 > Equip everyone regardless of means, to participate in the global economy that rewards data literacy.    
 <center> —RStudio mission statement </center>
+
+<br>
 
 The [Tidyverse](https://www.tidyverse.org/) is a collection of packages designed to help data users work more efficiently with their data. At the time of writing this, the Tidyverse consists of over 25 packages with diverse that range from connecting to google sheets to working with databases. 
 
@@ -99,13 +101,13 @@ base::intersect(...)
 
 ## Load Data
 
-### 'read_csv' v 'read.csv'
+### `read_csv()` v `read.csv()`
 
 How do the functions `read.csv()` (from base R) and `read_csv` (from readr) differ in how they read in data? 
 
-For this tutorial, 3 data sets will be used, "nass_cotton", "nass_barley", and "nass_barley". These are historical data sets from the National Agricultural Statistics Service that indicate the total acreage and yield for the crops indicated for each each U.S. state and year from 1866 to 2011. They were provided by packaged 'agridat'. 
+For this tutorial, 3 data sets will be used, "nass_cotton", "nass_barley", and "nass_barley". These are historical data sets from the National Agricultural Statistics Service that indicate the total acreage and yield for the crops indicated for each each U.S. state and year from 1866 to 2011. They can be accessed with the package 'agridat'. 
 
-*Note: these data sets were originally obtained as thus:*
+These data sets were originally obtained as thus from Agridat and saved to separate files for this tutorial. 
 
 ```r
 library(agridat) # a package of agricultural data sets
@@ -179,11 +181,11 @@ To create a new tibble, you can use the function `tribble()` to create a tibble 
 
 <img src="tribbles.jpg" width="40%" height="40%" style="display: block; margin: auto;" />
 
-There are a few aspects of tibbles that are fundamentally different from a standard data frame. Tibbles do not handle row names well and many tidyverse functions discard that information. This is often just fine - row names are computationally expensive to set and maintain. Also, it can be difficult to filter and sort data based on rownames. However, many other (non-tidyverse) package functions rely on the rownames attribute, so be aware of this behavior when using tidyverse functions on data sets. 
+There are a few aspects of tibbles that are fundamentally different from a standard data frame. Tibbles do not handle row names well and many tidyverse functions discard that information. This is often just fine - row names are computationally expensive to set and maintain. Also, it can be difficult to filter and sort data based on row names. However, many other (non-tidyverse) package functions rely on the `rownames` attribute, so be aware of this behavior when using tidyverse functions on data sets. 
 
 ### Function details
 
-  * the most noticeable difference between `read.csv()` and `read_csv()` is that `read.csv()`'s default behavior is to import character variables that with repeat values as factors, while `read_csv()` keeps those variables as character. The default behavior can be overrode in both functions. 
+  * the most noticeable difference between `read.csv()` and `read_csv()` is that `read.csv()`'s default behavior is to replace all spaces and special characters in column headers with a ".", while `read_csv()` keeps all that information. Additionally, `read_csv()` tends to handle dates a bit better than `read.csv()`. 
   
   * `read_delim()` and its wrappers are faster than base versions (e.g. `read.csv()`), however, the difference will not be noticeable for small files (< 10 Mb) 
   
@@ -191,7 +193,8 @@ There are a few aspects of tibbles that are fundamentally different from a stand
 
   * specific values for missing data that are not "NA" (e.g. "-9", ".") can be set with with argument `na = ...`
 
-  * the function can be sped up by setting values for the `col_types = ...` argument (e.g. character, numeric, date, et cetera)  
+  * the function can be sped up by setting values for the `col_types = ...` argument (e.g. character, numeric, date, et cetera): 
+  
 
 ```r
 nass_corn <- read_csv("nass_corn.csv", col_types = cols(col_integer(), col_character(), col_double(), col_double()))
@@ -214,17 +217,18 @@ str(nass_corn)
 ##  - attr(*, "problems")=<externalptr>
 ```
 
-**Note:** if you have truly huge data, consider the `fread()` function in 'data.table' or storing the data in database and using 'dbplyr' to access it.
+**Note:** if you have truly huge data, consider the `fread()` function in 'data.table', storing the data in database and using 'dbplyr' to access it, or using the 'arrow' package. 
   
   
 ## Data selection and subsetting
-*(from the package 'dplyr')*
+Using 'dplyr'
 
 ### Column selection
 
-The `select()` function is used for column selection and has the formulation: `select(data, vars_to_select)`.
+The `select()` function is used for column selection and has the general structure: `select(data, variables_to_select)`.
 
-**Select only the columns that you want: **
+#### Select only the columns that you want
+
 
 ```r
 barley_acres <- select(nass_barley, state, year, acres)
@@ -252,7 +256,8 @@ head(barley_acres)
 ## 6    Kentucky 1866 10000
 ```
 
-**Select the columns you do not want: **
+#### Select the columns you do not want:
+
 
 ```r
 barley_yield <- select(nass_barley, -acres)
@@ -279,9 +284,9 @@ str(barley_yield2)
 
 ### Sorting data
 
-Sort functions have the formulation: `sort(data, vars_to_sort)`.
+Sort functions follow this structure: `sort(data, variables_to_sort)`
 
-**Sort across one column:**
+#### Sort across one column:*
 
 ```r
 corn_year <- arrange(nass_corn, state)
@@ -300,7 +305,8 @@ head(corn_year)
 ## 6  1871 Alabama 1480000  11
 ```
 
-**Sort across several columns:**
+#### Sort across several columns
+
 
 ```r
 corn_year_yield <- arrange(nass_corn, year, yield)
@@ -319,7 +325,7 @@ head(corn_year_yield)
 ## 6  1866 North Carolina 1675000   9.5
 ```
 
-**Sort in reverse order:**
+#### Sort in reverse order
 
 ```r
 corn_year_yield_rev <- arrange(nass_corn, desc(year), desc(yield))
@@ -351,7 +357,8 @@ corn_first100 <- slice(nass_corn, 100) # grab first 100 rows
 
 Filtering enables users to select all columns of data based on a condition within a row or rows. The `filter()` function has the formulation: `select(data, condition_for_filter)`.
 
-**Filter based on one variable and exact match:** 
+#### Filter based on one variable and exact match
+
 
 ```r
 corn_AZ <- filter(nass_corn, state == "Arizona")
@@ -370,7 +377,8 @@ head(corn_AZ)
 ## 6  1887 Arizona  3000    19
 ```
 
-**Filter for matching several items: **
+#### Filter for matching several items: 
+
 
 ```r
 barley_pnw <- filter(nass_barley, state %in% c("Idaho", "Oregon", "Washington"))
@@ -387,7 +395,7 @@ head(barley_pnw)
 ## 6 1874 Oregon 17000  29.0
 ```
 
-**Filter by numerical cut-off: **
+#### Filter by numerical cut-off: 
 
 (first, look at summary of data)
 
@@ -420,26 +428,10 @@ nass_cotton_high <- filter(nass_cotton, acres < 550000)
 |x & y     | x AND y  |
 
 
-**Combine multiple filters:**
+#### Combine multiple filters
 
-(again, let's look at summaries of the data first)
+*(and plot the output)*
 
-```r
-summary(nass_corn$yield)
-```
-
-```
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##    3.00   23.00   36.00   52.41   73.00  225.00
-```
-
-```r
-range(nass_corn$year)
-```
-
-```
-## [1] 1866 2011
-```
 
 ```r
 corn_Iowa_prewar <- filter(nass_corn, year < 1950 & year >= 1930 & state == "Iowa")
@@ -453,14 +445,14 @@ with(corn_Iowa_prewar, plot(year, yield, col = "dodgerblue", pch = 16, type = "b
 
 ### The `mutate()` function to define new variables
 
-Mutate functions have the formulation: `mutate(data, new_var_name = data_transformation)`. New variables are declared on the left and the right provides the operations for variable creation itself. Many operations are allowed within a mutate function: 
+Mutate functions have the formulation: `mutate(data, new_variable_name = data_transformation)`. New variables are declared on the left and the right provides the operations for variable creation itself. Many operations are allowed within a mutate function: 
 
 ```r
 barley_HI <- mutate(nass_barley, 
                     harvest_index = acres/yield,
                     Year = as.factor(year),
                     Is_high = acres > median(acres),
-                    crop = "barley",
+                    crop = "barley", 
                     relative_yld = yield/mean(yield))
 
 head(barley_HI)
@@ -566,9 +558,16 @@ The general formulation for join functions: `type_join(x_data, y_data, ID_key_va
 
 The column(s) used for ID are only included once in the merged data frame, that is, the duplicated key column is dropped. However, if there are other (non-ID) columns with duplicated names across the data sets, the duplicate columns from first data set listed are given a ".x" suffix and the duplicate columns from second data set listed are given a ".y" suffix. 
 
-**1. The `full_join()`:**    
-    - always the safest option, everything is returned
-    - searches and matches when both the year and state of a single observation match the year and state: 
+**1. The `full_join()`:**   
+
+* always the safest option for avoiding data removal (everything is returned)  
+
+* in this example, the full join will produce matches when both the year and state of a single observation match the year and state, and non-matches are appended to the resulting object.  
+
+* **Note:** for the rest of the joins, which employ a filtering step, I recommend you always use a single unique identifier (called a "key") for the joins. You can use multiple keys, but a single unique key is the clearest way to join data without generating duplicate observations.
+
+* When there is no match, the rows from each data set are still returned and filled with NA for columns from the other data set. 
+
 
 
 ```r
@@ -604,12 +603,11 @@ dim(nass_barley)
 ## [1] 4839    4
 ```
 
-  - **Note:** for the rest of the joins, which employ a filtering step, I recommend you always use a single unique identifier (called a "key") for the joins. You can use multiple keys, but a single unique key is the clearest way to join data without generating duplicate observations. 
-    - When there is not a match, the rows from each data set are still returned and filled with NA for columns from the other data set. 
 
 **2. The `inner_join()`:**   
 
-    - this function only keeps what is common between data sets:
+This function only keeps what is common between data sets:
+
 
 ```r
 cotton_barley_inner <- inner_join(cotton_nass_new, barley_nass_new, by = "ID")
@@ -644,7 +642,8 @@ colnames(cotton_barley_inner)[2:5] <- c("cotton_acres", "cotton_yield", "barley_
 
 **3. The `left_join()`:**    
 
-   - matches all rows for observations found in the tibble listed on the left:  
+This function matches all rows for observations found in the tibble listed on the left:  
+
 
 ```r
 cotton_barley_left <- left_join(cotton_nass_new, barley_nass_new, by = "ID")
@@ -656,9 +655,11 @@ dim(cotton_barley_left)
 ```
 
 
-**14. The `right_join()`:**  
+**4. The `right_join()`:**  
 
-   - matches all rows for observations found in the tibble listed on the left:  
+
+This function matches all rows for observations found in the tibble listed on the left:  
+
 
 ```r
 cotton_barley_right <- right_join(cotton_nass_new, barley_nass_new, by = "ID")
@@ -669,9 +670,10 @@ dim(cotton_barley_right)
 ## [1] 4839    5
 ```
 
-**5. The `semi_join()`: **   
+**5. The `semi_join()`:**   
 
-    - This function is like `inner_join()` (only rows with keys in both data sets are kept) except it does not keep any data from the data set listed second:
+This function is like `inner_join()` (only rows with keys in both data sets are kept) except it does not keep any data from the data set listed second:
+
 
 ```r
 cotton_barley_semi <- semi_join(cotton_nass_new, barley_nass_new, by = "ID")
@@ -706,9 +708,10 @@ str(cotton_barley_inner)
 ##  $ barley_yield: num [1:1242] 23 16 19 20 18 22 19 22 18.5 20.5 ...
 ```
 
-**6. The `anti_join()`: **  
+**6. The `anti_join()`:**  
 
-  - observations from A that *do not* match B are kept:
+Observations from first data set that *do not* match the second data set are kept:
+
 
 ```r
 cotton_barley_anti <- anti_join(cotton_nass_new, barley_nass_new, by = "ID")
@@ -720,11 +723,18 @@ dim(cotton_barley_anti)
 ```
 
 
+**Question:** What happens when there are multiple matches for an identifier when using `full_join()`, `left_join()` or `right_join()`? 
+
+<br>
+
+*Answer: Each time there is a new match between the keys of two data frames, a new row is added for the matched data - effectively all pairwise matches are added to the data set. There may be circumstances when this is advantageous, but usually, it is an unexpected surprise when a `full_join()` results in new data set several magnitudes larger than the two data sets combined.*
+
+
 ### Set operations
 
-These are different from standard joins. They compare across *vectors* and return what has been specified in the statement. *Duplicates are discarded.* The purpose of set operations is to determine common or uncommon observations, not merge two different data sets. 
+These are different from standard joins. They compare across *vectors* (not data.frames/tibbles) and return what has been specified in the statement. *Duplicates are always discarded.* The purpose of set operations is to determine common or uncommon observations, not merge two different data sets. 
 
-**Common set operations**   
+#### Common set operations   
 
 ![](set_operations.png)
 
@@ -775,26 +785,25 @@ intersect(nass_cotton$state, nass_barley$state)
 ## [17] "Kentucky"       "Nevada"
 ```
 
-**What happens when there are multiple matches for an identifier?** 
-
-*(Each time there is a new match between the keys of two data frames, a new row is added for the matched data)*
 
 ## Reshaping data
+
+Occasionally, you will have data in one arrangement (e.g. wide) that needs to be transformed into the long format.  Perhaps this is needed for graphing purposes, or to compare particular data points, or because another R package requires it. Doing this manually is time consuming and error-prone. There are some function in tidyr that can do this very efficiently. 
 
 ![](wide_v_long.png)
 **Same data, two formats**  
 
 Two common approaches to reshaping data: 
 
-1. 'tidyr' (popular)
-1. 'data.table' (flexible, fast)
+1. 'tidyr' (popular, fast)
+1. 'data.table' (flexible, very fast with large data sets)
 
 |reshaping action | tidyr function | data.table function |
 |----------|-------------|--------------|
 |long to wide | `pivot_wider()`  | `dcast()`  |
 |wide to long | `pivot_longer()`   | `melt()`  |
 
-*Note: the tidyr functions `pivot_wider()` and `pivot_longer()` replace `spread()` and `gather()`.*
+*Note: the tidyr functions `pivot_wider()` and `pivot_longer()` replaced `spread()` and `gather()`.*
 
 ### The tidyr approach: 
 
@@ -831,11 +840,11 @@ sample_n(nass_barley_pnw_wide, 5)
 ## # A tibble: 5 × 4
 ##    year Oregon Idaho Washington
 ##   <int>  <dbl> <dbl>      <dbl>
-## 1  1876   28      NA       NA  
-## 2  1895   22.5    28       25.5
-## 3  1915   25      35       33.5
-## 4  1991   72      75       65  
-## 5  1984   62      66       65
+## 1  1869   35      NA       NA  
+## 2  1911   23      35       32  
+## 3  1995   76      80       72  
+## 4  1956   37.5    33       35  
+## 5  1926   24      31       30.5
 ```
 There is also a `values_fill=` argument to fill in missing values when you know what those should be. The default behavior is to fill with an NA. 
 
@@ -856,11 +865,11 @@ sample_n(nass_barley_pnw_wide2, 5)
 ## # A tibble: 5 × 7
 ##    year yield_Oregon yield_Idaho yield_Washington acres_Oregon acres_I…¹ acres…²
 ##   <int>        <dbl>       <dbl>            <dbl>        <dbl>     <dbl>   <dbl>
-## 1  1877         35          NA               NA          25000        NA      NA
-## 2  1878         25          NA               NA          27000        NA      NA
-## 3  1909         21.8        34.7             33.9       109000    132000  172000
-## 4  1879         31.4        NA               NA          29000        NA      NA
-## 5  1915         25          35               33.5        85000    136000  180000
+## 1  2004         73          92               70          66000    650000  245000
+## 2  1945         29.5        37               35         257000    307000  125000
+## 3  1960         36          28.5             36.5       457000    492000  661000
+## 4  1914         23.5        32.5             33          82000    133000  187000
+## 5  1946         34          34               37         278000    276000   90000
 ## # … with abbreviated variable names ¹​acres_Idaho, ²​acres_Washington
 ```
 
@@ -948,16 +957,16 @@ sample(colnames(cotton_wide), 30)
 ```
 
 ```
-##  [1] "cotton_acres_1971" "cotton_acres_1930" "cotton_acres_1984"
-##  [4] "cotton_acres_1909" "cotton_acres_1872" "cotton_acres_1897"
-##  [7] "cotton_acres_1868" "cotton_acres_1935" "cotton_yield_1988"
-## [10] "cotton_yield_2008" "cotton_yield_1963" "cotton_yield_1991"
-## [13] "cotton_yield_2002" "cotton_yield_1879" "cotton_yield_1967"
-## [16] "cotton_yield_1925" "cotton_yield_1903" "cotton_acres_1989"
-## [19] "cotton_yield_1960" "cotton_yield_1930" "cotton_acres_1892"
-## [22] "cotton_acres_1968" "cotton_yield_1920" "cotton_acres_1878"
-## [25] "cotton_acres_1902" "cotton_yield_1918" "cotton_yield_1866"
-## [28] "cotton_acres_1954" "cotton_yield_1881" "cotton_acres_1906"
+##  [1] "cotton_acres_1971" "cotton_acres_1898" "cotton_yield_1998"
+##  [4] "cotton_acres_1945" "cotton_yield_1947" "cotton_yield_1911"
+##  [7] "cotton_acres_1952" "cotton_yield_1944" "cotton_acres_1896"
+## [10] "cotton_yield_1965" "cotton_yield_1945" "cotton_yield_1970"
+## [13] "cotton_yield_2005" "cotton_yield_1957" "cotton_yield_1967"
+## [16] "cotton_acres_1954" "cotton_yield_1898" "cotton_acres_1963"
+## [19] "cotton_yield_1932" "cotton_acres_1926" "cotton_yield_1868"
+## [22] "cotton_acres_1979" "cotton_yield_1908" "cotton_acres_1991"
+## [25] "cotton_acres_1972" "cotton_acres_1878" "cotton_acres_1883"
+## [28] "cotton_acres_1918" "cotton_yield_1921" "cotton_yield_1879"
 ```
 
 #### Implementing a summary function in the reshape 
@@ -972,11 +981,11 @@ sample_n(cotton_wide_meanYield , 5)[,c(1, 100:106)]
 
 ```
 ##    cotton_acres 1964 1965 1966 1967 1968 1969 1970
-## 1:      1868000    0    0    0    0    0    0    0
-## 2:      1055000    0    0    0    0    0  518    0
-## 3:      1695000    0    0    0    0    0    0    0
-## 4:      2553000    0    0    0    0    0    0    0
-## 5:      7084000    0    0    0    0    0    0    0
+## 1:       571000    0    0    0    0    0    0    0
+## 2:       420000    0    0    0    0    0    0    0
+## 3:      3242000    0    0    0    0    0    0    0
+## 4:       363000    0    0    0    0    0    0    0
+## 5:     10212000    0    0    0    0    0    0    0
 ```
 
 #### Reshaping from wide to long
@@ -993,12 +1002,12 @@ sample_n(cotton_acres_long, 5)
 ```
 
 ```
-##          State YEAR ACRES
-## 1: Mississippi 1918    NA
-## 2:     Georgia 1871    NA
-## 3:      Nevada 1868    NA
-## 4:    Missouri 1867    NA
-## 5:      Nevada 1898    NA
+##       State YEAR   ACRES
+## 1:   Nevada 1969    2300
+## 2: Kentucky 1981      NA
+## 3: Arkansas 1905      NA
+## 4: Arkansas 1921      NA
+## 5: Arkansas 1965 1205000
 ```
 
 
@@ -1013,12 +1022,12 @@ sample_n(cotton_long, 5)
 ```
 
 ```
-##       State YEAR  ACRES YIELD
-## 1: Missouri   98 343000   630
-## 2: Oklahoma  100 555000   319
-## 3: Illinois   93   1600   208
-## 4:  Arizona   62 131000   335
-## 5: Illinois   69   6100   305
+##             State YEAR  ACRES YIELD
+## 1:       Kentucky  106   4300   573
+## 2:         Kansas  130   2600   185
+## 3:     New Mexico   72 159000   490
+## 4: North Carolina   74 737000   296
+## 5:       Missouri   93 295000   446
 ```
 
 ## Grouping and summarising data
@@ -1074,6 +1083,9 @@ with(corn_highest_yielders, plot(year, yield, type = "l", col = "blue", lwd = 1.
 
 ## Other Useful Functions
 
+Not every amazing function in dplyr and tidyr are covered in this tutorial. Here are a few other functions you may find helpful when preparing and analyzing data. 
+
+
 |Package | Function |  Purpose  |
 |---------|-----------|------------------------------------------------------------|
 | dplyr | `pull()` | extracts a single column and returns a vector | 
@@ -1083,14 +1095,16 @@ with(corn_highest_yielders, plot(year, yield, type = "l", col = "blue", lwd = 1.
 | dplyr | `starts_with()` | used within `select()`, for selecting columns that start with a specific string of characters |
 | tidyr | `drop_na()` | remove rows with any missing data |
 | tidyr | `fill()` | fills in missing values with whatever occurs before it (column-wise). Its behavior is dependent on row order |
-|tidyr | `replace_na()` | replace missing values with a user-defined value (only when is.na(x) evaluates as "TRUE")
+| dplyr | `relocate()` | to move a column from one position to another (very helpful when working with a very wide data set)  
+| tibble | rownames_to_column | will place rownames as the first column in a tibble or data.frame 
+|tidyr | `replace_na()` | replace missing values with a user-defined value (only when `is.na(a_scalar)` evaluates to "TRUE")
 
-## Free Training Resources 
+## Other Resources 
 
-* [R for data science]("https://r4ds.had.co.nz/")
-* [RStudio Cheat sheets]("https://www.rstudio.com/resources/cheatsheets/")
-* [Package documentation]("https://www.tidyverse.org/packages/")
-* Tutorials by package authors: 
+* [R for data science]("https://r4ds.had.co.nz/") - *Thee Book* for working with the tidyverse 
+* [RStudio Cheat sheets]("https://www.rstudio.com/resources/cheatsheets/") - very handy! 
+* [Package documentation]("https://www.tidyverse.org/packages/") - always worth checking out
+* Tutorials by package authors: (these can often reveal package tricks that are hard to spot in the original help files) 
 
 ```
 vignette("dplyr")
