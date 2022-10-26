@@ -1,7 +1,7 @@
 ---
 title: "Categorical Data Analysis in SAS"
 author: "Statistical Programs, University of Idaho"
-date: "26/October/2022"
+date: "2022-10-26"
 output: 
   html_document:
     toc: true
