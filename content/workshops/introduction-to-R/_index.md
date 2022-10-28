@@ -9,7 +9,6 @@ type: page
 ## *(Registration Link Coming Soon)*
  
 <br>
-<br>
 
 ### Workshop content
 
