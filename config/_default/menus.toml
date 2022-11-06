@@ -17,28 +17,28 @@
 #  name = "Events"
 #  url = "events"
 #  weight = 30
-  
-#[[main]]
-#  name = "Presentations"
-#  parent = "Events"
-#  url = "events/presentations"
-#  weight = 10
+
+[[main]]
+  name = "Tutorials"
+  url = "tutorials"
+  weight = 30
   
 [[main]]
   name = "Workshops"
   #parent = "Events"
   url = "workshops"
-  weight = 20
-
+  weight = 40
+  
 [[main]]
-  name = "Tutorials"
-  url = "tutorials"
-  weight = 60
+  name = "Presentations"
+  #parent = "Events"
+  url = "presentations"
+  weight = 50
   
 [[main]]
   name = "contact"
   url = "#contact"
-  weight = 70
+  weight = 60
   
 [[main]]
   pre = "<i class='fa fa-rss'></i>"

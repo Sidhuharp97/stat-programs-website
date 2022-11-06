@@ -24,8 +24,8 @@ type: page
 
 ### Other Resources
 
-* [Spatial Analysis for Agricultural Field Experiments](https://idahoagstats.github.io/guide-to-field-trial-spatial-analysis/)
-* [Rstats4Ag](https://rstats4ag.org/) (using R and SAS)
+* [Spatial Analysis for Agricultural Field Experiments](https://idahoagstats.github.io/guide-to-field-trial-spatial-analysis/) (using R and SAS)
+* [Rstats4Ag](https://rstats4ag.org/) 
 * [Multivariate Statistical Machine Learning Methods for Genomic Prediction](https://link.springer.com/content/pdf/10.1007%2F978-3-030-89010-0.pdf)
 * [Basic Introduction to Linear models](https://lindeloev.github.io/tests-as-linear/#1_the_simplicity_underlying_common_tests)
 * [Mixed models in R](https://m-clark.github.io/mixed-models-with-R/)

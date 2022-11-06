@@ -116,6 +116,21 @@
     <loc>/post/learning-r/</loc>
     <lastmod>2022-06-01T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>/tag/cran/</loc>
+    <lastmod>2022-05-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/presentations/</loc>
+    <lastmod>2022-05-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tag/r/</loc>
+    <lastmod>2022-05-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2022-05-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/presentations/agstats-conference-2022/</loc>
+    <lastmod>2022-05-16T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>/category/agriculture/</loc>
     <lastmod>2022-05-13T00:00:00+00:00</lastmod>
   </url><url>
@@ -155,18 +170,22 @@
     <loc>/post/reproducible-r/</loc>
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tag/r/</loc>
-    <lastmod>2021-04-15T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>/tag/reproducible-research/</loc>
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tags/</loc>
-    <lastmod>2021-04-15T00:00:00+00:00</lastmod>
+    <loc>/tag/field-experiments/</loc>
+    <lastmod>2021-04-09T15:30:00+00:00</lastmod>
   </url><url>
-    <loc>/admin/</loc>
+    <loc>/presentations/spatial-seminar-2021-04-09/</loc>
+    <lastmod>2021-04-09T15:30:00+00:00</lastmod>
+  </url><url>
+    <loc>/tag/spatial-statistics/</loc>
+    <lastmod>2021-04-09T15:30:00+00:00</lastmod>
   </url><url>
     <loc>/authors/admin/</loc>
+    <lastmod>2021-04-09T15:30:00+00:00</lastmod>
+  </url><url>
+    <loc>/admin/</loc>
   </url><url>
     <loc>/tutorials/</loc>
   </url><url>
