@@ -7,6 +7,7 @@ output:
   xaringan::moon_reader:
     lib_dir: libs
     mathjax: null
+    css: ["robot.css", "fc.css"]
     nature:
       highlightStyle: github
       countIncrementalSlides: false
@@ -18,7 +19,12 @@ options(htmltools.dir.version = FALSE)
 knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
 knitr::opts_chunk$set(tidy.opts = list(width.cutoff = 60), tidy = TRUE)
 ```
+---
+class: center, middle, inverse
 
+# (link)
+
+---
 # What Do I use git & GitHub for? 
 
 .pull-left[ 
@@ -50,7 +56,7 @@ class: center
 class: center
 # Fork (copy) Project
 
-![](git_talk/fork_example.png)
+!["github fork example"](git_talk/fork_example.png)
 
 .right[[Website fork example](https://github.com/jpiaskowski/sta210-s22-template)]
 
@@ -58,20 +64,19 @@ class: center
 # Collaborate: File Issues
 
 - find out if someone else has experience a problem similar to yours  
-- Point out a bug  
-- request a feature
+- notify developers of a software bug  
+- request a new feature
 
-![](git_talk/r-lib_issues.png)
+!["github examples issues"](git_talk/r-lib_issues.png)
 
 [R GitHub Actions example](https://github.com/r-lib/actions/issues)
 
 ---
 # Collaboration with Others
 
-> Collaboration is the most compelling reason to manage a project with Git and GitHub.
-My definition of collaboration includes hands-on participation by multiple people, including your past and future self, as well as an asymmetric model, in which some people are active makers and others only read or review.
+> Collaboration is the most compelling reason to manage a project with Git and GitHub. My definition of collaboration includes hands-on participation by multiple people, including your past and future self, as well as an asymmetric model, in which some people are active makers and others only read or review.
 
-[J. Bryan, *Peer J* (2017)](https://peerj.com/preprints/3159/)
+.right[[J. Bryan, *Peer J* (2017)](https://peerj.com/preprints/3159/)]
 
 ---
 # git vs. GitHub
@@ -103,13 +108,13 @@ To clarify your data curation and analysis process for *research reproducibility
 ---
 # Why Might You Need This? 
 
-You are probably already implementing ad hoc version control. 
+You may be already implementing ad hoc version control. 
 
-![](git_talk/file_overload.png)
+!["ad hoc version control example"](git_talk/file_overload.png)
 ---
 # What It Could Look Like
 
-![](git_talk/version_control_contrast.png)
+!["schematic comparing version control"](git_talk/version_control_contrast.png)
 
 ---
 # Version Control Advantages
@@ -117,34 +122,36 @@ You are probably already implementing ad hoc version control.
 * Sharing for asynchronous work - no more "data_final_KC_EP_JLP_BP.csv" or wondering if you have the most recent version of files  
 * Abundantly clear what is the central or main version of files   
 * Very advanced version of "track changes"  
-* commits create safety points in case of disaster - you can recover pervious version
+* commits create safety points in case of disaster - you can recover previous version
 * branching creates space for experimentation - if all ends in failure, delete the experimental branch, return to the main branch and carry on like nothing happened
 
 ---
 # Generate a Web Presence
 
-agstats.io
+!["agstat.io screenshot"](git_talk/agstat_website.png)
+
+.right[[agstats.io](agstats.io) | [GitHub](https://github.com/IdahoAgStats/stat-programs-website)]
 
 ---
 # Post a Tutorial as an online book
 
-![]()
+!["example gitbook screenshot"](git_talk/example_gitbook.png)
 
-[Spatial Statistics in R](https://idahoagstats.github.io/guide-to-field-trial-spatial-analysis/)
+.right[[Happy Git with R](https://happygitwithr.com) | [GitHub](https://github.com/jennybc/happy-git-with-r)]
 
 ---
 # Run a course
 
-![]()
+!["example course"](git_talk/example_course.png)
 
-.right[[intro state course](https://sta210-s22.github.io/website/)]
+.right[[Staticial Rethinking](https://bayesf22-notebook.classes.andrewheiss.com/rethinking/) | [GitHub](https://github.com/andrewheiss/bayesf22-notebook)]
 
 ---
-# Documentation for your software
+# Documentation for Software
 
-![]()
+![](git_talk/pkgdown_example.png)
 
-.right[[rusda package](https://docs.ropensci.org/rusda/)]
+.right[[rusda package](https://docs.ropensci.org/rusda/) | [GitHub](https://github.com/ropensci/rusda/)]
 ---
 # Automate Tasks
 
@@ -152,7 +159,7 @@ agstats.io
 * run a GitHub action to do CI/CD (continuous integration/continuous deployment)
 * GitHUb actions can be challenging: 
 
-![]()
+!["examples of failed workflows"](git_talk/workflow_failures.png)
 
 ---
 # What Git and GitHub are *not* suitable for
@@ -165,23 +172,21 @@ There are special tools to work with large files - make sure you use those if yo
 ---
 # Things Can Go Wrong With Version Control
 
-![](git_talk/rejected_badges.png)
+!["rejected github badges"](git_talk/rejected_badges.png)
 
 [Snark GitHub Badges](https://github.com/Flet/rejected-github-profile-achievements)
 
 ---
 # Lesson 1: Take Learning git Seriously
 
-![](git_talk/xkcd_git.png)
+.center[![](git_talk/xkcd_git.png)]
 
-[xkcd cartoon](https://xkcd.com/1597/)
+.right[[xkcd cartoon](https://xkcd.com/1597/)]
 
 ---
 # Learning git
 
 Those 2-hour workshops are a good way to get started! But more training is needed. 
-
-You will find yourself in a sticky situation that only you can resolve. Do you want to implement a mystery solution you found on Stack Overflow and rick data loss??
 
 Decent options: 
 
@@ -189,6 +194,8 @@ Decent options:
   * [Software Carpentry git workshop](https://swcarpentry.github.io/git-novice/)
   * [Thee book of git](https://git-scm.com/book/en/v2)
   
+???
+You will find yourself in a sticky situation that only you can resolve. Do you want to implement a mystery solution you found on Stack Overflow and rick data loss??
 ---
 # Lesson 2: Use a Git Client
 
@@ -205,16 +212,18 @@ Decent options:
 The goal is to become accustomed to using git regularly - use the tools that help you reach that. 
 
 ---
-# Lesson 3: Be Patient When an Error Occurs
+# Tip 3: Be Patient When an Error Occurs
 
-When the inevitable error happens:
+.pull-left[When the inevitable error happens:
   * a merge error
   * can't pull or push!
-  * a `git revert` gone horribly wrong
+  * a `git revert` gone horribly wrong]
   
-**Proceed with caution!**
+.pull-right[
 
-![](git_talk_waldocat.png)
+![](git_talk/waldocat.png)]
+
+???
 
 All can be untangled - if you act wisely. It's also very possible to make things irreversibly worse! 
 
@@ -231,12 +240,9 @@ All can be untangled - if you act wisely. It's also very possible to make things
 ![](git_talk/git_disaster.png)
 
 ---
-# In the End, git is Worth it
+# 'Guitar Hero' git disaster
 
-1[](git_talk/yogitocat.png)
-
----
-# Guitar Hero git
+*(I still think git is worth the trade-offs)*
 
 ![](git_talk/guitar_hero.png)
 
