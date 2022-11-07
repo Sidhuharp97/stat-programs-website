@@ -21,7 +21,6 @@ knitr::opts_chunk$set(tidy.opts = list(width.cutoff = 60), tidy = TRUE)
 
 # What Do I use git & GitHub for? 
 
-*(Talk Outline)*
 
 ### 1. Share and access data
 ### 2. Collaborate
@@ -31,9 +30,12 @@ knitr::opts_chunk$set(tidy.opts = list(width.cutoff = 60), tidy = TRUE)
 [GitHub Octocat](https://octodex.github.com/)
 
 ---
-# Share & Access Data
+# Share & Access Data/Software/Demos
 
-https://github.com/rfordatascience/tidytuesday)
+![](git_talk/tidy_tuesday.png)
+
+[Tidy Tuesday datasets](https://github.com/rfordatascience/tidytuesday)
+
 ---
 # Share & Access Data/Software/Demos
 
@@ -42,28 +44,30 @@ https://github.com/rfordatascience/tidytuesday)
 [Hugging Face Deep Learning Tools](https://github.com/huggingface)
 
 ---
-# Collaborate: File Issues
-
-- Point out a bug (or find out if someone else has this problem)
-- ask developer to add feature
-
-![](git_talk/r-lib_issues.png)
-
-[R GitHub Actions example](https://github.com/r-lib/actions/issues)
-
----
-# Collaborate: Fork (copy) Project
+# Fork (copy) Project
 
 ![](git_talk/fork_example.png)
 
 [Website fork example](https://github.com/jpiaskowski/sta210-s22-template)
 
 ---
-# Collaborate with Other People
+# Collaborate: File Issues
 
+- find out if someone else has experience a problem similar to yours  
+- Point out a bug  
+- request a feature
 
+![](git_talk/r-lib_issues.png)
 
-[](https://peerj.com/preprints/3159/)
+[R GitHub Actions example](https://github.com/r-lib/actions/issues)
+
+---
+# Collaboration with Others
+
+> Collaboration is the most compelling reason to manage a project with Git and GitHub.
+My definition of collaboration includes hands-on participation by multiple people, including your past and future self, as well as an asymmetric model, in which some people are active makers and others only read or review.
+
+[J. Bryan, *Peer J* (2017)](https://peerj.com/preprints/3159/)
 
 ---
 # git vs. GitHub
@@ -76,20 +80,16 @@ https://github.com/rfordatascience/tidytuesday)
 Version control captures changes across files, describing the difference between each and maintaining a linear history that can be rewound if needed. 
 
 ![](git_talk/flower_growing.jpg)
-
 ---
 # Why Might You Need This? 
  
-You're already doing an ad hoc version control. 
-{image of file system}
+To clarify your data curation and analysis process for *research reproducibility*
 
+* files change over time
+* results may be shared
+* many people are contributing to a project
 
----
-# Why Might You Need This? 
- 
-#### *Reproducible Research*
-
-> ...reproducibility is obtaining consistent results using the same input data; computational steps, methods, and code; and conditions of analysis. This definition is synonymous with “computational reproducibility” 
+> ...reproducibility is obtaining consistent results using the same input data; computational steps, methods, and code; and conditions of analysis. 
 
             - Reproducibility and Replicability in Science (2018)
                National Academies of Sciences
@@ -97,14 +97,44 @@ You're already doing an ad hoc version control.
 .right[.ref[*[Reference](https://www.nationalacademies.org/our-work/reproducibility-and-replicability-in-science)*]
 
 ---
-# Version Control Creates Safety Points
+# Why Might You Need This? 
 
-![](git_talk/git_safety.png)
-Image Credit: [Allison Horst](https://www.openscapes.org/blog/2022/05/27/github-illustrated-series/)
+You are probably already implementing ad hoc version control. 
+
+![](git_talk/file_overload.png)
+---
+# What It Could Look Like
+
+![](git_talk/version_control_contrast.png)
+
+---
+# Version Control Advantages
+
+* Sharing for asynchronous work - no more "data_final_KC_EP_JLP_BP.csv" or wondering if you have the most recent version of files  
+* Abundantly clear what is the central or main version of files   
+* Very advanced version of "track changes"  
+* commits create safety points in case of disaster - you can recover pervious version
+* branching creates space for experimentation - if all ends in failure, delete the experimental branch, return to the main branch and carry on like nothing happened
+
+---
+# Generate a Web Presence
+
+
+---
+# Post a Tutorial as an online book
+
+---
+# Run a course
+
+---
+# Documentation for your software
+
+
+
 ---
 # What is Git and GitHub not suitable for
 
-* Making publication data sets available - this is not an appropriate long-term repository
+* Making publication data sets available - this is not an appropriate long-term repository (just ask the National Academy of Sciences!)
 * Tracking changes in binary files (.doc, .docx, .xls, .xlsx, .pdf)
 
 There are special tools to work with large files - make sure you use those if your files are large!  
@@ -113,11 +143,11 @@ There are special tools to work with large files - make sure you use those if yo
 # Things Can Go Wrong With Version Control
 
 ![](git_talk/rejected_badges.png)
+
 [Snark GitHub Badges](https://github.com/Flet/rejected-github-profile-achievements)
 
-
 ---
-# Lesson 1: Take learning git seriously
+# Lesson 1: Take Learning git Seriously
 
 ![](git_talk/xkcd_git.png)
 
@@ -126,11 +156,12 @@ There are special tools to work with large files - make sure you use those if yo
 ---
 # Learning git
 
-* Those 2-hour workshops are a good way to get started!
+Those 2-hour workshops are a good way to get started! But more training is needed. 
 
-* But more training is needed. You will find yourself in a sticky situation that only you can resolve. Do you want to implement a mystery solution you found on Stack Overflow and rick data loss??
+You will find yourself in a sticky situation that only you can resolve. Do you want to implement a mystery solution you found on Stack Overflow and rick data loss??
 
 Decent options: 
+
   * [Happy Git with R](https://happygitwithr.com/)
   * [Software Carpentry git workshop](https://swcarpentry.github.io/git-novice/)
   * [Thee book of git](https://git-scm.com/book/en/v2)
@@ -141,7 +172,7 @@ Decent options:
 ![](git_talk/git_kraken.png)
 
 ---
-# Some Graphical User Interface
+# Some Graphical User Interfaces
 
 * GitHub GUI
 * Git Kraken
@@ -158,7 +189,9 @@ When the inevitable error happens:
   * can't pull or push!
   * a `git revert` gone horribly wrong
   
-Proceed with caution! 
+**Proceed with caution!**
+
+![](git_talk_waldocat.png)
 
 All can be untangled - if you act wisely. It's also very possible to make things irreversibly worse! 
 
@@ -167,7 +200,7 @@ All can be untangled - if you act wisely. It's also very possible to make things
 
 * Learn about and use the `.gitignore` file
 * Consider private repositories when appropriate
-* There are some guidelines regarding legal compliaence (e.g. [HIPAA](https://github.com/truevault/hipaa-compliance-developers-guide))
+* There are some guidelines regarding legal compliance (e.g. [HIPAA](https://github.com/truevault/hipaa-compliance-developers-guide))
 
 ---
 # Git a Humbling Experience
@@ -175,7 +208,15 @@ All can be untangled - if you act wisely. It's also very possible to make things
 ![](git_talk/git_disaster.png)
 
 ---
-# In the End, git is Worth It
+# In the End, git is Worth it
 
 1[](git_talk/yogitocat.png)
+
+---
+# Guitar Hero git
+
+![](git_talk/guitar_hero.png)
+
+.right[.ref[*[original tweet](https://twitter.com/HenryHoffman/status/694184106440200192)]]
+
 
