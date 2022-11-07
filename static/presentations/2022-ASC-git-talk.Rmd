@@ -21,34 +21,38 @@ knitr::opts_chunk$set(tidy.opts = list(width.cutoff = 60), tidy = TRUE)
 
 # What Do I use git & GitHub for? 
 
-
+.pull-left[ 
 ### 1. Share and access data
 ### 2. Collaborate
-### 3. Build things
+### 3. Build things ]
 
+.pull-right[
 ![](git_talk/octocat_original.png)
-[GitHub Octocat](https://octodex.github.com/)
+[GitHub Octocat](https://octodex.github.com/). ]
 
 ---
+class: center
 # Share & Access Data/Software/Demos
 
 ![](git_talk/tidy_tuesday.png)
 
-[Tidy Tuesday datasets](https://github.com/rfordatascience/tidytuesday)
+.right[[Tidy Tuesday datasets](https://github.com/rfordatascience/tidytuesday)]
 
 ---
+class: center
 # Share & Access Data/Software/Demos
 
 ![](git_talk/hugging_face.png)
 
-[Hugging Face Deep Learning Tools](https://github.com/huggingface)
+.right[[Hugging Face Deep Learning Tools](https://github.com/huggingface)]
 
 ---
+class: center
 # Fork (copy) Project
 
 ![](git_talk/fork_example.png)
 
-[Website fork example](https://github.com/jpiaskowski/sta210-s22-template)
+.right[[Website fork example](https://github.com/jpiaskowski/sta210-s22-template)]
 
 ---
 # Collaborate: File Issues
@@ -119,20 +123,39 @@ You are probably already implementing ad hoc version control.
 ---
 # Generate a Web Presence
 
+agstats.io
 
 ---
 # Post a Tutorial as an online book
 
+![]()
+
+[Spatial Statistics in R](https://idahoagstats.github.io/guide-to-field-trial-spatial-analysis/)
+
 ---
 # Run a course
+
+![]()
+
+.right[[intro state course](https://sta210-s22.github.io/website/)]
 
 ---
 # Documentation for your software
 
+![]()
 
+.right[[rusda package](https://docs.ropensci.org/rusda/)]
+---
+# Automate Tasks
+
+* automate action: `R cmd check` or `blogdown::build_site()`
+* run a GitHub action to do CI/CD (continuous integration/continuous deployment)
+* GitHUb actions can be challenging: 
+
+![]()
 
 ---
-# What is Git and GitHub not suitable for
+# What Git and GitHub are *not* suitable for
 
 * Making publication data sets available - this is not an appropriate long-term repository (just ask the National Academy of Sciences!)
 * Tracking changes in binary files (.doc, .docx, .xls, .xlsx, .pdf)
