@@ -1,0 +1,181 @@
+---
+title: "Using git"
+subtitle: "⚔ <br/>w ales of Peril, Pain and Protection"
+author: "Julia Piaskowski"
+date: "2022/11/08"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    mathjax: null
+    nature:
+      highlightStyle: github
+      countIncrementalSlides: false
+---
+
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
+knitr::opts_chunk$set(tidy.opts = list(width.cutoff = 60), tidy = TRUE)
+```
+
+# What Do I use git & GitHub for? 
+
+*(Talk Outline)*
+
+### 1. Share and access data
+### 2. Collaborate
+### 3. Build things
+
+![](git_talk/octocat_original.png)
+[GitHub Octocat](https://octodex.github.com/)
+
+---
+# Share & Access Data
+
+https://github.com/rfordatascience/tidytuesday)
+---
+# Share & Access Data/Software/Demos
+
+![](git_talk/hugging_face.png)
+
+[Hugging Face Deep Learning Tools](https://github.com/huggingface)
+
+---
+# Collaborate: File Issues
+
+- Point out a bug (or find out if someone else has this problem)
+- ask developer to add feature
+
+![](git_talk/r-lib_issues.png)
+
+[R GitHub Actions example](https://github.com/r-lib/actions/issues)
+
+---
+# Collaborate: Fork (copy) Project
+
+![](git_talk/fork_example.png)
+
+[Website fork example](https://github.com/jpiaskowski/sta210-s22-template)
+
+---
+# Collaborate with Other People
+
+
+
+[](https://peerj.com/preprints/3159/)
+
+---
+# git vs. GitHub
+
+![](git_talk/git_github_schematic.jpg)
+
+---
+# Version Control
+
+Version control captures changes across files, describing the difference between each and maintaining a linear history that can be rewound if needed. 
+
+![](git_talk/flower_growing.jpg)
+
+---
+# Why Might You Need This? 
+ 
+You're already doing an ad hoc version control. 
+{image of file system}
+
+
+---
+# Why Might You Need This? 
+ 
+#### *Reproducible Research*
+
+> ...reproducibility is obtaining consistent results using the same input data; computational steps, methods, and code; and conditions of analysis. This definition is synonymous with “computational reproducibility” 
+
+            - Reproducibility and Replicability in Science (2018)
+               National Academies of Sciences
+
+.right[.ref[*[Reference](https://www.nationalacademies.org/our-work/reproducibility-and-replicability-in-science)*]
+
+---
+# Version Control Creates Safety Points
+
+![](git_talk/git_safety.png)
+Image Credit: [Allison Horst](https://www.openscapes.org/blog/2022/05/27/github-illustrated-series/)
+---
+# What is Git and GitHub not suitable for
+
+* Making publication data sets available - this is not an appropriate long-term repository
+* Tracking changes in binary files (.doc, .docx, .xls, .xlsx, .pdf)
+
+There are special tools to work with large files - make sure you use those if your files are large!  
+
+---
+# Things Can Go Wrong With Version Control
+
+![](git_talk/rejected_badges.png)
+[Snark GitHub Badges](https://github.com/Flet/rejected-github-profile-achievements)
+
+
+---
+# Lesson 1: Take learning git seriously
+
+![](git_talk/xkcd_git.png)
+
+[xkcd cartoon](https://xkcd.com/1597/)
+
+---
+# Learning git
+
+* Those 2-hour workshops are a good way to get started!
+
+* But more training is needed. You will find yourself in a sticky situation that only you can resolve. Do you want to implement a mystery solution you found on Stack Overflow and rick data loss??
+
+Decent options: 
+  * [Happy Git with R](https://happygitwithr.com/)
+  * [Software Carpentry git workshop](https://swcarpentry.github.io/git-novice/)
+  * [Thee book of git](https://git-scm.com/book/en/v2)
+  
+---
+# Lesson 2: Use a Git Client
+
+![](git_talk/git_kraken.png)
+
+---
+# Some Graphical User Interface
+
+* GitHub GUI
+* Git Kraken
+* SourceTree
+* ....[tons more](https://git-scm.com/downloads/guis)
+
+The goal is to become accustomed to using git regularly - use the tools that help you reach that. 
+
+---
+# Lesson 3: Be Patient When an Error Occurs
+
+When the inevitable error happens:
+  * a merge error
+  * can't pull or push!
+  * a `git revert` gone horribly wrong
+  
+Proceed with caution! 
+
+All can be untangled - if you act wisely. It's also very possible to make things irreversibly worse! 
+
+---
+# Lesson 4: Don't Expose Secrets
+
+* Learn about and use the `.gitignore` file
+* Consider private repositories when appropriate
+* There are some guidelines regarding legal compliaence (e.g. [HIPAA](https://github.com/truevault/hipaa-compliance-developers-guide))
+
+---
+# Git a Humbling Experience
+
+![](git_talk/git_disaster.png)
+
+---
+# In the End, git is Worth It
+
+1[](git_talk/yogitocat.png)
+
