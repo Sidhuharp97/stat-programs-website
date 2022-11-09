@@ -1,0 +1,357 @@
+---
+title: "Nonlinear Regression in SAS"
+author: "Statistical Programs, University of Idaho"
+date: "2022-11-09"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    toc_collapsed: true
+    toc_depth: 3
+    number_sections: true
+    css: .\sas.default.css
+---
+
+```{r  setup, include=FALSE}
+require(SASmarkdown)
+sasopts <- "-nosplash -ls 200  "
+knitr::opts_chunk$set(engine.opts=list(sashtml=sasopts, sashtmllog=sasopts),
+                      comment=NA)
+```
+
+# Introduction
+
+This tutorial is an introduction to nonlinear regression models in SAS. Some additional knowledge of SAS may be useful for understanding certain aspects of this material. For more information on these requirements, the reader is referred to the tutorials on the [Data Step](https://agstats.io/tutorials/sas-data-step.html){target="_blank"} and [Graphics and Plotting](https://agstats.io/tutorials/sas-graphics.html){target="_blank"}. 
+  
+Nonlinear models are often associated with functions that curve or are not straight lines. This, however, is a not a precise definition. Linear or nonlinear in statistical models refers to how the model parameters enter the model function. Some models that graphically appear "curved" are, in fact, linear models. For example, a quadratic model is graphically a concave or convex shape, but the model is linear:
+
+$$y_{i} = \beta_0 + \beta_1 \cdot x_{1} + \beta_2 \cdot x_{1}^2 + \epsilon_{i}$$
+In this model, the parameters $\beta_0$, $\beta_1$, and $\beta_2$ are additive relative to one another making this a linear model. An example of a nonlinear model would be:
+
+$$y_{i} = \beta_0\cdot x_{i}^{\beta_1} + \epsilon_{i}$$
+
+where the parameters $\beta_0$ and $\beta_1$ are multiplicative relative to each other. In terms of estimation, this makes a difference. In linear models, solutions for parameter estimates can be derived algebraically, while no closed form solutions or equations can be derived for nonlinear models. Estimation in nonlinear models is obtained through an iterative "trial-and-error" process, the details of which can vary and are only covered briefly here. For more technical material on nonlinear estimation methods, see texts such as [Nonlinear Regression Analysis and Its Applications](https://www.wiley.com/en-us/Nonlinear+Regression+Analysis+and+Its+Applications-p-9780470139004){target="_blank"}. 
+
+Regardless of the methodology, the iterative estimation process typically requires the user to specify *starting values* for each parameter. These are basically guesses at what the parameters might be to start the process. The user may have some clues from the data, or they may be completely unknown to the user. Such details will depend on the model used, knowledge of the process being modeled, and the data itself. Examples for these aspects will be demonstrated below.<br><br>
+
+<div class="infobox">
+##### Note: Linearization
+
+The ability to estimate nonlinear models is, computationally, relatively recent. Before this ability was available, nonlinear model forms were often transformed or *linearized* such that they became linear with additive parameters. This made estimation through standard linear regression possible. An example would be the power model above:
+
+$$y_{i} = \beta_0\cdot x_{i}^{\beta_1} + \epsilon_{i}$$
+
+By taking the logarithm of the model, we get a linear form:
+
+$$ln(y_{i}) = ln(\beta_0) + \beta_1\cdot x_{i}^{} + \phi_{i} $$
+$$ y_{i}^*= \beta_0^* + \beta_1\cdot x_{i} + \phi_{i}$$
+where $y_{i}^*$ is the logarithm of the response, $y_{i}$, and the intercept of this model, $\beta_0^*$, is the logarithm of the original parameter $\beta_0$. The exponential function could then be used to untransform the predicted values and intercept parameter. Note, however, that the error term $\phi_{i}$ is not equivalent to the additive error $\epsilon_{i}$. Thus, linearization provides only an approximation to the desired nonlinear form. For these reasons, it is now more desirable to use true nonlinear estimation techniques rather than linearization.  In some cases, however, linearization may be useful for deriving the starting values necessary for the nonlinear estimation process.
+
+
+</div><br>
+
+# Model Selection
+
+There are an infinite number of nonlinear forms that can be selected for representing data. The selection process, however, should follow some basic guidelines. First and foremost, model selection, and the use of nonlinear modeling in general, should meet the research objectives. What is the purpose of modeling and what does the researcher hope to gain from it? A second and related factor is model interpretation. Are the parameters of the model interpretable in biological terms? Do they have biological relevance? This is often determined from theoretical considerations or previous research. Given these decisions, the data itself are an important consideration. What pattern does the data generally have? Is it increasing, decreasing, curved, etc.? Are there sufficient data points to support estimation of a model and do they fall in appropriate places to provide good estimation? As an example, many models attempt to estimate minimum or maximum theoretical values (asymptotes) when the values of dose or time are very large. Even though such doses or times are not practically relevant, they are important for model estimation. If the data set lacks points at large dose/time values, then the estimations will be poor, or even fail. Lastly, the complexity of model forms and their parameterization should be considered. Models containing many parameters (often more than 3) or parameters that involve exponents, ratios, or other multiplicative relationships can be difficult to estimate. Models should be as concise as possible with the fewest parameters as possible (parsimony). In many cases, parsimony and complexity issues can be resolved by reparameterizing the model or selecting a different model to make a simpler form for estimation.
+
+# Common Nonlinear Models
+
+## Exponential Forms
+
+Exponential forms are often used to describe uniformly decreasing or increasing curved trends found in response decay or growth. They are typically two to three parameter models. Two common forms used in agricultural research are:
+
+$$ y = a*exp(-b*x) + c \tag*{(Decreasing)} $$
+$$y = M - a*exp(-b*x) \tag*{(Increasing)} $$ 
+In these models, the parameter $a$ is releated to an intercept at $x=0$, $b$ is a rate related parameter, $M$ is an upper asymptote, and $c$ is a lower asymptote, both approached as $x$ grows larger. In many cases, $c$ is often assumed to be zero and $M$ may be set to 1.0 or 100 for proportional or percentage data, respectively.
+
+<img src="./images/decreasing exp.png" alt="Decreasing Exponential" width="300"/>
+<img src="./images/increasing exp.png" alt="Increasing Exponential" width="300"/><br><br>
+
+## S-Curve Forms
+
+Similar to the exponential forms, S-curves may be either increasing or decreasing. A key difference, however, is that these forms have an *inflection point* midway where the rate of change in the curve slows and changes direction giving the curves their characteristic "S" shape. They are commonly used to describe dose-response relationships or growth over time. Many are taken directly from the functional forms of cumulative probability distributions for theoretical reasons (for example probit, tobit and logit models). Others are derived from mathematical derivations of growth or decay. Some specific types of S-curves are outlined below.
+
+<img src="./images/increasing S.png" alt="Increasing S-Curve" width="300"/>
+<img src="./images/decreasing S.png" alt="Decreasing S-Curve" width="300"/><br><br>
+
+### Logistic Curve
+
+The logistic curve (not to be confused with logistic regression) is often seen in dose-response work with a probabilistic interpretation, or from differential equations describing growth. Its parameterization can vary widely. The form below is often seen in agricultural dose-response work.
+
+$$ y = \frac{M}{1 + exp(K*(x - L))}$$
+Here, $M$ is an upper asymptote representing a theoretical maximum of the response, $y$. $K$ is a rate parameter. When $K$ is positive, the curve begins close to $M$ and decreases. When negative, the curve starts close to zero and increases to $M$. The parameter $L$ is, by default, the infection point at 50% of $M$. That is, when the variable $x$ equals $L$ the response $y$ equals $\frac{M}{2}$. In dose-response work, this 50th percentile is commonly known as the $LD_{50}$ or $ED_{50}$. In growth models, $L$ represents a quantification of lag time for the start of growth. The quantity $(x - L)$ often appears in logrithmic form as this transformation makes the data pattern symmetric about the inflection point (as in the data examples below). Hence, the form may appear as $(ln(x) - L)$, $ln(\frac{x}{L})$, or an equivalent. It is also possible to have $L$ estimate other percentiles by reparameterizing the function (see for example [Price, et. al, 2017](https://www.cambridge.org/core/journals/weed-technology/article/estimation-of-doseresponse-models-for-discrete-and-continuous-data-in-weed-science/E23EAEEF80C008DC5E3191BDABFE6245){target="_blank"}.
+
+### Probability Based Models
+
+These encompass a wide variety of models that were traditionally used for dose-response modeling. Examples include cumulative distributions for the Normal (probit), t (tobit), and logistic (logit). Because these functions are complex and involve integration to compute, they are not readily written out in equation form, but instead either use predefined probability functions in SAS, or dedicated SAS procedures (Proc Probit).
+
+### Asymmetric S-Curves
+
+All the curves described above exhibit symmetry about the inflection point. As mentioned, sometimes asymmetry in the data is accommodated through logrithmic transformations in the model. There are some models, however, that can directly assume asymmetry. Two examples of this are the Weibull and Gompherz.
+
+$$y = M*(1-exp(-((K*x)^C)))\tag*{Weibull}$$
+
+$$y = = M*exp(−exp(−K*(x − L)))\tag*{Gomphertz}$$
+In these forms, $M$, $K$, and $L$ play similar roles as those in the logistic model above, although $L$ does not relate to the 50th percentile.
+
+### Hormesis Models
+
+There are a special class of dose-response models where the data generally follow the decreasing S-Curve shape, but they also exhibit a small initial increase at very low doses. This behavior, for example, is often observed in some herbicides that are similar to growth hormones and small doses actually induce growth, rather than plant injury. This process is referred to as hormesis and one model to describe this phenomenon was given by [Brain and Cousens, 1989](https://onlinelibrary.wiley.com/doi/10.1111/j.1365-3180.1989.tb00845.x){target="_blank"}:
+
+$$y = \frac{(M + f*x)}{1 + exp(B*(log(x)-log(L)))}$$
+This model is similar to the logistic model above with the addition of the parameter $f$ which creates the bump in the curve at small doses, $x$. An example of fitting this curve can be found at [Price, et. al, 2017](https://www.cambridge.org/core/journals/weed-technology/article/estimation-of-doseresponse-models-for-discrete-and-continuous-data-in-weed-science/E23EAEEF80C008DC5E3191BDABFE6245){target="_blank"}
+
+
+# Model Estimation
+
+Nonlinear estimation is an iterative process. That is, there are no closed form equations to compute parameter values. Because of this, the computer algorithms that estimate parameters will use a trial and error process to judge whether the estimates it has are "good enough", which usually means they have met some predetermined numeric condition (referred to as *convergence*). This requires that the algorithm has a place to start, or starting parameter values, to begin the estimation. The algorithm will then adjust the starting values to improve to model fit and continue doing so until the model *converges*. Conceptually, this process is analogous to letting a marble drop into a bowl from the edge. The marble will oscillate back and forth and around until it settles at the bottom or a low spot.  
+
+Traditionally, the trial and error iterative process has been based on the concept of least squares where the objective is to find parameters such that the distance between the predicted curve and the observed points is minimal. In SAS, the least squares estimation process is carried out through the procedure *Proc Nlin*. While *Proc Nlin* is still useful, it does have limitations because, for statistical inference, it assumes the data are normally distributed in addition to assuming that all parameters in the  model are fixed effects. Its benefits, however, include ease of use and good convergence on parameter solutions, which can be useful for deriving starting values to use in more sophisticated nonlinear modeling procedures. 
+
+A more modern alternative to least squares estimation is the process of maximum likelihood estimation. In maximum likelihood, the objective  of the parameter iterations and adjustments is to maximize the likelihood or probability of observing the data at hand. This has the obvious advantage that the likelihood function does not have to be a normal distribution, but could, alternatively, come from a wide array of potential distributions (generalized nonlinear models). The procedure available in SAS, *Proc Nlmixed*, also has the ability to consider parameters as random effects, thereby giving these models more flexibility to accurately represent the data. The drawbacks here are a more sensitive and complex estimation algorithm that can show difficulty in converging on a solution. Obtaining good starting values close to the final estimates can be essential when using *Proc Nlmixed*. The least squares procedure, *Proc Nlin* above, can be a good way of deriving these.
+
+Both least squares *Proc Nlin* and maximum likelihood *Proc Nlmixed* will be demonstrated below.
+
+# Data used in examples
+  
+## Exponential Data
+
+These data are a simple simulated set of variables for demonstrating the exponential model and basic nonlinear estimation and results.
+
+```{sashtml Data1, collectcode=TRUE}
+
+data exp;
+	do x = 0 to 20;
+		do rep = 1 to 4;
+			y = 100*exp(-.2*x) + rannor(0934)*5;
+			output;
+		end;
+	end;
+;
+
+proc sgplot;
+        scatter x=x y=y/filledoutlinedmarkers markeroutlineattrs=(color=black) markerattrs=(symbol=circlefilled size=12) MARKERFILLATTRS=(color=green);
+	xaxis LABELATTRS=( Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+	yaxis LABELATTRS=( Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+run;
+
+```
+
+## Onion Data
+
+These [data](.\data\Onion.xlsx) are from an experiment assessing the germination of onion seeds under varying osmotic pressure (available moisture). In the experiemnt, there were two petri dishes of 100 seeds each. This was replicated four times. The cumulative number of seeds germinated (emerged radical of 1 mm) were recorded for 20 days.
+
+```{sashtml Data2, collectcode=TRUE}
+
+PROC IMPORT OUT= WORK.onion
+	DATAFILE= "./data/onion.xlsx"
+	DBMS=XLSX REPLACE;
+	sheet="Onion";
+RUN;
+
+proc sort data=onion;
+	by trt day;
+run;
+
+proc sgplot data=onion;
+	styleattrs datacolors=(cxFD07FA cx0752FD);
+	scatter x=day y=germ/group=trt filledoutlinedmarkers markeroutlineattrs=(color=black) markerattrs=(symbol=circlefilled size=12);;
+	xaxis type=log logbase=e logstyle=linear label='Day' LABELATTRS=( Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+	yaxis label='Germination (%)' LABELATTRS=( Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+	keylegend /AUTOITEMSIZE valueattrs=(size=14) TITLEATTRS=(weight=bold size=12) Title = 'Osmotic Pressure (Pa)'; 
+run;
+```
+
+## ALS Activity in Winter Wheat
+
+These [data](.\data\ALS.xlsx) record the activity of Acetolactate Synthase (ALS) as % absorbtion in winter wheat under increasing doses of a herbicide that inhibits ALS ([Rainbolt, C. R., et al., 2005](https://www.cambridge.org/core/journals/weed-technology/article/abs/imidazolinoneresistant-wheat-acetolactate-synthase-in-vivo-response-to-imazamox/59A66E34A5FB8E4BCF1805A004F8D7D4){target="_blank"}. The study was carried out over eight replications (plates).
+
+```{sashtml Data3, collectcode=TRUE}
+
+PROC IMPORT OUT= WORK.ALS
+	DATAFILE= "./data/ALS.xlsx"
+	DBMS=XLSX REPLACE;
+	sheet="ALS";
+RUN;
+	
+proc sgplot;
+	scatter x=dose y=percent/FILLEDOUTLINEDMARKERS markerattrs=(symbol=circlefilled size=14) MARKERFILLATTRS=(color=tan) MARKEROUTLINEATTRS=(color=black);;
+	xaxis type=log logbase=e logstyle=linear label='ALS Herbicide Dose (ug/ml)' LABELATTRS=( Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+	yaxis label="ALS Activity (% Absorbance)" LABELATTRS=( Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+run;
+```
+
+# Least Squares Estimation
+
+The following code applies least squares estimation to an exponential model with the procedure *Proc Nlin*. The predicted curve and studentized model residuals are output and plotted to visually assess the model fit. The *Parms* statement is used to specify the starting values for the parameters **a** and **b**. The *method=guass* option applies one of several available least squares estimation algorithms.
+
+```{sashtml Exp1}
+
+proc nlin data=exp method=gauss;
+    parms a=100 b=-.2;
+    model y = a*exp(-b*x);
+    output out=nl_pred p=pr student=resid;
+run;
+
+proc sgplot;
+    scatter x=x y=y;
+		series x=x y=pr;
+		
+run;
+
+proc sgplot;
+    scatter x=x y=resid;
+		refline 0/axis=y;
+run;
+
+```
+
+In this output, the first table lists the changes made to the parameters over the iterations required to converge on an answer (9). Also listed are the sum of squares error which decreases until it stabilizes at 1452. The note following the table is critical, stating the convergence was met. When using any nonlinear procedure, this statement or equivalent is essential. Results from analyses not meeting convergence should not be used.
+
+An "ANOVA" like table lists significance for the model, p<0.0001, suggesting the exponential model fit the data. A parameter table with estimates and confidence intervals is also shown where a = 98.87 and b = 0.20. The last table lists correlation between the parameters. These correlations are important when they reach high levels, say larger than 0.9, which may indicate that the model has too many parameters for this data to support. In such circumstances, reducing the number of parameters through respecification of the model, or simply selecting a simpler alternative model, may be desirable. Note: In nonlinear estimation, all inferential tests and statistics are approximate and, hence, they should be interpreted cautiously and in conjunction with other information such as the size, sign and relevance of parameter estimates, as well as visual confirmation that the estimated curve approximates the observed data well.
+
+To, that end, the final plots show the model runs through the observed data and the residuals are randomly scattered with no trending and they are of reasonable magnitude (between -3 and 3 for studentized residuals). All this information together indicates the exponential model is an appropriate description of this data.
+
+# Maximum Likelihood Estimation and Curve Comparison
+
+## Initial Model Fitting
+
+In this example we have two treatments. We would like to fit germination curves to each treatment and then compare them. The data, however, are binomial counts, not continuous normal data, therefore, we need to use a generalized model (Proc Nlmixed) for the final estimation. Before doing so, however, it is a good idea to see if we can generally fit a curve (logistic in this case) to the data. To do so, Proc Nlin is used, ignoring the count nature of the data. This provides us with estimated starting values for the actual generalized model later. We will ignore all inferential statistics here and only concentrate on the estimated parameters and the visual fit of the curves. Once satisfied with these we can move on to the curve comparisons.
+
+The code below sorts the data by treatment, fits the logistic model separately for each, and then plots the predicted curves with the observed data. As noted above, when the data pattern is asymmetric, as in this case, a logrithmic transformation is useful. This is done for the variable *Day* and the parameter $L$.
+
+```
+proc sort data=onion;
+	by trt day;
+run;
+
+proc nlin data=onion;
+	parms M=80 K=1 L=4;
+	model germ = M/(1 + exp(-K*(log(day) - log(L))));
+	by trt;
+    output out=pred p=pr;
+run;
+
+proc sgplot data=pred;
+	styleattrs datacolors=(cxFD07FA cx0752FD);
+	scatter x=day y=germ/group=trt  FILLEDOUTLINEDMARKERS markerattrs=(symbol=circlefilled size=14) MARKEROUTLINEATTRS=(color=black);
+	series x=day y=pr/group=trt;
+	xaxis label='Day' LABELATTRS=( Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+	yaxis label="Germinated" LABELATTRS=( Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+	title1 'Logistic Model';
+run;
+
+```
+
+| Parameter | Estimate: Trt = 0 | Estimate: Trt = -0.662 |
+|:---|:---|:---|
+| M | 79.8596 | 81.1036 |
+| K | 4.7118 | 5.4270 |
+| L | 2.6412 | 4.2480 |
+<br>
+
+<img src="./images/Onion Fit.png" alt="Logistic Fit to Onion Data" width="600" />
+<br>
+
+The estimated curves seem to fit the data well. The parameter estimates will be used in the following section to run the curve comparison, while accounting for the binomial nature of the data.
+
+## Curve Comparison
+
+Curve comparison is done using *Proc Nlmixed*. Unlike *Proc Nlin*, *Nlmixed* allows for *Contrast* statements on estimated parameters. Hence, even when the data at hand are normally distributed, curve comparison will require *Proc Nlmixed*. Additionally, *Proc Nlmixed* carries out estimation through maximum likelihood. Because of this, the model is specified in terms of the distribution and it's parameters. Lastly, we will use a Dummy Variable Regression specification to build a full model that simultaneously fits the two treatments. This process is similar to that covered for linear regression [here](https://agstats.io/tutorials/sas-proc-reg.html#5_Comparing_regression_lines_(Dummy_Variable_Regression,_DVR)){target="_blank"}. While this example uses two treatments, multiple treatments can be fit as well by extending the framework shown here. Keep in mind, however, that fitting too many treatments at once will reduce statistical power and is lacking in parsimony.
+
+We start by specifying parameters M, K, and L for each treatment using the starting values above (approximation is fine here). The numeric indices 1 and 2 refer to treatments 0 and -0.662, respectively. Of note, parameter M is now expressed as a proportion, not the percentage that was used in *Proc Nlin* because the binomial distribution expects values between 0.0 and 1.0. The binomial distribution requires two parts: An expected value or mean, and the total number of trials per observations, N. The expected value will be the logistic model, defined here as *mu*. In the experiment, each observation was based on the number of seeds germinated out of an initial 100 seeds, so the number of trials is 100, which is recorded in variable *total*. The model statement then is expressed as *germ* distributed as (*~*) a binomial with expected value *mu*, a function of our parameters, and the total.
+
+Contrast statements are written differently than most SAS modeling procedures and are more simply expressed as equations such as $M1 - M2$ or similar. Note, however, that contrasts don't just involve treatments, but must also specify what part or parameter in the model to test. Below, tests are done to see whether treatments differ in the maximum extent of germination, the rate of germination, or the lag time in germination. A *Predict* statement is also used to output the predicted values to a data set *Pred*. In this statement, *mu* is multiplied by 100 to convert the predicted values back to a percentage scale.
+
+```{sashtml Logistic1}
+
+proc nlmixed data=onion;
+	parms M1 = .80 K1 = 4.7  L1 = 2.64 
+		  M2 = .81 K2 = 5.42 L2 = 4.25;
+
+	/**  If an observation is from trt=0, then use trt=0 parameters. Otherwise, use trt=-0.662 parameters  **/
+	if trt=0 then do;
+		M = M1;
+		K = K1;
+		L = L1;
+	end;
+	else if trt=-0.662 then do;
+		M = M2;
+		K = K2;
+		L = L2;
+	end;
+
+	mu = M/(1 + exp(-K*(log(day) - log(L))));
+	model germ~binomial(total, mu);
+
+	contrast 'Parameters M' M1-M2;
+	contrast 'Parameters K' K1-K2;
+	contrast 'Parameters L' L1-L2;
+
+	predict 100*mu out = pred;
+	title1 'Logistic Model Comparisons: Full Model';
+run;
+
+```
+
+The output here is similar to *Proc Nlin* with iterations, etc. The parameter estimates are very similar to the least squares estimates. Due to the different estimation method, however, they will not be exactly the same. An advantage of the generalized model assuming a binomial here is that the estimates will stay within the theoretical bounds, unlike least squares assuming normality. For example, the maximum germination estimates cannot exceed 100% or a proportion of 1.0 in the generalized model, while they potentially could under least squares.
+
+The table of contrasts indicates that the maximum germination of the two treatments, $M$, is similar at about 80%, while the rate of germination, $K$, for the drier treatment, -0.662, is higher than the control and also has a longer lag time in germination, estimated by parameter $L$.
+
+
+# Mixed Model Estimation
+
+Mixed effects in nonlinear models may be considered when there are additional known factors which could affect the variability in estimation. Examples might be data sets that represent multiple studies, experiments, locations, seedlots, animal barns, etc. Like the case of curve comparison, we must consider where that variation might occur among the model parameters. In a growth curve, would it affect the parameter(s) for rate, or the maximum growth, or both? This can only be assessed by fitting models both with and without random effects. Caution is advised, however, as adding multiple random effects can make model estimation difficult and it also adds additional variance parameters, reducing parsimony and requiring further guessing about starting values.
+
+The initial step is to fit a fixed model assuming no random effects. In the code below, a fixed logistic model is fit to absorbence data. In this case, the logistic model is a decreasing function starting close to 100% (1.0). This model is assuming normality where the mean or expected value of the distribution is defined in *mu* as the logistic model using logrithmic transformations on ALS dose and the parameter $L$. The variance of the normal distribution also needs to be specified as a parameter, *sigma2*. Starting values were determined from *Proc Nlin* (not shown). The starting value for *sigma2* was obtained from the MSE value in that estimation. Because the data have observations at a dose of 0.0, and the model attempts to use a log(dose) function, which would be undefined at dose=0.0, there is an additional *If* statement to reduce the model under this condition to *mu=M*.
+
+```{sashtml Mixed1}
+
+proc nlmixed data=als corr;  
+	parms  M=.94 b=1 L=2.748 sigma2=38;
+
+	if Dose=0 then mu=M;    /**  Steps to avoid log(0)  **/
+	else mu = M/(1 + exp(B*(log(Dose)-log(L))));
+
+	model percent ~normal(mu, sigma2);
+
+title1 'Winter Wheat, Continuous Response: Fixed Model';
+run;
+
+```
+
+What is important in this output are the fit statistics. The AIC here is 367.7.
+
+Next, the logistic is fit allowing for the $ED_{50}$ estimate, $L$ to have a random effect from experiment (plate). This is entered into the model in three steps: 1) by defining a variance for $L$ as *sig_l*, and 2) adding statement to define the random $L$ parameter as *L1 = L + u*, e.g. *L1* is the original parameter plus a random component, and lastly, 3) adding a random statement that defines the random component *u* as a normal variable with mean=0 and variance of $sig\_l^2$. A subject option denotes where the random effect comes from, plate. Note also that the logistic model now uses the newly defined *L1* parameter. The *Predict* statements for predicted values, however, use the original $L$. If we did not do this, the predicted line would represent random fluctuation, not a smooth predicted curve.
+
+```{sashtml Mixed2}
+
+proc nlmixed data=als ;  
+	parms  M=.94 b=1 L=2.748 sigma2=38  sig_l = 1;
+
+	L1 = L + u;
+	if Dose=0 then mu=M;    /**  Steps to avoid log(0)  **/
+	else mu = M/(1 + exp(B*(log(Dose)-log(L1))));
+
+	model percent ~normal(mu, sigma2);
+	random u ~ normal([0], [sig_l**2]) subject=plate;
+	predict M/(1 + exp(B*(log(Dose+0.1)-log(L)))) out = pred;
+
+title1 'Winter Wheat, Continuous Response: Random Model (L)';
+run;
+
+proc sort data=pred;
+	by dose;
+run;
+
+proc sgplot data=pred;
+	scatter x=dose y=percent/FILLEDOUTLINEDMARKERS markerattrs=(symbol=circlefilled size=14) MARKERFILLATTRS=(color=tan) MARKEROUTLINEATTRS=(color=black);
+	series x=dose y=upper;
+	series x=dose y=lower;
+	series x=dose y=pred;
+	xaxis label='ALS Herbicide Dose' LABELATTRS=( Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+	yaxis label="ALS Activity (% Absorbance)" LABELATTRS=( Family=Arial Size=15 Weight=Bold) VALUEATTRS=(Family=Arial Size=12 Weight=Bold);
+run;
+```
+
+The fit statistics here give an AIC value of 349.7 which is lower than the fixed model. Hence, this suggests that the addition of the random effect improves the model fit. The final plot shows the fitted curve with 95% confidence bounds.
