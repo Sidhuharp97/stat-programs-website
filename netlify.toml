@@ -19,3 +19,10 @@
   package = "netlify-plugin-hugo-cache-resources"
   [plugins.inputs]
     debug = true
+    
+## redirect for a Ag cran task view poster
+[[redirects]]
+  from = "/events/presentations/agstats-conference-2022/"
+  to = "https://cran.rstudio.com/web/views/Agriculture.html"
+  status = 200
+  force = true # COMMENT: ensure that we always redirect

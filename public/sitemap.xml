@@ -2,40 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/events/workshops/spatial-workshop/prep-work/</loc>
+    <loc>/workshops/spatial-workshop/prep-work/</loc>
     <lastmod>2021-11-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/events/workshops/spatial-workshop/why-spatial/</loc>
+    <loc>/workshops/spatial-workshop/why-spatial/</loc>
     <lastmod>2021-11-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/events/workshops/spatial-workshop/diagnosis/</loc>
+    <loc>/workshops/spatial-workshop/diagnosis/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/events/workshops/spatial-workshop/variograms/</loc>
+    <loc>/workshops/spatial-workshop/variograms/</loc>
     <lastmod>2021-11-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/events/workshops/spatial-workshop/correlated-error-models/</loc>
+    <loc>/workshops/spatial-workshop/correlated-error-models/</loc>
     <lastmod>2021-11-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/events/workshops/spatial-workshop/trend-modelling/</loc>
+    <loc>/workshops/spatial-workshop/trend-modelling/</loc>
     <lastmod>2021-11-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/events/workshops/spatial-workshop/model-comparison/</loc>
+    <loc>/workshops/spatial-workshop/model-comparison/</loc>
     <lastmod>2021-11-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/events/workshops/spatial-workshop/augmented/</loc>
+    <loc>/workshops/spatial-workshop/augmented/</loc>
     <lastmod>2021-11-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/events/workshops/spatial-workshop/conclusion/</loc>
+    <loc>/workshops/spatial-workshop/conclusion/</loc>
     <lastmod>2021-11-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/</loc>
+    <lastmod>2022-10-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/workshops/introduction-to-r/</loc>
+    <lastmod>2022-10-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/workshops/</loc>
+    <lastmod>2022-10-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/categories/</loc>
     <lastmod>2022-10-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/category/data-cleaning/</loc>
-    <lastmod>2022-10-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/</loc>
     <lastmod>2022-10-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/post/data-cleaning-r/</loc>
@@ -113,7 +119,7 @@
     <loc>/tag/cran/</loc>
     <lastmod>2022-05-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/events/</loc>
+    <loc>/presentations/</loc>
     <lastmod>2022-05-16T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/tag/r/</loc>
@@ -122,10 +128,7 @@
     <loc>/tags/</loc>
     <lastmod>2022-05-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/events/presentations/</loc>
-    <lastmod>2022-05-16T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/events/presentations/agstats-conference-2022/</loc>
+    <loc>/presentations/agstats-conference-2022/</loc>
     <lastmod>2022-05-16T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/category/agriculture/</loc>
@@ -140,10 +143,7 @@
     <loc>/post/help-in-r/</loc>
     <lastmod>2022-05-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/events/workshops/what-they-forgot/</loc>
-    <lastmod>2022-03-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/events/workshops/</loc>
+    <loc>/workshops/what-they-forgot/</loc>
     <lastmod>2022-03-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/category/functions/</loc>
@@ -161,7 +161,7 @@
     <loc>/category/linear-models/</loc>
     <lastmod>2021-11-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/events/workshops/spatial-workshop/</loc>
+    <loc>/workshops/spatial-workshop/</loc>
     <lastmod>2021-11-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/post/getting-r-setup/</loc>
@@ -176,7 +176,7 @@
     <loc>/tag/field-experiments/</loc>
     <lastmod>2021-04-09T15:30:00+00:00</lastmod>
   </url><url>
-    <loc>/events/presentations/spatial-seminar-2021-04-09/</loc>
+    <loc>/presentations/spatial-seminar-2021-04-09/</loc>
     <lastmod>2021-04-09T15:30:00+00:00</lastmod>
   </url><url>
     <loc>/tag/spatial-statistics/</loc>

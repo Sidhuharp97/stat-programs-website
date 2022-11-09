@@ -1,7 +1,7 @@
 ---
 title: "Generalized Linear Mixed Models in SAS"
 author: "Statistical Programs, University of Idaho"
-date: "21/4/2022"
+date: "2022-04-21"
 output: 
   html_document:
     toc: true
