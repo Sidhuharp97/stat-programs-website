@@ -9,6 +9,7 @@ type: page
 ### R
 
 * [What They Forgot to Teach You](https://imci-idaho.github.io/2022-03-01-WhatTheyForgot/) (about using R)
+* [Rstats4Ag](https://rstats4ag.org/) (weed-science oriented)
 
 ### SAS
 
@@ -23,12 +24,17 @@ type: page
 * <a href="../tutorials/sas-graphics.html" target="_blank">Graphics and Plotting</a>
 
 
-### Other Resources
+### Miscellaneous Resources
 
 * [Spatial Analysis for Agricultural Field Experiments](https://idahoagstats.github.io/guide-to-field-trial-spatial-analysis/) (using R and SAS)
-* [Rstats4Ag](https://rstats4ag.org/) 
+* [University of Florida Quantitative Genetics Course](https://lfelipe-ferrao.github.io/class/quantGenetic/)
 * [Multivariate Statistical Machine Learning Methods for Genomic Prediction](https://link.springer.com/content/pdf/10.1007%2F978-3-030-89010-0.pdf)
 * [Basic Introduction to Linear models](https://lindeloev.github.io/tests-as-linear/#1_the_simplicity_underlying_common_tests)
+* [USDA SCINet Learning Pathway](https://scinet.usda.gov/training/learningpath) 
+
+#### Mixed Models in R
 * [Mixed models in R](https://m-clark.github.io/mixed-models-with-R/)
 * [Data Science for Agriculture in R](https://schmidtpaul.github.io/DSFAIR/)
 * [Mixed Models for Agriculture in R](https://schmidtpaul.github.io/MMFAIR/)
+
+
