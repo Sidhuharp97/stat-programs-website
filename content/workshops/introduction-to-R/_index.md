@@ -18,9 +18,10 @@ In this workshop, participants will learn practical R programming skills for sci
 -   understand data types and object types
 -   filter, reshape, merge and manipulate your data
 -   mathematically transform data
--   do repeat actions in R
--   plot data
 -   navigate R help files
+-   plot data
+-   do repeat actions in R (time permitting)
+
 
 ### Who is this workshop for?
 
@@ -34,7 +35,7 @@ This workshop is intended for beginner R users. No previous experience in R or a
 ### Requirements
 
 -   Computer, functional speakers, and a stable internet connection  
--   Optional but likely needed: a camera and microphone for communicating through Zoom  
+-   ~~Optional~~ Required: a camera and microphone for communicating through Zoom  
 
 ### When
 
