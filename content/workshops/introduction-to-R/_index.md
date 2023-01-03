@@ -22,6 +22,8 @@ In this workshop, participants will learn practical R programming skills for sci
 -   plot data
 -   do repeat actions in R (time permitting)
 
+Check out the [course website](https://idahoagstats.github.io/r-for-ag-scientists/). 
+
 
 ### Who is this workshop for?
 
@@ -45,7 +47,7 @@ Tuesday/Thursdays\
 
 All sessions will take place over Zoom so people outside of Moscow, Idaho can participate.
 
-### Instructors
+### Instructor
 
-[Julia Piaskowski](https://jpiaskowski.gitlab.io/) | [GitHub](https://github.com/jpiaskowski)
+[Julia Piaskowski](https://www.uidaho.edu/cals/statistical-programs/people/julia-piaskowski) | [training website](agstats.io) | [GitHub](https://github.com/jpiaskowski) | [personal website](https://jpiaskowski.gitlab.io/)
 
