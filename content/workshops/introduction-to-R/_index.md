@@ -6,7 +6,7 @@ summary: "Carpentries-style introductory workshop to R for scientists"
 type: page
 ---
 
-## *[Registration Now Open --->](https://imci.uidaho.edu/spring-2023-carpentries-workshops/)*
+## *Registration Now Closed*
  
 <br>
 
