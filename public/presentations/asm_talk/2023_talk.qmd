@@ -1,0 +1,253 @@
+---
+title: "Learn R now!!! Or triple your money back!"
+author: "Julia Piaskowski"
+date: "2023-03-07" 
+format: 
+  revealjs:
+    theme: white
+editor: source  
+---
+
+## ASM 240 Computer Applications in Biophysical Systems 
+
+*(3 credits)*
+
+This course is designed as an introductory course to computer applications with specific emphasis on applications used in agriculture and life sciences. Content includes spreadsheet management, database management, data analysis, data visualization, and presentation applications. Recommended preparation: three credits of college math. Two lectures and one 2-hour lab per week.
+
+---
+
+![](r_infomercial.png)
+
+---
+
+## What is R? 
+  
+> R is a free software environment for statistical computing and graphics.
+>
+> *[R Core Team](https://www.r-project.org/)*
+  
+> R is a programming language for statistical computing and graphics....
+> *--[Wikipedia](https://en.wikipedia.org/wiki/R_(programming_language))* 
+  
+[Invented in the 1970s at Bell Labs](https://sas.uwaterloo.ca/~rwoldfor/software/R-code/historyOfS.pdf)
+
+---
+
+## Data Analysis 
+  
+- math calculations
+- [statistical analysis](https://cran.r-project.org/web/views/)
+- [deep learning](https://tensorflow.rstudio.com/)
+- [natural language models](https://cran.r-project.org/web/views/NaturalLanguageProcessing.html)
+- [GIS and spatial applications](https://cran.r-project.org/web/views/Spatial.html)
+
+R has a solution for everything. 
+
+
+::: {.center}
+## What Can R do? 
+
+* comprehensive set of standard math functions
+* [20k+ contributed packages](https://cran.r-project.org/web/packages/)
+::: 
+  
+  
+---
+  
+## Data Preparation
+  
+*Rarely is data ready to use after the initial acquisition.* 
+  
+![](data_cleans_itself.png)
+
+---
+  
+## Data preparation
+  
+- remove impossible values
+- find out why there are so many duplicates! 
+  - "name disambiguate" (e.g. J. Piaskowski, Julia Piaskowski, Julia L. Piaskowski, Dr. Piaskowski, JL Piaskowski, ...)
+- [tidyverse](https://www.tidyverse.org/packages/) - suite of packages to do this!
+  
+  
+---
+  
+## Data preparation is time consuming
+  
+![](pie_chart.png)
+
+
+---
+  
+## Connect with data sources
+  
+- internal or external database
+- packages for connecting to any API: [httr](https://httr.r-lib.org/), [jsonlite](https://cran.r-project.org/web/packages/jsonlite/index.html)
+- packages for working with specific API, e.g. [rnassqs](https://docs.ropensci.org/rnassqs/) for accessing data from NASS '[Quick Stats]()' or [spotifyr](https://www.rcharlie.com/spotifyr/) for accessing Spotify's API
+
+
+
+::: {.center}
+## Static data visualization
+
+[some lovely examples](https://www.cedricscherer.com/top/dataviz/)
+
+:::
+
+---
+
+## Dynamic data visualization
+
+
+[gganimate](https://gganimate.com/) package for creating gifs
+
+![](steph_curry_shots_made_loop.gif)
+*([source code](https://github.com/IdahoAgStats/r-for-ag-scientists/blob/main/lessons/Lesson15.qmd))*
+ 
+
+::: {.center}
+## Web apps
+
+- [Shiny apps](https://shiny.rstudio.com/)
+- [Idaho variety testing](https://jpiaskowski.shinyapps.io/idaho_vartest_shiny_app/)
+:::
+  
+---
+  
+## Write & publish reports
+  
+- Includes narratives: introduction, discussion, conclusion, etc
+- Use R code to run analysis and output results and/or illustrative plots
+- Embed mathematical equations, images, tables of results, diagrams
+- [Example](https://agstats.io/post/anova-in-r/)
+
+---
+  
+## Interactive data visualizations
+  
+[plotly](https://plotly.com/r/) example
+
+```{r, plotly_ex, eval=TRUE, include=FALSE, echo=FALSE}
+library(plotly)
+library(rjson)
+
+df <- fromJSON(file="https://gist.githubusercontent.com/davenquinn/988167471993bc2ece29/raw/f38d9cb3dd86e315e237fde5d65e185c39c931c2/data.json") 
+
+colors = c('#8dd3c7','#ffffb3','#bebada',
+                    '#fb8072','#80b1d3','#fdb462',
+                    '#b3de69','#fccde5','#d9d9d9',
+                    '#bc80bd','#ccebc5','#ffed6f');
+                    
+fig <- plot_ly()
+
+for (i in 1:length(df)) {
+  l = c()
+  m = c()
+  n = c()
+  
+  for (j in 1:length(df[[i]])) {
+    l[[j]] <- df[[i]][[j]]$clay
+    m[[j]] <- df[[i]][[j]]$sand
+    n[[j]] <- df[[i]][[j]]$silt
+  }
+  
+  fig <- add_trace(
+    fig,
+    type = 'scatterternary',
+    a = l,
+    b = m,
+    c = n,
+    name = names(df[i]),
+    mode = 'lines',
+    line = list(
+      color='#444'
+    ),
+    fill = 'toself',
+    fillcolor = colors[i],
+    showlegend = F
+  )
+}
+
+fig <- layout(
+  fig,
+  #title = "Simple Ternary Contour Plot in R",
+  ternary = list(
+    sum = 100,
+    aaxis = list(
+      title = "clay",
+      ticksuffix = "%",
+      min = 0.01,
+      linewidth = 2,
+      ticks = "outside"
+    ),
+    baxis = list(
+      title = "sand",
+      ticksuffix = "%",
+      min = 0.01,
+      linewidth = 2,
+      ticks = "outside"
+    ),
+    caxis = list(
+      title = "silt",
+      ticksuffix = "%",
+      min = 0.01,
+      linewidth = 2,
+      ticks = "outside"
+    )
+  )
+)
+```
+
+```{r}
+fig
+```
+
+*([source code](https://plotly.com/r/ternary-contour/))*
+
+
+  
+::: {.center}
+## Build & publish tutorials online
+
+[spatial statistics book](https://idahoagstats.github.io/guide-to-field-trial-spatial-analysis/)
+:::
+  
+---
+  
+## Build websites
+  
+- [example 1](agstats.io)
+- [example 2](https://idahoagstats.github.io/r-for-ag-scientists/),
+- [example 3](https://idahoagstats.github.io/wave/)
+- so many options: [quarto](https://quarto.org/docs/websites/), [blogdown + hugo](https://bookdown.org/yihui/blogdown/)
+
+---
+  
+## R in agriculture
+  
+- widely used in agronomy, crop science, and soil science
+- precision ag: uses some R and python
+- animal science: SAS
+- agricultural econ: python, point-and-click software
+- weed science, plant pathology, entomology: R & SAS
+- [agricultural packages in R](https://cran.r-project.org/web/views/Agriculture.html)
+
+---
+  
+## How to learn R
+  
+- Invest time + effort. This is hard! It will take a concerted effort to learn it. 
+- Many free resources out there:
+- [my curriculum!](https://idahoagstats.github.io/r-for-ag-scientists/)
+- [other options](https://agstats.io/post/learning-r/)
+
+---
+  
+## LEARN R NOW!!!!
+### FOR THE LOW LOW LOW PRICE OF FREE!!!!
+### JUST 20 EASY-TO-WATCH VIDEO INSTALLMENTS!!!
+#### GUARANTEED TO TURN YOU INTO A DATA HERO OR TRIPLE YOUR MONEY BACK
+### OPERATORS ARE STANDING BY!!!! CALL NOW!!!
+  
+  
+  

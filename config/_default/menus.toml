@@ -32,7 +32,7 @@
 [[main]]
   name = "Talks"
   #parent = "Events"
-  url = "presentations"
+  url = "talks"
   weight = 50
   
 [[main]]

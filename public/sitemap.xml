@@ -29,8 +29,26 @@
     <loc>/workshops/spatial-workshop/conclusion/</loc>
     <lastmod>2021-11-07T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>/authors/</loc>
+    <lastmod>2023-03-07T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>/</loc>
-    <lastmod>2022-10-28T00:00:00+00:00</lastmod>
+    <lastmod>2023-03-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/authors/jpiaskowski/</loc>
+    <lastmod>2023-03-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/talks/asm240-2023/</loc>
+    <lastmod>2023-03-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/talks/</loc>
+    <lastmod>2023-03-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tag/r/</loc>
+    <lastmod>2023-03-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2023-03-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/workshops/introduction-to-r/</loc>
     <lastmod>2022-10-28T00:00:00+00:00</lastmod>
@@ -61,9 +79,6 @@
   </url><url>
     <loc>/post/intro-to-ggplot/</loc>
     <lastmod>2022-10-21T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/authors/</loc>
-    <lastmod>2022-06-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/post/p-values/</loc>
     <lastmod>2021-04-15T00:00:00+00:00</lastmod>
@@ -107,9 +122,6 @@
     <loc>/post/r-gui/</loc>
     <lastmod>2022-06-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/authors/jpiaskowski/</loc>
-    <lastmod>2022-06-23T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>/category/learning-r/</loc>
     <lastmod>2022-06-23T00:00:00+00:00</lastmod>
   </url><url>
@@ -119,16 +131,7 @@
     <loc>/tag/cran/</loc>
     <lastmod>2022-05-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/presentations/</loc>
-    <lastmod>2022-05-16T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tag/r/</loc>
-    <lastmod>2022-05-16T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/</loc>
-    <lastmod>2022-05-16T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/presentations/agstats-conference-2022/</loc>
+    <loc>/talks/agstats-conference-2022/</loc>
     <lastmod>2022-05-16T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/category/agriculture/</loc>
@@ -176,7 +179,7 @@
     <loc>/tag/field-experiments/</loc>
     <lastmod>2021-04-09T15:30:00+00:00</lastmod>
   </url><url>
-    <loc>/presentations/spatial-seminar-2021-04-09/</loc>
+    <loc>/talks/spatial-seminar-2021-04-09/</loc>
     <lastmod>2021-04-09T15:30:00+00:00</lastmod>
   </url><url>
     <loc>/tag/spatial-statistics/</loc>
