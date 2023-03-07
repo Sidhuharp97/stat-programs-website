@@ -30,7 +30,7 @@
   weight = 40
   
 [[main]]
-  name = "Presentations"
+  name = "Talks"
   #parent = "Events"
   url = "presentations"
   weight = 50
