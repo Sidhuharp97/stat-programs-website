@@ -1,0 +1,91 @@
+---
+title: "Learn R now!!! (infomercial)"
+author: "Julia Piaskowski"
+date: "2023-03-07" 
+format: 
+  revealjs:
+    theme: white
+editor: source
+---
+
+## ASM 240 Computer Applications in Biophysical Systems 
+
+*(3 credits)*
+
+This course is designed as an introductory course to computer applications with specific emphasis on applications used in agriculture and life sciences. Content includes spreadsheet management, database management, data analysis, data visualization, and presentation applications. Recommended preparation: three credits of college math. Two lectures and one 2-hour lab per week.
+
+---
+
+## What is R? 
+
+> R is a free software environment for statistical computing and graphics. 
+> *--[R Core Team](https://www.r-project.org/)*
+
+> R is a programming language for statistical computing and graphics....
+> *--[Wikipedia](https://en.wikipedia.org/wiki/R_(programming_language))* 
+
+---
+
+## What Can R do? 
+
+---
+
+## Data Analysis
+
+---
+
+## Data Preparation
+
+---
+
+## Static Data Visualization
+
+---
+
+## dynamic data visualization
+
+---
+
+## interactive data visualizations
+
+--
+
+## web apps
+
+---
+
+## write & publish reports
+
+- Includes narratives: introduction, discussion, conclusion, etc
+- use R code to run analysis and output results and/or illustrative plots
+- embed mathematical equations, images, tables of results, diagrams
+
+---
+
+## build & publish tutorials online
+
+---
+
+## build websites
+
+---
+
+## R in Agriculture
+
+---
+
+## How to learn R
+
+- invest time + effort
+- many free resources out there:
+  - 
+
+
+ 
+
+##
+
+
+
+
+
