@@ -31,6 +31,16 @@ This course is designed as an introductory course to computer applications with 
   
 [Invented in the 1970s at Bell Labs](https://sas.uwaterloo.ca/~rwoldfor/software/R-code/historyOfS.pdf)
 
+
+
+::: {.center}
+## What Can R do? 
+
+* comprehensive set of standard math functions
+* [20k+ contributed packages](https://cran.r-project.org/web/packages/)
+::: 
+  
+
 ---
 
 ## Data Analysis 
@@ -42,15 +52,6 @@ This course is designed as an introductory course to computer applications with 
 - [GIS and spatial applications](https://cran.r-project.org/web/views/Spatial.html)
 
 R has a solution for everything. 
-
-
-::: {.center}
-## What Can R do? 
-
-* comprehensive set of standard math functions
-* [20k+ contributed packages](https://cran.r-project.org/web/packages/)
-::: 
-  
   
 ---
   
@@ -83,7 +84,7 @@ R has a solution for everything.
   
 - internal or external database
 - packages for connecting to any API: [httr](https://httr.r-lib.org/), [jsonlite](https://cran.r-project.org/web/packages/jsonlite/index.html)
-- packages for working with specific API, e.g. [rnassqs](https://docs.ropensci.org/rnassqs/) for accessing data from NASS '[Quick Stats]()' or [spotifyr](https://www.rcharlie.com/spotifyr/) for accessing Spotify's API
+- packages for working with specific API, e.g. [rnassqs](https://docs.ropensci.org/rnassqs/) for accessing data from NASS '[Quick Stats](https://quickstats.nass.usda.gov/)' or [spotifyr](https://www.rcharlie.com/spotifyr/) for accessing Spotify's API
 
 
 
@@ -216,8 +217,8 @@ fig
   
 ## Build websites
   
-- [example 1](agstats.io)
-- [example 2](https://idahoagstats.github.io/r-for-ag-scientists/),
+- [example 1](https://agstats.io/)
+- [example 2](https://idahoagstats.github.io/r-for-ag-scientists/)
 - [example 3](https://idahoagstats.github.io/wave/)
 - so many options: [quarto](https://quarto.org/docs/websites/), [blogdown + hugo](https://bookdown.org/yihui/blogdown/)
 
