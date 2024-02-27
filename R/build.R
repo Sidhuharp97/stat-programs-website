@@ -1,3 +1,4 @@
+library(rmarkdown)
 
 blogdown::build_dir("static")
 
