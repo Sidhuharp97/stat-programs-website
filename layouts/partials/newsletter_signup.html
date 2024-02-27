@@ -1,12 +1,38 @@
 <!-- Newsletter Signup -->
+<!-- this works, but it's unsightly -->
+
+<!--
+<form
+  action="https://buttondown.email/api/emails/embed-subscribe/Uidaho-stat-programs"
+  method="post"
+  target="popupwindow"
+  onsubmit="window.open('https://buttondown.email/Uidaho-stat-programs', 'popupwindow')"
+  class="embeddable-buttondown-form"
+>
+  <label for="bd-email">Enter your email</label>
+  <input type="email" name="email" id="bd-email" />
+  
+  <input type="submit" value="Subscribe" />
+  <p>
+    <a href="https://buttondown.email/refer/Uidaho-stat-programs" target="_blank">Powered by Buttondown.</a>
+  </p>
+</form>
+-->
+
+<!-- this does not works -->
+
 <style type="text/css" media="screen">
     {{ partial "css/newsletter.css" . | safeCSS }}
 </style>
 <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 
 <div id="revue-embed" class="revue-embed">
-    <form action="https://tinyletter.com/idahoagstats/" method="post" id="revue-form" name="revue-form"
-          target="popupwindow" onsubmit="window.open('https://tinyletter.com/idahoagstats', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true">
+    <form action="https://buttondown.email/api/emails/embed-subscribe/Uidaho-stat-programs" 
+          method="post" 
+          id="revue-form" 
+          name="revue-form"
+          target="popupwindow" 
+          onsubmit="window.open('https://buttondown.email/Uidaho-stat-programs', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true">
       
       
       
